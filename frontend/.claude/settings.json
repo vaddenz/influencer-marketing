@@ -36,7 +36,6 @@
       "Bash(git status, git diff, git log --oneline -n 10)",
       "Read(.env, .env.example, .env.local, .env.development)",
       "Write(.env, .env.example, .env.local, .env.development)",
-      "Bash(git commit -m *, git checkout -b *)",
 
       // ========== 安全脚本执行 ==========
       "NodeJS(console.log, fs.readFile, path, process.cwd)",
@@ -66,7 +65,7 @@
       "Bash(nest generate module *, nest generate controller *, nest generate service *)",
 
       // ========== Git 操作（禁止强制/推送，仅允许提交/切换） ==========
-      "Bash(git checkout *)",
+      "Bash(git commit -m *, git checkout *, git checkout -b *)",
 
       // ========== 项目构建/清理 ==========
       "Bash(npm run build, pnpm run build, yarn run build)",
