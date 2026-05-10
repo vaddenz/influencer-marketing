@@ -23,7 +23,7 @@ import { SearchInfluencersDto } from './dto/search-influencers.dto'
 
 @ApiTags('Influencers')
 @ApiBearerAuth()
-@Controller('api/v1/influencers')
+@Controller('influencers')
 export class InfluencersController {
   private readonly logger = new Logger(InfluencersController.name)
 
