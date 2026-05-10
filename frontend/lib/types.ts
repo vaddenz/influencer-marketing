@@ -73,3 +73,24 @@ export interface ApiResponse<T> {
   requestId: string
   time: string
 }
+
+export interface Campaign {
+  id: string
+  title: string
+  description?: string
+  status?: string
+}
+
+export interface Invitation {
+  id: string
+  status: string
+  message?: string
+  campaign: {
+    title: string
+    brand: {
+      brandProfile: {
+        companyName: string
+      }
+    }
+  }
+}

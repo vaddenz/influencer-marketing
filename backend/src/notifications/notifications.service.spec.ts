@@ -1,8 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import {
-  ForbiddenException,
-  NotFoundException,
-} from '@nestjs/common'
+import { ForbiddenException, NotFoundException } from '@nestjs/common'
 import { NotificationsService } from './notifications.service'
 import { PrismaService } from '@/common/prisma/prisma.service'
 
@@ -108,7 +105,9 @@ describe('NotificationsService', () => {
       prisma.notification.findUnique.mockResolvedValue(notification)
       prisma.notification.update.mockResolvedValue(updated)
 
-      await expect(service.markRead(userId, notificationId)).resolves.toEqual(updated)
+      await expect(service.markRead(userId, notificationId)).resolves.toEqual(
+        updated
+      )
       expect(prisma.notification.findUnique).toHaveBeenCalledWith({
         where: { id: notificationId },
       })
@@ -122,7 +121,7 @@ describe('NotificationsService', () => {
       prisma.notification.findUnique.mockResolvedValue(null)
 
       await expect(service.markRead('user-1', 'notif-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
       expect(prisma.notification.update).not.toHaveBeenCalled()
     })
@@ -143,7 +142,7 @@ describe('NotificationsService', () => {
       prisma.notification.findUnique.mockResolvedValue(notification)
 
       await expect(service.markRead('user-1', 'notif-1')).rejects.toThrow(
-        ForbiddenException,
+        ForbiddenException
       )
       expect(prisma.notification.update).not.toHaveBeenCalled()
     })
@@ -165,7 +164,9 @@ describe('NotificationsService', () => {
 
       prisma.notification.findUnique.mockResolvedValue(notification)
 
-      await expect(service.markRead(userId, notificationId)).resolves.toEqual(notification)
+      await expect(service.markRead(userId, notificationId)).resolves.toEqual(
+        notification
+      )
       expect(prisma.notification.update).not.toHaveBeenCalled()
     })
   })

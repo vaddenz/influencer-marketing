@@ -42,7 +42,7 @@ export class CampaignsController {
   @ApiResponse({ status: 201, description: 'Campaign created successfully' })
   async create(
     @CurrentUser() user: UserPayload,
-    @Body() dto: CreateCampaignDto,
+    @Body() dto: CreateCampaignDto
   ) {
     return this.campaignsService.create(user.id, dto)
   }
@@ -61,10 +61,7 @@ export class CampaignsController {
   @ApiResponse({ status: 200, description: 'Campaign retrieved successfully' })
   @ApiResponse({ status: 404, description: 'Campaign not found' })
   @ApiResponse({ status: 403, description: 'Access denied' })
-  async findOne(
-    @CurrentUser() user: UserPayload,
-    @Param('id') id: string,
-  ) {
+  async findOne(@CurrentUser() user: UserPayload, @Param('id') id: string) {
     return this.campaignsService.findOne(user, id)
   }
 
@@ -78,7 +75,7 @@ export class CampaignsController {
   async update(
     @CurrentUser() user: UserPayload,
     @Param('id') id: string,
-    @Body() dto: UpdateCampaignDto,
+    @Body() dto: UpdateCampaignDto
   ) {
     return this.campaignsService.update(user.id, id, dto)
   }
@@ -93,7 +90,7 @@ export class CampaignsController {
   @ApiResponse({ status: 403, description: 'Not campaign owner' })
   async remove(
     @CurrentUser() user: UserPayload,
-    @Param('id') id: string,
+    @Param('id') id: string
   ): Promise<void> {
     await this.campaignsService.remove(user.id, id)
   }

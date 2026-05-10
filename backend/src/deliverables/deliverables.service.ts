@@ -104,7 +104,7 @@ export class DeliverablesService {
     })
 
     this.logger.log(
-      `Deliverable ${deliverableId} completed by influencer ${userId}`,
+      `Deliverable ${deliverableId} completed by influencer ${userId}`
     )
     return result
   }
@@ -133,9 +133,7 @@ export class DeliverablesService {
       })
     })
 
-    this.logger.log(
-      `Deliverable ${deliverableId} reopened by brand ${userId}`,
-    )
+    this.logger.log(`Deliverable ${deliverableId} reopened by brand ${userId}`)
     return updated
   }
 }

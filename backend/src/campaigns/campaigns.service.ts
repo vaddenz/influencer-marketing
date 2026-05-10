@@ -96,7 +96,7 @@ export class CampaignsService {
 
     const isBrandOwner = campaign.brandId === user.id
     const isInvitedInfluencer = campaign.invitations.some(
-      (inv) => inv.influencerId === user.id && inv.status === 'accepted',
+      (inv) => inv.influencerId === user.id && inv.status === 'accepted'
     )
 
     if (!isBrandOwner && !isInvitedInfluencer) {
@@ -108,10 +108,10 @@ export class CampaignsService {
       return {
         ...campaign,
         invitations: campaign.invitations.filter(
-          (inv) => inv.influencerId === user.id,
+          (inv) => inv.influencerId === user.id
         ),
         deliverables: campaign.deliverables.filter(
-          (del) => del.influencerId === user.id,
+          (del) => del.influencerId === user.id
         ),
       }
     }

@@ -118,7 +118,7 @@ describe('InvitationsService', () => {
         service.create('brand-1', {
           campaignId: 'camp-1',
           influencerId: 'inf-1',
-        }),
+        })
       ).rejects.toThrow(NotFoundException)
       expect(prisma.invitation.create).not.toHaveBeenCalled()
     })
@@ -134,7 +134,7 @@ describe('InvitationsService', () => {
         service.create('brand-1', {
           campaignId: 'camp-1',
           influencerId: 'inf-1',
-        }),
+        })
       ).rejects.toThrow(ForbiddenException)
       expect(prisma.invitation.create).not.toHaveBeenCalled()
     })
@@ -153,7 +153,7 @@ describe('InvitationsService', () => {
       prisma.invitation.findFirst.mockResolvedValue(existing)
 
       await expect(service.create(userId, dto)).rejects.toThrow(
-        ConflictException,
+        ConflictException
       )
       expect(prisma.$transaction).toHaveBeenCalled()
       expect(prisma.invitation.findFirst).toHaveBeenCalledWith({
@@ -179,7 +179,7 @@ describe('InvitationsService', () => {
       prisma.user.findUnique.mockResolvedValue(null)
 
       await expect(service.create(userId, dto)).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
       expect(prisma.user.findUnique).toHaveBeenCalledWith({
         where: { id: dto.influencerId },
@@ -204,7 +204,7 @@ describe('InvitationsService', () => {
       })
 
       await expect(service.create(userId, dto)).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
       expect(prisma.invitation.create).not.toHaveBeenCalled()
     })
@@ -375,7 +375,7 @@ describe('InvitationsService', () => {
       prisma.deliverable.create.mockResolvedValue({ id: 'del-1' })
 
       await expect(service.accept(userId, invitationId)).resolves.toEqual(
-        updated,
+        updated
       )
       expect(prisma.invitation.update).toHaveBeenCalledWith({
         where: { id: invitationId },
@@ -441,7 +441,7 @@ describe('InvitationsService', () => {
       prisma.invitation.findUnique.mockResolvedValue(null)
 
       await expect(service.accept('inf-1', 'inv-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
 
@@ -454,7 +454,7 @@ describe('InvitationsService', () => {
       })
 
       await expect(service.accept('inf-1', 'inv-1')).rejects.toThrow(
-        ForbiddenException,
+        ForbiddenException
       )
     })
 
@@ -467,7 +467,7 @@ describe('InvitationsService', () => {
       })
 
       await expect(service.accept('inf-1', 'inv-1')).rejects.toThrow(
-        BadRequestException,
+        BadRequestException
       )
     })
   })
@@ -499,7 +499,7 @@ describe('InvitationsService', () => {
       prisma.notification.create.mockResolvedValue({ id: 'notif-1' })
 
       await expect(service.decline(userId, invitationId)).resolves.toEqual(
-        updated,
+        updated
       )
       expect(prisma.invitation.update).toHaveBeenCalledWith({
         where: { id: invitationId },
@@ -529,7 +529,7 @@ describe('InvitationsService', () => {
       })
 
       await expect(service.decline('inf-1', 'inv-1')).rejects.toThrow(
-        BadRequestException,
+        BadRequestException
       )
     })
   })
@@ -560,7 +560,7 @@ describe('InvitationsService', () => {
       prisma.invitation.update.mockResolvedValue(updated)
 
       await expect(service.withdraw(userId, invitationId)).resolves.toEqual(
-        updated,
+        updated
       )
       expect(prisma.$transaction).toHaveBeenCalled()
       expect(prisma.invitation.update).toHaveBeenCalledWith({
@@ -582,7 +582,7 @@ describe('InvitationsService', () => {
       })
 
       await expect(service.withdraw('brand-1', 'inv-1')).rejects.toThrow(
-        ForbiddenException,
+        ForbiddenException
       )
     })
 
@@ -596,7 +596,7 @@ describe('InvitationsService', () => {
       })
 
       await expect(service.withdraw('brand-1', 'inv-1')).rejects.toThrow(
-        BadRequestException,
+        BadRequestException
       )
     })
   })

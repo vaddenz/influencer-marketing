@@ -9,7 +9,12 @@ import {
   Query,
   Logger,
 } from '@nestjs/common'
-import { ApiBearerAuth, ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger'
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { RolesGuard } from '@/common/guards/roles.guard'
 import { Roles } from '@/common/decorators/roles.decorator'
@@ -37,7 +42,7 @@ export class InfluencersController {
   @ApiResponse({ status: 409, description: 'Profile already exists' })
   async createProfile(
     @CurrentUser() user: UserPayload,
-    @Body() dto: CreateInfluencerProfileDto,
+    @Body() dto: CreateInfluencerProfileDto
   ) {
     return this.influencersService.createProfile(user.id, dto)
   }
@@ -60,7 +65,7 @@ export class InfluencersController {
   @ApiResponse({ status: 404, description: 'Profile not found' })
   async updateProfile(
     @CurrentUser() user: UserPayload,
-    @Body() dto: UpdateInfluencerProfileDto,
+    @Body() dto: UpdateInfluencerProfileDto
   ) {
     return this.influencersService.updateProfile(user.id, dto)
   }
