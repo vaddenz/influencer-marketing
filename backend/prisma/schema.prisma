@@ -145,7 +145,6 @@ model Invitation {
 
   campaign     Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   influencer   User          @relation("InfluencerInvitations", fields: [influencerId], references: [id])
-  deliverables Deliverable[]
 }
 
 enum DeliverableStatus {
@@ -158,16 +157,14 @@ model Deliverable {
   id           String            @id @default(cuid(2))
   campaignId   String
   influencerId String
-  invitationId String?
   description  String
   dueDate      DateTime?         @db.Date
   status       DeliverableStatus @default(pending)
   completedAt  DateTime?
   createdAt    DateTime          @default(now())
 
-  campaign    Campaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  influencer  User         @relation(fields: [influencerId], references: [id])
-  invitation  Invitation?  @relation(fields: [invitationId], references: [id])
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  influencer  User     @relation(fields: [influencerId], references: [id])
 }
 
 enum NotificationType {
