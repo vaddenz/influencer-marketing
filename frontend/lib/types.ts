@@ -35,13 +35,15 @@ export interface Template {
   updatedAt?: string
 }
 
+export type UserRole = 'brand' | 'influencer' | 'agency'
+
 // Auth types
 export interface User {
   id: string
   email: string
   name: string
   avatar?: string
-  role?: 'user' | 'admin'
+  role: UserRole
 }
 
 export interface AuthTokens {
