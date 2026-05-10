@@ -21,7 +21,7 @@ import { UpdateBrandProfileDto } from './dto/update-brand-profile.dto'
 
 @ApiTags('Brands')
 @ApiBearerAuth()
-@Controller('api/v1/brands')
+@Controller('brands')
 export class BrandsController {
   private readonly logger = new Logger(BrandsController.name)
 

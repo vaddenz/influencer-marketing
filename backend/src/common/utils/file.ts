@@ -1,5 +1,4 @@
 import { createId } from '@paralleldrive/cuid2'
-import archiver from 'archiver'
 
 export interface ZipEntry {
   name: string
@@ -146,6 +145,7 @@ export class FileUtil {
    * @returns ZipResult containing the buffer and size
    */
   static async createZip(entries: ZipEntry[]): Promise<ZipResult> {
+    const { default: archiver } = await import('archiver')
     return new Promise((resolve, reject) => {
       const chunks: Buffer[] = []
       const archive = archiver('zip', {
