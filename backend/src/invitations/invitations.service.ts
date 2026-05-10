@@ -64,23 +64,27 @@ export class InvitationsService {
       throw new ConflictException('Invitation already sent')
     }
 
-    const invitation = await this.prisma.invitation.create({
-      data: {
-        campaignId: dto.campaignId,
-        influencerId: dto.influencerId,
-        message: dto.message,
-      },
-    })
+    const invitation = await this.prisma.$transaction(async (tx) => {
+      const created = await tx.invitation.create({
+        data: {
+          campaignId: dto.campaignId,
+          influencerId: dto.influencerId,
+          message: dto.message,
+        },
+      })
 
-    await this.prisma.notification.create({
-      data: {
-        userId: dto.influencerId,
-        type: 'invitation_received',
-        title: 'New Invitation',
-        message: `You have been invited to collaborate on "${campaign.title}"`,
-        relatedEntityType: 'invitation',
-        relatedEntityId: invitation.id,
-      },
+      await tx.notification.create({
+        data: {
+          userId: dto.influencerId,
+          type: 'invitation_received',
+          title: 'New Invitation',
+          message: `You have been invited to collaborate on "${campaign.title}"`,
+          relatedEntityType: 'invitation',
+          relatedEntityId: created.id,
+        },
+      })
+
+      return created
     })
 
     this.logger.log(

@@ -6,7 +6,6 @@ import {
   Body,
   Param,
   UseGuards,
-  Logger,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -25,10 +24,8 @@ import { CreateInvitationDto } from './dto/create-invitation.dto'
 
 @ApiTags('Invitations')
 @ApiBearerAuth()
-@Controller('api/v1/invitations')
+@Controller('invitations')
 export class InvitationsController {
-  private readonly logger = new Logger(InvitationsController.name)
-
   constructor(private readonly invitationsService: InvitationsService) {}
 
   @Post()

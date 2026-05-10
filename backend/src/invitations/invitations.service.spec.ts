@@ -10,27 +10,34 @@ import { PrismaService } from '@/common/prisma/prisma.service'
 import { Role } from '@/common/enums/role.enum'
 import type { UserPayload } from '@/common/decorators/current-user.decorator'
 
-const mockPrismaService = () => ({
-  campaign: {
-    findUnique: jest.fn(),
-  },
-  invitation: {
-    create: jest.fn(),
-    findFirst: jest.fn(),
-    findMany: jest.fn(),
-    findUnique: jest.fn(),
-    update: jest.fn(),
-  },
-  notification: {
-    create: jest.fn(),
-  },
-  deliverable: {
-    create: jest.fn(),
-  },
-  $transaction: jest.fn((ops) =>
-    Promise.all(ops.map((op: Promise<unknown>) => op)),
-  ),
-})
+const mockPrismaService = () => {
+  const prisma = {
+    campaign: {
+      findUnique: jest.fn(),
+    },
+    invitation: {
+      create: jest.fn(),
+      findFirst: jest.fn(),
+      findMany: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+    },
+    notification: {
+      create: jest.fn(),
+    },
+    deliverable: {
+      create: jest.fn(),
+    },
+    $transaction: jest.fn(),
+  }
+  prisma.$transaction = jest.fn((arg: unknown) => {
+    if (typeof arg === 'function') {
+      return (arg as (tx: typeof prisma) => Promise<unknown>)(prisma)
+    }
+    return Promise.all((arg as Promise<unknown>[]).map((op) => op))
+  })
+  return prisma
+}
 
 describe('InvitationsService', () => {
   let service: InvitationsService
@@ -73,6 +80,7 @@ describe('InvitationsService', () => {
       expect(prisma.campaign.findUnique).toHaveBeenCalledWith({
         where: { id: dto.campaignId },
       })
+      expect(prisma.$transaction).toHaveBeenCalled()
       expect(prisma.invitation.create).toHaveBeenCalledWith({
         data: {
           campaignId: dto.campaignId,
