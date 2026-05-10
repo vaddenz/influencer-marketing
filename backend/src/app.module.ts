@@ -18,7 +18,6 @@ import {
   CustomThrottlerGuard,
   DEFAULT_THROTTLER,
 } from '@/common/guards/custom-throttler.guard'
-import { RolesGuard } from '@/common/guards/roles.guard'
 import { RequestIdMiddleware } from '@/common/middlewares/request-id.middleware'
 import { RedisModule } from '@/common/redis/redis.module'
 import { PrismaModule } from '@/common/prisma/prisma.module'
@@ -102,10 +101,6 @@ import { FileModule } from '@/file/file.module'
     {
       provide: APP_GUARD,
       useClass: CustomThrottlerGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
     },
     {
       provide: APP_INTERCEPTOR,
