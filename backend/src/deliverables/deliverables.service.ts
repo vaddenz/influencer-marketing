@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ForbiddenException,
   Injectable,
   Logger,
@@ -7,6 +6,7 @@ import {
 } from '@nestjs/common'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { Role } from '@/common/enums/role.enum'
+import { DeliverableStatus } from '@/generated/prisma/client'
 import type { UserPayload } from '@/common/decorators/current-user.decorator'
 
 const DELIVERABLE_LIST_SELECT = {
@@ -26,11 +26,7 @@ export class DeliverablesService {
 
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(user: UserPayload, campaignId: string | undefined) {
-    if (!campaignId) {
-      throw new BadRequestException('campaignId is required')
-    }
-
+  async findAll(user: UserPayload, campaignId: string) {
     if (user.role === Role.Brand) {
       return this.prisma.deliverable.findMany({
         where: {
@@ -69,14 +65,14 @@ export class DeliverablesService {
         throw new ForbiddenException('You cannot complete this deliverable')
       }
 
-      if (deliverable.status === 'completed') {
+      if (deliverable.status === DeliverableStatus.completed) {
         return deliverable
       }
 
       const updated = await tx.deliverable.update({
         where: { id: deliverableId },
         data: {
-          status: 'completed',
+          status: DeliverableStatus.completed,
           completedAt: new Date(),
         },
       })
@@ -86,7 +82,7 @@ export class DeliverablesService {
           campaignId: deliverable.campaignId,
           influencerId: userId,
           status: {
-            not: 'completed',
+            not: DeliverableStatus.completed,
           },
         },
       })
@@ -131,7 +127,7 @@ export class DeliverablesService {
       return tx.deliverable.update({
         where: { id: deliverableId },
         data: {
-          status: 'pending',
+          status: DeliverableStatus.pending,
           completedAt: null,
         },
       })

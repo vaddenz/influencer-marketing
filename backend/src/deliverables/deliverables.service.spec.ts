@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import {
-  BadRequestException,
   ForbiddenException,
   NotFoundException,
 } from '@nestjs/common'
@@ -48,18 +47,6 @@ describe('DeliverablesService', () => {
   })
 
   describe('findAll', () => {
-    it('should throw BadRequestException when campaignId is missing', async () => {
-      const user: UserPayload = {
-        id: 'inf-1',
-        email: 'i@example.com',
-        role: Role.Influencer,
-      }
-
-      await expect(service.findAll(user, undefined)).rejects.toThrow(
-        BadRequestException,
-      )
-    })
-
     it('should return brand-owned deliverables for brand role', async () => {
       const user: UserPayload = {
         id: 'brand-1',

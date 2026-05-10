@@ -19,6 +19,7 @@ import { CurrentUser } from '@/common/decorators/current-user.decorator'
 import type { UserPayload } from '@/common/decorators/current-user.decorator'
 import { Role } from '@/common/enums/role.enum'
 import { DeliverablesService } from './deliverables.service'
+import { FindAllDeliverablesDto } from './dto/find-all-deliverables.dto'
 
 @ApiTags('Deliverables')
 @ApiBearerAuth()
@@ -33,9 +34,9 @@ export class DeliverablesController {
   @ApiResponse({ status: 400, description: 'campaignId is required' })
   async findAll(
     @CurrentUser() user: UserPayload,
-    @Query('campaignId') campaignId: string,
+    @Query() dto: FindAllDeliverablesDto,
   ) {
-    return this.deliverablesService.findAll(user, campaignId)
+    return this.deliverablesService.findAll(user, dto.campaignId)
   }
 
   @Patch(':id/complete')
