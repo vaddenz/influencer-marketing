@@ -7,6 +7,7 @@ import Link from 'next/link'
 
 interface InfluencerProfile {
   id: string
+  userId: string
   displayName: string
   handle: string
   niche: string
@@ -74,7 +75,7 @@ export default function DiscoverPage() {
                 <h3 className="font-semibold">{i.handle}</h3>
                 <p className="text-sm text-[var(--c-text-secondary)]">{i.niche} • {i.followerCount.toLocaleString()} followers • {i.engagementRate}% engagement • {i.locationCountry} {i.locationRegion}</p>
               </div>
-              <Link href={`/brand/influencers/${i.id}`} className="btn-text">View Profile →</Link>
+              <Link href={`/brand/influencers/${i.userId}`} className="btn-text">View Profile →</Link>
             </div>
           ))}
         </div>
