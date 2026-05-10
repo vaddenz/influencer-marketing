@@ -4,6 +4,7 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common'
+import { Prisma } from '@/generated/prisma/client'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { CreateBrandProfileDto } from './dto/create-brand-profile.dto'
 import { UpdateBrandProfileDto } from './dto/update-brand-profile.dto'
@@ -23,15 +24,25 @@ export class BrandsService {
       throw new ConflictException('Brand profile already exists')
     }
 
-    const profile = await this.prisma.brandProfile.create({
-      data: {
-        ...dto,
-        userId,
-      },
-    })
+    try {
+      const profile = await this.prisma.brandProfile.create({
+        data: {
+          ...dto,
+          userId,
+        },
+      })
 
-    this.logger.log(`Brand profile created for user ${userId}`)
-    return profile
+      this.logger.log(`Brand profile created for user ${userId}`)
+      return profile
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('Brand profile already exists')
+      }
+      throw error
+    }
   }
 
   async getMyProfile(userId: string) {
@@ -47,13 +58,21 @@ export class BrandsService {
   }
 
   async updateProfile(userId: string, dto: UpdateBrandProfileDto) {
-    const profile = await this.prisma.brandProfile.update({
+    const profile = await this.prisma.brandProfile.findUnique({
+      where: { userId },
+    })
+
+    if (!profile) {
+      throw new NotFoundException('Brand profile not found')
+    }
+
+    const updated = await this.prisma.brandProfile.update({
       where: { userId },
       data: dto,
     })
 
     this.logger.log(`Brand profile updated for user ${userId}`)
-    return profile
+    return updated
   }
 
   async getPublicProfile(userId: string) {
@@ -63,7 +82,6 @@ export class BrandsService {
         user: {
           select: {
             name: true,
-            email: true,
           },
         },
       },

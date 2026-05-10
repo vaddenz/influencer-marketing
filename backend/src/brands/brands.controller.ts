@@ -8,6 +8,7 @@ import {
   Param,
   Logger,
 } from '@nestjs/common'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { RolesGuard } from '@/common/guards/roles.guard'
 import { Roles } from '@/common/decorators/roles.decorator'
@@ -18,6 +19,8 @@ import { BrandsService } from './brands.service'
 import { CreateBrandProfileDto } from './dto/create-brand-profile.dto'
 import { UpdateBrandProfileDto } from './dto/update-brand-profile.dto'
 
+@ApiTags('Brands')
+@ApiBearerAuth()
 @Controller('api/v1/brands')
 export class BrandsController {
   private readonly logger = new Logger(BrandsController.name)
