@@ -15,6 +15,9 @@ const mockPrismaService = () => {
     campaign: {
       findUnique: jest.fn(),
     },
+    user: {
+      findUnique: jest.fn(),
+    },
     invitation: {
       create: jest.fn(),
       findFirst: jest.fn(),
@@ -73,6 +76,10 @@ describe('InvitationsService', () => {
       }
 
       prisma.campaign.findUnique.mockResolvedValue(campaign)
+      prisma.user.findUnique.mockResolvedValue({
+        id: dto.influencerId,
+        influencerProfile: { id: 'profile-1' },
+      })
       prisma.invitation.create.mockResolvedValue(invitation)
       prisma.notification.create.mockResolvedValue({ id: 'notif-1' })
 
@@ -81,6 +88,10 @@ describe('InvitationsService', () => {
         where: { id: dto.campaignId },
       })
       expect(prisma.$transaction).toHaveBeenCalled()
+      expect(prisma.user.findUnique).toHaveBeenCalledWith({
+        where: { id: dto.influencerId },
+        include: { influencerProfile: true },
+      })
       expect(prisma.invitation.create).toHaveBeenCalledWith({
         data: {
           campaignId: dto.campaignId,
@@ -151,6 +162,49 @@ describe('InvitationsService', () => {
           status: 'pending',
         },
       })
+      expect(prisma.invitation.create).not.toHaveBeenCalled()
+    })
+
+    it('should throw NotFoundException if influencer does not exist', async () => {
+      const userId = 'brand-1'
+      const dto = {
+        campaignId: 'camp-1',
+        influencerId: 'inf-1',
+        message: 'Join us!',
+      }
+      const campaign = { id: 'camp-1', brandId: userId, title: 'Summer' }
+
+      prisma.campaign.findUnique.mockResolvedValue(campaign)
+      prisma.user.findUnique.mockResolvedValue(null)
+
+      await expect(service.create(userId, dto)).rejects.toThrow(
+        NotFoundException,
+      )
+      expect(prisma.user.findUnique).toHaveBeenCalledWith({
+        where: { id: dto.influencerId },
+        include: { influencerProfile: true },
+      })
+      expect(prisma.invitation.create).not.toHaveBeenCalled()
+    })
+
+    it('should throw NotFoundException if influencer has no influencerProfile', async () => {
+      const userId = 'brand-1'
+      const dto = {
+        campaignId: 'camp-1',
+        influencerId: 'inf-1',
+        message: 'Join us!',
+      }
+      const campaign = { id: 'camp-1', brandId: userId, title: 'Summer' }
+
+      prisma.campaign.findUnique.mockResolvedValue(campaign)
+      prisma.user.findUnique.mockResolvedValue({
+        id: dto.influencerId,
+        influencerProfile: null,
+      })
+
+      await expect(service.create(userId, dto)).rejects.toThrow(
+        NotFoundException,
+      )
       expect(prisma.invitation.create).not.toHaveBeenCalled()
     })
   })

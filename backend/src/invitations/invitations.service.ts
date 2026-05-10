@@ -65,6 +65,15 @@ export class InvitationsService {
     }
 
     const invitation = await this.prisma.$transaction(async (tx) => {
+      const influencer = await tx.user.findUnique({
+        where: { id: dto.influencerId },
+        include: { influencerProfile: true },
+      })
+
+      if (!influencer || !influencer.influencerProfile) {
+        throw new NotFoundException('Influencer not found')
+      }
+
       const created = await tx.invitation.create({
         data: {
           campaignId: dto.campaignId,
@@ -116,131 +125,139 @@ export class InvitationsService {
   }
 
   async accept(userId: string, invitationId: string) {
-    const invitation = await this.prisma.invitation.findUnique({
-      where: { id: invitationId },
-      include: { campaign: true },
-    })
-
-    if (!invitation) {
-      throw new NotFoundException('Invitation not found')
-    }
-
-    if (invitation.influencerId !== userId) {
-      throw new ForbiddenException('You cannot accept this invitation')
-    }
-
-    if (invitation.status !== 'pending') {
-      throw new BadRequestException(
-        `Invitation cannot be accepted because it is ${invitation.status}`,
-      )
-    }
-
-    const [updated] = await this.prisma.$transaction([
-      this.prisma.invitation.update({
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const invitation = await tx.invitation.findUnique({
         where: { id: invitationId },
-        data: {
-          status: 'accepted',
-          respondedAt: new Date(),
-        },
-      }),
-      this.prisma.notification.create({
-        data: {
-          userId: invitation.campaign.brandId,
-          type: 'invitation_accepted',
-          title: 'Invitation Accepted',
-          message: `An influencer has accepted your invitation for "${invitation.campaign.title}"`,
-          relatedEntityType: 'invitation',
-          relatedEntityId: invitation.id,
-        },
-      }),
-      this.prisma.deliverable.create({
-        data: {
-          campaignId: invitation.campaignId,
-          influencerId: invitation.influencerId,
-          description:
-            invitation.campaign.description || 'Complete campaign deliverables',
-          status: 'pending',
-        },
-      }),
-    ])
+        include: { campaign: true },
+      })
+
+      if (!invitation) {
+        throw new NotFoundException('Invitation not found')
+      }
+
+      if (invitation.influencerId !== userId) {
+        throw new ForbiddenException('You cannot accept this invitation')
+      }
+
+      if (invitation.status !== 'pending') {
+        throw new BadRequestException(
+          `Invitation cannot be accepted because it is ${invitation.status}`,
+        )
+      }
+
+      const [upd] = await Promise.all([
+        tx.invitation.update({
+          where: { id: invitationId },
+          data: {
+            status: 'accepted',
+            respondedAt: new Date(),
+          },
+        }),
+        tx.notification.create({
+          data: {
+            userId: invitation.campaign.brandId,
+            type: 'invitation_accepted',
+            title: 'Invitation Accepted',
+            message: `An influencer has accepted your invitation for "${invitation.campaign.title}"`,
+            relatedEntityType: 'invitation',
+            relatedEntityId: invitation.id,
+          },
+        }),
+        tx.deliverable.create({
+          data: {
+            campaignId: invitation.campaignId,
+            influencerId: invitation.influencerId,
+            description:
+              invitation.campaign.description || 'Complete campaign deliverables',
+            status: 'pending',
+          },
+        }),
+      ])
+
+      return upd
+    })
 
     this.logger.log(`Invitation ${invitationId} accepted by influencer ${userId}`)
     return updated
   }
 
   async decline(userId: string, invitationId: string) {
-    const invitation = await this.prisma.invitation.findUnique({
-      where: { id: invitationId },
-      include: { campaign: true },
-    })
-
-    if (!invitation) {
-      throw new NotFoundException('Invitation not found')
-    }
-
-    if (invitation.influencerId !== userId) {
-      throw new ForbiddenException('You cannot decline this invitation')
-    }
-
-    if (invitation.status !== 'pending') {
-      throw new BadRequestException(
-        `Invitation cannot be declined because it is ${invitation.status}`,
-      )
-    }
-
-    const [updated] = await this.prisma.$transaction([
-      this.prisma.invitation.update({
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const invitation = await tx.invitation.findUnique({
         where: { id: invitationId },
-        data: {
-          status: 'declined',
-          respondedAt: new Date(),
-        },
-      }),
-      this.prisma.notification.create({
-        data: {
-          userId: invitation.campaign.brandId,
-          type: 'invitation_declined',
-          title: 'Invitation Declined',
-          message: `An influencer has declined your invitation for "${invitation.campaign.title}"`,
-          relatedEntityType: 'invitation',
-          relatedEntityId: invitation.id,
-        },
-      }),
-    ])
+        include: { campaign: true },
+      })
+
+      if (!invitation) {
+        throw new NotFoundException('Invitation not found')
+      }
+
+      if (invitation.influencerId !== userId) {
+        throw new ForbiddenException('You cannot decline this invitation')
+      }
+
+      if (invitation.status !== 'pending') {
+        throw new BadRequestException(
+          `Invitation cannot be declined because it is ${invitation.status}`,
+        )
+      }
+
+      const [upd] = await Promise.all([
+        tx.invitation.update({
+          where: { id: invitationId },
+          data: {
+            status: 'declined',
+            respondedAt: new Date(),
+          },
+        }),
+        tx.notification.create({
+          data: {
+            userId: invitation.campaign.brandId,
+            type: 'invitation_declined',
+            title: 'Invitation Declined',
+            message: `An influencer has declined your invitation for "${invitation.campaign.title}"`,
+            relatedEntityType: 'invitation',
+            relatedEntityId: invitation.id,
+          },
+        }),
+      ])
+
+      return upd
+    })
 
     this.logger.log(`Invitation ${invitationId} declined by influencer ${userId}`)
     return updated
   }
 
   async withdraw(userId: string, invitationId: string) {
-    const invitation = await this.prisma.invitation.findUnique({
-      where: { id: invitationId },
-      include: { campaign: true },
-    })
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const invitation = await tx.invitation.findUnique({
+        where: { id: invitationId },
+        include: { campaign: true },
+      })
 
-    if (!invitation) {
-      throw new NotFoundException('Invitation not found')
-    }
+      if (!invitation) {
+        throw new NotFoundException('Invitation not found')
+      }
 
-    if (invitation.campaign.brandId !== userId) {
-      throw new ForbiddenException('You cannot withdraw this invitation')
-    }
+      if (invitation.campaign.brandId !== userId) {
+        throw new ForbiddenException('You cannot withdraw this invitation')
+      }
 
-    if (invitation.status !== 'pending') {
-      throw new BadRequestException(
-        `Invitation cannot be withdrawn because it is ${invitation.status}`,
-      )
-    }
+      if (invitation.status !== 'pending') {
+        throw new BadRequestException(
+          `Invitation cannot be withdrawn because it is ${invitation.status}`,
+        )
+      }
 
-    const [updated] = await this.prisma.$transaction([
-      this.prisma.invitation.update({
+      return tx.invitation.update({
         where: { id: invitationId },
         data: {
           status: 'withdrawn',
           respondedAt: new Date(),
         },
-      }),
-    ])
+      })
+    })
 
     this.logger.log(`Invitation ${invitationId} withdrawn by brand ${userId}`)
     return updated
