@@ -35,9 +35,9 @@ export function Footer() {
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link
-              href="/templates"
+              href="/discover"
               className="text-sm text-[var(--c-text-secondary)] hover:text-[var(--c-accent)] transition-colors">
-              {t('templates')}
+              {t('discover')}
             </Link>
             <Link
               href="/about"
