@@ -44,7 +44,7 @@ const OAUTH_PROVIDERS = {
 }
 
 export function AuthButton() {
-  const { user, isAuthenticated, isAdmin, logout } = useAuth()
+  const { user, isAuthenticated, isBrand, logout } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('Auth')
@@ -125,7 +125,7 @@ export function AuthButton() {
                 {user.email}
               </p>
             </div>
-            {isAdmin && (
+            {isBrand && (
               <Link
                 href="/admin"
                 className="block px-4 py-2 text-sm text-[var(--c-text)] hover:bg-[var(--c-bg-secondary)] transition-colors"

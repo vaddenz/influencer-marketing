@@ -13,7 +13,8 @@ import { getApiUrl } from '@/lib/config'
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
-  isAdmin: boolean
+  isBrand: boolean
+  isInfluencer: boolean
   login: (tokens: AuthTokens) => Promise<void>
   logout: () => void
   loading: boolean
@@ -62,8 +63,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         isAuthenticated: user !== null,
-        // isAdmin: user?.role === 'admin',
-        isAdmin: true,
+        isBrand: user?.role === 'brand',
+        isInfluencer: user?.role === 'influencer',
         login,
         logout,
         loading,
