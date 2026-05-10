@@ -71,5 +71,6 @@ export class CreateCampaignDto {
   })
   @IsOptional()
   @IsDateString()
+  @Validate(IsDateRangeConstraint)
   endDate?: string
 }
