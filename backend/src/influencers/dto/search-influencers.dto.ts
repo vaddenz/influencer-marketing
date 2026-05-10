@@ -4,6 +4,7 @@ import {
   IsString,
   IsInt,
   Min,
+  Max,
   IsIn,
 } from 'class-validator'
 import { Transform, Type } from 'class-transformer'
@@ -76,4 +77,19 @@ export class SearchInfluencersDto {
   @IsOptional()
   @IsIn(['nano', 'micro', 'macro', 'mega'])
   scope?: string
+
+  @ApiPropertyOptional({ description: 'Page number', default: 1 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Type(() => Number)
+  page?: number = 1
+
+  @ApiPropertyOptional({ description: 'Items per page', default: 20 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(100)
+  @Type(() => Number)
+  limit?: number = 20
 }

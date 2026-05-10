@@ -47,7 +47,7 @@ describe('InfluencersService', () => {
       prisma.influencerProfile.findUnique.mockResolvedValue(null)
       prisma.influencerProfile.create.mockResolvedValue(created)
 
-      await expect(service.createProfile(userId, dto as any)).resolves.toEqual(created)
+      await expect(service.createProfile(userId, dto)).resolves.toEqual(created)
       expect(prisma.influencerProfile.findUnique).toHaveBeenCalledWith({
         where: { userId },
       })
@@ -71,7 +71,7 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findUnique.mockResolvedValue({ id: 'ip-1' })
 
-      await expect(service.createProfile(userId, dto as any)).rejects.toThrow(
+      await expect(service.createProfile(userId, dto)).rejects.toThrow(
         ConflictException,
       )
       expect(prisma.influencerProfile.create).not.toHaveBeenCalled()
@@ -98,7 +98,7 @@ describe('InfluencersService', () => {
         }),
       )
 
-      await expect(service.createProfile(userId, dto as any)).rejects.toThrow(
+      await expect(service.createProfile(userId, dto)).rejects.toThrow(
         ConflictException,
       )
     })
@@ -193,10 +193,12 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({})).resolves.toEqual(candidates)
+      await expect(service.search({ page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {},
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -207,7 +209,7 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ q: 'ali' })).resolves.toEqual(candidates)
+      await expect(service.search({ q: 'ali', page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           OR: [
@@ -217,6 +219,8 @@ describe('InfluencersService', () => {
           ],
         },
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -227,12 +231,14 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ niche: 'Travel' })).resolves.toEqual(candidates)
+      await expect(service.search({ niche: 'Travel', page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           niche: { equals: 'Travel', mode: 'insensitive' },
         },
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -243,13 +249,15 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ location: 'US', region: 'California' })).resolves.toEqual(candidates)
+      await expect(service.search({ location: 'US', region: 'California', page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           locationCountry: { equals: 'US', mode: 'insensitive' },
           locationRegion: { equals: 'California', mode: 'insensitive' },
         },
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -260,7 +268,7 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ followersMin: 1000, followersMax: 10000 })).resolves.toEqual(candidates)
+      await expect(service.search({ followersMin: 1000, followersMax: 10000, page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           AND: [
@@ -269,6 +277,8 @@ describe('InfluencersService', () => {
           ],
         },
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -279,7 +289,7 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ scope: 'nano' })).resolves.toEqual(candidates)
+      await expect(service.search({ scope: 'nano', page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           AND: [
@@ -288,6 +298,8 @@ describe('InfluencersService', () => {
           ],
         },
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -298,14 +310,16 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ scope: 'mega' })).resolves.toEqual(candidates)
+      await expect(service.search({ scope: 'mega', page: 1, limit: 20 })).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
-          followerCount: {
-            gte: 1000000,
-          },
+          AND: [
+            { followerCount: { gte: 1000000 } },
+          ],
         },
         orderBy: { followerCount: 'desc' },
+        skip: 0,
+        take: 20,
       })
     })
 
@@ -318,7 +332,7 @@ describe('InfluencersService', () => {
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      const result = await service.search({ platforms: 'instagram,tiktok' })
+      const result = await service.search({ platforms: 'instagram,tiktok', page: 1, limit: 20 })
       expect(result).toHaveLength(2)
       expect(result.map((r: any) => r.id)).toEqual(['ip-1', 'ip-2'])
     })
@@ -336,6 +350,8 @@ describe('InfluencersService', () => {
         followersMin: 1000,
         followersMax: 15000,
         platforms: 'instagram',
+        page: 1,
+        limit: 20,
       })
       expect(result).toHaveLength(1)
       expect(result[0].id).toBe('ip-1')

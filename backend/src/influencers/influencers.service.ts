@@ -10,6 +10,13 @@ import { CreateInfluencerProfileDto } from './dto/create-influencer-profile.dto'
 import { UpdateInfluencerProfileDto } from './dto/update-influencer-profile.dto'
 import { SearchInfluencersDto } from './dto/search-influencers.dto'
 
+const SCOPE_RANGES: Record<string, { min: number; max?: number }> = {
+  nano: { min: 1000, max: 10000 },
+  micro: { min: 10000, max: 100000 },
+  macro: { min: 100000, max: 1000000 },
+  mega: { min: 1000000, max: undefined },
+}
+
 @Injectable()
 export class InfluencersService {
   private readonly logger = new Logger(InfluencersService.name)
@@ -101,6 +108,7 @@ export class InfluencersService {
 
   async search(dto: SearchInfluencersDto) {
     const where: Prisma.InfluencerProfileWhereInput = {}
+    const andConditions: Prisma.InfluencerProfileWhereInput[] = []
 
     if (dto.q) {
       where.OR = [
@@ -122,43 +130,36 @@ export class InfluencersService {
       where.locationRegion = { equals: dto.region, mode: 'insensitive' }
     }
 
-    const followerConditions: Prisma.IntFilter<'InfluencerProfile'>[] = []
-
     if (dto.followersMin !== undefined) {
-      followerConditions.push({ gte: dto.followersMin })
+      andConditions.push({ followerCount: { gte: dto.followersMin } })
     }
 
     if (dto.followersMax !== undefined) {
-      followerConditions.push({ lte: dto.followersMax })
+      andConditions.push({ followerCount: { lte: dto.followersMax } })
     }
 
     if (dto.scope) {
-      const ranges: Record<string, [number, number | undefined]> = {
-        nano: [1000, 10000],
-        micro: [10000, 100000],
-        macro: [100000, 1000000],
-        mega: [1000000, undefined],
-      }
-      const [min, max] = ranges[dto.scope]
-      followerConditions.push({ gte: min })
-      if (max !== undefined) {
-        followerConditions.push({ lte: max })
+      const range = SCOPE_RANGES[dto.scope]
+      if (range) {
+        andConditions.push({ followerCount: { gte: range.min } })
+        if (range.max !== undefined) {
+          andConditions.push({ followerCount: { lte: range.max } })
+        }
       }
     }
 
-    if (followerConditions.length > 0) {
-      if (followerConditions.length === 1) {
-        where.followerCount = followerConditions[0]
-      } else {
-        where.AND = where.AND
-          ? [...(Array.isArray(where.AND) ? where.AND : [where.AND]), ...followerConditions.map((cond) => ({ followerCount: cond }))]
-          : followerConditions.map((cond) => ({ followerCount: cond }))
-      }
+    if (andConditions.length > 0) {
+      where.AND = andConditions
     }
+
+    const skip = ((dto.page ?? 1) - 1) * (dto.limit ?? 20)
+    const take = dto.limit ?? 20
 
     const candidates = await this.prisma.influencerProfile.findMany({
       where,
       orderBy: { followerCount: 'desc' },
+      skip,
+      take,
     })
 
     if (!dto.platforms) {
