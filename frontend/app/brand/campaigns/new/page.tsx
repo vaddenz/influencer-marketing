@@ -19,7 +19,7 @@ export default function NewCampaignPage() {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['campaigns'] })
-      router.push('/dashboard')
+      router.push('/brand/dashboard')
     },
   })
 
