@@ -1,0 +1,88 @@
+<h2>Data Model</h2>
+<p class="subtitle">Core entities for brand discovery + campaign management MVP</p>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">Entity Relationships</div>
+    <div class="mockup-body">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <!-- Users -->
+        <div style="border: 2px solid #4f46e5; border-radius: 8px; padding: 12px; background: #eef2ff; position: relative;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong>👤 users</strong>
+            <span style="font-size: 11px; color: #666;">id, email, password_hash, role, status</span>
+          </div>
+        </div>
+
+        <!-- Profiles -->
+        <div style="display: flex; gap: 16px;">
+          <div style="flex: 1; border: 2px solid #7c3aed; border-radius: 8px; padding: 12px; background: #f5f3ff;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong>🏢 brand_profiles</strong>
+              <span style="font-size: 11px; color: #666;">belongs to user</span>
+            </div>
+            <div style="font-size: 12px; color: #555; margin-top: 6px;">company_name, industry, website, description, logo_url</div>
+          </div>
+          <div style="flex: 1; border: 2px solid #db2777; border-radius: 8px; padding: 12px; background: #fdf2f8;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong>⭐ influencer_profiles</strong>
+              <span style="font-size: 11px; color: #666;">belongs to user</span>
+            </div>
+            <div style="font-size: 12px; color: #555; margin-top: 6px;">display_name, handle, bio, niche, follower_count, engagement_rate, platforms[], location, profile_image_url</div>
+          </div>
+        </div>
+
+        <!-- Campaigns -->
+        <div style="border: 2px solid #059669; border-radius: 8px; padding: 12px; background: #ecfdf5;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong>📋 campaigns</strong>
+            <span style="font-size: 11px; color: #666;">belongs to brand (user)</span>
+          </div>
+          <div style="font-size: 12px; color: #555; margin-top: 6px;">title, description, status (draft/active/completed/cancelled), budget, start_date, end_date</div>
+        </div>
+
+        <!-- Invitations + Deliverables side by side -->
+        <div style="display: flex; gap: 16px;">
+          <div style="flex: 1; border: 2px solid #d97706; border-radius: 8px; padding: 12px; background: #fffbeb;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong>📩 invitations</strong>
+              <span style="font-size: 11px; color: #666;">belongs to campaign + influencer</span>
+            </div>
+            <div style="font-size: 12px; color: #555; margin-top: 6px;">status (pending/accepted/declined/withdrawn), message, created_at, responded_at</div>
+          </div>
+          <div style="flex: 1; border: 2px solid #0891b2; border-radius: 8px; padding: 12px; background: #ecfeff;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong>✅ deliverables</strong>
+              <span style="font-size: 11px; color: #666;">belongs to campaign + influencer</span>
+            </div>
+            <div style="font-size: 12px; color: #555; margin-top: 6px;">description, due_date, status (pending/in_progress/completed), completed_at</div>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div style="border: 2px solid #64748b; border-radius: 8px; padding: 12px; background: #f8fafc;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong>🔔 notifications</strong>
+            <span style="font-size: 11px; color: #666;">belongs to user</span>
+          </div>
+          <div style="font-size: 12px; color: #555; margin-top: 6px;">type, title, message, read (bool), related_entity_type, related_entity_id</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Key Decisions</h3>
+  <ul>
+    <li><strong>Separate profile tables</strong> — keeps brand and influencer data clean. Adding agencies later means a third profile table, no migration needed.</li>
+    <li><strong>Platforms as JSON</strong> — influencers can have multiple social accounts (Instagram, TikTok, YouTube). JSON array is flexible for MVP.</li>
+    <li><strong>Invitation as its own table</strong> — not just a campaign status. This supports future features like invitation history, negotiation, bulk invites.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <p><strong>Does this data model look right?</strong> Any fields missing or relationships you'd change?</p>
+</div>

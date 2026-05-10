@@ -1,0 +1,29 @@
+http:
+  routers:
+    frontend-router:
+      rule: "Host(`HOSTNAME_1`) || Host(`HOSTNAME_2`)"
+      service: frontend-service
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: default
+
+    backend-router:
+      rule: "(Host(`HOSTNAME_1`) || Host(`HOSTNAME_2`)) && PathPrefix(`/api/v1`)"
+      service: backend-service
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: default
+      priority: 100
+
+  services:
+    frontend-service:
+      loadBalancer:
+        servers:
+          - url: "http://frontend:3000"
+
+    backend-service:
+      loadBalancer:
+        servers:
+          - url: "http://backend:3000"

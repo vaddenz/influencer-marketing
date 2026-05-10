@@ -1,0 +1,86 @@
+<h2>Data Flow: Invitation & Campaign Lifecycle</h2>
+<p class="subtitle">How state changes flow through the system from discovery to completion</p>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">State Machine: Invitation</div>
+    <div class="mockup-body">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; font-size: 12px;">
+        <div style="text-align: center;">
+          <div style="background: #dbeafe; border: 2px solid #3b82f6; border-radius: 8px; padding: 10px 14px; font-weight: bold;">pending</div>
+          <div style="margin-top: 4px; color: #666;">Brand sends invite</div>
+        </div>
+        <div style="font-size: 20px; color: #888;">→</div>
+        <div style="text-align: center;">
+          <div style="background: #d1fae5; border: 2px solid #10b981; border-radius: 8px; padding: 10px 14px; font-weight: bold;">accepted</div>
+          <div style="margin-top: 4px; color: #666;">Influencer accepts</div>
+        </div>
+        <div style="font-size: 20px; color: #888;">→</div>
+        <div style="text-align: center;">
+          <div style="background: #e0e7ff; border: 2px solid #6366f1; border-radius: 8px; padding: 10px 14px; font-weight: bold;">in_progress</div>
+          <div style="margin-top: 4px; color: #666;">Deliverables start</div>
+        </div>
+        <div style="font-size: 20px; color: #888;">→</div>
+        <div style="text-align: center;">
+          <div style="background: #f3e8ff; border: 2px solid #a855f7; border-radius: 8px; padding: 10px 14px; font-weight: bold;">completed</div>
+          <div style="margin-top: 4px; color: #666;">All deliverables done</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; margin-top: 12px; gap: 40px; font-size: 12px; color: #666;">
+        <div>⤴ pending can also go to <strong style="color: #ef4444;">declined</strong> (influencer declines)</div>
+        <div>⤴ pending can go to <strong style="color: #6b7280;">withdrawn</strong> (brand cancels)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">Sequence: Brand Invites → Influencer Accepts</div>
+    <div class="mockup-body">
+      <div style="padding: 12px; font-size: 12px; line-height: 1.8;">
+        <div style="display: flex; margin-bottom: 4px;">
+          <div style="width: 80px; font-weight: bold; color: #4f46e5;">Brand</div>
+          <div>POST /campaigns → creates campaign (optional, if new)</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px;">
+          <div style="width: 80px; font-weight: bold; color: #4f46e5;">Brand</div>
+          <div>POST /invitations → sends invite (campaign_id, influencer_id, message)</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px; padding-left: 40px;">
+          <div style="width: 80px; font-weight: bold; color: #059669;">System</div>
+          <div>Creates notification for influencer (type: invitation_received)</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px;">
+          <div style="width: 80px; font-weight: bold; color: #db2777;">Influencer</div>
+          <div>GET /invitations → sees pending invitation</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px;">
+          <div style="width: 80px; font-weight: bold; color: #db2777;">Influencer</div>
+          <div>PATCH /invitations/:id/accept → status becomes accepted</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px; padding-left: 40px;">
+          <div style="width: 80px; font-weight: bold; color: #059669;">System</div>
+          <div>Creates notification for brand (type: invitation_accepted)</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px; padding-left: 40px;">
+          <div style="width: 80px; font-weight: bold; color: #059669;">System</div>
+          <div>Creates deliverables from campaign template (status: pending)</div>
+        </div>
+        <div style="display: flex; margin-bottom: 4px;">
+          <div style="width: 80px; font-weight: bold; color: #db2777;">Influencer</div>
+          <div>PATCH /deliverables/:id/complete → marks deliverable done</div>
+        </div>
+        <div style="display: flex; padding-left: 40px;">
+          <div style="width: 80px; font-weight: bold; color: #059669;">System</div>
+          <div>When all deliverables complete → notification to brand (type: deliverables_completed)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p><strong>Does this data flow and state machine make sense?</strong> Any missing states or sequences?</p>
+</div>

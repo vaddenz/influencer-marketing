@@ -1,0 +1,35 @@
+# Traefik Configuration
+api:
+  dashboard: true
+  insecure: false
+
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: default
+
+certificatesResolvers:
+  default:
+    acme:
+      email: "postmaster@HOSTNAME_1"
+      storage: "/etc/traefik/acme.json"
+      httpChallenge:
+        entryPoint: web
+
+providers:
+  file:
+    filename: "/etc/traefik/dynamic.yml"
+    watch: true

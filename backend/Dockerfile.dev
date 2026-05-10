@@ -1,0 +1,58 @@
+FROM node:22-alpine AS base
+
+# Install system dependencies for development
+RUN apk add --no-cache \
+    libc6-compat \
+    git \
+    bash \
+    curl \
+    vim \
+    nano \
+    htop \
+    procps \
+    && rm -rf /var/cache/apk/*
+
+# Set working directory
+WORKDIR /app
+
+# Install global development tools
+RUN npm install -g \
+    @nestjs/cli \
+    prisma \
+    ts-node \
+    typescript \
+    nodemon
+
+# Copy package files
+COPY package.json yarn.lock* ./
+
+# Install all dependencies (including dev dependencies)
+RUN yarn install --frozen-lockfile
+
+# Development stage
+FROM base AS development
+
+# Set environment to development
+ENV NODE_ENV=development
+
+# Copy all source code
+COPY . .
+
+# Generate Prisma client for development
+RUN yarn prisma:gen
+
+# Create non-root user for development
+RUN addgroup -g 1001 -S developer && \
+    adduser -S -D -u 1001 developer developer
+
+# Set proper permissions
+RUN chown -R developer:developer /app
+
+# Switch to non-root user
+USER developer
+
+# Expose development port
+EXPOSE 3000
+
+# Default command for development
+CMD ["yarn", "start:dev"]

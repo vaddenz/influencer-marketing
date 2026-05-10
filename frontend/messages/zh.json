@@ -1,0 +1,283 @@
+{
+  "HomePage": {
+    "badge": "Alpha 版本现已上线",
+    "heroTitle1": "一键招募",
+    "heroTitle2": "Agent 团队",
+    "title": "ACME Brand Name - Agent 团队模板市场",
+    "description": "为无技术背景的 OpenClaw 用户提供一键安装预设 Agent 团队模板，包含内容创作、电商运营、客服支持等业务场景",
+    "cta": "浏览模板",
+    "secondaryCta": "了解更多",
+    "stats": {
+      "scenarios": "业务场景",
+      "roles": "Agent 角色",
+      "openSource": "开源免费"
+    },
+    "howItWorks": {
+      "title": "三步开始使用",
+      "subtitle": "简单快捷，无需任何技术背景",
+      "step1Title": "选择模板",
+      "step1Desc": "浏览我们的模板库，根据业务场景选择适合的 Agent 团队模板",
+      "step2Title": "一键部署",
+      "step2Desc": "与 OpenClaw 对话一键部署完整的 Agent 团队设置",
+      "step3Title": "启动使用",
+      "step3Desc": "即刻开始使用专业的 Agent 团队"
+    },
+    "features": {
+      "title": "为什么选择 AgentPlanet",
+      "subtitle": "我们专注于为无技术背景的用户提供最佳体验",
+      "feature1Title": "一键安装",
+      "feature1Desc": "无需复杂配置，通过对话即可在 OpenClaw 中快速部署，省去繁琐的手动设置",
+      "feature2Title": "专业团队",
+      "feature2Desc": "预设多种业务场景的专业 Agent 角色组合，每个角色都有明确的职责和系统提示词",
+      "feature3Title": "完全免费",
+      "feature3Desc": "所有模板均开源免费使用，无任何隐藏费用，让每个人都能平等享受 AI 带来的效率提升",
+      "feature4Title": "智能协作",
+      "feature4Desc": "Agent 之间可以相互协作，形成完整的工作流",
+      "feature5Title": "场景丰富",
+      "feature5Desc": "覆盖内容创作、电商运营、客服支持等多种业务场景，满足不同行业需求",
+      "feature6Title": "隐私安全",
+      "feature6Desc": "OpenClaw 完全运行在用户环境，我们不获取任何用户数据，保障数据隐私"
+    },
+    "bottomCta": {
+      "title": "准备好提升业务效率了吗？",
+      "subtitle": "立即浏览我们的模板库，找到适合你业务场景的 Agent 团队配置，开启 AI 驱动的业务增长",
+      "button": "开始探索"
+    }
+  },
+  "Navbar": {
+    "home": "首页",
+    "templates": "模板库",
+    "install": "部署指南",
+    "pricing": "定价",
+    "about": "关于",
+    "login": "登录",
+    "start": "开始使用",
+    "openMenu": "打开菜单"
+  },
+  "Templates": {
+    "metadata": {
+      "title": "模板库 - AgentPlanet",
+      "description": "浏览我们的 Agent 团队模板库，包含内容创作、电商运营、客服支持等多种业务场景"
+    },
+    "title": "模板库",
+    "subtitle": "选择适合你业务场景的 Agent 团队模板，一键部署到 OpenClaw",
+    "categories": {
+      "all": "全部",
+      "content-creation": "内容创作",
+      "e-commerce": "电商运营",
+      "customer-service": "客服支持"
+    },
+    "categoryLabel": "分类",
+    "searchPlaceholder": "搜索模板...",
+    "foundCount": "共找到 {count} 个模板",
+    "noResults": "暂无符合条件的模板",
+    "tryAdjusting": "请尝试调整筛选条件",
+    "agentsCount": "{count} 个角色",
+    "downloadCount": "{count} 次下载",
+    "hotTemplates": "热门模板",
+    "moreTemplates": "还有 {count} 个模板",
+    "viewAll": "查看全部模板",
+    "detail": {
+      "notFoundTitle": "模板未找到 - AgentPlanet",
+      "metadataTitle": "{name} - AgentPlanet",
+      "copySuccess": "已复制到剪贴板",
+      "copyFailed": "复制失败，请手动复制",
+      "home": "首页",
+      "templates": "模板库",
+      "tabOrganization": "组织架构",
+      "tabAgents": "Agent 角色",
+      "clickToCopy": "点击复制",
+      "subordinates": "下属：",
+      "getConfig": "获取配置",
+      "copyPrompt": "复制下方提示发送给 OpenClaw，一键安装",
+      "installCommand": "使用 curl 或浏览器技能访问 \"https://agentplanet.io/api/v1/templates/{slug}/install\" 链接，按照链接中的指示安装并配置 Agents。",
+      "copyInstallCommand": "复制安装命令",
+      "installSteps": "安装步骤",
+      "step1": "复制提示发送给 OpenClaw，一键安装",
+      "step2": "配置 Agent 路由规则",
+      "step3": "询问 OpenClaw 当前 Agent 配置进行验证",
+      "step4": "开始使用",
+      "needHelp": "需要帮助？",
+      "contactSupportDesc": "如果在使用过程中遇到问题，请联系我们",
+      "contactSupport": "联系支持 →"
+    }
+  },
+  "Install": {
+    "title": "部署指南 - AgentPlanet",
+    "description": "详细的 OpenClaw 部署和配置指南，帮助您快速部署 AI Agent 团队模板",
+    "header": "部署指南",
+    "subheader": "按照以下步骤，快速在 OpenClaw 中部署 Agent 团队模板",
+    "prerequisites": {
+      "title": "前提条件",
+      "desc": "在开始之前，请确保您已经具备以下条件：",
+      "item1": "已安装",
+      "item1Link": "OpenClaw",
+      "item1Desc": "（版本 2026.1.30 或更高）",
+      "item2": "拥有 OpenClaw 的配置修改权限"
+    },
+    "steps": {
+      "step1Title": "选择并下载模板",
+      "step1Desc1": "浏览",
+      "step1Link": "模板库",
+      "step1Desc2": "，选择适合您业务场景的 Agent 团队模板，点击 \"复制安装命令\" 按钮获取安装命令。",
+      "step2Title": "一键安装",
+      "step2Desc": "将复制的安装命令直接以对话形式发送给 OpenClaw，一键安装",
+      "step3Title": "重启 OpenClaw Gateway",
+      "step3Desc": "安装完成后，命令 OpenClaw 重启 Gateway 服务以加载新的配置。或手动使用以下命令重启服务：",
+      "step4Title": "验证部署",
+      "step4Desc": "重启后，您可以通过以下方式验证部署是否成功：",
+      "step4Item1": "在 OpenClaw 控制台查看 Agent 列表，确认所有角色已上线",
+      "step4Item2": "尝试向 Agent 发送测试消息，检查响应是否正常",
+      "step4Item3": "查看 Gateway 日志，确认没有错误信息"
+    },
+    "faq": {
+      "title": "常见问题",
+      "q1Title": "Agent 无法启动",
+      "q1Desc": "检查 OpenClaw Gateway 是否正常运行，以及配置目录路径是否正确。确保配置文件放置在正确的 templates 子目录中。",
+      "q2Title": "权限不足",
+      "q2Desc": "确保当前用户对 OpenClaw 配置目录具有读写权限。在 Linux/macOS 上，您可能需要使用 chmod 命令修改权限。"
+    },
+    "contact": {
+      "desc": "仍然遇到问题？",
+      "link": "联系我们的支持团队"
+    }
+  },
+  "About": {
+    "title": "关于我们 - AgentPlanet",
+    "description": "了解 AgentPlanet 的愿景和使命，为无技术背景的 OpenClaw 用户提供低门槛的 Agent 团队配置解决方案",
+    "header": "关于 AgentPlanet",
+    "intro": "AgentPlanet 是一个为 OpenClaw 用户打造的 Agent 团队模板市场。我们的使命是让没有技术背景的用户也能轻松配置和使用 AI Agent 团队，提升业务效率。",
+    "vision": "我们的愿景",
+    "visionDesc": "让每个人都能享受到 AI Agent 技术带来的便利，无需编写代码或理解复杂的技术概念，只需选择适合自己业务场景的模板，即可快速搭建专业的 AI Agent 团队。",
+    "features": "核心功能",
+    "feature1": "丰富的业务场景模板库",
+    "feature2": "一键下载 OpenClaw 配置文件",
+    "feature3": "所有模板完全开源免费",
+    "feature4": "详细的 Agent 角色说明和使用指南",
+    "contact": "联系我们",
+    "contactDesc": "如果您有任何问题或建议，欢迎通过以下方式联系我们："
+  },
+  "Privacy": {
+    "title": "隐私政策 - AgentPlanet",
+    "description": "了解 AgentPlanet 如何收集、使用和保护您的个人信息",
+    "header": "隐私政策",
+    "lastUpdated": "最后更新日期：2026年3月16日",
+    "overview": "概述",
+    "overviewDesc": "AgentPlanet（\"我们\"、\"我们的\"或\"本平台\"）致力于保护您的隐私。本隐私政策说明了我们如何收集、使用、存储和保护您的个人信息。使用我们的服务即表示您同意本隐私政策中所述的做法。",
+    "collect": "我们收集的信息",
+    "collectDesc": "我们收集的信息类型包括：",
+    "collectItem1": "账户信息：当您注册账户时，我们收集您的邮箱地址、用户名和密码。",
+    "collectItem2": "使用数据：我们收集有关您如何与我们的平台互动的信息，包括访问的页面、下载的模板和使用的功能。",
+    "collectItem3": "技术信息：包括您的IP地址、浏览器类型、操作系统和设备信息。",
+    "collectItem4": "Cookie和类似技术：我们使用Cookie来改善用户体验和分析网站流量。",
+    "use": "我们如何使用您的信息",
+    "useDesc": "我们使用收集的信息用于：",
+    "useItem1": "提供、维护和改进我们的服务",
+    "useItem2": "处理您的账户注册和登录",
+    "useItem3": "向您发送服务通知和更新",
+    "useItem4": "响应您的询问和请求",
+    "useItem5": "分析使用趋势以优化用户体验",
+    "useItem6": "防止欺诈和滥用行为",
+    "security": "数据安全",
+    "securityDesc": "我们采取适当的技术和组织措施来保护您的个人信息免受未经授权的访问、使用或披露。然而，请注意，互联网传输或电子存储方法都不是100%安全的。",
+    "thirdParty": "第三方服务",
+    "thirdPartyDesc": "我们可能使用第三方服务提供商来协助我们运营平台和提供服务。这些提供商仅在必要时访问您的信息，并有义务保护其安全性和保密性。",
+    "rights": "您的权利",
+    "rightsDesc": "根据适用的数据保护法律，您可能拥有以下权利：",
+    "rightsItem1": "访问您的个人信息",
+    "rightsItem2": "更正不准确的信息",
+    "rightsItem3": "删除您的个人信息",
+    "rightsItem4": "限制或反对处理您的信息",
+    "rightsItem5": "数据可携带性",
+    "updates": "政策更新",
+    "updatesDesc": "我们可能会不时更新本隐私政策。任何更改将在本页面发布，并注明更新日期。我们建议您定期查看本政策以了解任何变更。",
+    "contact": "联系我们",
+    "contactDesc": "如果您对本隐私政策有任何疑问或担忧，请通过以下方式联系我们："
+  },
+  "Terms": {
+    "title": "服务条款 - AgentPlanet",
+    "description": "阅读 AgentPlanet 的服务条款，了解使用我们平台的规则和条件",
+    "header": "服务条款",
+    "lastUpdated": "最后更新日期：2026年3月16日",
+    "acceptance": "1. 接受条款",
+    "acceptanceDesc": "通过访问或使用 AgentPlanet 平台（以下简称\"本平台\"），您即表示您已阅读、理解并同意受本服务条款的约束。如果您不同意这些条款的任何部分，请不要使用本平台。",
+    "services": "2. 服务描述",
+    "servicesDesc": "AgentPlanet 提供一个面向 OpenClaw 用户的 Agent 团队模板市场。我们允许用户浏览、下载和分享预配置的 Agent 团队模板。本平台不提供 Agent 的实际运行环境，运行环境需由用户自行部署和维护 OpenClaw 系统。",
+    "userConduct": "3. 用户行为",
+    "userConductDesc": "在使用本平台时，您同意不从事以下行为：",
+    "conductItem1": "违反任何适用的法律、法规或规章；",
+    "conductItem2": "侵犯他人的知识产权、隐私权或其他合法权益；",
+    "conductItem3": "上传、发布或传播任何非法、有害、威胁、辱骂、骚扰、诽谤、粗俗、淫秽或侵权的内容；",
+    "conductItem4": "干扰或破坏本平台的正常运行或相关服务器和网络；",
+    "conductItem5": "试图未经授权访问本平台的任何部分。未经授权访问或使用本平台可能导致刑事和/或民事起诉。",
+    "intellectualProperty": "4. 知识产权",
+    "ipDesc1": "平台内容：本平台上的所有内容，包括但不限于文本、图形、标识、按钮图标、图像、音频剪辑、数字下载和数据编译，均为 AgentPlanet 或其内容供应商的财产，受适用的版权法保护。",
+    "ipDesc2": "模板内容：用户上传到本平台的模板应遵守开源许可协议。除非另有说明，本平台上的所有模板均在 MIT 许可下提供。用户在下载和使用模板时，应遵守相应的许可条款。",
+    "disclaimer": "5. 免责声明",
+    "disclaimerDesc": "本平台按\"原样\"和\"可用\"基础提供。我们不对本平台的运营或其中包含的信息、内容、材料或产品作任何明示或暗示的保证。您明确同意，使用本平台的风险由您自行承担。AgentPlanet 不保证本平台、其服务器或从本平台发送的电子邮件不含病毒或其他有害组件。",
+    "limitation": "6. 责任限制",
+    "limitationDesc": "在法律允许的最大范围内，AgentPlanet 不对因使用本平台或由于使用本平台而引起的任何直接、间接、偶然、惩罚性或后果性损害承担责任，包括但不限于利润损失、数据丢失或业务中断。",
+    "modifications": "7. 条款修改",
+    "modificationsDesc": "我们保留随时修改这些服务条款的权利。修改后的条款将在本页面发布，并注明最后更新日期。您继续使用本平台即表示您接受修改后的条款。",
+    "governingLaw": "8. 适用法律",
+    "governingLawDesc": "这些服务条款应受当地法律管辖并按其解释，不考虑其冲突法规定。",
+    "contact": "9. 联系方式",
+    "contactDesc": "如果您对这些服务条款有任何疑问，请联系我们："
+  },
+  "Footer": {
+    "allRightsReserved": "保留所有权利。",
+    "templates": "模板库",
+    "about": "关于我们",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们"
+  },
+  "Auth": {
+    "login": "登录",
+    "logout": "退出登录",
+    "selectMethod": "选择登录方式",
+    "loginWith": "使用 {provider} 登录",
+    "error": {
+      "default": "登录过程中发生错误",
+      "failed": "登录失败",
+      "providerError": "通过 {provider} 登录时出错",
+      "missingTokens": "登录失败：缺少必要的认证信息",
+      "backHome": "返回首页",
+      "browseTemplates": "浏览模板"
+    },
+    "callback": {
+      "completing": "正在完成登录..."
+    }
+  },
+  "Layout": {
+    "metadata": {
+      "title": "AgentPlanet - Agent 团队模板市场",
+      "description": "为无技术背景的 OpenClaw 用户提供一键安装预设 Agent 团队模板，包含内容创作、电商运营、客服支持等业务场景"
+    }
+  },
+  "Admin": {
+    "dashboard": "仪表盘",
+    "adminPanel": "管理后台",
+    "backToSite": "返回站点",
+    "logout": "退出登录",
+    "unauthorizedTitle": "未授权",
+    "unauthorizedMessage": "您没有权限访问此页面。",
+    "backHome": "返回首页"
+  },
+  "Common": {
+    "loading": "加载中...",
+    "error": {
+      "title": "出错了",
+      "message": "抱歉，应用遇到了一个错误。请尝试刷新页面或返回首页。",
+      "retry": "重试",
+      "backHome": "返回首页"
+    },
+    "notFound": {
+      "title": "页面未找到",
+      "message": "抱歉，您访问的页面不存在或已被移除。",
+      "backHome": "返回首页",
+      "browseTemplates": "浏览模板"
+    },
+    "error": "发生错误"
+  }
+}

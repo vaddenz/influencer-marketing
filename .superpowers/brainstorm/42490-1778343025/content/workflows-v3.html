@@ -1,0 +1,101 @@
+<h2>Updated Discover — Niche Filter Added</h2>
+<p class="subtitle">Brands can now filter by influencer niche/category</p>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">Discover Influencers (Updated)</div>
+    <div class="mockup-body">
+      <div style="display: flex; gap: 10px; height: 220px;">
+        <!-- Filters sidebar -->
+        <div style="width: 150px; background: #f8fafc; padding: 8px; border-radius: 4px; font-size: 11px;">
+          <div style="font-weight: bold; margin-bottom: 6px;">Filters</div>
+
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight: 600; margin-bottom: 2px;">Keywords</div>
+            <input class="mock-input" placeholder="Search..." style="width: 100%; font-size: 10px;">
+          </div>
+
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight: 600; margin-bottom: 2px;">Niche</div>
+            <select class="mock-input" style="width: 100%; font-size: 10px;">
+              <option>All Niches</option>
+              <option>Fashion</option>
+              <option>Travel</option>
+              <option>Fitness</option>
+              <option>Food</option>
+              <option>Tech</option>
+              <option>Beauty</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight: 600; margin-bottom: 2px;">Platform</div>
+            <div>☐ Instagram</div>
+            <div>☐ TikTok</div>
+            <div>☐ Douyin</div>
+            <div>☐ YouTube</div>
+          </div>
+
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight: 600; margin-bottom: 2px;">Location</div>
+            <select class="mock-input" style="width: 100%; font-size: 10px;"><option>Country...</option></select>
+            <select class="mock-input" style="width: 100%; font-size: 10px; margin-top: 2px;"><option>Region...</option></select>
+          </div>
+
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight: 600; margin-bottom: 2px;">Followers</div>
+            <input type="range" style="width: 100%;">
+            <div style="font-size: 10px; color: #666;">1K — 10M+</div>
+          </div>
+
+          <div>
+            <div style="font-weight: 600; margin-bottom: 2px;">Scope</div>
+            <div>☐ Nano</div>
+            <div>☐ Micro</div>
+            <div>☐ Macro</div>
+            <div>☐ Mega</div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div style="flex: 1;">
+          <div style="font-size: 12px; color: #666; margin-bottom: 8px;">12 influencers found</div>
+          <div style="border: 1px dashed #ccc; padding: 8px; border-radius: 4px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-weight: bold;">@travel_jane</div>
+              <div style="font-size: 11px;"><strong>Travel</strong> • 125K • 4.2% • 🇺🇸 California</div>
+            </div>
+            <button class="mock-button">View Profile</button>
+          </div>
+          <div style="border: 1px dashed #ccc; padding: 8px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-weight: bold;">@fitness_mike</div>
+              <div style="font-size: 11px;"><strong>Fitness</strong> • 450K • 3.8% • 🇬🇧 London</div>
+            </div>
+            <button class="mock-button">View Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">API Query Param Update</div>
+    <div class="mockup-body">
+      <div style="padding: 10px; font-family: monospace; font-size: 12px;">
+        GET /api/v1/influencers?platforms=instagram,tiktok<br>
+        &amp;location=US&amp;region=California<br>
+        &amp;followers_min=10000&amp;followers_max=100000<br>
+        &amp;scope=micro<br>
+        &amp;niche=travel <span style="color: #059669; font-weight: bold;">← NEW</span><br>
+        &amp;q=keyword
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p><strong>Niche filter added.</strong> Does this look correct? If yes, I'll proceed to write the full design spec.</p>
+</div>

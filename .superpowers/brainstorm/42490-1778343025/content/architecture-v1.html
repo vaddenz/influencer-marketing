@@ -1,0 +1,96 @@
+<h2>High-Level Architecture</h2>
+<p class="subtitle">API-first with NestJS backend + NextJS frontends</p>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">System Overview</div>
+    <div class="mockup-body">
+      <div style="display: flex; gap: 20px; align-items: flex-start;">
+        <!-- Frontends -->
+        <div style="flex: 1; min-width: 140px;">
+          <div class="label">FRONTENDS</div>
+          <div style="border: 2px solid #4f46e5; border-radius: 8px; padding: 12px; margin-bottom: 10px; background: #eef2ff;">
+            <strong>Brand Dashboard</strong>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">NextJS App</div>
+            <div style="font-size: 11px; color: #888;">Search, invite, manage campaigns</div>
+          </div>
+          <div style="border: 2px solid #4f46e5; border-radius: 8px; padding: 12px; background: #eef2ff;">
+            <strong>Influencer Portal</strong>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">NextJS App</div>
+            <div style="font-size: 11px; color: #888;">Profile, invites, campaign status</div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="display: flex; flex-direction: column; justify-content: center; padding-top: 40px;">
+          <div style="font-size: 20px;">→</div>
+          <div style="font-size: 11px; color: #888;">HTTPS</div>
+          <div style="font-size: 20px; margin-top: 50px;">→</div>
+        </div>
+
+        <!-- Backend -->
+        <div style="flex: 1.5; min-width: 180px;">
+          <div class="label">BACKEND</div>
+          <div style="border: 2px solid #059669; border-radius: 8px; padding: 16px; background: #ecfdf5;">
+            <strong>NestJS API</strong>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">REST API</div>
+            <div style="margin-top: 10px; font-size: 12px; line-height: 1.6;">
+              <div>• Auth Module (JWT)</div>
+              <div>• Users Module</div>
+              <div>• Influencers Module</div>
+              <div>• Campaigns Module</div>
+              <div>• Notifications Module</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="display: flex; flex-direction: column; justify-content: center; padding-top: 60px;">
+          <div style="font-size: 20px;">→</div>
+          <div style="font-size: 11px; color: #888;">SQL</div>
+        </div>
+
+        <!-- Database -->
+        <div style="flex: 1; min-width: 120px;">
+          <div class="label">DATA</div>
+          <div style="border: 2px solid #d97706; border-radius: 8px; padding: 16px; background: #fffbeb;">
+            <strong>PostgreSQL</strong>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">Relational DB</div>
+            <div style="margin-top: 10px; font-size: 12px; line-height: 1.6;">
+              <div>• users</div>
+              <div>• influencers</div>
+              <div>• campaigns</div>
+              <div>• invitations</div>
+              <div>• deliverables</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Key Design Decisions</h3>
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>Why This Fits</h4>
+      <ul>
+        <li>You already have working NestJS + NextJS templates</li>
+        <li>Clean separation lets mobile apps reuse the API later</li>
+        <li>Brand and influencer UIs can evolve independently</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>Open Questions</h4>
+      <ul>
+        <li>One NextJS app with role-switching, or two separate apps from the same template?</li>
+        <li>Shared component library between brand and influencer UIs?</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p><strong>Does this architecture look right?</strong> Let me know if you want to adjust anything before I move to the data model.</p>
+</div>
