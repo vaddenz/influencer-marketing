@@ -21,8 +21,8 @@ export default function BrandLayout({ children }: { children: React.ReactNode })
       <aside className="w-64 bg-gray-900 text-white p-6">
         <div className="text-xl font-bold mb-8">Brand Dashboard</div>
         <nav className="space-y-4">
-          <Link href="/dashboard" className="block hover:text-blue-400">Dashboard</Link>
-          <Link href="/discover" className="block hover:text-blue-400">Discover</Link>
+          <Link href="/brand/dashboard" className="block hover:text-blue-400">Dashboard</Link>
+          <Link href="/brand/discover" className="block hover:text-blue-400">Discover</Link>
         </nav>
       </aside>
       <main className="flex-1 p-8 bg-[var(--c-bg-secondary)]">{children}</main>
