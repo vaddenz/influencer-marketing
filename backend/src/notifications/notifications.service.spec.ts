@@ -67,6 +67,17 @@ describe('NotificationsService', () => {
       expect(prisma.notification.findMany).toHaveBeenCalledWith({
         where: { userId },
         orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          userId: true,
+          type: true,
+          title: true,
+          message: true,
+          read: true,
+          relatedEntityType: true,
+          relatedEntityId: true,
+          createdAt: true,
+        },
       })
     })
 
@@ -134,6 +145,27 @@ describe('NotificationsService', () => {
       await expect(service.markRead('user-1', 'notif-1')).rejects.toThrow(
         ForbiddenException,
       )
+      expect(prisma.notification.update).not.toHaveBeenCalled()
+    })
+
+    it('should return the notification early if it is already read', async () => {
+      const userId = 'user-1'
+      const notificationId = 'notif-1'
+      const notification = {
+        id: notificationId,
+        userId,
+        type: 'invitation_received',
+        title: 'New Invitation',
+        message: 'You have a new invitation',
+        read: true,
+        relatedEntityType: 'invitation',
+        relatedEntityId: 'inv-1',
+        createdAt: new Date(),
+      }
+
+      prisma.notification.findUnique.mockResolvedValue(notification)
+
+      await expect(service.markRead(userId, notificationId)).resolves.toEqual(notification)
       expect(prisma.notification.update).not.toHaveBeenCalled()
     })
   })

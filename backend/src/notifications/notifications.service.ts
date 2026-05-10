@@ -6,6 +6,18 @@ import {
 } from '@nestjs/common'
 import { PrismaService } from '@/common/prisma/prisma.service'
 
+const NOTIFICATION_LIST_SELECT = {
+  id: true,
+  userId: true,
+  type: true,
+  title: true,
+  message: true,
+  read: true,
+  relatedEntityType: true,
+  relatedEntityId: true,
+  createdAt: true,
+}
+
 @Injectable()
 export class NotificationsService {
   private readonly logger = new Logger(NotificationsService.name)
@@ -16,6 +28,7 @@ export class NotificationsService {
     return this.prisma.notification.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
+      select: NOTIFICATION_LIST_SELECT,
     })
   }
 
@@ -30,6 +43,10 @@ export class NotificationsService {
 
     if (notification.userId !== userId) {
       throw new ForbiddenException('You cannot mark this notification as read')
+    }
+
+    if (notification.read) {
+      return notification
     }
 
     const updated = await this.prisma.notification.update({
