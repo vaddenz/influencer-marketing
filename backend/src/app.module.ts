@@ -28,6 +28,7 @@ import { MQDefaultJobOption } from '@/common/config/mq.config'
 import { UserModule } from '@/user/user.module'
 import { HealthModule } from '@/health/health.module'
 import { FileModule } from '@/file/file.module'
+import { BrandsModule } from '@/brands/brands.module'
 
 @Module({
   imports: [
@@ -95,6 +96,7 @@ import { FileModule } from '@/file/file.module'
     UserModule,
     HealthModule,
     FileModule,
+    BrandsModule,
   ],
   controllers: [],
   providers: [
