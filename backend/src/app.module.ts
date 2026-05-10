@@ -29,6 +29,7 @@ import { UserModule } from '@/user/user.module'
 import { HealthModule } from '@/health/health.module'
 import { FileModule } from '@/file/file.module'
 import { BrandsModule } from '@/brands/brands.module'
+import { InfluencersModule } from '@/influencers/influencers.module'
 
 @Module({
   imports: [
@@ -97,6 +98,7 @@ import { BrandsModule } from '@/brands/brands.module'
     HealthModule,
     FileModule,
     BrandsModule,
+    InfluencersModule,
   ],
   controllers: [],
   providers: [
