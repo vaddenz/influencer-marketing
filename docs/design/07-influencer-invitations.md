@@ -66,6 +66,42 @@ View pending invites with brief preview. One-click accept or decline.
 +------------------------------------------------------------------+
 ```
 
++------------------------------------------------------------------+
+```
+
+## Empty State — No Invitations
+
+For first-time influencers after onboarding:
+
+```
++------------------------------------------------------------------+
+|  LOGO    Invitations    My Campaigns    Profile    [@travel_jane]|
++------------------------------------------------------------------+
+|                                                                  |
+|  New Invitations (0)                                             |
+|  ----------------------------------------------------------------|
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  |                                                             | |
+|  |              [✉️ Illustration Placeholder]                  | |
+|  |                                                             | |
+|  |         No invitations yet                                  | |
+|  |                                                             | |
+|  |   Complete your profile to help brands discover you.        | |
+|  |                                                             | |
+|  |              [Go to Profile]                                | |
+|  |                                                             | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
+|  Accepted (0)                                                    |
+|  ----------------------------------------------------------------|
+|                                                                  |
+|  Declined (0)                                                    |
+|  ----------------------------------------------------------------|
+|                                                                  |
++------------------------------------------------------------------+
+```
+
 ## Key Elements
 - **Top Navigation**: Logo, Invitations, My Campaigns, Profile + influencer handle
 - **New Invitations Section**: Expandable cards with full brief preview
@@ -81,7 +117,7 @@ View pending invites with brief preview. One-click accept or decline.
 
 ### Flow: View Full Brief
 1. Influencer clicks "View Full Brief" on a pending invitation card
-2. Inline expansion or modal opens showing complete campaign details:
+2. Modal opens showing complete campaign details (modal chosen over inline expansion to avoid layout shift on a list page; Minor #22):
    - Full description and requirements
    - Complete deliverables list with due dates
    - Brand profile and contact info
@@ -115,7 +151,10 @@ View pending invites with brief preview. One-click accept or decline.
 3. Campaign View loads with brief and deliverable checklist
 
 ## Notes
-- "View Full Brief" expands the card inline or opens a modal with full details
+- **"View Full Brief" opens a modal** (not inline expansion) to avoid layout shift on a list page (Minor #22)
 - Accepting an invitation creates deliverables and redirects to Campaign View
 - Declining shows a confirmation dialog with optional reason input
 - Sections are collapsible accordion panels
+- **First-time empty state**: New influencers landing on an empty invitations page see a welcome illustration and a CTA to complete their profile instead of a blank screen (Major #7)
+- **Invite expiry**: Invitations expire after 7 days of no response; expired invitations show an "Expired" badge and cannot be accepted (Cross-cutting gap)
+- **Loading state**: Skeleton cards shown while invitations load (Cross-cutting gap)

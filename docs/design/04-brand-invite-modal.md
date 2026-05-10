@@ -46,6 +46,60 @@ Pick an existing campaign or create a new one inline. Attach a personal note. Se
 +------------------------------------------------------------------+
 ```
 
+## Empty State — No Campaigns
+
+When the brand has zero campaigns, the dropdown is replaced with a prominent CTA:
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile              [BrandCo] |
++------------------------------------------------------------------+
+|                                                                  |
+|  +------------------------------------------------------------+  |
+|  |  Invite @travel_jane                                 [x]   |  |
+|  |  ========================================================  |  |
+|  |                                                            |  |
+|  |  You don't have any campaigns yet.                         |  |
+|  |                                                            |  |
+|  |  Create a campaign first to invite this influencer.        |  |
+|  |                                                            |  |
+|  |              [+ Create New Campaign]                       |  |
+|  |                                                            |  |
+|  |                                    [Cancel]                |  |
+|  |                                                            |  |
+|  +------------------------------------------------------------+  |
+|                                                                  |
++------------------------------------------------------------------+
+```
+
+## Already Invited State
+
+When the influencer already has a pending invitation to the selected campaign:
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile              [BrandCo] |
++------------------------------------------------------------------+
+|                                                                  |
+|  +------------------------------------------------------------+  |
+|  |  Invite @travel_jane                                 [x]   |  |
+|  |  ========================================================  |  |
+|  |                                                            |  |
+|  |  Select Campaign:                                          |  |
+|  |  +------------------------------------------------------+  |  |
+|  |  | Summer Promo (Active)                            [v] |  |  |
+|  |  +------------------------------------------------------+  |  |
+|  |                                                            |  |
+|  |  ⚠ Invitation already pending to this campaign.            |  |
+|  |                                                            |  |
+|  |  [Cancel]                              [Send Invitation]   |  |
+|  |  (disabled with tooltip: "Invite already sent")            |  |
+|  |                                                            |  |
+|  +------------------------------------------------------------+  |
+|                                                                  |
++------------------------------------------------------------------+
+```
+
 ## Key Elements
 - **Modal Header**: Title with influencer handle, close button
 - **Campaign Selector**: Dropdown of existing campaigns + "+ Create New Campaign" option
@@ -53,6 +107,8 @@ Pick an existing campaign or create a new one inline. Attach a personal note. Se
 - **Message Input**: Optional personalized textarea
 - **Info Text**: Explanation of what happens next
 - **Actions**: Cancel (secondary), Send Invitation (primary)
+- **Empty State**: When brand has 0 campaigns, show illustration, copy, and "+ Create New Campaign" CTA (Critical #1)
+- **Already Invited Guardrail**: If influencer already has a pending invitation to the selected campaign, "Send Invitation" is disabled with a tooltip explaining why (Major #8)
 
 ## Action Flows
 
@@ -84,3 +140,6 @@ Pick an existing campaign or create a new one inline. Attach a personal note. Se
 - Brief preview updates when campaign selection changes
 - Message has character limit (e.g., 500 chars)
 - After sending, show success toast and redirect to Campaign Detail
+- **Duplicate guardrail**: System validates influencer is not already invited to the selected campaign before allowing send (Major #8)
+- **Campaign / invite expiry**: Invitations expire after 7 days of no response; expired invitations show "Expired" status and can be re-sent (Cross-cutting gap)
+- **Empty state**: If brand has zero campaigns, dropdown is hidden and a prominent "+ Create New Campaign" CTA is shown instead (Critical #1)

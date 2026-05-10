@@ -19,8 +19,8 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 |  |    +------+                                                 | |
 |  |                                                             | |
 |  |    +-----------+  +-----------+  +-----------+  +---------+ | |
-|  |    |   125K    |  |   4.2%    |  |  Micro   |  |  Active  | | |
-|  |    | Followers |  | Engagement|  |  Scope   |  | Campaigns| | |
+|  |    | Instagram |  |  TikTok   |  |  YouTube  |  |  Micro  | | |
+|  |    |  80K 4.5% |  |  45K 3.8% |  |   --  --  |  |  Scope  | | |
 |  |    +-----------+  +-----------+  +-----------+  +---------+ | |
 |  |                                                             | |
 |  |    Bio                                                      | |
@@ -36,6 +36,8 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 |  |                                                             | |
 |  |    Email (private): jane@email.com                           | |
 |  |                                                             | |
+|  |    [👁 Preview Public Profile]                               | |
+|  |                                                             | |
 |  +-------------------------------------------------------------+ |
 |                                                                  |
 |  +-------------------------------------------------------------+ |
@@ -46,6 +48,7 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 |  | | Coll.    |  | Promo    |  | Travel   |                    | |
 |  | | $800     |  | $500     |  | $1,200   |                    | |
 |  | | Complete |  | Active   |  | Complete |                    | |
+|  | | FashionB |  | BrandCo  |  | TravelCo |                    | |
 |  | +----------+  +----------+  +----------+                    | |
 |  +-------------------------------------------------------------+ |
 |                                                                  |
@@ -71,8 +74,11 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 |  |                                                             | |
 |  |  Niche *                              Location *            | |
 |  |  +----------------------+             +------------------+  | |
-|  |  | Travel & Lifestyle  |             | California, USA  |  | |
+|  |  | Travel & Lifestyle  |             | United States [v]|  | |
 |  |  +----------------------+             +------------------+  | |
+|  |                                       +------------------+  | |
+|  |                                       | California    [v]|  | |
+|  |                                       +------------------+  | |
 |  |                                                             | |
 |  |  Bio *                                                      | |
 |  |  +------------------------------------------------------+   | |
@@ -88,10 +94,10 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 |  |  Languages                                                  | |
 |  |  [English] [Spanish] [+ Add]                                | |
 |  |                                                             | |
-|  |  Follower Count *              Engagement Rate *             | |
-|  |  +------------------+          +------------------+         | |
-|  |  | 125000           |          | 4.2                |         | |
-|  |  +------------------+          +------------------+         | |
+|  |  Per-Platform Stats *                                        | |
+|  |  Instagram  Followers: [80000    ]  Engagement: [4.5     %]  | |
+|  |  TikTok     Followers: [45000    ]  Engagement: [3.8     %]  | |
+|  |  YouTube    Followers: [0        ]  Engagement: [ --    %]  | |
 |  |                                                             | |
 |  |  [Cancel]                                    [Save Changes] | |
 |  |                                                             | |
@@ -104,16 +110,20 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 - **View Mode**:
   - Avatar with edit button
   - Display name, niche, location
-  - Stats row: followers, engagement, scope, active campaigns
+  - Stats row: per-platform follower counts and engagement rates, scope, active campaigns (Critical #4)
   - Bio, platforms, niche categories, languages
   - Private email
-  - Campaign history grid
+  - Campaign history grid with brand names (Moderate #17)
+  - "Preview Public Profile" toggle to see what brands see (Moderate #16)
 - **Edit Mode**:
   - All fields editable with form inputs
   - Photo upload
   - Platform multi-checkboxes
   - Tag-style niche categories and languages (add/remove)
+  - Location: cascading country/region dropdowns (Moderate #15)
+  - Per-platform follower counts and engagement rates (Critical #4)
   - Cancel / Save actions
+- **Empty States**: Missing bio, no campaign history, no audience data (Critical #1)
 
 ## Action Flows
 
@@ -159,4 +169,9 @@ Public-facing stats and bio. Editable by the influencer. What brands see during 
 ## Notes
 - Scope is auto-calculated from follower count (cannot be edited directly)
 - Profile is public — what brands see during discovery
-- Campaign history shows past collaborations with brand names
+- **Per-platform stats**: Each platform has its own follower count and engagement rate; no misleading global aggregate is shown (Critical #4)
+- **Location consistency**: Edit mode uses the same cascading country/region dropdowns as onboarding instead of a text input (Moderate #15)
+- **Preview Public Profile**: Influencers can toggle a preview mode to see exactly how their profile appears to brands (Moderate #16)
+- **Campaign history with brand names**: Each history card displays the brand name prominently so influencers know who they worked with (Moderate #17)
+- **Empty states**: If bio is missing, show placeholder encouraging the influencer to add one. If no campaign history, show "No campaigns yet" message. (Critical #1)
+- **Loading state**: Skeleton placeholders shown while profile data loads (Cross-cutting gap)

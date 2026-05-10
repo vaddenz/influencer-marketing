@@ -46,12 +46,46 @@ Overview of campaigns, quick stats, and entry points to create or discover.
 +------------------------------------------------------------------+
 ```
 
+## Empty State — No Campaigns
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile              [BrandCo] |
++------------------------------------------------------------------+
+|                                                                  |
+|  +------------------+  +------------------+  +----------------+  |
+|  | Active Campaigns |  | Total Influencers|  | Avg Engagement |  |
+|  |        0         |  |        0         |  |     --         |  |
+|  +------------------+  +------------------+  +----------------+  |
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  |                                                             | |
+|  |              [📋 Illustration Placeholder]                  | |
+|  |                                                             | |
+|  |         No active campaigns yet                             | |
+|  |                                                             | |
+|  |   Create your first campaign to start collaborating         | |
+|  |   with influencers.                                         | |
+|  |                                                             | |
+|  |              [+ Create Campaign]                            | |
+|  |                                                             | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
+|  Recent Activity                                                 |
+|  ----------------------------------------------------------------|
+|  No recent activity yet.                                        |
+|                                                                  |
++------------------------------------------------------------------+
+```
+
 ## Key Elements
 - **Top Navigation**: Logo, Campaigns, Discover, Profile links + brand identity
 - **Stats Cards**: Quick metrics at a glance (3 cards)
+  - "Avg Engagement" includes a tooltip/subtitle: "Across all active campaigns, last 30 days" (Moderate #14)
 - **Campaign List**: Active campaigns with progress bars, budget, due dates
 - **Activity Feed**: Recent notifications/actions
 - **Primary CTA**: "+ New Campaign" button
+- **Empty State**: Illustrated placeholder, copy, and primary action when no campaigns exist (Critical #1)
 
 ## Action Flows
 
@@ -74,3 +108,5 @@ Overview of campaigns, quick stats, and entry points to create or discover.
 - Progress bar shows % of deliverables completed across all invited influencers
 - Campaign status badge (Active/Draft/Completed) on each card
 - Clicking a campaign navigates to Campaign Detail
+- **Loading / Skeleton States**: Show pulse/skeleton placeholders for stats cards and campaign list while async data loads (Cross-cutting gap)
+- **Avg Engagement tooltip**: Hovering the "Avg Engagement" card reveals a tooltip: "Across all active campaigns, last 30 days" (Moderate #14)

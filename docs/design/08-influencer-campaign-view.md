@@ -31,9 +31,9 @@ Read the full brief and check off deliverables as they are completed.
 |  ----------------------------------------------------------------|
 |                                                                  |
 |  +-------------------------------------------------------------+ |
-|  | [x] 1 Instagram Reel                                        | |
+|  | [✓] 1 Instagram Reel                                        | |
 |  |     Due: Aug 15                                             | |
-|  |     Status: Completed on Aug 10                             | |
+|  |     Status: Approved on Aug 10                              | |
 |  |                                                             | |
 |  |     [View Submitted Content]                                | |
 |  +-------------------------------------------------------------+ |
@@ -49,6 +49,16 @@ Read the full brief and check off deliverables as they are completed.
 |  |     | Notes (optional):                                  |  | |
 |  |     | [Post links, feedback, etc...                  ]   |  | |
 |  |     +----------------------------------------------------+  | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  | [⏳] 1 TikTok Video                                         | |
+|  |     Due: Aug 20                                             | |
+|  |     Status: Pending Review — awaiting brand approval        | |
+|  |                                                             | |
+|  |     Submitted notes: "Link to draft: ..."                   | |
+|  |                                                             | |
+|  |     [View Submitted Content]                                | |
 |  +-------------------------------------------------------------+ |
 |                                                                  |
 |  Progress: 1 of 2 deliverables complete                          |
@@ -80,14 +90,13 @@ Read the full brief and check off deliverables as they are completed.
 3. Influencer clicks "Mark as Complete" button
 4. Confirmation dialog appears: "Mark this deliverable as complete?"
 5. Influencer confirms
-6. System updates deliverable `status` to `completed`
-7. System sets `completed_at` timestamp
-8. System checks if all deliverables in the campaign are now completed
-9. If all complete, system updates campaign `status` to `completed`
-10. System creates notification for brand (`type: deliverables_completed`)
-11. Deliverable card updates: checkbox becomes checked, status shows completion date
-12. "View Submitted Content" link appears if notes/URLs were provided
-13. Progress bar updates to reflect new completion percentage
+6. System updates deliverable `status` to `pending_review`
+7. System sets `submitted_at` timestamp
+8. System creates notification for brand (`type: deliverable_pending_review`)
+9. Deliverable card updates: status shows "Pending Review", notes are visible
+10. Brand must approve the deliverable before it moves to `completed` (Major #9)
+11. Progress bar updates to reflect submission (but campaign remains "In Progress" until brand approves)
+12. If brand rejects, deliverable returns to `pending` with a rejection note
 
 ### Flow: View Completed Deliverable
 1. Influencer clicks "View Submitted Content" on a completed deliverable
@@ -103,6 +112,9 @@ Read the full brief and check off deliverables as they are completed.
 
 ## Notes
 - Checkbox is interactive — checking it triggers "Mark as Complete" flow
-- When all deliverables are complete, status auto-updates to "Completed"
+- **Content approval workflow**: After influencer marks complete, deliverable enters `pending_review` status. Brand must approve before it becomes `completed`. Campaign status stays "In Progress" until all deliverables are approved (Major #9)
 - Optional notes allow influencer to add links or comments when completing
 - Message button opens a simple messaging modal or sidebar
+- **Confirmation dialog**: "Mark as Complete" shows a confirmation dialog to prevent accidental submissions
+- **Error state**: If marking complete fails (network error, validation error), show inline error message and allow retry (Cross-cutting gap)
+- **Loading state**: Show spinner on "Mark as Complete" button while API request is in-flight (Cross-cutting gap)

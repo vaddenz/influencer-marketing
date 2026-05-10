@@ -46,10 +46,58 @@ Create the brief, define deliverables, and send the invitation to a specific inf
 |  |                                                             | |
 |  |  [+ Add Deliverable]                                        | |
 |  |                                                             | |
-|  |                                    [Cancel]  [Next: Invite] | |
+|  |                    [Save as Draft]  [Cancel]  [Next: Invite] | |
 |  |                                                             | |
 |  +-------------------------------------------------------------+ |
 |                                                                  |
+```
+
+## Empty Deliverables State — Step 1
+
+Before any deliverables are added:
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile              [BrandCo] |
++------------------------------------------------------------------+
+|                                                                  |
+|  < Back                                                          |
+|                                                                  |
+|  Create Campaign + Invite @travel_jane                           |
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  | Step 1 of 2: Campaign Details                               | |
+|  | ============================================================| |
+|  |                                                             | |
+|  |  Campaign Title *                                           | |
+|  |  +------------------------------------------------------+   | |
+|  |  | Summer Promo                                          |   | |
+|  |  +------------------------------------------------------+   | |
+|  |                                                             | |
+|  |  Description & Requirements *                               | |
+|  |  +------------------------------------------------------+   | |
+|  |  | Create a Reel showcasing our summer collection and    |   | |
+|  |  | 3 Stories with the discount code.                     |   | |
+|  |  +------------------------------------------------------+   | |
+|  |                                                             | |
+|  |  Budget (USD) *                    Due Date *               | |
+|  |  +------------------+              +------------------+     | |
+|  |  | $500             |              | Aug 15, 2026     |     | |
+|  |  +------------------+              +------------------+     | |
+|  |                                                             | |
+|  |  Deliverables:                                              | |
+|  |  +------------------------------------------------------+   | |
+|  |  | No deliverables yet.                                  |   | |
+|  |  | Add at least one deliverable to proceed.              |   | |
+|  |  +------------------------------------------------------+   | |
+|  |                                                             | |
+|  |  [+ Add Deliverable]                                        | |
+|  |                                                             | |
+|  |                    [Save as Draft]  [Cancel]  [Next: Invite] | |
+|  |                                                             | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
++------------------------------------------------------------------+
 ```
 
 ## Step 2: Send Invitation
@@ -141,13 +189,17 @@ Create the brief, define deliverables, and send the invitation to a specific inf
 4. Brand optionally types a Personalized Message (textarea)
 5. Brand clicks "< Back" to return to Step 1 and edit
 6. Brand clicks "Send Invitation" to finalize
-7. System creates campaign record with `status: active`
+7. System creates campaign record with `status: draft`
 8. System creates invitation record with `status: pending`
+9. System updates campaign `status` to `active` (first invitation sent moves campaign out of draft)
 9. System creates deliverable records from template with `status: pending`
 10. System creates notification for influencer (`type: invitation_received`)
 11. Page redirects to `/campaigns/:id` (Campaign Detail)
 
 ## Notes
 - Deliverable form: Platform (dropdown), Type (dropdown: Reel, Story, Post, Video), Quantity, Due Date
-- Campaign is created in `draft` status, invitation moves it to `active`
+- **Save as Draft**: Brand can save Step 1 progress and resume later from the campaign list; draft campaigns show a "Draft" badge on the dashboard (Critical #2)
+- **Status machine**: Campaigns are created in `draft` status. Sending the first invitation moves the campaign to `active`. Draft campaigns can be edited and deleted. (Critical #3)
+- **Empty deliverables state**: Before the first deliverable is added, show a placeholder: "No deliverables yet. Add at least one deliverable to proceed." with the "+ Add Deliverable" button below (Critical #1)
 - After sending, redirect to Campaign Detail
+- **Loading state**: Show spinner on "Next: Invite" and "Save as Draft" buttons while API request is in-flight (Cross-cutting gap)

@@ -62,7 +62,7 @@ Account creation for new brands and influencers. Role selection determines which
 - **Password Input**: Password field with strength indicator
 - **Confirm Password**: Must match password field
 - **Terms Checkbox**: Required to proceed
-- **Create Account Button**: Primary CTA, disabled until all validations pass
+- **Create Account Button**: Primary CTA, always enabled; validates on click with inline errors (Moderate #19)
 - **Sign In Link**: For existing users
 
 ## Action Flows
@@ -86,17 +86,26 @@ Account creation for new brands and influencers. Role selection determines which
    - Password and confirm password match
    - Terms checkbox checked
    - Role selected
-7. If any validation fails, inline errors appear; "Create Account" button remains disabled
-8. User clicks "Create Account" button
-9. Client sends `POST /api/v1/auth/register` with `{ email, password, role }`
-10. Server checks email uniqueness in `users` table
-11. If email exists, server returns 409; client shows "Email already registered"
-12. If email is unique, server hashes password and creates user record with `status: pending_onboarding`
-13. Server returns JWT access token and refresh token
-14. Client stores token
-15. Client redirects to onboarding flow based on role:
+7. "Create Account" button is always enabled (Moderate #19)
+8. If any validation fails, inline errors appear on the invalid fields
+9. User clicks "Create Account" button
+10. Client re-validates all fields on submit; if any fail, inline errors appear and submission is blocked
+11. If all validations pass, client proceeds with registration
+12. Client sends `POST /api/v1/auth/register` with `{ email, password, role }`
+13. Server checks email uniqueness in `users` table
+14. If email exists, server returns 409; client shows "Email already registered"
+15. If email is unique, server hashes password and creates user record with `status: pending_onboarding`
+16. Server returns JWT access token and refresh token
+17. Client stores token
+18. Client redirects to onboarding flow based on role:
     - `brand` → `/onboarding/brand`
     - `influencer` → `/onboarding/influencer`
+
+### Flow: Handle Uniqueness Race Condition
+1. Email uniqueness is checked on blur (debounced 500ms)
+2. While the async uniqueness check is in-flight, a small spinner appears next to the email field
+3. If the user clicks "Create Account" before the check completes, the client waits for the check to finish before submitting
+4. If the check returns "already registered", the client blocks submission and shows the inline error (Moderate #18)
 
 ### Flow: Navigate to Sign In
 1. User clicks "Sign In" button at bottom
@@ -107,5 +116,7 @@ Account creation for new brands and influencers. Role selection determines which
 - Only email/password registration supported
 - Password strength indicator: Weak (red) → Medium (yellow) → Strong (green)
 - Email uniqueness checked on blur (debounced 500ms)
+- **Submit button always enabled**: Users can click "Create Account" at any time; validation runs on click and shows inline errors. This avoids the frustrating "why is this disabled?" UX antipattern (Moderate #19)
+- **Handle uniqueness race condition**: Submission is blocked while async validation is in-flight; re-validated on submit to prevent race conditions (Moderate #18)
 - Terms and Privacy Policy links open in new tab
 - Account created with `status: pending_onboarding` until onboarding completed

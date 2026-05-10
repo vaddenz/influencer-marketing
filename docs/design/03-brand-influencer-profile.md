@@ -10,7 +10,7 @@ Full stats and bio of an influencer. Two CTA paths: invite to existing campaign,
 |  LOGO    Campaigns    Discover    Profile              [BrandCo] |
 +------------------------------------------------------------------+
 |                                                                  |
-|  < Back to Discover                                              |
+|  < Back                                                          |
 |                                                                  |
 |  +-------------------------------------------------------------+ |
 |  |                                                             | |
@@ -21,8 +21,8 @@ Full stats and bio of an influencer. Two CTA paths: invite to existing campaign,
 |  |    +------+                                                 | |
 |  |                                                             | |
 |  |    +-----------+  +-----------+  +-----------+  +---------+ | |
-|  |    |   125K    |  |   4.2%    |  |  Micro   |  |  4.8/5  | | |
-|  |    | Followers |  | Engagement|  |  Scope   |  |  Rating | | |
+|  |    | Instagram |  |  TikTok   |  |  YouTube  |  |  Micro  | | |
+|  |    |  80K 4.5% |  |  45K 3.8% |  |   --  --  |  |  Scope  | | |
 |  |    +-----------+  +-----------+  +-----------+  +---------+ | |
 |  |                                                             | |
 |  |    Bio                                                      | |
@@ -61,9 +61,43 @@ Full stats and bio of an influencer. Two CTA paths: invite to existing campaign,
 +------------------------------------------------------------------+
 ```
 
+## Already Invited State
+
+When the influencer already has a pending invitation to an existing campaign:
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile              [BrandCo] |
++------------------------------------------------------------------+
+|                                                                  |
+|  < Back                                                          |
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  |                                                             | |
+|  |    +------+                                                 | |
+|  |    |      |  @travel_jane                                   | |
+|  |    |  👤  |  Travel & Lifestyle                             | |
+|  |    |      |  California, United States                      | |
+|  |    +------+                                                 | |
+|  |                                                             | |
+|  |    +-----------+  +-----------+  +-----------+  +---------+ | |
+|  |    | Instagram |  |  TikTok   |  |  YouTube  |  |  Micro  | | |
+|  |    |  80K 4.5% |  |  45K 3.8% |  |   --  --  |  |  Scope  | | |
+|  |    +-----------+  +-----------+  +-----------+  +---------+ | |
+|  |                                                             | |
+|  |    ⚠ Invitation Pending to "Summer Promo"                   | |
+|  |                                                             | |
+|  |    [View Invitation]                                        | |
+|  |                                                             | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
++------------------------------------------------------------------+
+```
+
 ## Key Elements
 - **Profile Header**: Avatar, handle, niche, location
-- **Stats Row**: Followers, Engagement Rate, Scope Tier, Rating (if available)
+- **Stats Row**: Per-platform follower counts and engagement rates (e.g., Instagram 80K / 4.5%, TikTok 45K / 3.8%), Scope Tier (Critical #4)
+- **Already Invited Indicator**: When influencer has a pending invitation, CTA row is replaced with a status banner and "View Invitation" link (Major #8)
 - **Bio Section**: Full bio text
 - **Platforms**: Platform badges with links
 - **Niche Categories**: Tag-style display
@@ -101,3 +135,6 @@ Full stats and bio of an influencer. Two CTA paths: invite to existing campaign,
 - "Invite to Existing Campaign" opens Invite Modal pre-filled with this influencer
 - "Create Campaign + Invite" navigates to Create Campaign flow with influencer pre-selected
 - Audience insights are optional MVP — can be placeholder/coming soon
+- **Per-platform stats**: Each platform shows its own follower count and engagement rate; no single global number is shown (Critical #4)
+- **Already Invited guardrail**: If influencer has a pending invitation to any of the brand's campaigns, the profile shows a status banner instead of the Invite CTAs to prevent duplicate invitations (Major #8)
+- **Back button**: Uses browser history, not hardcoded "Back to Discover" route (Moderate #11)

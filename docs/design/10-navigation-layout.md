@@ -7,7 +7,7 @@ Shared layout structure and navigation patterns across both portals.
 
 ```
 +------------------------------------------------------------------+
-|  LOGO    Campaigns    Discover    Profile              [BrandCo] |
+|  LOGO    Campaigns    Discover    Profile   🔔3   [BrandCo]    |
 +------------------------------------------------------------------+
 |                                                                  |
 |  [PAGE CONTENT AREA]                                             |
@@ -22,7 +22,7 @@ Shared layout structure and navigation patterns across both portals.
 |                                                                  |
 |                                                                  |
 +------------------------------------------------------------------+
-|  Footer:  (c) 2026 Influencer Marketing Platform                 |
+|  Help   Privacy   Terms   (c) 2026 Influencer Marketing Platform |
 +------------------------------------------------------------------+
 ```
 
@@ -30,7 +30,7 @@ Shared layout structure and navigation patterns across both portals.
 
 ```
 +------------------------------------------------------------------+
-|  LOGO    Invitations    My Campaigns    Profile    [@travel_jane]|
+|  LOGO    Invitations    My Campaigns    Profile   🔍  🔔1 [@travel_jane]|
 +------------------------------------------------------------------+
 |                                                                  |
 |  [PAGE CONTENT AREA]                                             |
@@ -45,7 +45,7 @@ Shared layout structure and navigation patterns across both portals.
 |                                                                  |
 |                                                                  |
 +------------------------------------------------------------------+
-|  Footer:  (c) 2026 Influencer Marketing Platform                 |
+|  Help   Privacy   Terms   (c) 2026 Influencer Marketing Platform |
 +------------------------------------------------------------------+
 ```
 
@@ -82,6 +82,7 @@ Shared layout structure and navigation patterns across both portals.
 - Background: white with subtle bottom border
 - Logo: clickable, returns to `/`
 - Links: active state with underline or highlight
+- Notification Bell: dropdown panel with recent notifications, unread badge (Major #10)
 - User Identity: avatar + name/handle dropdown with Logout
 
 ### Mobile Collapsed Navigation
@@ -93,6 +94,52 @@ Shared layout structure and navigation patterns across both portals.
 - Menu icon opens drawer/sheet from right
 - Links stacked vertically
 - User identity at bottom
+
+## Error Pages
+
+### 404 — Not Found
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile   🔔0   [BrandCo]    |
++------------------------------------------------------------------+
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  |                                                             | |
+|  |              [🔍 Illustration Placeholder]                  | |
+|  |                                                             | |
+|  |         Page not found                                      | |
+|  |                                                             | |
+|  |   The page you're looking for doesn't exist or was moved.   | |
+|  |                                                             | |
+|  |              [Go to Dashboard]                              | |
+|  |                                                             | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
++------------------------------------------------------------------+
+```
+
+### 500 — Server Error
+
+```
++------------------------------------------------------------------+
+|  LOGO    Campaigns    Discover    Profile   🔔0   [BrandCo]    |
++------------------------------------------------------------------+
+|                                                                  |
+|  +-------------------------------------------------------------+ |
+|  |                                                             | |
+|  |              [⚠️ Illustration Placeholder]                  | |
+|  |                                                             | |
+|  |         Something went wrong                                | |
+|  |                                                             | |
+|  |   We're experiencing a server issue. Please try again.      | |
+|  |                                                             | |
+|  |              [Refresh Page]                                 | |
+|  |                                                             | |
+|  +-------------------------------------------------------------+ |
+|                                                                  |
++------------------------------------------------------------------+
+```
 
 ## Responsive Breakpoints
 
@@ -129,12 +176,25 @@ Shared layout structure and navigation patterns across both portals.
 ### Flow: Mobile Navigation
 1. On mobile (< 640px), user clicks hamburger menu icon (≡)
 2. Drawer/sheet slides in from the right side
-3. Navigation links stack vertically with larger tap targets
-4. User identity section appears at the bottom of the drawer
+3. User identity section (avatar + name/handle + logout) appears at the top of the drawer
+4. Navigation links stack vertically with larger tap targets below user identity
 5. User clicks a link or the overlay to close the drawer
-6. Drawer slides out; selected page loads
+6. Drawer slides out; selected page loads (Moderate #20)
+
+### Flow: Notifications
+1. User clicks the notification bell icon in the top nav
+2. Dropdown panel opens below the bell showing recent notifications
+3. Unread notifications have a blue dot indicator
+4. Unread count badge on the bell updates in real-time
+5. User clicks a notification to navigate to the relevant page
+6. Clicked notification is marked as read; badge count decrements (Major #10)
 
 ## Notes
 - Both portals share the same layout shell but with different nav items
-- Footer is minimal — copyright only
+- **Notification bell**: Global notification dropdown accessible from all pages; shows unread count badge (Major #10)
+- **Search in influencer portal**: Influencers get a search icon in the top nav for discovering campaigns or brands (Cross-cutting gap)
+- **Footer quick links**: Help, Privacy, and Terms links provide easy access to legal and support pages (Minor #25)
+- **Mobile nav user identity**: Placed at the top of the drawer for conventional accessibility (Moderate #20)
+- **Error pages**: 404 and 500 pages have friendly illustrations, clear copy, and a primary CTA to recover (Cross-cutting gap)
+- **Loading / skeleton states**: All pages with async data show skeleton placeholders during initial load (Cross-cutting gap)
 - Page content has max-width container (e.g., 1280px) centered with padding

@@ -107,9 +107,9 @@ Collect essential influencer profile information after account creation. Require
   - Location picker (required)
 - **Step 2 — Platforms & Stats**:
   - Platform multi-select checkboxes (required, at least one)
-  - Follower Count numeric input (required)
+  - Per-platform Follower Count and Engagement Rate inputs (Critical #4)
+  - Engagement Rate inputs include a "%" suffix adornment (Minor #24)
   - Auto-calculated Scope display (Nano/Micro/Macro/Mega)
-  - Engagement Rate numeric input (required)
   - Niche Categories tag input (optional)
   - Languages tag input (optional)
 
@@ -132,18 +132,18 @@ Collect essential influencer profile information after account creation. Require
 ### Flow: Step 2 — Fill Platforms & Stats
 1. Step 2 loads with data from Step 1 preserved
 2. Influencer selects at least one Platform via checkboxes
-3. Influencer enters Follower Count (numeric, required)
-4. Client auto-calculates and displays Scope tier:
+3. Influencer enters per-platform Follower Count and Engagement Rate for each selected platform
+4. Client auto-calculates and displays Scope tier from the highest follower count:
    - 1K–10K → Nano
    - 10K–100K → Micro
    - 100K–1M → Macro
    - 1M+ → Mega
-5. Influencer enters Engagement Rate (numeric, 0–100, required)
+5. Engagement Rate inputs show a "%" suffix to prevent decimal confusion (Minor #24)
 6. Influencer optionally adds Niche Category tags
 7. Influencer optionally adds Language tags
 8. Client validates all required fields
 9. Influencer clicks "Complete Setup"
-10. Client validates Step 2 fields
+10. Client blocks submission if async handle uniqueness check is still in-flight; re-validates on submit (Moderate #18)
 11. Client sends `POST /api/v1/influencer-profiles` with all onboarding data
 12. Server creates `influencer_profiles` record linked to user
 13. Server updates user `status` to `active`
@@ -169,7 +169,9 @@ Collect essential influencer profile information after account creation. Require
 - Onboarding is gated — influencer cannot access portal until completed
 - Profile photo is optional; placeholder shown if skipped
 - Handle uniqueness checked on blur (debounced 500ms)
-- Location uses two-level cascading dropdown: Country → Region/State
-- Scope is read-only, auto-calculated from follower count
-- Engagement rate stored as decimal (e.g., 4.2 = 4.2%)
+- **Handle uniqueness race condition**: Submission is blocked while the async uniqueness check is in-flight. Re-validated on submit to prevent races (Moderate #18)
+- Location uses two-level cascading dropdown: Country → Region/State (consistent with profile edit; Moderate #15)
+- Scope is read-only, auto-calculated from the highest follower count across all platforms
+- **Per-platform stats**: Follower counts and engagement rates are stored per platform, not as a single misleading global number (Critical #4)
+- **Engagement rate "%" suffix**: Input fields show a "%" adornment so users know to enter "4.2" rather than "0.042" (Minor #24)
 - Two-step onboarding reduces cognitive load vs. single long form
