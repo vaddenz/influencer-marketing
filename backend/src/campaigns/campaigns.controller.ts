@@ -8,6 +8,8 @@ import {
   Param,
   UseGuards,
   Logger,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -84,14 +86,15 @@ export class CampaignsController {
   @Delete(':id')
   @Roles(Role.Brand)
   @UseGuards(JwtAuthGuard, RolesGuard)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete a campaign' })
-  @ApiResponse({ status: 200, description: 'Campaign deleted successfully' })
+  @ApiResponse({ status: 204, description: 'Campaign deleted successfully' })
   @ApiResponse({ status: 404, description: 'Campaign not found' })
   @ApiResponse({ status: 403, description: 'Not campaign owner' })
   async remove(
     @CurrentUser() user: UserPayload,
     @Param('id') id: string,
-  ) {
-    return this.campaignsService.remove(user.id, id)
+  ): Promise<void> {
+    await this.campaignsService.remove(user.id, id)
   }
 }

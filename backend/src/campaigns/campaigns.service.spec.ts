@@ -6,6 +6,9 @@ import { Role } from '@/common/enums/role.enum'
 import type { UserPayload } from '@/common/decorators/current-user.decorator'
 
 const mockPrismaService = () => ({
+  brandProfile: {
+    findUnique: jest.fn(),
+  },
   campaign: {
     create: jest.fn(),
     findMany: jest.fn(),
@@ -32,23 +35,42 @@ describe('CampaignsService', () => {
   })
 
   describe('create', () => {
-    it('should create a campaign with brandId set to userId', async () => {
+    it('should create a campaign when brand profile exists', async () => {
       const userId = 'brand-1'
       const dto = {
         title: 'Summer Campaign',
         description: 'Promote summer products',
-        budget: 5000,
+        budget: '5000',
         startDate: '2025-06-01',
         endDate: '2025-08-31',
       }
       const created = { id: 'camp-1', brandId: userId, ...dto }
 
+      prisma.brandProfile.findUnique.mockResolvedValue({ id: 'bp-1', userId })
       prisma.campaign.create.mockResolvedValue(created)
 
       await expect(service.create(userId, dto)).resolves.toEqual(created)
+      expect(prisma.brandProfile.findUnique).toHaveBeenCalledWith({
+        where: { userId },
+      })
       expect(prisma.campaign.create).toHaveBeenCalledWith({
         data: { ...dto, brandId: userId },
       })
+    })
+
+    it('should throw ForbiddenException if brand profile does not exist', async () => {
+      const userId = 'brand-1'
+      const dto = {
+        title: 'Summer Campaign',
+        description: 'Promote summer products',
+      }
+
+      prisma.brandProfile.findUnique.mockResolvedValue(null)
+
+      await expect(service.create(userId, dto)).rejects.toThrow(
+        ForbiddenException,
+      )
+      expect(prisma.campaign.create).not.toHaveBeenCalled()
     })
   })
 
@@ -143,7 +165,7 @@ describe('CampaignsService', () => {
       })
     })
 
-    it('should return campaign for invited influencer with accepted status', async () => {
+    it('should return scoped campaign for invited influencer with accepted status', async () => {
       const user: UserPayload = { id: 'inf-1', email: 'i@example.com', role: Role.Influencer }
       const campaign = {
         id: 'camp-1',
@@ -152,12 +174,18 @@ describe('CampaignsService', () => {
         invitations: [
           { influencerId: user.id, status: 'accepted', influencer: { id: user.id, name: 'Inf', email: 'i@example.com', influencerProfile: null } },
         ],
-        deliverables: [],
+        deliverables: [
+          { id: 'del-1', influencerId: user.id, description: 'Post' },
+          { id: 'del-2', influencerId: 'inf-2', description: 'Story' },
+        ],
       }
 
       prisma.campaign.findUnique.mockResolvedValue(campaign)
 
-      await expect(service.findOne(user, 'camp-1')).resolves.toEqual(campaign)
+      const result = await service.findOne(user, 'camp-1')
+      expect(result.invitations).toHaveLength(1)
+      expect(result.deliverables).toHaveLength(1)
+      expect(result.deliverables[0].id).toBe('del-1')
     })
 
     it('should throw NotFoundException if campaign does not exist', async () => {
@@ -243,7 +271,7 @@ describe('CampaignsService', () => {
       prisma.campaign.findUnique.mockResolvedValue(existing)
       prisma.campaign.delete.mockResolvedValue(existing)
 
-      await expect(service.remove(userId, campaignId)).resolves.toEqual({ deleted: true })
+      await expect(service.remove(userId, campaignId)).resolves.toBeUndefined()
       expect(prisma.campaign.delete).toHaveBeenCalledWith({
         where: { id: campaignId },
       })

@@ -10,6 +10,16 @@ import type { UserPayload } from '@/common/decorators/current-user.decorator'
 import { CreateCampaignDto } from './dto/create-campaign.dto'
 import { UpdateCampaignDto } from './dto/update-campaign.dto'
 
+const CAMPAIGN_LIST_SELECT = {
+  id: true,
+  title: true,
+  description: true,
+  status: true,
+  budget: true,
+  startDate: true,
+  endDate: true,
+}
+
 @Injectable()
 export class CampaignsService {
   private readonly logger = new Logger(CampaignsService.name)
@@ -17,6 +27,14 @@ export class CampaignsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(userId: string, dto: CreateCampaignDto) {
+    const brandProfile = await this.prisma.brandProfile.findUnique({
+      where: { userId },
+    })
+
+    if (!brandProfile) {
+      throw new ForbiddenException('Brand profile required to create campaigns')
+    }
+
     const campaign = await this.prisma.campaign.create({
       data: {
         ...dto,
@@ -32,15 +50,7 @@ export class CampaignsService {
     if (user.role === Role.Brand) {
       return this.prisma.campaign.findMany({
         where: { brandId: user.id },
-        select: {
-          id: true,
-          title: true,
-          description: true,
-          status: true,
-          budget: true,
-          startDate: true,
-          endDate: true,
-        },
+        select: CAMPAIGN_LIST_SELECT,
         orderBy: { createdAt: 'desc' },
       })
     }
@@ -55,15 +65,7 @@ export class CampaignsService {
           },
         },
       },
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        status: true,
-        budget: true,
-        startDate: true,
-        endDate: true,
-      },
+      select: CAMPAIGN_LIST_SELECT,
       orderBy: { createdAt: 'desc' },
     })
   }
@@ -98,7 +100,20 @@ export class CampaignsService {
     )
 
     if (!isBrandOwner && !isInvitedInfluencer) {
-      throw new ForbiddenException('Access denied for this campaign')
+      throw new ForbiddenException('You do not have access to this campaign')
+    }
+
+    // For influencers, scope deliverables and invitations to only theirs
+    if (user.role === Role.Influencer) {
+      return {
+        ...campaign,
+        invitations: campaign.invitations.filter(
+          (inv) => inv.influencerId === user.id,
+        ),
+        deliverables: campaign.deliverables.filter(
+          (del) => del.influencerId === user.id,
+        ),
+      }
     }
 
     return campaign
@@ -114,7 +129,7 @@ export class CampaignsService {
     }
 
     if (campaign.brandId !== userId) {
-      throw new ForbiddenException('You do not own this campaign')
+      throw new ForbiddenException('You do not have access to this campaign')
     }
 
     const updated = await this.prisma.campaign.update({
@@ -136,7 +151,7 @@ export class CampaignsService {
     }
 
     if (campaign.brandId !== userId) {
-      throw new ForbiddenException('You do not own this campaign')
+      throw new ForbiddenException('You do not have access to this campaign')
     }
 
     await this.prisma.campaign.delete({
@@ -144,6 +159,5 @@ export class CampaignsService {
     })
 
     this.logger.log(`Campaign deleted by brand ${userId}: ${campaignId}`)
-    return { deleted: true }
   }
 }

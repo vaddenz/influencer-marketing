@@ -4,10 +4,27 @@ import {
   IsNotEmpty,
   Length,
   IsOptional,
-  IsNumber,
-  Min,
   IsDateString,
+  Validate,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+  ValidationArguments,
 } from 'class-validator'
+
+@ValidatorConstraint({ name: 'isDateRange', async: false })
+class IsDateRangeConstraint implements ValidatorConstraintInterface {
+  validate(_value: unknown, args: ValidationArguments) {
+    const obj = args.object as CreateCampaignDto
+    if (obj.startDate && obj.endDate) {
+      return new Date(obj.startDate) <= new Date(obj.endDate)
+    }
+    return true
+  }
+
+  defaultMessage(_args: ValidationArguments) {
+    return 'startDate must be before or equal to endDate'
+  }
+}
 
 export class CreateCampaignDto {
   @ApiProperty({
@@ -33,14 +50,12 @@ export class CreateCampaignDto {
   description!: string
 
   @ApiPropertyOptional({
-    description: 'Campaign budget in USD',
-    example: 5000,
-    minimum: 0,
+    description: 'Campaign budget in USD as a decimal string',
+    example: '5000.00',
   })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  budget?: number
+  @IsString()
+  budget?: string
 
   @ApiPropertyOptional({
     description: 'Campaign start date (ISO 8601)',
