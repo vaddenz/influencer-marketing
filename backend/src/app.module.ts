@@ -33,6 +33,7 @@ import { InfluencersModule } from '@/influencers/influencers.module'
 import { CampaignsModule } from '@/campaigns/campaigns.module'
 import { InvitationsModule } from '@/invitations/invitations.module'
 import { DeliverablesModule } from '@/deliverables/deliverables.module'
+import { NotificationsModule } from '@/notifications/notifications.module'
 
 @Module({
   imports: [
@@ -105,6 +106,7 @@ import { DeliverablesModule } from '@/deliverables/deliverables.module'
     CampaignsModule,
     InvitationsModule,
     DeliverablesModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [
