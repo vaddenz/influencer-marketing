@@ -257,10 +257,30 @@
     "terms": "利用規約",
     "contact": "お問い合わせ"
   },
+  "LoginPage": {
+    "title": "ログイン",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "jane@example.com",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワードを入力",
+    "rememberMe": "ログイン状態を保持",
+    "signIn": "ログイン",
+    "signingIn": "ログイン中...",
+    "forgotPassword": "パスワードを忘れた？",
+    "noAccount": "アカウントをお持ちでない？",
+    "createAccount": "アカウント作成",
+    "error": {
+      "invalidEmail": "有効なメールアドレスを入力してください",
+      "passwordTooShort": "パスワードは8文字以上必要です",
+      "invalidCredentials": "メールアドレスまたはパスワードが無効です",
+      "generic": "エラーが発生しました。もう一度お試しください。"
+    }
+  },
   "Auth": {
     "login": "ログイン",
     "logout": "ログアウト",
     "selectMethod": "ログイン方法を選択",
+    "emailPassword": "メールアドレスでログイン",
     "loginWith": "{provider}でログイン",
     "error": {
       "default": "ログイン中にエラーが発生しました",

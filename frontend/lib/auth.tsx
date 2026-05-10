@@ -15,7 +15,7 @@ interface AuthContextType {
   isAuthenticated: boolean
   isBrand: boolean
   isInfluencer: boolean
-  login: (tokens: AuthTokens) => Promise<void>
+  login: (tokens: AuthTokens, rememberMe?: boolean) => Promise<void>
   logout: () => void
   loading: boolean
 }
@@ -42,8 +42,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initAuth()
   }, [])
 
-  const login = async (tokens: AuthTokens) => {
-    setTokens(tokens)
+  const login = async (tokens: AuthTokens, rememberMe = true) => {
+    setTokens(tokens, rememberMe)
     const currentUser = await fetchCurrentUser()
     if (currentUser) {
       setUser(currentUser)
@@ -85,27 +85,38 @@ export function useAuth() {
 // Token management
 export function getTokens(): AuthTokens | null {
   if (typeof window === 'undefined') return null
-  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY)
-  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY)
+  // Check sessionStorage first (non-remembered sessions), then localStorage
+  let accessToken = sessionStorage.getItem(ACCESS_TOKEN_KEY)
+  let refreshToken = sessionStorage.getItem(REFRESH_TOKEN_KEY)
+  if (!accessToken || !refreshToken) {
+    accessToken = localStorage.getItem(ACCESS_TOKEN_KEY)
+    refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY)
+  }
   if (!accessToken || !refreshToken) return null
   return { accessToken, refreshToken }
 }
 
-export function setTokens(tokens: AuthTokens): void {
+export function setTokens(tokens: AuthTokens, rememberMe = true): void {
   if (typeof window === 'undefined') return
-  localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken)
-  localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken)
+  const storage = rememberMe ? localStorage : sessionStorage
+  storage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken)
+  storage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken)
 }
 
 export function clearTokens(): void {
   if (typeof window === 'undefined') return
   localStorage.removeItem(ACCESS_TOKEN_KEY)
   localStorage.removeItem(REFRESH_TOKEN_KEY)
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY)
+  sessionStorage.removeItem(REFRESH_TOKEN_KEY)
 }
 
 export function getAccessToken(): string | null {
   if (typeof window === 'undefined') return null
-  return localStorage.getItem(ACCESS_TOKEN_KEY)
+  return (
+    sessionStorage.getItem(ACCESS_TOKEN_KEY) ||
+    localStorage.getItem(ACCESS_TOKEN_KEY)
+  )
 }
 
 // Fetch current user info
