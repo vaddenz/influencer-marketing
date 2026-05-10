@@ -5,6 +5,7 @@ import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { PublicLayout } from '@/components/PublicLayout'
 import { AuthProvider } from '@/lib/auth'
+import { QueryProvider } from '@/lib/query-provider'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -74,11 +75,13 @@ export default async function RootLayout({
       className={`${plusJakartaSans.variable} ${jetbrainsMono.variable}`}>
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider messages={messages}>
-          <AuthProvider>
-            <PublicLayout>
-              <div className="flex-1">{children}</div>
-            </PublicLayout>
-          </AuthProvider>
+          <QueryProvider>
+            <AuthProvider>
+              <PublicLayout>
+                <div className="flex-1">{children}</div>
+              </PublicLayout>
+            </AuthProvider>
+          </QueryProvider>
         </NextIntlClientProvider>
         <Script
           src="https://cloud.umami.is/script.js"
