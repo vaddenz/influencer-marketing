@@ -16,6 +16,7 @@
   - DTO (Data Transfer Objects) 用于所有输入/输出验证，放在对应 module 的 `dto/` 目录下。
   - 使用 `class-validator` 和 `class-transformer` 进行 DTO 验证。
 - **依赖注入**: 使用构造函数注入，并标记为 `private readonly`。
+- **接口版本**: 除特殊配置外，所有 API 都必须在路径中包含版本号（正常情况下，已经通过 `app.setGlobalPrefix(GLOBAL_PREFIX)` 设置了全局前缀）。
 
 ## 2. 项目配置 (Project Configuration)
 

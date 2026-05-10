@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import {
   BadRequestException,
+  ConflictException,
   ForbiddenException,
   NotFoundException,
 } from '@nestjs/common'
@@ -15,6 +16,7 @@ const mockPrismaService = () => ({
   },
   invitation: {
     create: jest.fn(),
+    findFirst: jest.fn(),
     findMany: jest.fn(),
     findUnique: jest.fn(),
     update: jest.fn(),
@@ -117,6 +119,32 @@ describe('InvitationsService', () => {
       ).rejects.toThrow(ForbiddenException)
       expect(prisma.invitation.create).not.toHaveBeenCalled()
     })
+
+    it('should throw ConflictException if a pending invitation already exists', async () => {
+      const userId = 'brand-1'
+      const dto = {
+        campaignId: 'camp-1',
+        influencerId: 'inf-1',
+        message: 'Join us!',
+      }
+      const campaign = { id: 'camp-1', brandId: userId, title: 'Summer' }
+      const existing = { id: 'inv-existing', status: 'pending' }
+
+      prisma.campaign.findUnique.mockResolvedValue(campaign)
+      prisma.invitation.findFirst.mockResolvedValue(existing)
+
+      await expect(service.create(userId, dto)).rejects.toThrow(
+        ConflictException,
+      )
+      expect(prisma.invitation.findFirst).toHaveBeenCalledWith({
+        where: {
+          campaignId: dto.campaignId,
+          influencerId: dto.influencerId,
+          status: 'pending',
+        },
+      })
+      expect(prisma.invitation.create).not.toHaveBeenCalled()
+    })
   })
 
   describe('findAll', () => {
@@ -135,6 +163,14 @@ describe('InvitationsService', () => {
           message: null,
           createdAt: new Date(),
           respondedAt: null,
+          campaign: {
+            title: 'Summer',
+            brand: {
+              brandProfile: {
+                companyName: 'Acme Inc',
+              },
+            },
+          },
         },
       ]
 
@@ -155,6 +191,18 @@ describe('InvitationsService', () => {
           message: true,
           createdAt: true,
           respondedAt: true,
+          campaign: {
+            select: {
+              title: true,
+              brand: {
+                select: {
+                  brandProfile: {
+                    select: { companyName: true },
+                  },
+                },
+              },
+            },
+          },
         },
         orderBy: { createdAt: 'desc' },
       })
@@ -175,6 +223,14 @@ describe('InvitationsService', () => {
           message: null,
           createdAt: new Date(),
           respondedAt: null,
+          campaign: {
+            title: 'Summer',
+            brand: {
+              brandProfile: {
+                companyName: 'Acme Inc',
+              },
+            },
+          },
         },
       ]
 
@@ -193,6 +249,18 @@ describe('InvitationsService', () => {
           message: true,
           createdAt: true,
           respondedAt: true,
+          campaign: {
+            select: {
+              title: true,
+              brand: {
+                select: {
+                  brandProfile: {
+                    select: { companyName: true },
+                  },
+                },
+              },
+            },
+          },
         },
         orderBy: { createdAt: 'desc' },
       })
@@ -415,6 +483,7 @@ describe('InvitationsService', () => {
       await expect(service.withdraw(userId, invitationId)).resolves.toEqual(
         updated,
       )
+      expect(prisma.$transaction).toHaveBeenCalled()
       expect(prisma.invitation.update).toHaveBeenCalledWith({
         where: { id: invitationId },
         data: {

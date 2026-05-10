@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   ForbiddenException,
   Injectable,
   Logger,
@@ -18,6 +19,18 @@ const INVITATION_LIST_SELECT = {
   message: true,
   createdAt: true,
   respondedAt: true,
+  campaign: {
+    select: {
+      title: true,
+      brand: {
+        select: {
+          brandProfile: {
+            select: { companyName: true },
+          },
+        },
+      },
+    },
+  },
 }
 
 @Injectable()
@@ -37,6 +50,18 @@ export class InvitationsService {
 
     if (campaign.brandId !== userId) {
       throw new ForbiddenException('You do not own this campaign')
+    }
+
+    const existing = await this.prisma.invitation.findFirst({
+      where: {
+        campaignId: dto.campaignId,
+        influencerId: dto.influencerId,
+        status: 'pending',
+      },
+    })
+
+    if (existing) {
+      throw new ConflictException('Invitation already sent')
     }
 
     const invitation = await this.prisma.invitation.create({
@@ -203,13 +228,15 @@ export class InvitationsService {
       )
     }
 
-    const updated = await this.prisma.invitation.update({
-      where: { id: invitationId },
-      data: {
-        status: 'withdrawn',
-        respondedAt: new Date(),
-      },
-    })
+    const [updated] = await this.prisma.$transaction([
+      this.prisma.invitation.update({
+        where: { id: invitationId },
+        data: {
+          status: 'withdrawn',
+          respondedAt: new Date(),
+        },
+      }),
+    ])
 
     this.logger.log(`Invitation ${invitationId} withdrawn by brand ${userId}`)
     return updated
