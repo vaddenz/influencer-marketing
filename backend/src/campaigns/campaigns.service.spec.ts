@@ -68,7 +68,7 @@ describe('CampaignsService', () => {
       prisma.brandProfile.findUnique.mockResolvedValue(null)
 
       await expect(service.create(userId, dto)).rejects.toThrow(
-        ForbiddenException,
+        ForbiddenException
       )
       expect(prisma.campaign.create).not.toHaveBeenCalled()
     })
@@ -76,9 +76,21 @@ describe('CampaignsService', () => {
 
   describe('findAll', () => {
     it('should return brand-owned campaigns for brand role', async () => {
-      const user: UserPayload = { id: 'brand-1', email: 'b@example.com', role: Role.Brand }
+      const user: UserPayload = {
+        id: 'brand-1',
+        email: 'b@example.com',
+        role: Role.Brand,
+      }
       const campaigns = [
-        { id: 'camp-1', title: 'A', description: 'Desc', status: 'draft', budget: null, startDate: null, endDate: null },
+        {
+          id: 'camp-1',
+          title: 'A',
+          description: 'Desc',
+          status: 'draft',
+          budget: null,
+          startDate: null,
+          endDate: null,
+        },
       ]
 
       prisma.campaign.findMany.mockResolvedValue(campaigns)
@@ -100,9 +112,21 @@ describe('CampaignsService', () => {
     })
 
     it('should return campaigns with accepted invitations for influencer role', async () => {
-      const user: UserPayload = { id: 'inf-1', email: 'i@example.com', role: Role.Influencer }
+      const user: UserPayload = {
+        id: 'inf-1',
+        email: 'i@example.com',
+        role: Role.Influencer,
+      }
       const campaigns = [
-        { id: 'camp-2', title: 'B', description: 'Desc', status: 'active', budget: 1000, startDate: null, endDate: null },
+        {
+          id: 'camp-2',
+          title: 'B',
+          description: 'Desc',
+          status: 'active',
+          budget: 1000,
+          startDate: null,
+          endDate: null,
+        },
       ]
 
       prisma.campaign.findMany.mockResolvedValue(campaigns)
@@ -133,7 +157,11 @@ describe('CampaignsService', () => {
 
   describe('findOne', () => {
     it('should return campaign with invitations and deliverables for brand owner', async () => {
-      const user: UserPayload = { id: 'brand-1', email: 'b@example.com', role: Role.Brand }
+      const user: UserPayload = {
+        id: 'brand-1',
+        email: 'b@example.com',
+        role: Role.Brand,
+      }
       const campaign = {
         id: 'camp-1',
         brandId: user.id,
@@ -166,13 +194,26 @@ describe('CampaignsService', () => {
     })
 
     it('should return scoped campaign for invited influencer with accepted status', async () => {
-      const user: UserPayload = { id: 'inf-1', email: 'i@example.com', role: Role.Influencer }
+      const user: UserPayload = {
+        id: 'inf-1',
+        email: 'i@example.com',
+        role: Role.Influencer,
+      }
       const campaign = {
         id: 'camp-1',
         brandId: 'brand-1',
         title: 'A',
         invitations: [
-          { influencerId: user.id, status: 'accepted', influencer: { id: user.id, name: 'Inf', email: 'i@example.com', influencerProfile: null } },
+          {
+            influencerId: user.id,
+            status: 'accepted',
+            influencer: {
+              id: user.id,
+              name: 'Inf',
+              email: 'i@example.com',
+              influencerProfile: null,
+            },
+          },
         ],
         deliverables: [
           { id: 'del-1', influencerId: user.id, description: 'Post' },
@@ -189,31 +230,56 @@ describe('CampaignsService', () => {
     })
 
     it('should throw NotFoundException if campaign does not exist', async () => {
-      const user: UserPayload = { id: 'brand-1', email: 'b@example.com', role: Role.Brand }
+      const user: UserPayload = {
+        id: 'brand-1',
+        email: 'b@example.com',
+        role: Role.Brand,
+      }
       prisma.campaign.findUnique.mockResolvedValue(null)
 
-      await expect(service.findOne(user, 'camp-1')).rejects.toThrow(NotFoundException)
+      await expect(service.findOne(user, 'camp-1')).rejects.toThrow(
+        NotFoundException
+      )
     })
 
     it('should throw ForbiddenException if influencer has no accepted invitation', async () => {
-      const user: UserPayload = { id: 'inf-1', email: 'i@example.com', role: Role.Influencer }
+      const user: UserPayload = {
+        id: 'inf-1',
+        email: 'i@example.com',
+        role: Role.Influencer,
+      }
       const campaign = {
         id: 'camp-1',
         brandId: 'brand-1',
         title: 'A',
         invitations: [
-          { influencerId: user.id, status: 'pending', influencer: { id: user.id, name: 'Inf', email: 'i@example.com', influencerProfile: null } },
+          {
+            influencerId: user.id,
+            status: 'pending',
+            influencer: {
+              id: user.id,
+              name: 'Inf',
+              email: 'i@example.com',
+              influencerProfile: null,
+            },
+          },
         ],
         deliverables: [],
       }
 
       prisma.campaign.findUnique.mockResolvedValue(campaign)
 
-      await expect(service.findOne(user, 'camp-1')).rejects.toThrow(ForbiddenException)
+      await expect(service.findOne(user, 'camp-1')).rejects.toThrow(
+        ForbiddenException
+      )
     })
 
     it('should throw ForbiddenException for non-owner brand viewing another brand campaign', async () => {
-      const user: UserPayload = { id: 'brand-2', email: 'b2@example.com', role: Role.Brand }
+      const user: UserPayload = {
+        id: 'brand-2',
+        email: 'b2@example.com',
+        role: Role.Brand,
+      }
       const campaign = {
         id: 'camp-1',
         brandId: 'brand-1',
@@ -224,7 +290,9 @@ describe('CampaignsService', () => {
 
       prisma.campaign.findUnique.mockResolvedValue(campaign)
 
-      await expect(service.findOne(user, 'camp-1')).rejects.toThrow(ForbiddenException)
+      await expect(service.findOne(user, 'camp-1')).rejects.toThrow(
+        ForbiddenException
+      )
     })
   })
 
@@ -239,7 +307,9 @@ describe('CampaignsService', () => {
       prisma.campaign.findUnique.mockResolvedValue(existing)
       prisma.campaign.update.mockResolvedValue(updated)
 
-      await expect(service.update(userId, campaignId, dto)).resolves.toEqual(updated)
+      await expect(service.update(userId, campaignId, dto)).resolves.toEqual(
+        updated
+      )
       expect(prisma.campaign.update).toHaveBeenCalledWith({
         where: { id: campaignId },
         data: dto,
@@ -249,7 +319,9 @@ describe('CampaignsService', () => {
     it('should throw NotFoundException if campaign not found', async () => {
       prisma.campaign.findUnique.mockResolvedValue(null)
 
-      await expect(service.update('brand-1', 'camp-1', {})).rejects.toThrow(NotFoundException)
+      await expect(service.update('brand-1', 'camp-1', {})).rejects.toThrow(
+        NotFoundException
+      )
       expect(prisma.campaign.update).not.toHaveBeenCalled()
     })
 
@@ -257,7 +329,9 @@ describe('CampaignsService', () => {
       const existing = { id: 'camp-1', brandId: 'brand-1', title: 'Old' }
       prisma.campaign.findUnique.mockResolvedValue(existing)
 
-      await expect(service.update('brand-2', 'camp-1', { title: 'New' })).rejects.toThrow(ForbiddenException)
+      await expect(
+        service.update('brand-2', 'camp-1', { title: 'New' })
+      ).rejects.toThrow(ForbiddenException)
       expect(prisma.campaign.update).not.toHaveBeenCalled()
     })
   })
@@ -280,7 +354,9 @@ describe('CampaignsService', () => {
     it('should throw NotFoundException if campaign not found', async () => {
       prisma.campaign.findUnique.mockResolvedValue(null)
 
-      await expect(service.remove('brand-1', 'camp-1')).rejects.toThrow(NotFoundException)
+      await expect(service.remove('brand-1', 'camp-1')).rejects.toThrow(
+        NotFoundException
+      )
       expect(prisma.campaign.delete).not.toHaveBeenCalled()
     })
 
@@ -288,7 +364,9 @@ describe('CampaignsService', () => {
       const existing = { id: 'camp-1', brandId: 'brand-1', title: 'Old' }
       prisma.campaign.findUnique.mockResolvedValue(existing)
 
-      await expect(service.remove('brand-2', 'camp-1')).rejects.toThrow(ForbiddenException)
+      await expect(service.remove('brand-2', 'camp-1')).rejects.toThrow(
+        ForbiddenException
+      )
       expect(prisma.campaign.delete).not.toHaveBeenCalled()
     })
   })

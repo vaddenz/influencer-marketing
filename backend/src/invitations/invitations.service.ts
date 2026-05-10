@@ -105,7 +105,7 @@ export class InvitationsService {
     })
 
     this.logger.log(
-      `Invitation ${invitation.id} created by brand ${userId} for influencer ${dto.influencerId}`,
+      `Invitation ${invitation.id} created by brand ${userId} for influencer ${dto.influencerId}`
     )
     return invitation
   }
@@ -149,7 +149,7 @@ export class InvitationsService {
 
       if (invitation.status !== 'pending') {
         throw new BadRequestException(
-          `Invitation cannot be accepted because it is ${invitation.status}`,
+          `Invitation cannot be accepted because it is ${invitation.status}`
         )
       }
 
@@ -176,7 +176,8 @@ export class InvitationsService {
             campaignId: invitation.campaignId,
             influencerId: invitation.influencerId,
             description:
-              invitation.campaign.description || 'Complete campaign deliverables',
+              invitation.campaign.description ||
+              'Complete campaign deliverables',
             status: 'pending',
           },
         }),
@@ -185,7 +186,9 @@ export class InvitationsService {
       return upd
     })
 
-    this.logger.log(`Invitation ${invitationId} accepted by influencer ${userId}`)
+    this.logger.log(
+      `Invitation ${invitationId} accepted by influencer ${userId}`
+    )
     return updated
   }
 
@@ -206,7 +209,7 @@ export class InvitationsService {
 
       if (invitation.status !== 'pending') {
         throw new BadRequestException(
-          `Invitation cannot be declined because it is ${invitation.status}`,
+          `Invitation cannot be declined because it is ${invitation.status}`
         )
       }
 
@@ -233,7 +236,9 @@ export class InvitationsService {
       return upd
     })
 
-    this.logger.log(`Invitation ${invitationId} declined by influencer ${userId}`)
+    this.logger.log(
+      `Invitation ${invitationId} declined by influencer ${userId}`
+    )
     return updated
   }
 
@@ -254,7 +259,7 @@ export class InvitationsService {
 
       if (invitation.status !== 'pending') {
         throw new BadRequestException(
-          `Invitation cannot be withdrawn because it is ${invitation.status}`,
+          `Invitation cannot be withdrawn because it is ${invitation.status}`
         )
       }
 

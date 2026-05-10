@@ -1,8 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import {
-  ForbiddenException,
-  NotFoundException,
-} from '@nestjs/common'
+import { ForbiddenException, NotFoundException } from '@nestjs/common'
 import { DeliverablesService } from './deliverables.service'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { Role } from '@/common/enums/role.enum'
@@ -70,7 +67,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.findMany.mockResolvedValue(deliverables)
 
       await expect(service.findAll(user, campaignId)).resolves.toEqual(
-        deliverables,
+        deliverables
       )
       expect(prisma.deliverable.findMany).toHaveBeenCalledWith({
         where: {
@@ -116,7 +113,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.findMany.mockResolvedValue(deliverables)
 
       await expect(service.findAll(user, campaignId)).resolves.toEqual(
-        deliverables,
+        deliverables
       )
       expect(prisma.deliverable.findMany).toHaveBeenCalledWith({
         where: {
@@ -168,7 +165,7 @@ describe('DeliverablesService', () => {
       prisma.notification.create.mockResolvedValue({ id: 'notif-1' })
 
       await expect(service.complete(userId, deliverableId)).resolves.toEqual(
-        updated,
+        updated
       )
       expect(prisma.deliverable.update).toHaveBeenCalledWith({
         where: { id: deliverableId },
@@ -224,7 +221,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.count.mockResolvedValue(2)
 
       await expect(service.complete(userId, deliverableId)).resolves.toEqual(
-        updated,
+        updated
       )
       expect(prisma.notification.create).not.toHaveBeenCalled()
     })
@@ -249,7 +246,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.findUnique.mockResolvedValue(deliverable)
 
       await expect(service.complete(userId, deliverableId)).resolves.toEqual(
-        deliverable,
+        deliverable
       )
       expect(prisma.deliverable.update).not.toHaveBeenCalled()
       expect(prisma.notification.create).not.toHaveBeenCalled()
@@ -259,7 +256,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.findUnique.mockResolvedValue(null)
 
       await expect(service.complete('inf-1', 'del-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
 
@@ -273,7 +270,7 @@ describe('DeliverablesService', () => {
       })
 
       await expect(service.complete('inf-1', 'del-1')).rejects.toThrow(
-        ForbiddenException,
+        ForbiddenException
       )
     })
   })
@@ -304,7 +301,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.update.mockResolvedValue(updated)
 
       await expect(service.reopen(userId, deliverableId)).resolves.toEqual(
-        updated,
+        updated
       )
       expect(prisma.$transaction).toHaveBeenCalled()
       expect(prisma.deliverable.update).toHaveBeenCalledWith({
@@ -320,7 +317,7 @@ describe('DeliverablesService', () => {
       prisma.deliverable.findUnique.mockResolvedValue(null)
 
       await expect(service.reopen('brand-1', 'del-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
 
@@ -334,7 +331,7 @@ describe('DeliverablesService', () => {
       })
 
       await expect(service.reopen('brand-1', 'del-1')).rejects.toThrow(
-        ForbiddenException,
+        ForbiddenException
       )
     })
   })

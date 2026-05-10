@@ -79,7 +79,9 @@ export class InfluencersService {
       where: { userId },
       data: {
         ...dto,
-        platforms: dto.platforms ? (dto.platforms as unknown as Prisma.InputJsonValue) : undefined,
+        platforms: dto.platforms
+          ? (dto.platforms as unknown as Prisma.InputJsonValue)
+          : undefined,
       },
     })
 
@@ -180,7 +182,7 @@ export class InfluencersService {
         ? (candidate.platforms as Array<{ platform: string }>)
         : []
       return platforms.some((plat) =>
-        platformNames.includes(String(plat.platform).toLowerCase()),
+        platformNames.includes(String(plat.platform).toLowerCase())
       )
     })
 

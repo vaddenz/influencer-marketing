@@ -37,7 +37,7 @@ export class InvitationsController {
   @ApiResponse({ status: 403, description: 'Not campaign owner' })
   async create(
     @CurrentUser() user: UserPayload,
-    @Body() dto: CreateInvitationDto,
+    @Body() dto: CreateInvitationDto
   ) {
     return this.invitationsService.create(user.id, dto)
   }
@@ -45,7 +45,10 @@ export class InvitationsController {
   @Get()
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'List invitations for current user' })
-  @ApiResponse({ status: 200, description: 'Invitations retrieved successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Invitations retrieved successfully',
+  })
   async findAll(@CurrentUser() user: UserPayload) {
     return this.invitationsService.findAll(user)
   }
@@ -58,10 +61,7 @@ export class InvitationsController {
   @ApiResponse({ status: 404, description: 'Invitation not found' })
   @ApiResponse({ status: 403, description: 'Cannot accept this invitation' })
   @ApiResponse({ status: 400, description: 'Invitation is not pending' })
-  async accept(
-    @CurrentUser() user: UserPayload,
-    @Param('id') id: string,
-  ) {
+  async accept(@CurrentUser() user: UserPayload, @Param('id') id: string) {
     return this.invitationsService.accept(user.id, id)
   }
 
@@ -73,10 +73,7 @@ export class InvitationsController {
   @ApiResponse({ status: 404, description: 'Invitation not found' })
   @ApiResponse({ status: 403, description: 'Cannot decline this invitation' })
   @ApiResponse({ status: 400, description: 'Invitation is not pending' })
-  async decline(
-    @CurrentUser() user: UserPayload,
-    @Param('id') id: string,
-  ) {
+  async decline(@CurrentUser() user: UserPayload, @Param('id') id: string) {
     return this.invitationsService.decline(user.id, id)
   }
 
@@ -84,14 +81,14 @@ export class InvitationsController {
   @Roles(Role.Brand)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOperation({ summary: 'Withdraw a pending invitation' })
-  @ApiResponse({ status: 200, description: 'Invitation withdrawn successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Invitation withdrawn successfully',
+  })
   @ApiResponse({ status: 404, description: 'Invitation not found' })
   @ApiResponse({ status: 403, description: 'Cannot withdraw this invitation' })
   @ApiResponse({ status: 400, description: 'Invitation is not pending' })
-  async withdraw(
-    @CurrentUser() user: UserPayload,
-    @Param('id') id: string,
-  ) {
+  async withdraw(@CurrentUser() user: UserPayload, @Param('id') id: string) {
     return this.invitationsService.withdraw(user.id, id)
   }
 }

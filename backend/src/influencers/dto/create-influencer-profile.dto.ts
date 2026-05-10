@@ -96,7 +96,11 @@ export class CreateInfluencerProfileDto {
   @ApiProperty({
     description: 'Platforms with URLs and follower counts',
     example: [
-      { platform: 'instagram', url: 'https://instagram.com/janedoe', followers: 10000 },
+      {
+        platform: 'instagram',
+        url: 'https://instagram.com/janedoe',
+        followers: 10000,
+      },
     ],
     type: [PlatformDto],
   })

@@ -81,9 +81,17 @@ export class AuthService {
    *          as well as user information (id, email, name)
    */
   async login(user: any) {
-    const payload = { sub: user.id, email: user.email, role: user.role } as JwtPayload
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    } as JwtPayload
     const tokens = await this.generateTokens(payload)
-    this.logger.log(`User logged in`, { id: user.id, email: user.email, role: user.role })
+    this.logger.log(`User logged in`, {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    })
     return {
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,

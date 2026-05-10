@@ -38,7 +38,13 @@ describe('InfluencersService', () => {
         niche: 'Travel',
         followerCount: 15000,
         engagementRate: 4.5,
-        platforms: [{ platform: 'instagram', url: 'https://instagram.com/janedoe', followers: 10000 }],
+        platforms: [
+          {
+            platform: 'instagram',
+            url: 'https://instagram.com/janedoe',
+            followers: 10000,
+          },
+        ],
         locationCountry: 'US',
         locationRegion: 'California',
       }
@@ -72,7 +78,7 @@ describe('InfluencersService', () => {
       prisma.influencerProfile.findUnique.mockResolvedValue({ id: 'ip-1' })
 
       await expect(service.createProfile(userId, dto)).rejects.toThrow(
-        ConflictException,
+        ConflictException
       )
       expect(prisma.influencerProfile.create).not.toHaveBeenCalled()
     })
@@ -95,11 +101,11 @@ describe('InfluencersService', () => {
         new Prisma.PrismaClientKnownRequestError('Unique constraint failed', {
           code: 'P2002',
           clientVersion: '1',
-        }),
+        })
       )
 
       await expect(service.createProfile(userId, dto)).rejects.toThrow(
-        ConflictException,
+        ConflictException
       )
     })
   })
@@ -118,7 +124,7 @@ describe('InfluencersService', () => {
       prisma.influencerProfile.findUnique.mockResolvedValue(null)
 
       await expect(service.getMyProfile('user-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
   })
@@ -144,7 +150,7 @@ describe('InfluencersService', () => {
       prisma.influencerProfile.findUnique.mockResolvedValue(null)
 
       await expect(
-        service.updateProfile('user-1', { displayName: 'X' }),
+        service.updateProfile('user-1', { displayName: 'X' })
       ).rejects.toThrow(NotFoundException)
       expect(prisma.influencerProfile.update).not.toHaveBeenCalled()
     })
@@ -179,7 +185,7 @@ describe('InfluencersService', () => {
       prisma.influencerProfile.findUnique.mockResolvedValue(null)
 
       await expect(service.getPublicProfile('user-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
   })
@@ -187,13 +193,37 @@ describe('InfluencersService', () => {
   describe('search', () => {
     it('should return all candidates when no filters provided', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 5000, platforms: [{ platform: 'instagram', url: 'https://instagram.com/alice', followers: 5000 }] },
-        { id: 'ip-2', displayName: 'Bob', followerCount: 20000, platforms: [{ platform: 'tiktok', url: 'https://tiktok.com/@bob', followers: 20000 }] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 5000,
+          platforms: [
+            {
+              platform: 'instagram',
+              url: 'https://instagram.com/alice',
+              followers: 5000,
+            },
+          ],
+        },
+        {
+          id: 'ip-2',
+          displayName: 'Bob',
+          followerCount: 20000,
+          platforms: [
+            {
+              platform: 'tiktok',
+              url: 'https://tiktok.com/@bob',
+              followers: 20000,
+            },
+          ],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(service.search({ page: 1, limit: 20 })).resolves.toEqual(
+        candidates
+      )
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {},
         orderBy: { followerCount: 'desc' },
@@ -204,12 +234,19 @@ describe('InfluencersService', () => {
 
     it('should filter by q (search query)', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 5000, platforms: [] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 5000,
+          platforms: [],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ q: 'ali', page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(
+        service.search({ q: 'ali', page: 1, limit: 20 })
+      ).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           OR: [
@@ -226,12 +263,20 @@ describe('InfluencersService', () => {
 
     it('should filter by niche', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', niche: 'Travel', followerCount: 5000, platforms: [] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          niche: 'Travel',
+          followerCount: 5000,
+          platforms: [],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ niche: 'Travel', page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(
+        service.search({ niche: 'Travel', page: 1, limit: 20 })
+      ).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           niche: { equals: 'Travel', mode: 'insensitive' },
@@ -244,12 +289,24 @@ describe('InfluencersService', () => {
 
     it('should filter by location and region', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 5000, platforms: [] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 5000,
+          platforms: [],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ location: 'US', region: 'California', page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(
+        service.search({
+          location: 'US',
+          region: 'California',
+          page: 1,
+          limit: 20,
+        })
+      ).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           locationCountry: { equals: 'US', mode: 'insensitive' },
@@ -263,12 +320,24 @@ describe('InfluencersService', () => {
 
     it('should filter by followersMin and followersMax', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 5000, platforms: [] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 5000,
+          platforms: [],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ followersMin: 1000, followersMax: 10000, page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(
+        service.search({
+          followersMin: 1000,
+          followersMax: 10000,
+          page: 1,
+          limit: 20,
+        })
+      ).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           AND: [
@@ -284,12 +353,19 @@ describe('InfluencersService', () => {
 
     it('should filter by scope (nano)', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 5000, platforms: [] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 5000,
+          platforms: [],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ scope: 'nano', page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(
+        service.search({ scope: 'nano', page: 1, limit: 20 })
+      ).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
           AND: [
@@ -305,17 +381,22 @@ describe('InfluencersService', () => {
 
     it('should filter by scope (mega)', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 2000000, platforms: [] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 2000000,
+          platforms: [],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      await expect(service.search({ scope: 'mega', page: 1, limit: 20 })).resolves.toEqual(candidates)
+      await expect(
+        service.search({ scope: 'mega', page: 1, limit: 20 })
+      ).resolves.toEqual(candidates)
       expect(prisma.influencerProfile.findMany).toHaveBeenCalledWith({
         where: {
-          AND: [
-            { followerCount: { gte: 1000000 } },
-          ],
+          AND: [{ followerCount: { gte: 1000000 } }],
         },
         orderBy: { followerCount: 'desc' },
         skip: 0,
@@ -325,22 +406,83 @@ describe('InfluencersService', () => {
 
     it('should filter by platforms in application layer', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', followerCount: 5000, platforms: [{ platform: 'instagram', url: 'https://instagram.com/alice', followers: 5000 }] },
-        { id: 'ip-2', displayName: 'Bob', followerCount: 20000, platforms: [{ platform: 'tiktok', url: 'https://tiktok.com/@bob', followers: 20000 }] },
-        { id: 'ip-3', displayName: 'Charlie', followerCount: 100000, platforms: [{ platform: 'youtube', url: 'https://youtube.com/charlie', followers: 100000 }] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          followerCount: 5000,
+          platforms: [
+            {
+              platform: 'instagram',
+              url: 'https://instagram.com/alice',
+              followers: 5000,
+            },
+          ],
+        },
+        {
+          id: 'ip-2',
+          displayName: 'Bob',
+          followerCount: 20000,
+          platforms: [
+            {
+              platform: 'tiktok',
+              url: 'https://tiktok.com/@bob',
+              followers: 20000,
+            },
+          ],
+        },
+        {
+          id: 'ip-3',
+          displayName: 'Charlie',
+          followerCount: 100000,
+          platforms: [
+            {
+              platform: 'youtube',
+              url: 'https://youtube.com/charlie',
+              followers: 100000,
+            },
+          ],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)
 
-      const result = await service.search({ platforms: 'instagram,tiktok', page: 1, limit: 20 })
+      const result = await service.search({
+        platforms: 'instagram,tiktok',
+        page: 1,
+        limit: 20,
+      })
       expect(result).toHaveLength(2)
       expect(result.map((r: any) => r.id)).toEqual(['ip-1', 'ip-2'])
     })
 
     it('should combine multiple filters', async () => {
       const candidates = [
-        { id: 'ip-1', displayName: 'Alice', niche: 'Travel', followerCount: 5000, platforms: [{ platform: 'instagram', url: 'https://instagram.com/alice', followers: 5000 }] },
-        { id: 'ip-2', displayName: 'Bob', niche: 'Travel', followerCount: 20000, platforms: [{ platform: 'tiktok', url: 'https://tiktok.com/@bob', followers: 20000 }] },
+        {
+          id: 'ip-1',
+          displayName: 'Alice',
+          niche: 'Travel',
+          followerCount: 5000,
+          platforms: [
+            {
+              platform: 'instagram',
+              url: 'https://instagram.com/alice',
+              followers: 5000,
+            },
+          ],
+        },
+        {
+          id: 'ip-2',
+          displayName: 'Bob',
+          niche: 'Travel',
+          followerCount: 20000,
+          platforms: [
+            {
+              platform: 'tiktok',
+              url: 'https://tiktok.com/@bob',
+              followers: 20000,
+            },
+          ],
+        },
       ]
 
       prisma.influencerProfile.findMany.mockResolvedValue(candidates)

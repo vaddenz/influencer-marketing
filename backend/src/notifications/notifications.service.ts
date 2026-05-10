@@ -54,7 +54,9 @@ export class NotificationsService {
       data: { read: true },
     })
 
-    this.logger.log(`Notification ${notificationId} marked read by user ${userId}`)
+    this.logger.log(
+      `Notification ${notificationId} marked read by user ${userId}`
+    )
     return updated
   }
 
@@ -64,7 +66,9 @@ export class NotificationsService {
       data: { read: true },
     })
 
-    this.logger.log(`All notifications marked read for user ${userId}, count: ${result.count}`)
+    this.logger.log(
+      `All notifications marked read for user ${userId}, count: ${result.count}`
+    )
     return { count: result.count }
   }
 }

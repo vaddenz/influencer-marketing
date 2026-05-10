@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Patch,
-  Param,
-  UseGuards,
-} from '@nestjs/common'
+import { Controller, Get, Patch, Param, UseGuards } from '@nestjs/common'
 import {
   ApiBearerAuth,
   ApiTags,
@@ -25,7 +19,10 @@ export class NotificationsController {
   @Get()
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'List notifications for current user' })
-  @ApiResponse({ status: 200, description: 'Notifications retrieved successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Notifications retrieved successfully',
+  })
   async findAll(@CurrentUser() user: UserPayload) {
     return this.notificationsService.findAll(user.id)
   }
@@ -35,11 +32,11 @@ export class NotificationsController {
   @ApiOperation({ summary: 'Mark a notification as read' })
   @ApiResponse({ status: 200, description: 'Notification marked as read' })
   @ApiResponse({ status: 404, description: 'Notification not found' })
-  @ApiResponse({ status: 403, description: 'Cannot mark this notification as read' })
-  async markRead(
-    @CurrentUser() user: UserPayload,
-    @Param('id') id: string,
-  ) {
+  @ApiResponse({
+    status: 403,
+    description: 'Cannot mark this notification as read',
+  })
+  async markRead(@CurrentUser() user: UserPayload, @Param('id') id: string) {
     return this.notificationsService.markRead(user.id, id)
   }
 

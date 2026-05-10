@@ -53,7 +53,7 @@ describe('BrandsService', () => {
       prisma.brandProfile.findUnique.mockResolvedValue({ id: 'bp-1' })
 
       await expect(service.createProfile(userId, dto)).rejects.toThrow(
-        ConflictException,
+        ConflictException
       )
       expect(prisma.brandProfile.create).not.toHaveBeenCalled()
     })
@@ -67,11 +67,11 @@ describe('BrandsService', () => {
         new Prisma.PrismaClientKnownRequestError('Unique constraint failed', {
           code: 'P2002',
           clientVersion: '1',
-        }),
+        })
       )
 
       await expect(service.createProfile(userId, dto)).rejects.toThrow(
-        ConflictException,
+        ConflictException
       )
     })
   })
@@ -90,7 +90,7 @@ describe('BrandsService', () => {
       prisma.brandProfile.findUnique.mockResolvedValue(null)
 
       await expect(service.getMyProfile('user-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
   })
@@ -116,7 +116,7 @@ describe('BrandsService', () => {
       prisma.brandProfile.findUnique.mockResolvedValue(null)
 
       await expect(
-        service.updateProfile('user-1', { companyName: 'X' }),
+        service.updateProfile('user-1', { companyName: 'X' })
       ).rejects.toThrow(NotFoundException)
       expect(prisma.brandProfile.update).not.toHaveBeenCalled()
     })
@@ -151,7 +151,7 @@ describe('BrandsService', () => {
       prisma.brandProfile.findUnique.mockResolvedValue(null)
 
       await expect(service.getPublicProfile('user-1')).rejects.toThrow(
-        NotFoundException,
+        NotFoundException
       )
     })
   })
