@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt'
 import 'dotenv/config'
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '@/generated/prisma/client' // DO NOT USE @prisma/client, USE @/generated/prisma/client INSTEAD
+import { PrismaClient, User, InfluencerProfile, Invitation, NotificationType } from '@/generated/prisma/client' // DO NOT USE @prisma/client, USE @/generated/prisma/client INSTEAD
 import { Pool } from 'pg'
 
 const connectionString = process.env.DATABASE_URL
@@ -142,7 +142,7 @@ async function createInfluencers() {
     },
   ]
 
-  const influencers = []
+  const influencers: Array<User & { influencerProfile: InfluencerProfile | null }> = []
   for (const data of influencersData) {
     const user = await prisma.user.upsert({
       where: { email: data.email },
@@ -190,7 +190,7 @@ async function createInvitationsAndDeliverables(
 
   const campaign = brand.campaigns[0]
 
-  const invitations = []
+  const invitations: Invitation[] = []
   for (let i = 0; i < influencers.length; i++) {
     const status = i === 0 ? 'accepted' : i === 1 ? 'pending' : 'declined'
     const invitation = await prisma.invitation.create({
@@ -324,7 +324,13 @@ async function createPrompts() {
 async function createNotifications(users: { id: string }[]) {
   console.log('\n--- Creating Additional Notifications ---')
 
-  const notificationData = [
+  const notificationData: Array<{
+    userId: string
+    type: NotificationType
+    title: string
+    message: string
+    read: boolean
+  }> = [
     {
       userId: users[0].id,
       type: 'campaign_updated',
