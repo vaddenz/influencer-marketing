@@ -31,6 +31,7 @@ import { FileModule } from '@/file/file.module'
 import { BrandsModule } from '@/brands/brands.module'
 import { InfluencersModule } from '@/influencers/influencers.module'
 import { CampaignsModule } from '@/campaigns/campaigns.module'
+import { InvitationsModule } from '@/invitations/invitations.module'
 
 @Module({
   imports: [
@@ -101,6 +102,7 @@ import { CampaignsModule } from '@/campaigns/campaigns.module'
     BrandsModule,
     InfluencersModule,
     CampaignsModule,
+    InvitationsModule,
   ],
   controllers: [],
   providers: [
