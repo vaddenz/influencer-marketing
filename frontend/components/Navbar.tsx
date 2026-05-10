@@ -34,13 +34,8 @@ export function Navbar() {
 
   const navLinks = [
     { href: '/', label: t('home') },
-    { href: '/templates', label: t('templates') },
-    { href: '/install', label: t('install') },
-    {
-      href: 'https://github.com',
-      label: 'GitHub',
-      external: true,
-    },
+    { href: '/brand/discover', label: t('discover') },
+    { href: '/about', label: t('howItWorks') },
   ]
 
   useEffect(() => {
@@ -74,22 +69,8 @@ export function Navbar() {
               const isActive =
                 link.href === '/'
                   ? pathname === '/'
-                  : !link.external &&
-                    (pathname === link.href ||
-                      pathname.startsWith(link.href + '/'))
-
-              if (link.external) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={getLinkClass(false)}>
-                    {link.label}
-                  </a>
-                )
-              }
+                  : pathname === link.href ||
+                    pathname.startsWith(link.href + '/')
 
               return (
                 <Link
@@ -151,22 +132,8 @@ export function Navbar() {
               const isActive =
                 link.href === '/'
                   ? pathname === '/'
-                  : !link.external &&
-                    (pathname === link.href ||
-                      pathname.startsWith(link.href + '/'))
-
-              if (link.external) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={getMobileLinkClass(false)}>
-                    {link.label}
-                  </a>
-                )
-              }
+                  : pathname === link.href ||
+                    pathname.startsWith(link.href + '/')
 
               return (
                 <Link
@@ -183,7 +150,7 @@ export function Navbar() {
             </div>
             <div className="pt-2">
               <Link
-                href="/templates"
+                href="/brand/discover"
                 className="btn-primary w-full justify-center">
                 {t('start')}
               </Link>

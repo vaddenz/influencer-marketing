@@ -1,53 +1,77 @@
 {
   "HomePage": {
-    "badge": "Alpha Version Live",
-    "heroTitle1": "One-click: ",
-    "heroTitle2": "Recruit & Organize Agent Teams",
-    "title": "ACME Brand Name - Agent Team Template Market",
-    "description": "One-click installation of preset Agent team templates for non-technical OpenClaw users, covering content creation, e-commerce operations, customer support, and more.",
-    "cta": "Browse Templates",
-    "secondaryCta": "How It Works",
+    "badge": "Influencer Marketing Platform",
+    "heroTitle1": "Connect with Niche Influencers to ",
+    "heroTitle2": "Create & Publish Content",
+    "title": "Influencer Marketing Platform - Connect Brands with Creators",
+    "description": "Connect instantly with millions of authentic and relevant influencers in your niche to create and publish videos and photos of your products.",
+    "cta": "Find Influencers",
+    "secondaryCta": "Join as Creator",
     "stats": {
-      "scenarios": "Business Scenarios",
-      "roles": "Agent Roles",
-      "openSource": "Open Source & Free"
+      "creators": "Creators",
+      "brands": "Brands",
+      "contentPieces": "Content Pieces"
+    },
+    "trust": {
+      "title": "Trusted by leading DTC brands"
     },
     "howItWorks": {
-      "title": "Three Steps to Start",
-      "subtitle": "Simple and fast, no technical background required",
-      "step1Title": "Choose a Template",
-      "step1Desc": "Browse our template library and choose the suitable Agent team template according to your business scenarios",
-      "step2Title": "One-Click Deploy",
-      "step2Desc": "Chat with OpenClaw to deploy a complete Agent team setup with one click",
-      "step3Title": "Start Using",
-      "step3Desc": "Start using your professional Agent team immediately"
+      "title": "How It Works",
+      "subtitle": "Simple and fast, whether you are a brand or a creator",
+      "forBrands": "For Brands",
+      "forCreators": "For Creators",
+      "brandStep1Title": "Discover",
+      "brandStep1Desc": "Search and filter millions of niche influencers by audience, engagement, and content style",
+      "brandStep2Title": "Connect",
+      "brandStep2Desc": "Reach out directly or launch a campaign to receive applications from interested creators",
+      "brandStep3Title": "Collaborate",
+      "brandStep3Desc": "Manage contracts, content approvals, and payments all in one place",
+      "creatorStep1Title": "Create Profile",
+      "creatorStep1Desc": "Showcase your content, audience metrics, and rates to attract brand deals",
+      "creatorStep2Title": "Get Discovered",
+      "creatorStep2Desc": "Brands search for creators like you every day — get matched with relevant campaigns",
+      "creatorStep3Title": "Earn",
+      "creatorStep3Desc": "Create authentic content, submit for approval, and get paid securely through the platform"
     },
     "features": {
-      "title": "Why Choose AgentPlanet",
-      "subtitle": "We focus on providing the best experience for non-technical users",
-      "feature1Title": "One-Click Installation",
-      "feature1Desc": "No complex configuration required, deploy quickly in OpenClaw through conversation, saving tedious manual setup",
-      "feature2Title": "Professional Team",
-      "feature2Desc": "Preset professional Agent role combinations for various business scenarios, each role has clear responsibilities and system prompts",
-      "feature3Title": "Completely Free",
-      "feature3Desc": "All templates are open source and free to use, without any hidden fees, allowing everyone to equally enjoy the efficiency improvement brought by AI",
-      "feature4Title": "Intelligent Collaboration",
-      "feature4Desc": "Agents can collaborate with each other to form a complete workflow",
-      "feature5Title": "Rich Scenarios",
-      "feature5Desc": "Covering content creation, e-commerce operations, customer support, and other business scenarios to meet the needs of different industries",
-      "feature6Title": "Privacy & Security",
-      "feature6Desc": "OpenClaw runs entirely in the user's environment, we do not collect any user data, ensuring data privacy"
+      "title": "Why Choose Our Platform",
+      "subtitle": "Everything you need to run successful influencer marketing campaigns",
+      "feature1Title": "Smart Matching",
+      "feature1Desc": "AI-powered algorithm matches your brand with the most relevant influencers based on niche, audience, and engagement",
+      "feature2Title": "Campaign Management",
+      "feature2Desc": "End-to-end campaign tracking from outreach to content delivery — manage dozens of creators effortlessly",
+      "feature3Title": "Content Library",
+      "feature3Desc": "Centralized content approvals, asset storage, and revision tracking to keep your brand consistent",
+      "feature4Title": "Performance Analytics",
+      "feature4Desc": "Real-time ROI, engagement metrics, and conversion tracking to measure campaign success",
+      "feature5Title": "Secure Payments",
+      "feature5Desc": "Escrow-protected creator payments with flexible pricing models — fixed, commission, or product gifting",
+      "feature6Title": "Multi-Platform",
+      "feature6Desc": "Support for TikTok, Instagram, YouTube, and more — manage all your social campaigns in one dashboard"
+    },
+    "testimonials": {
+      "title": "Loved by Brands and Creators",
+      "subtitle": "See what our community says about working together",
+      "quote1": "We scaled our influencer program from 5 to 200 creators in 3 months. The matching algorithm saved us countless hours of manual outreach.",
+      "author1": "Sarah Chen",
+      "role1": "Head of Growth, GlowSkincare",
+      "quote2": "This platform helped me land consistent brand deals that actually fit my niche. My monthly revenue doubled within two months.",
+      "author2": "Marcus Johnson",
+      "role2": " Lifestyle Creator, 180K followers",
+      "quote3": "The campaign management tools are a game changer. We can track content, approvals, and payments for 50+ influencers without chaos.",
+      "author3": "Emily Zhang",
+      "role3": "Marketing Director, FitFuel"
     },
     "bottomCta": {
-      "title": "Ready to boost your business efficiency?",
-      "subtitle": "Browse our template library now to find the Agent team configuration suitable for your business scenarios and start AI-driven business growth",
-      "button": "Start Exploring"
+      "title": "Ready to scale your influencer marketing?",
+      "subtitle": "Join thousands of brands and creators already collaborating on our platform",
+      "button": "Get Started Free"
     }
   },
   "Navbar": {
     "home": "Home",
-    "templates": "Templates",
-    "install": "Install Guide",
+    "discover": "Discover",
+    "howItWorks": "How It Works",
     "pricing": "Pricing",
     "about": "About",
     "login": "Login",
@@ -252,8 +276,8 @@
   },
   "Layout": {
     "metadata": {
-      "title": "AgentPlanet - Agent Team Template Market",
-      "description": "Providing one-click installation of preset Agent team templates for OpenClaw users without technical backgrounds, including content creation, e-commerce, customer support, and other business scenarios"
+      "title": "Influencer Marketing Platform - Connect Brands with Creators",
+      "description": "Connect instantly with millions of authentic and relevant influencers in your niche to create and publish videos and photos of your products"
     }
   },
   "Admin": {
