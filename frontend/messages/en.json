@@ -233,10 +233,30 @@
     "terms": "Terms of Service",
     "contact": "Contact Us"
   },
+  "LoginPage": {
+    "title": "Sign In",
+    "emailLabel": "Email",
+    "emailPlaceholder": "jane@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Remember me",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create Account",
+    "error": {
+      "invalidEmail": "Please enter a valid email address",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "invalidCredentials": "Invalid email or password",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
   "Auth": {
     "login": "Login",
     "logout": "Logout",
     "selectMethod": "Select login method",
+    "emailPassword": "Email & Password",
     "loginWith": "Login with {provider}",
     "error": {
       "default": "An error occurred during login",

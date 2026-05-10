@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth'
 import { getApiUrl } from '@/lib/config'
 import { useTranslations } from 'next-intl'
@@ -48,6 +49,7 @@ export function AuthButton() {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('Auth')
+  const router = useRouter()
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -183,6 +185,30 @@ export function AuthButton() {
           <p className="px-4 py-1 text-xs text-[var(--c-text-secondary)]">
             {t('selectMethod')}
           </p>
+          <button
+            onClick={() => {
+              setIsOpen(false)
+              router.push('/login')
+            }}
+            className="w-full px-4 py-2.5 text-left hover:bg-[var(--c-bg-secondary)] transition-colors flex items-center gap-3"
+            type="button">
+            <svg
+              className="w-5 h-5 text-[var(--c-text-secondary)]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+              />
+            </svg>
+            <span className="text-sm text-[var(--c-text)]">
+              {t('emailPassword')}
+            </span>
+          </button>
+          <div className="mx-4 my-1.5 border-t border-[var(--c-border-light)]" />
           {(
             Object.keys(OAUTH_PROVIDERS) as Array<keyof typeof OAUTH_PROVIDERS>
           ).map((key) => (
