@@ -155,6 +155,7 @@ describe('InvitationsService', () => {
       await expect(service.create(userId, dto)).rejects.toThrow(
         ConflictException,
       )
+      expect(prisma.$transaction).toHaveBeenCalled()
       expect(prisma.invitation.findFirst).toHaveBeenCalledWith({
         where: {
           campaignId: dto.campaignId,
@@ -265,6 +266,14 @@ describe('InvitationsService', () => {
               },
             },
           },
+          influencer: {
+            select: {
+              name: true,
+              influencerProfile: {
+                select: { displayName: true, handle: true },
+              },
+            },
+          },
         },
         orderBy: { createdAt: 'desc' },
       })
@@ -320,6 +329,14 @@ describe('InvitationsService', () => {
                     select: { companyName: true },
                   },
                 },
+              },
+            },
+          },
+          influencer: {
+            select: {
+              name: true,
+              influencerProfile: {
+                select: { displayName: true, handle: true },
               },
             },
           },

@@ -31,6 +31,14 @@ const INVITATION_LIST_SELECT = {
       },
     },
   },
+  influencer: {
+    select: {
+      name: true,
+      influencerProfile: {
+        select: { displayName: true, handle: true },
+      },
+    },
+  },
 }
 
 @Injectable()
@@ -52,19 +60,19 @@ export class InvitationsService {
       throw new ForbiddenException('You do not own this campaign')
     }
 
-    const existing = await this.prisma.invitation.findFirst({
-      where: {
-        campaignId: dto.campaignId,
-        influencerId: dto.influencerId,
-        status: 'pending',
-      },
-    })
-
-    if (existing) {
-      throw new ConflictException('Invitation already sent')
-    }
-
     const invitation = await this.prisma.$transaction(async (tx) => {
+      const existing = await tx.invitation.findFirst({
+        where: {
+          campaignId: dto.campaignId,
+          influencerId: dto.influencerId,
+          status: 'pending',
+        },
+      })
+
+      if (existing) {
+        throw new ConflictException('Invitation already sent')
+      }
+
       const influencer = await tx.user.findUnique({
         where: { id: dto.influencerId },
         include: { influencerProfile: true },
