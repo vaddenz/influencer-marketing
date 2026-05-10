@@ -1,53 +1,77 @@
 {
   "HomePage": {
-    "badge": "Alpha 版本现已上线",
-    "heroTitle1": "一键招募",
-    "heroTitle2": "Agent 团队",
-    "title": "ACME Brand Name - Agent 团队模板市场",
-    "description": "为无技术背景的 OpenClaw 用户提供一键安装预设 Agent 团队模板，包含内容创作、电商运营、客服支持等业务场景",
-    "cta": "浏览模板",
-    "secondaryCta": "了解更多",
+    "badge": "网红营销平台",
+    "heroTitle1": "连接垂直领域网红，",
+    "heroTitle2": "创作与发布内容",
+    "title": "网红营销平台 - 连接品牌与创作者",
+    "description": "即时连接数百万真实且相关的垂直领域网红，为您的产品创作和发布视频与图片。",
+    "cta": "寻找网红",
+    "secondaryCta": "成为创作者",
     "stats": {
-      "scenarios": "业务场景",
-      "roles": "Agent 角色",
-      "openSource": "开源免费"
+      "creators": "创作者",
+      "brands": "品牌",
+      "contentPieces": "内容作品"
+    },
+    "trust": {
+      "title": "深受领先 DTC 品牌信赖"
     },
     "howItWorks": {
-      "title": "三步开始使用",
-      "subtitle": "简单快捷，无需任何技术背景",
-      "step1Title": "选择模板",
-      "step1Desc": "浏览我们的模板库，根据业务场景选择适合的 Agent 团队模板",
-      "step2Title": "一键部署",
-      "step2Desc": "与 OpenClaw 对话一键部署完整的 Agent 团队设置",
-      "step3Title": "启动使用",
-      "step3Desc": "即刻开始使用专业的 Agent 团队"
+      "title": "如何使用",
+      "subtitle": "简单快捷，无论您是品牌方还是创作者",
+      "forBrands": "品牌方",
+      "forCreators": "创作者",
+      "brandStep1Title": "发现",
+      "brandStep1Desc": "按受众、互动率和内容风格搜索并筛选数百万垂直领域网红",
+      "brandStep2Title": "连接",
+      "brandStep2Desc": "直接联系或发起活动，接收感兴趣创作者的合作申请",
+      "brandStep3Title": "协作",
+      "brandStep3Desc": "在一个地方管理合同、内容审核和付款",
+      "creatorStep1Title": "创建档案",
+      "creatorStep1Desc": "展示您的内容、受众数据和报价，吸引品牌合作",
+      "creatorStep2Title": "被品牌发现",
+      "creatorStep2Desc": "品牌每天都在寻找像您这样的创作者——与相关活动精准匹配",
+      "creatorStep3Title": "获得收益",
+      "creatorStep3Desc": "创作真实内容，提交审核，并通过平台安全收款"
     },
     "features": {
-      "title": "为什么选择 AgentPlanet",
-      "subtitle": "我们专注于为无技术背景的用户提供最佳体验",
-      "feature1Title": "一键安装",
-      "feature1Desc": "无需复杂配置，通过对话即可在 OpenClaw 中快速部署，省去繁琐的手动设置",
-      "feature2Title": "专业团队",
-      "feature2Desc": "预设多种业务场景的专业 Agent 角色组合，每个角色都有明确的职责和系统提示词",
-      "feature3Title": "完全免费",
-      "feature3Desc": "所有模板均开源免费使用，无任何隐藏费用，让每个人都能平等享受 AI 带来的效率提升",
-      "feature4Title": "智能协作",
-      "feature4Desc": "Agent 之间可以相互协作，形成完整的工作流",
-      "feature5Title": "场景丰富",
-      "feature5Desc": "覆盖内容创作、电商运营、客服支持等多种业务场景，满足不同行业需求",
-      "feature6Title": "隐私安全",
-      "feature6Desc": "OpenClaw 完全运行在用户环境，我们不获取任何用户数据，保障数据隐私"
+      "title": "为什么选择我们",
+      "subtitle": "运营成功网红营销活动所需的一切",
+      "feature1Title": "智能匹配",
+      "feature1Desc": "AI 驱动算法根据领域、受众和互动率，为您的品牌匹配最相关的网红",
+      "feature2Title": "活动管理",
+      "feature2Desc": "从合作洽谈到内容交付的端到端活动追踪——轻松管理数十位创作者",
+      "feature3Title": "内容库",
+      "feature3Desc": "集中的内容审核、素材存储和修改追踪，保持品牌一致性",
+      "feature4Title": "效果分析",
+      "feature4Desc": "实时 ROI、互动指标和转化追踪，衡量活动成效",
+      "feature5Title": "安全支付",
+      "feature5Desc": "受托管保护的创作者付款，支持固定费用、佣金或产品赠送等灵活定价模式",
+      "feature6Title": "多平台支持",
+      "feature6Desc": "支持 TikTok、Instagram、YouTube 等平台——在一个面板中管理所有社交活动"
+    },
+    "testimonials": {
+      "title": "深受品牌和创作者喜爱",
+      "subtitle": "看看我们的社区如何评价彼此的合作",
+      "quote1": "我们在 3 个月内将网红项目从 5 位扩展到 200 位创作者。智能匹配算法为我们节省了无数手动 outreach 的时间。",
+      "author1": "陈莎拉",
+      "role1": "增长负责人，GlowSkincare",
+      "quote2": "这个平台帮助我获得了真正适合我领域的稳定品牌合作。两个月内我的月收入翻了一番。",
+      "author2": "马库斯·约翰逊",
+      "role2": "生活方式创作者，18万粉丝",
+      "quote3": "活动管理工具是游戏规则改变者。我们可以追踪 50 多位网红的内容、审核和付款，而不混乱。",
+      "author3": "张艾米",
+      "role3": "市场总监，FitFuel"
     },
     "bottomCta": {
-      "title": "准备好提升业务效率了吗？",
-      "subtitle": "立即浏览我们的模板库，找到适合你业务场景的 Agent 团队配置，开启 AI 驱动的业务增长",
-      "button": "开始探索"
+      "title": "准备好扩展您的网红营销了吗？",
+      "subtitle": "加入已在平台上合作的数千品牌和创作者",
+      "button": "免费开始使用"
     }
   },
   "Navbar": {
     "home": "首页",
-    "templates": "模板库",
-    "install": "部署指南",
+    "discover": "发现",
+    "howItWorks": "如何使用",
     "pricing": "定价",
     "about": "关于",
     "login": "登录",
@@ -80,6 +104,7 @@
     "detail": {
       "notFoundTitle": "模板未找到 - AgentPlanet",
       "metadataTitle": "{name} - AgentPlanet",
+      "about": "关于此模板",
       "copySuccess": "已复制到剪贴板",
       "copyFailed": "复制失败，请手动复制",
       "home": "首页",
@@ -251,8 +276,8 @@
   },
   "Layout": {
     "metadata": {
-      "title": "AgentPlanet - Agent 团队模板市场",
-      "description": "为无技术背景的 OpenClaw 用户提供一键安装预设 Agent 团队模板，包含内容创作、电商运营、客服支持等业务场景"
+      "title": "网红营销平台 - 连接品牌与创作者",
+      "description": "即时连接数百万真实且相关的垂直领域网红，为您的产品创作和发布视频与图片"
     }
   },
   "Admin": {
