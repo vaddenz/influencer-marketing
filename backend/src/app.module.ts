@@ -30,6 +30,7 @@ import { HealthModule } from '@/health/health.module'
 import { FileModule } from '@/file/file.module'
 import { BrandsModule } from '@/brands/brands.module'
 import { InfluencersModule } from '@/influencers/influencers.module'
+import { CampaignsModule } from '@/campaigns/campaigns.module'
 
 @Module({
   imports: [
@@ -99,6 +100,7 @@ import { InfluencersModule } from '@/influencers/influencers.module'
     FileModule,
     BrandsModule,
     InfluencersModule,
+    CampaignsModule,
   ],
   controllers: [],
   providers: [
