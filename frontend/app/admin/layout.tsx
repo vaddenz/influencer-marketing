@@ -1,5 +1,7 @@
 'use client'
 
+// TODO: /admin is the brand dashboard. Rename this route to (brand)/ in Task 13.
+
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -12,17 +14,17 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { user, isAdmin, loading, logout } = useAuth()
+  const { user, isBrand, loading, logout } = useAuth()
   const router = useRouter()
   const pathname = usePathname()
   const t = useTranslations('Admin')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   useEffect(() => {
-    if (!loading && !isAdmin) {
+    if (!loading && !isBrand) {
       router.replace('/')
     }
-  }, [loading, isAdmin, router])
+  }, [loading, isBrand, router])
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setIsSidebarOpen(false))
@@ -37,7 +39,7 @@ export default function AdminLayout({
     )
   }
 
-  if (!isAdmin) {
+  if (!isBrand) {
     return (
       <div className="flex h-screen items-center justify-center bg-[var(--c-bg)]">
         <div className="text-center">

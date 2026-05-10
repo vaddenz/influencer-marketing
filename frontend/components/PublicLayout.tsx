@@ -6,13 +6,13 @@ import { Footer } from './Footer'
 
 export function PublicLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isAdmin = pathname?.startsWith('/admin')
+  const isBrandRoute = pathname?.startsWith('/admin')
 
   return (
     <>
-      {!isAdmin && <Navbar />}
+      {!isBrandRoute && <Navbar />}
       {children}
-      {!isAdmin && <Footer />}
+      {!isBrandRoute && <Footer />}
     </>
   )
 }
