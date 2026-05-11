@@ -181,6 +181,156 @@ async function createInfluencers() {
   return influencers
 }
 
+// 3b. Create real Douyin influencers from fetched API data
+async function createDouyinInfluencers() {
+  console.log('\n--- Creating Real Douyin Influencers ---')
+
+  const douyinInfluencersData = [
+    {
+      email: 'qinghua.xin.ge@example.com',
+      name: '清华鑫哥讲AI智能体',
+      handle: '@98707849718',
+      bio: '189页OpenClaw蓝皮书主页群聊看公告\n清华大学硕士丨研究方向神经网络预测\nAgent全链路赋能，多赛道头部IP案例\n激波Agent创始人丨曾就职于中民投等一线PE投资机构\n👇橱窗智能体课程+AI社群',
+      niche: 'AI & Technology',
+      followers: 180735,
+      engagement: '3.20',
+      platforms: { douyin: '98707849718' },
+      country: 'China',
+      region: 'Sichuan',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_6ad9dff8b42f411ed89e1c39b6a8d6f4.jpeg?from=2956013662',
+    },
+    {
+      email: 'motianlun@example.com',
+      name: '摩天轮短剧',
+      handle: '@motianlun',
+      bio: '短剧创作者，分享精彩短剧内容',
+      niche: 'Entertainment',
+      followers: 1028180,
+      engagement: '2.80',
+      platforms: { douyin: 'MS4wLjABAAAA-gfcPom5_EcguiHkYY3H6a0a8eCXt5LfcAfaszNeAk8TyKG2ZeKj1s9Yf6ixSZev' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_aa3ff9ec2c981647d82bde2d089fb14b.jpeg?from=2956013662',
+    },
+    {
+      email: 'du.laoshi.aigc@example.com',
+      name: '杜老师AIGC',
+      handle: '@dulaoshi',
+      bio: 'AIGC领域创作者，分享AI生成内容技术与应用',
+      niche: 'AI & Technology',
+      followers: 133911,
+      engagement: '7.50',
+      platforms: { douyin: 'MS4wLjABAAAA8823HyxJMan39uAmpKwfmZWoux1Q2qHwtbilHivlDtA' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_cd1d32cbb07dae41cd98b8424a3550f5.jpeg?from=2956013662',
+    },
+    {
+      email: 'qinghua.jiang@example.com',
+      name: '清华姜学长',
+      handle: '@qinghuajiang',
+      bio: '清华大学学长，分享学习经验与科技前沿',
+      niche: 'Education & Technology',
+      followers: 183922,
+      engagement: '3.80',
+      platforms: { douyin: 'MS4wLjABAAAAfte3rFiVQ8VUE3Nfxph1NhCnq1ZAttn43OIr5UsXD5c' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_21514c189971a84eced2bb1db5575a85.jpeg?from=2956013662',
+    },
+    {
+      email: 'qiuzhi.2046@example.com',
+      name: '秋芝2046',
+      handle: '@qiuzhi2046',
+      bio: '生活方式与科技融合创作者',
+      niche: 'Lifestyle & Technology',
+      followers: 1184667,
+      engagement: '5.20',
+      platforms: { douyin: 'MS4wLjABAAAAwbbVuf1W2DdgRe0xCa0oxg1ZIHbzuiTzyjq3NcOVgBuu6qIidYlMYqbL3ZFY2swu' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_1aea2b7ed4b464ba6ca670ead9d89ce8.jpeg?from=2956013662',
+    },
+    {
+      email: 'eyemore@example.com',
+      name: 'EyeMore智能体设备',
+      handle: '@eyemore',
+      bio: '智能体硬件设备官方账号',
+      niche: 'Tech Hardware',
+      followers: 440002,
+      engagement: '6.80',
+      platforms: { douyin: 'MS4wLjABAAAAhqjd8c-Xb02tDd9nwFpSU_In8eVAvqEmZqf_6AjAjcuCOkfIM9o2sLx-UxzlA4Xm' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_3b63ee6c3087292bd883e14e15e56dc2.jpeg?from=2956013662',
+    },
+    {
+      email: 'yang.boshi.ai@example.com',
+      name: '杨博士说AI',
+      handle: '@yangboshi',
+      bio: 'AI博士，科普人工智能知识与应用',
+      niche: 'AI & Technology',
+      followers: 37458,
+      engagement: '4.50',
+      platforms: { douyin: 'MS4wLjABAAAAMmbd2Qxnde80FDRpgCGCt2VOYp3ITbkZ_LJf2ywqoZw' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oEDENUNcEfuB88fEd9KDfJN7HCAFAAVgAozTIM.jpeg?from=2956013662',
+    },
+    {
+      email: 'jun.agent@example.com',
+      name: 'Jun_Agent',
+      handle: '@junagent',
+      bio: 'Agent智能体开发者，分享开发经验',
+      niche: 'AI & Technology',
+      followers: 16733,
+      engagement: '5.60',
+      platforms: { douyin: 'MS4wLjABAAAAv8r8Kj1BFD6TCMmju1Hv9eMXW6cKzPXKTsk6Y_3vOuHFDDXRhxinyQg0EjCO8jcw' },
+      country: 'China',
+      region: '',
+      avatar: 'https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_8b90eb7ee506c847223b8ce1abc4d4c8.jpeg?from=2956013662',
+    },
+  ]
+
+  const influencers: Array<User & { influencerProfile: InfluencerProfile | null }> = []
+  for (const data of douyinInfluencersData) {
+    const user = await prisma.user.upsert({
+      where: { email: data.email },
+      update: {},
+      create: {
+        email: data.email,
+        name: data.name,
+        passwordHash: await hashPassword('password'),
+        avatar: data.avatar,
+        role: 'influencer',
+        influencerProfile: {
+          create: {
+            displayName: data.name,
+            handle: data.handle,
+            bio: data.bio,
+            niche: data.niche,
+            followerCount: data.followers,
+            engagementRate: data.engagement,
+            platforms: data.platforms,
+            locationCountry: data.country,
+            locationRegion: data.region,
+            profileImageUrl: data.avatar,
+          },
+        },
+      },
+      include: {
+        influencerProfile: true,
+      },
+    })
+
+    console.log(`Created Douyin influencer: ${user.name} (${user.id})`)
+    console.log(`  Handle: ${user.influencerProfile?.handle}`)
+    influencers.push(user)
+  }
+
+  return influencers
+}
+
 // 4. Create invitations and deliverables
 async function createInvitationsAndDeliverables(
   brand: { campaigns: { id: string }[] },
@@ -376,6 +526,7 @@ async function main() {
     const emptyBrand = await createEmptyBrandUser()
     const brand = await createBrandWithCampaigns()
     const influencers = await createInfluencers()
+    const douyinInfluencers = await createDouyinInfluencers()
     const agency = await createAgencyUser()
 
     // Create related data
@@ -383,7 +534,7 @@ async function main() {
       await createInvitationsAndDeliverables(brand, influencers)
     }
 
-    const allUsers = [emptyBrand, brand, ...influencers, agency]
+    const allUsers = [emptyBrand, brand, ...influencers, ...douyinInfluencers, agency]
     await createOAuthAccounts(allUsers)
     await createPrompts()
     await createNotifications(allUsers)
@@ -396,6 +547,15 @@ async function main() {
     console.log('- influencer2@example.com (tech influencer)')
     console.log('- influencer3@example.com (fitness influencer)')
     console.log('- agency@example.com (agency user)')
+    console.log('\nCreated real Douyin influencers:')
+    console.log('- 清华鑫哥讲AI智能体 (180K followers, AI & Technology)')
+    console.log('- 摩天轮短剧 (1M followers, Entertainment)')
+    console.log('- 杜老师AIGC (133K followers, AI & Technology)')
+    console.log('- 清华姜学长 (183K followers, Education & Technology)')
+    console.log('- 秋芝2046 (1.1M followers, Lifestyle & Technology)')
+    console.log('- EyeMore智能体设备 (440K followers, Tech Hardware)')
+    console.log('- 杨博士说AI (37K followers, AI & Technology)')
+    console.log('- Jun_Agent (16K followers, AI & Technology)')
   } catch (error) {
     console.error('\n❌ Error during seeding:', error)
     throw error
