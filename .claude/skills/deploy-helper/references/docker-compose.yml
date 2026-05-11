@@ -1,0 +1,57 @@
+# Docker Compose template for {{PROJECT_NAME}} deployment
+# Images are tagged with 8-character git commit SHA
+# Copy and customize this file, or use the project-root docker-compose.yml
+
+name: {{PROJECT_NAME}}
+
+services:
+  backend:
+    image: {{IMAGE_HUB_URL}}/{{PROJECT_NAME}}/backend:{{IMAGE_TAG}}
+    container_name: {{PROJECT_NAME}}-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - app-net
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    image: {{IMAGE_HUB_URL}}/{{PROJECT_NAME}}/frontend:{{IMAGE_TAG}}
+    container_name: {{PROJECT_NAME}}-frontend
+    restart: unless-stopped
+    networks:
+      - app-net
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  gateway:
+    image: {{IMAGE_HUB_URL}}/{{PROJECT_NAME}}/gateway:{{IMAGE_TAG}}
+    container_name: {{PROJECT_NAME}}-gateway
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./acme.json:/etc/traefik/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - app-net
+    depends_on:
+      - frontend
+      - backend
+
+networks:
+  app-net:
+    driver: bridge

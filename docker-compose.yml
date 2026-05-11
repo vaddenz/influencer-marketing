@@ -1,0 +1,64 @@
+# Docker Compose for influencer-marketing deployment
+# Images are tagged with 8-character git commit SHA
+#
+# Required environment variables (or create a .env file):
+#   IMAGE_HUB_URL    - Docker registry URL, e.g. registry.example.com
+#   IMAGE_TAG        - Git commit SHA (8 chars), e.g. abcdef12
+#
+# Optional environment variables:
+#   PROJECT_NAME     - defaults to "influencer-marketing"
+#   BACKEND_ENV_FILE - path to backend env file, e.g. ./backend/.env.production
+
+name: ${PROJECT_NAME:-influencer-marketing}
+
+services:
+  backend:
+    image: ${IMAGE_HUB_URL:-registry.example.com}/${PROJECT_NAME:-influencer-marketing}/backend:${IMAGE_TAG:-latest}
+    container_name: ${PROJECT_NAME:-influencer-marketing}-backend
+    restart: unless-stopped
+    env_file:
+      - ${BACKEND_ENV_FILE:?BACKEND_ENV_FILE is required}
+    networks:
+      - app-net
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    image: ${IMAGE_HUB_URL:-registry.example.com}/${PROJECT_NAME:-influencer-marketing}/frontend:${IMAGE_TAG:-latest}
+    container_name: ${PROJECT_NAME:-influencer-marketing}-frontend
+    restart: unless-stopped
+    networks:
+      - app-net
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  gateway:
+    image: ${IMAGE_HUB_URL:-registry.example.com}/${PROJECT_NAME:-influencer-marketing}/gateway:${IMAGE_TAG:-latest}
+    container_name: ${PROJECT_NAME:-influencer-marketing}-gateway
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./acme.json:/etc/traefik/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - app-net
+    depends_on:
+      - frontend
+      - backend
+
+networks:
+  app-net:
+    driver: bridge
