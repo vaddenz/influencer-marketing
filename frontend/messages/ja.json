@@ -269,6 +269,8 @@
     "rememberMe": "ログイン状態を保持",
     "signIn": "ログイン",
     "signingIn": "ログイン中...",
+    "loginAsBrand": "ブランドとしてログイン (Demo)",
+    "loginAsCreator": "クリエイターとしてログイン (Demo)",
     "forgotPassword": "パスワードを忘れた？",
     "noAccount": "アカウントをお持ちでない？",
     "createAccount": "アカウント作成",

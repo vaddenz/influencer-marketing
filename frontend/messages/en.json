@@ -269,6 +269,8 @@
     "rememberMe": "Remember me",
     "signIn": "Sign In",
     "signingIn": "Signing in...",
+    "loginAsBrand": "Login as Brand (Demo)",
+    "loginAsCreator": "Login as Creator (Demo)",
     "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
     "createAccount": "Create Account",

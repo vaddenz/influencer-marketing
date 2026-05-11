@@ -53,8 +53,7 @@ export default function InvitationsPage() {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
-          >
+            strokeWidth={2}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -99,8 +98,7 @@ export default function InvitationsPage() {
       <div className="mb-10 animate-fade-up relative z-10">
         <h1
           className="text-3xl font-bold tracking-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
+          style={{ fontFamily: 'var(--font-heading)' }}>
           Invitations
         </h1>
         <p className="text-gray mt-1 text-sm">
@@ -134,8 +132,7 @@ export default function InvitationsPage() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
-            >
+              strokeWidth={2}>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -157,8 +154,7 @@ export default function InvitationsPage() {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
-          >
+            strokeWidth={2}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -167,8 +163,7 @@ export default function InvitationsPage() {
           </svg>
           <h2
             className="font-semibold text-lg"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
+            style={{ fontFamily: 'var(--font-heading)' }}>
             Pending
           </h2>
           <span className="px-2.5 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">
@@ -183,15 +178,13 @@ export default function InvitationsPage() {
               return (
                 <div
                   key={i.id}
-                  className={`d-card animate-fade-up delay-${Math.min(index + 4, 6)}`}
-                >
+                  className={`d-card animate-fade-up delay-${Math.min(index + 4, 6)}`}>
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h3
                           className="font-semibold"
-                          style={{ fontFamily: 'var(--font-heading)' }}
-                        >
+                          style={{ fontFamily: 'var(--font-heading)' }}>
                           {i.campaign?.title}
                         </h3>
                         <span className="px-2.5 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">
@@ -214,8 +207,7 @@ export default function InvitationsPage() {
                           respondMutation.mutate({ id: i.id, action: 'accept' })
                         }}
                         disabled={isActing}
-                        className="d-btn-primary text-sm"
-                      >
+                        className="d-btn-primary text-sm">
                         {isActing ? (
                           <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
                         ) : (
@@ -225,8 +217,7 @@ export default function InvitationsPage() {
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
-                              strokeWidth={2}
-                            >
+                              strokeWidth={2}>
                               <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -246,8 +237,7 @@ export default function InvitationsPage() {
                           })
                         }}
                         disabled={isActing}
-                        className="d-btn-secondary text-sm"
-                      >
+                        className="d-btn-secondary text-sm">
                         Decline
                       </button>
                     </div>
@@ -278,8 +268,7 @@ export default function InvitationsPage() {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
-          >
+            strokeWidth={2}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -288,8 +277,7 @@ export default function InvitationsPage() {
           </svg>
           <h2
             className="font-semibold text-lg"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
+            style={{ fontFamily: 'var(--font-heading)' }}>
             History
           </h2>
         </div>
@@ -300,13 +288,11 @@ export default function InvitationsPage() {
                 key={i.id}
                 href={`/influencer/campaigns/${i.campaign.id}`}
                 className={`d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 transition-shadow hover:shadow-md hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}
-                style={{ opacity: 0.85 }}
-              >
+                style={{ opacity: 0.85 }}>
                 <div>
                   <h3
                     className="font-semibold"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
+                    style={{ fontFamily: 'var(--font-heading)' }}>
                     {i.campaign?.title}
                   </h3>
                   <p className="text-gray text-sm">

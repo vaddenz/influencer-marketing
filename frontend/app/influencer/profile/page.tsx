@@ -66,8 +66,7 @@ export default function InfluencerProfilePage() {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
-          >
+            strokeWidth={2}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -89,8 +88,7 @@ export default function InfluencerProfilePage() {
       <div className="mb-10 animate-fade-up relative z-10">
         <h1
           className="text-3xl font-bold tracking-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
+          style={{ fontFamily: 'var(--font-heading)' }}>
           My Profile
         </h1>
         <p className="text-gray mt-1 text-sm">
@@ -106,8 +104,7 @@ export default function InfluencerProfilePage() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
-            >
+              strokeWidth={2}>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -130,8 +127,7 @@ export default function InfluencerProfilePage() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
-            >
+              strokeWidth={2}>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -142,8 +138,7 @@ export default function InfluencerProfilePage() {
           <div>
             <p
               className="font-semibold text-lg"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
+              style={{ fontFamily: 'var(--font-heading)' }}>
               {profile.displayName || profile.handle}
             </p>
             <p className="text-gray text-sm">@{profile.handle}</p>
@@ -270,8 +265,7 @@ export default function InfluencerProfilePage() {
             <button
               onClick={() => updateMutation.mutate()}
               disabled={updateMutation.isPending}
-              className="d-btn-primary"
-            >
+              className="d-btn-primary">
               {updateMutation.isPending ? (
                 <>
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -284,8 +278,7 @@ export default function InfluencerProfilePage() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}
-                  >
+                    strokeWidth={2}>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

@@ -56,7 +56,13 @@ export default function DiscoverPage() {
   }
 
   const getAvatarBg = (name: string) => {
-    const colors = ['bg-orange-100', 'bg-blue-100', 'bg-pink-100', 'bg-green-100', 'bg-purple-100']
+    const colors = [
+      'bg-orange-100',
+      'bg-blue-100',
+      'bg-pink-100',
+      'bg-green-100',
+      'bg-purple-100',
+    ]
     let hash = 0
     for (let i = 0; i < name.length; i++) {
       hash = name.charCodeAt(i) + ((hash << 5) - hash)
@@ -70,8 +76,7 @@ export default function DiscoverPage() {
       <div className="mb-8 animate-fade-up relative z-10">
         <h1
           className="text-3xl font-bold tracking-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
+          style={{ fontFamily: 'var(--font-heading)' }}>
           Discover Creators
         </h1>
         <p className="text-gray mt-1 text-sm">
@@ -89,8 +94,7 @@ export default function DiscoverPage() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={2}
-              >
+                strokeWidth={2}>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -99,8 +103,7 @@ export default function DiscoverPage() {
               </svg>
               <h3
                 className="font-semibold text-base"
-                style={{ fontFamily: 'var(--font-heading)' }}
-              >
+                style={{ fontFamily: 'var(--font-heading)' }}>
                 Filters
               </h3>
             </div>
@@ -130,8 +133,7 @@ export default function DiscoverPage() {
                     value={filters.niche}
                     onChange={(e) =>
                       setFilters({ ...filters, niche: e.target.value })
-                    }
-                  >
+                    }>
                     <option value="">All Niches</option>
                     <option value="travel">Travel</option>
                     <option value="fashion">Fashion</option>
@@ -145,8 +147,7 @@ export default function DiscoverPage() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}
-                  >
+                    strokeWidth={2}>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -166,8 +167,7 @@ export default function DiscoverPage() {
                     value={filters.location}
                     onChange={(e) =>
                       setFilters({ ...filters, location: e.target.value })
-                    }
-                  >
+                    }>
                     <option value="">All Countries</option>
                     <option value="US">United States</option>
                     <option value="GB">United Kingdom</option>
@@ -178,8 +178,7 @@ export default function DiscoverPage() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}
-                  >
+                    strokeWidth={2}>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -223,8 +222,7 @@ export default function DiscoverPage() {
                     value={filters.scope}
                     onChange={(e) =>
                       setFilters({ ...filters, scope: e.target.value })
-                    }
-                  >
+                    }>
                     <option value="">All Scopes</option>
                     <option value="nano">Nano (1K-10K)</option>
                     <option value="micro">Micro (10K-100K)</option>
@@ -236,8 +234,7 @@ export default function DiscoverPage() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}
-                  >
+                    strokeWidth={2}>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -272,15 +269,16 @@ export default function DiscoverPage() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
-                >
+                  strokeWidth={2}>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
                   />
                 </svg>
-                <p className="font-medium text-ink">Failed to load influencers.</p>
+                <p className="font-medium text-ink">
+                  Failed to load influencers.
+                </p>
               </div>
             </div>
           )}
@@ -307,8 +305,7 @@ export default function DiscoverPage() {
             {influencers?.map((influencer, index) => (
               <div
                 key={influencer.id}
-                className={`d-card flex items-center gap-5 hover-lift animate-fade-up delay-${Math.min(index + 3, 6)}`}
-              >
+                className={`d-card flex items-center gap-5 hover-lift animate-fade-up delay-${Math.min(index + 3, 6)}`}>
                 {/* Avatar */}
                 {influencer.profileImageUrl ? (
                   <Image
@@ -321,8 +318,7 @@ export default function DiscoverPage() {
                   />
                 ) : (
                   <div
-                    className={`w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0 ${getAvatarBg(influencer.displayName)}`}
-                  >
+                    className={`w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0 ${getAvatarBg(influencer.displayName)}`}>
                     {influencer.handle.charAt(0).toUpperCase()}
                   </div>
                 )}
@@ -331,24 +327,39 @@ export default function DiscoverPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h3
-                      className="font-semibold text-base"
+                      className="font-semibold text-base truncate max-w-full"
                       style={{ fontFamily: 'var(--font-heading)' }}
-                    >
+                      title={influencer.displayName}>
                       {influencer.displayName}
                     </h3>
-                    <span className="text-gray text-sm">{influencer.handle}</span>
-                    <span className="px-2.5 py-0.5 bg-ink/10 text-ink text-xs font-medium rounded-full">
+                    <span
+                      className="text-gray text-sm truncate max-w-[200px]"
+                      title={influencer.handle}>
+                      {influencer.handle.length > 24
+                        ? `${influencer.handle.substring(0, 24)}...`
+                        : influencer.handle}
+                    </span>
+                    <span className="px-2.5 py-0.5 bg-ink/10 text-ink text-xs font-medium rounded-full whitespace-nowrap">
                       {influencer.niche}
                     </span>
-                    <span className="px-2.5 py-0.5 bg-light-gray text-gray text-xs font-medium rounded-full">
+                    <span className="px-2.5 py-0.5 bg-light-gray text-gray text-xs font-medium rounded-full whitespace-nowrap">
                       {getScopeLabel(influencer.followerCount)}
                     </span>
                   </div>
-                  <p className="text-gray text-sm mb-2">
+                  <p
+                    className="text-gray text-sm mb-2 truncate"
+                    title={`${influencer.followerCount.toLocaleString()} followers · ${influencer.engagementRate}% engagement · ${influencer.locationCountry} ${influencer.locationRegion}`}>
                     {influencer.followerCount.toLocaleString()} followers ·{' '}
                     {influencer.engagementRate}% engagement ·{' '}
                     {influencer.locationCountry} {influencer.locationRegion}
                   </p>
+                  {influencer.bio && (
+                    <p
+                      className="text-gray text-sm mb-2 line-clamp-2"
+                      title={influencer.bio}>
+                      {influencer.bio}
+                    </p>
+                  )}
                   {influencer.platforms &&
                     Object.keys(influencer.platforms).length > 0 && (
                       <div className="flex items-center gap-2 mt-1 flex-wrap">
@@ -356,9 +367,12 @@ export default function DiscoverPage() {
                           ([platform, handle]) => (
                             <span
                               key={platform}
-                              className="px-3 py-1 bg-light-gray text-gray text-xs rounded-full capitalize"
-                            >
-                              {platform}: {handle}
+                              className="px-3 py-1 bg-light-gray text-gray text-xs rounded-full capitalize inline-block max-w-full truncate"
+                              title={`${platform} | ${handle}`}>
+                              {platform} |{' '}
+                              {typeof handle === 'string' && handle.length > 24
+                                ? `${handle.substring(0, 24)}...`
+                                : (handle as React.ReactNode)}
                             </span>
                           )
                         )}
@@ -369,8 +383,7 @@ export default function DiscoverPage() {
                 {/* CTA */}
                 <Link
                   href={`/brand/influencers/${influencer.userId}`}
-                  className="d-btn-primary flex-shrink-0 text-sm"
-                >
+                  className="d-btn-primary flex-shrink-0 text-sm">
                   View Profile
                 </Link>
               </div>

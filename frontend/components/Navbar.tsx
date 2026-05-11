@@ -51,8 +51,7 @@ export function Navbar() {
             </div>
             <span
               className="text-xl font-bold text-ink"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
+              style={{ fontFamily: 'var(--font-heading)' }}>
               {process.env.NEXT_PUBLIC_BRAND_NAME}
             </span>
           </Link>
@@ -70,8 +69,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={getLinkClass(isActive)}
-                >
+                  className={getLinkClass(isActive)}>
                   {link.label}
                 </Link>
               )
@@ -89,8 +87,7 @@ export function Navbar() {
             type="button"
             className="inline-flex items-center justify-center rounded-lg p-2 text-gray hover:bg-light-gray md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-          >
+            aria-expanded={isMenuOpen}>
             <span className="sr-only">{t('openMenu')}</span>
             {isMenuOpen ? (
               <svg
@@ -98,8 +95,7 @@ export function Navbar() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={2}
-              >
+                strokeWidth={2}>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -112,8 +108,7 @@ export function Navbar() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={2}
-              >
+                strokeWidth={2}>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -140,8 +135,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={getMobileLinkClass(isActive)}
-                >
+                  className={getMobileLinkClass(isActive)}>
                   {link.label}
                 </Link>
               )
@@ -152,8 +146,7 @@ export function Navbar() {
             <div className="pt-2">
               <Link
                 href="/brand/discover"
-                className="btn-primary w-full justify-center"
-              >
+                className="btn-primary w-full justify-center">
                 {t('start')}
               </Link>
             </div>

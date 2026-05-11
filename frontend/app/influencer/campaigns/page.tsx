@@ -48,8 +48,7 @@ export default function InfluencerCampaignsPage() {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
-          >
+            strokeWidth={2}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -71,8 +70,7 @@ export default function InfluencerCampaignsPage() {
       <div className="mb-10 animate-fade-up relative z-10">
         <h1
           className="text-3xl font-bold tracking-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
+          style={{ fontFamily: 'var(--font-heading)' }}>
           My Campaigns
         </h1>
         <p className="text-gray mt-1 text-sm">
@@ -117,14 +115,12 @@ export default function InfluencerCampaignsPage() {
             <Link
               key={c.id}
               href={`/influencer/campaigns/${c.id}`}
-              className={`d-card block group hover:shadow-soft transition-shadow hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}
-            >
+              className={`d-card block group hover:shadow-soft transition-shadow hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <h3
                     className="font-semibold text-base"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
+                    style={{ fontFamily: 'var(--font-heading)' }}>
                     {c.title}
                   </h3>
                   <p className="text-gray text-sm mt-0.5">

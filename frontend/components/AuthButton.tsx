@@ -49,6 +49,8 @@ export function AuthButton() {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('Auth')
+  const t2 = useTranslations('Navbar')
+  const t3 = useTranslations('Navbar')
   const router = useRouter()
 
   useEffect(() => {
@@ -87,20 +89,10 @@ export function AuthButton() {
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[var(--c-bg-secondary)] transition-colors"
           type="button">
-          {user.avatar ? (
-            <Image
-              src={user.avatar}
-              alt={user.name}
-              width={32}
-              height={32}
-              className="w-8 h-8 rounded-full object-cover"
-              unoptimized={true}
-            />
-          ) : (
-            <div className="w-8 h-8 rounded-full bg-[var(--c-accent)] flex items-center justify-center text-white font-medium">
-              {user.name?.charAt(0)?.toUpperCase() || 'U'}
-            </div>
-          )}
+          <div className="w-8 h-8 bg-ink rounded-full flex items-center justify-center text-white text-xs font-semibold">
+            {(user.name || user.email)?.charAt(0).toUpperCase() || 'C'}
+          </div>
+
           <span className="text-sm font-medium text-[var(--c-text)] hidden sm:block">
             {user.name}
           </span>
@@ -130,12 +122,21 @@ export function AuthButton() {
             </div>
             {isBrand && (
               <Link
-                href="/admin"
+                href="/brand/discover"
                 className="block px-4 py-2 text-sm text-[var(--c-text)] hover:bg-[var(--c-bg-secondary)] transition-colors"
                 onClick={() => setIsOpen(false)}>
-                Admin Panel
+                {t2('discover')}
               </Link>
             )}
+            {!isBrand && (
+              <Link
+                href="/influencer/invitations"
+                className="block px-4 py-2 text-sm text-[var(--c-text)] hover:bg-[var(--c-bg-secondary)] transition-colors"
+                onClick={() => setIsOpen(false)}>
+                {t2('discover')}
+              </Link>
+            )}
+
             <button
               onClick={handleLogout}
               className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"

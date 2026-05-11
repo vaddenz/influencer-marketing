@@ -57,7 +57,9 @@ export default function AdminLayout({
     )
   }
 
-  const navItems = [{ href: '/admin', label: t('dashboard') }]
+  const navItems = [
+    // { href: '/admin', label: t('dashboard') }
+  ]
 
   return (
     <div className="flex h-screen bg-[var(--c-bg)]">
@@ -78,11 +80,11 @@ export default function AdminLayout({
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
         <div className="flex h-16 items-center justify-between px-4 border-b border-[var(--c-border-light)]">
-          <span
+          {/* <span
             className="text-lg font-bold text-[var(--c-text)]"
             style={{ fontFamily: 'var(--font-heading)' }}>
             {t('adminPanel')}
-          </span>
+          </span> */}
           <button
             type="button"
             className="rounded p-1 text-[var(--c-text-secondary)] hover:bg-[var(--c-bg-tertiary)] md:hidden"
@@ -150,9 +152,9 @@ export default function AdminLayout({
                 />
               </svg>
             </button>
-            <h1 className="text-base font-semibold text-[var(--c-text)]">
+            {/* <h1 className="text-base font-semibold text-[var(--c-text)]">
               {t('adminPanel')}
-            </h1>
+            </h1> */}
           </div>
 
           <div className="flex items-center gap-4">

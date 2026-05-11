@@ -31,30 +31,24 @@ export default function LoginPage() {
   const [errors, setErrors] = useState<LoginFormErrors>({})
   const [isLoading, setIsLoading] = useState(false)
 
-  function validateForm(): boolean {
+  async function submitLogin(emailValue: string, passwordValue: string) {
+    setErrors({})
     const newErrors: LoginFormErrors = {}
 
-    if (!email.trim()) {
+    if (!emailValue.trim()) {
       newErrors.email = t('error.invalidEmail')
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
       newErrors.email = t('error.invalidEmail')
     }
 
-    if (!password) {
+    if (!passwordValue) {
       newErrors.password = t('error.passwordTooShort')
-    } else if (password.length < 8) {
+    } else if (passwordValue.length < 8) {
       newErrors.password = t('error.passwordTooShort')
     }
 
     setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setErrors({})
-
-    if (!validateForm()) return
+    if (Object.keys(newErrors).length > 0) return
 
     setIsLoading(true)
 
@@ -64,7 +58,7 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: emailValue, password: passwordValue }),
       })
 
       const result: ApiResponse<LoginResponse> = await response.json()
@@ -92,6 +86,17 @@ export default function LoginPage() {
       setErrors({ form: t('error.generic') })
       setIsLoading(false)
     }
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    await submitLogin(email, password)
+  }
+
+  function handleQuickLogin(emailVal: string, passwordVal: string) {
+    setEmail(emailVal)
+    setPassword(passwordVal)
+    submitLogin(emailVal, passwordVal)
   }
 
   const brandName = process.env.NEXT_PUBLIC_BRAND_NAME || 'InfluencerHub'
@@ -228,11 +233,33 @@ export default function LoginPage() {
               </p>
             )}
 
+            {/* Quick Logins */}
+            <div className="flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  handleQuickLogin('brand@example.com', 'password')
+                }
+                disabled={isLoading}
+                className="btn-primary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
+                {t('loginAsBrand')}
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  handleQuickLogin('influencer1@example.com', 'password')
+                }
+                disabled={isLoading}
+                className="btn-primary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
+                {t('loginAsCreator')}
+              </button>
+            </div>
+
             {/* Submit */}
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
+              className="btn-secondary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <svg

@@ -72,9 +72,7 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html
-      lang={locale}
-      className={`${dmSans.variable} ${inter.variable}`}>
+    <html lang={locale} className={`${dmSans.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>

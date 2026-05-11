@@ -179,9 +179,7 @@ export default async function HomePage() {
               style={{ fontFamily: 'var(--font-heading)' }}>
               {t('howItWorks.title')}
             </h2>
-            <p className="text-lg text-gray">
-              {t('howItWorks.subtitle')}
-            </p>
+            <p className="text-lg text-gray">{t('howItWorks.subtitle')}</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
@@ -323,9 +321,7 @@ export default async function HomePage() {
               style={{ fontFamily: 'var(--font-heading)' }}>
               {t('features.title')}
             </h2>
-            <p className="text-lg text-gray">
-              {t('features.subtitle')}
-            </p>
+            <p className="text-lg text-gray">{t('features.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -485,9 +481,7 @@ export default async function HomePage() {
               style={{ fontFamily: 'var(--font-heading)' }}>
               {t('testimonials.title')}
             </h2>
-            <p className="text-lg text-gray">
-              {t('testimonials.subtitle')}
-            </p>
+            <p className="text-lg text-gray">{t('testimonials.subtitle')}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -587,9 +581,7 @@ export default async function HomePage() {
               style={{ fontFamily: 'var(--font-heading)' }}>
               {t('bottomCta.title')}
             </h2>
-            <p className="text-lg text-gray mb-10">
-              {t('bottomCta.subtitle')}
-            </p>
+            <p className="text-lg text-gray mb-10">{t('bottomCta.subtitle')}</p>
             <Link href="/brand/discover" className="btn-primary">
               {t('bottomCta.button')}
               <svg

@@ -269,6 +269,8 @@
     "rememberMe": "记住我",
     "signIn": "登录",
     "signingIn": "登录中...",
+    "loginAsBrand": "以品牌方身份登录 (Demo)",
+    "loginAsCreator": "以创作者身份登录 (Demo)",
     "forgotPassword": "忘记密码？",
     "noAccount": "还没有账户？",
     "createAccount": "创建账户",

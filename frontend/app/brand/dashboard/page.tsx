@@ -36,25 +36,20 @@ export default function BrandDashboard() {
         <div>
           <h1
             className="text-3xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
+            style={{ fontFamily: 'var(--font-heading)' }}>
             Campaigns
           </h1>
           <p className="text-gray mt-1 text-sm">
             Manage your influencer marketing campaigns
           </p>
         </div>
-        <Link
-          href="/brand/campaigns/new"
-          className="d-btn-primary"
-        >
+        <Link href="/brand/campaigns/new" className="d-btn-primary">
           <svg
             className="w-4 h-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2.5}
-          >
+            strokeWidth={2.5}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -108,8 +103,7 @@ export default function BrandDashboard() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
-            >
+              strokeWidth={2}>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -141,14 +135,12 @@ export default function BrandDashboard() {
         {campaigns?.map((c, index) => (
           <div
             key={c.id}
-            className={`d-card flex items-center justify-between group hover:shadow-soft transition-shadow hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}
-          >
+            className={`d-card flex items-center justify-between group hover:shadow-soft transition-shadow hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}>
             <div>
               <div className="flex items-center gap-3 mb-1">
                 <h3
                   className="font-semibold text-base"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
+                  style={{ fontFamily: 'var(--font-heading)' }}>
                   {c.title}
                 </h3>
                 {getStatusTag(c.status)}
@@ -157,8 +149,7 @@ export default function BrandDashboard() {
             </div>
             <Link
               href={`/brand/campaigns/${c.id}`}
-              className="text-ink font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0"
-            >
+              className="text-ink font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0">
               View details <span>→</span>
             </Link>
           </div>
