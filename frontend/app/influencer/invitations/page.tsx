@@ -302,8 +302,7 @@ export default function InvitationsPage() {
                 key={i.id}
                 href={`/influencer/campaigns/${i.campaign.id}`}
                 className="d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 transition-shadow hover:shadow-md"
-                style={{ opacity: 0.85 }}
-              >
+                style={{ opacity: 0.85 }}>
                 <div>
                   <h3
                     className="font-semibold"

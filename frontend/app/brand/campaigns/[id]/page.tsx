@@ -16,7 +16,6 @@ interface CampaignDetail {
     status: string
     influencer: {
       id: string
-      userId: string
       influencerProfile: {
         handle: string
         displayName?: string
@@ -193,7 +192,7 @@ export default function CampaignDetailPage() {
           {campaign.invitations?.map((i) => (
             <Link
               key={i.id}
-              href={`/brand/influencers/${i.influencer.userId}`}
+              href={`/brand/influencers/${i.influencer.id}`}
               className="d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 group hover:opacity-80 transition-opacity">
               <div className="flex items-center gap-3">
                 {i.influencer?.influencerProfile?.profileImageUrl ? (
