@@ -2,7 +2,10 @@
 set -euo pipefail
 
 # Deploy script for {{PROJECT_NAME}}
-# Usage: ./deploy.sh <server-host> <ssh-user> <ssh-key-path> <image-hub-url> <project-name> <image-tag>
+# Usage: ./deploy.sh <server-host> <ssh-user> <ssh-key-path> <image-hub-url> <project-name> <image-tag> [skip-pull]
+#
+# If images were built directly on the dev server (registry push failed or skipped),
+# pass "skip-pull" as the 7th argument to skip "docker compose pull".
 
 SERVER_HOST="${1:-}"
 SSH_USER="${2:-}"
@@ -10,11 +13,12 @@ SSH_KEY_PATH="${3:-}"
 IMAGE_HUB_URL="${4:-}"
 PROJECT_NAME="${5:-}"
 IMAGE_TAG="${6:-}"
+SKIP_PULL="${7:-}"
 
 REMOTE_DIR="/opt/${PROJECT_NAME}"
 
 if [[ -z "$SERVER_HOST" || -z "$SSH_USER" || -z "$IMAGE_HUB_URL" || -z "$PROJECT_NAME" || -z "$IMAGE_TAG" ]]; then
-  echo "Usage: $0 <server-host> <ssh-user> <ssh-key-path> <image-hub-url> <project-name> <image-tag>"
+  echo "Usage: $0 <server-host> <ssh-user> <ssh-key-path> <image-hub-url> <project-name> <image-tag> [skip-pull]"
   exit 1
 fi
 
@@ -45,10 +49,19 @@ fi
 ${SSH_CMD} "touch ${REMOTE_DIR}/acme.json && chmod 600 ${REMOTE_DIR}/acme.json"
 
 # 5. Export vars and deploy
-${SSH_CMD} "cd ${REMOTE_DIR} && \
-  export IMAGE_HUB_URL='${IMAGE_HUB_URL}' IMAGE_TAG='${IMAGE_TAG}' PROJECT_NAME='${PROJECT_NAME}' BACKEND_ENV_FILE='./.env' && \
-  docker compose pull && \
-  docker compose up -d --remove-orphans && \
-  docker compose ps"
+if [[ "$SKIP_PULL" == "skip-pull" ]]; then
+  echo "-> Starting services (skipping pull, using local images)..."
+  ${SSH_CMD} "cd ${REMOTE_DIR} && \
+    export IMAGE_HUB_URL='${IMAGE_HUB_URL}' IMAGE_TAG='${IMAGE_TAG}' PROJECT_NAME='${PROJECT_NAME}' BACKEND_ENV_FILE='./.env' && \
+    docker compose up -d --remove-orphans && \
+    docker compose ps"
+else
+  echo "-> Pulling images and starting services..."
+  ${SSH_CMD} "cd ${REMOTE_DIR} && \
+    export IMAGE_HUB_URL='${IMAGE_HUB_URL}' IMAGE_TAG='${IMAGE_TAG}' PROJECT_NAME='${PROJECT_NAME}' BACKEND_ENV_FILE='./.env' && \
+    docker compose pull && \
+    docker compose up -d --remove-orphans && \
+    docker compose ps"
+fi
 
 echo "=== Deployment complete ==="
