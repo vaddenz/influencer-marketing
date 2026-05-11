@@ -24,7 +24,7 @@ entryPoints:
 certificatesResolvers:
   default:
     acme:
-      email: "postmaster@HOSTNAME_1"
+      email: "contact@agentplanet.ai"
       storage: "/etc/traefik/acme.json"
       httpChallenge:
         entryPoint: web

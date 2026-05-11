@@ -1,7 +1,7 @@
 http:
   routers:
     frontend-router:
-      rule: "Host(`HOSTNAME_1`) || Host(`HOSTNAME_2`)"
+      rule: "Host(`agentplanet.ai`) || Host(`www.agentplanet.ai`)"
       service: frontend-service
       entryPoints:
         - websecure
@@ -9,7 +9,7 @@ http:
         certResolver: default
 
     backend-router:
-      rule: "(Host(`HOSTNAME_1`) || Host(`HOSTNAME_2`)) && PathPrefix(`/api/v1`)"
+      rule: "(Host(`agentplanet.ai`) || Host(`www.agentplanet.ai`)) && PathPrefix(`/api/v1`)"
       service: backend-service
       entryPoints:
         - websecure
