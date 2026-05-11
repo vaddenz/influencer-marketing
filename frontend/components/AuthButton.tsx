@@ -94,6 +94,7 @@ export function AuthButton() {
               width={32}
               height={32}
               className="w-8 h-8 rounded-full object-cover"
+              unoptimized={true}
             />
           ) : (
             <div className="w-8 h-8 rounded-full bg-[var(--c-accent)] flex items-center justify-center text-white font-medium">

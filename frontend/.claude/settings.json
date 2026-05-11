@@ -1,28 +1,21 @@
 {
   "defaultMode": "code",
   "permissions": {
-    // ======================================================================================
-    // ===================== ✅ 低风险权限：无需确认，自动执行（安全）===============================
-    // ======================================================================================
     "allow": [
-      // ========== 安全文件读写（仅项目源码，禁止敏感文件）==========
       "Read(*.js, *.ts, *.jsx, *.tsx, *.json, *.md, *.yml, *.html, *.css, *.scss)",
       "Read(src/**, app/**, public/**, components/**, lib/**, utils/**, tests/**)",
       "Write(src/**, app/**, public/**, components/**, lib/**, utils/**, tests/**)",
       "Glob(**/*.tsx, **/*.ts, **/*.jsx, **/*.js)",
       "Grep(app/**, src/**, components/**)",
 
-      // ========== NextJS 专用低风险命令 ==========
       "Bash(next dev)",
       "Bash(next lint)",
       "Bash(next info)",
 
-      // ========== NestJS 专用低风险命令 ==========
       "Bash(nest start --watch)",
       "Bash(nest info)",
       "Bash(nest --version)",
 
-      // ========== React / 通用前端低风险命令 ==========
       "Bash(npm run lint)",
       "Bash(pnpm run lint)",
       "Bash(yarn run lint)",
@@ -31,86 +24,65 @@
       "Bash(eslint src/** app/**)",
       "Bash(tsc --noEmit)",
 
-      // ========== 通用开发/查看命令 ==========
       "Bash(ls, ls -la, pwd, cat, head, tail, find)",
       "Bash(git status, git diff, git log --oneline -n 10)",
       "Read(.env, .env.example, .env.local, .env.development)",
       "Write(.env, .env.example, .env.local, .env.development)",
       "Bash(git commit -m *, git checkout -b *)",
 
-      // ========== 安全脚本执行 ==========
       "NodeJS(console.log, fs.readFile, path, process.cwd)",
       "Python(print, json, yaml)",
 
-      // ========== Playwright 插件权限 ==========
-      "mcp__plugin_playwright__*"
+      "mcp__plugin_playwright__*",
+      "mcp__plugin_chrome-devtools__*"
     ],
 
-    // ======================================================================================
-    // ===================== ⚠️ 中风险权限：执行前必须手动确认 ====================================
-    // ======================================================================================
     "ask": [
-      // ========== 依赖管理（安装/卸载） ==========
       "Bash(npm install *, npm uninstall *)",
       "Bash(pnpm add *, pnpm remove *)",
       "Bash(yarn add *, yarn remove *)",
 
-      // ========== NextJS 中风险命令 ==========
       "Bash(next build)",
       "Bash(next start)",
       "Bash(next export)",
 
-      // ========== NestJS 中风险命令 ==========
       "Bash(nest build)",
       "Bash(nest start)",
       "Bash(nest generate module *, nest generate controller *, nest generate service *)",
 
-      // ========== Git 操作（禁止强制/推送，仅允许提交/切换） ==========
       "Bash(git checkout *)",
 
-      // ========== 项目构建/清理 ==========
       "Bash(npm run build, pnpm run build, yarn run build)",
       "Bash(rm -rf dist/, rm -rf .next/, rm -rf build/)",
       "Bash(npm run test, pnpm run test, yarn run test)",
 
-      // ========== 核心配置文件修改 ==========
       "Write(package.json, tsconfig.json, next.config.js, nest-cli.json)",
       "Write(tailwind.config.js, postcss.config.js)"
     ],
 
-    // ======================================================================================
-    // ===================== ❌ 高风险权限：永久禁止（系统/数据安全）===============================
-    // ======================================================================================
     "deny": [
-      // ========== 系统级高危命令 ==========
       "Bash(sudo *)",
       "Bash(rm -rf /*, rm -rf ~/*, rm -rf /home/*)",
       "Bash(chmod 777, chown *)",
 
-      // ========== 网络/远程高危操作 ==========
       "Bash(curl *, wget *, ssh *, scp *, rsync *)",
       "Bash(npm publish, yarn publish)",
 
-      // ========== Git 高危操作 ==========
       "Bash(git push, git pull --force, git reset --hard, git rebase *)",
 
-      // ========== 敏感文件 禁止读写（核心安全） ==========
       "Read(.env.production)",
       "Read(secrets/**, *.pem, *.key, credentials.json, id_rsa)",
       "Read(~/.ssh/**, ~/.aws/**, ~/.npmrc, /etc/**)",
       "Write(.env.production, secrets/**, *.pem, *.key)",
 
-      // ========== 依赖锁文件禁止修改 ==========
       "Write(package-lock.json, pnpm-lock.yaml, yarn.lock)"
     ]
   },
 
-  // ========== 环境配置（适配Next/Nest/React） ==========
   "env": {
      
   },
 
-  // ========== 会话/编辑器配置 ==========
   "memory": {
     "persist": true,
     "cleanupPeriodDays": 30

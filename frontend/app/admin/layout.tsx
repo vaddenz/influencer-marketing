@@ -168,6 +168,7 @@ export default function AdminLayout({
                 width={32}
                 height={32}
                 className="h-8 w-8 rounded-full"
+                unoptimized={true}
               />
             ) : (
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--c-accent-light)] text-sm font-medium text-[var(--c-accent)]">
