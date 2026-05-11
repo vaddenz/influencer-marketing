@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { apiFetch } from '@/lib/api'
+import Link from 'next/link'
 import type { Invitation } from '@/lib/types'
 
 export default function InvitationsPage() {
@@ -297,10 +298,12 @@ export default function InvitationsPage() {
         <div className="space-y-3">
           {history && history.length > 0 ? (
             history.map((i) => (
-              <div
+              <Link
                 key={i.id}
-                className="d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-                style={{ opacity: 0.85 }}>
+                href={`/influencer/campaigns/${i.campaign.id}`}
+                className="d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 transition-shadow hover:shadow-md"
+                style={{ opacity: 0.85 }}
+              >
                 <div>
                   <h3
                     className="font-semibold"
@@ -314,7 +317,7 @@ export default function InvitationsPage() {
                   </p>
                 </div>
                 {getStatusTag(i.status)}
-              </div>
+              </Link>
             ))
           ) : (
             <div className="d-card">
