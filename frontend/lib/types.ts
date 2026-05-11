@@ -86,6 +86,7 @@ export interface Invitation {
   status: string
   message?: string
   campaign: {
+    id: string
     title: string
     brand: {
       brandProfile: {
