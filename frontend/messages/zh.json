@@ -249,6 +249,9 @@
     "contact": "9. 联系方式",
     "contactDesc": "如果您对这些服务条款有任何疑问，请联系我们："
   },
+  "DiscoverPage": {
+    "resultCount": "共找到 {count} 位创作者"
+  },
   "Footer": {
     "allRightsReserved": "保留所有权利。",
     "discover": "发现",

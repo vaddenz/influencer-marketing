@@ -249,6 +249,9 @@
     "contact": "9. お問い合わせ先",
     "contactDesc": "これらの利用規約に関するご質問がございましたら、お問い合わせください："
   },
+  "DiscoverPage": {
+    "resultCount": "{count}件のクリエイターが見つかりました"
+  },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
     "discover": "発見",

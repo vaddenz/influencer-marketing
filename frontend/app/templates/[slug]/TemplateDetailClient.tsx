@@ -65,13 +65,7 @@ async function copyToClipboard(text: string): Promise<boolean> {
 }
 
 // Toast component
-function Toast({
-  message,
-  visible,
-}: {
-  message: string
-  visible: boolean
-}) {
+function Toast({ message, visible }: { message: string; visible: boolean }) {
   if (!visible) return null
 
   return (
@@ -171,10 +165,7 @@ export function TemplateDetailClient({ template }: TemplateDetailClientProps) {
   return (
     <main className="pt-24 pb-20 min-h-screen bg-white">
       {/* Toast Notification */}
-      <Toast
-        message={toast.message}
-        visible={toast.visible}
-      />
+      <Toast message={toast.message} visible={toast.visible} />
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         {/* Breadcrumb */}
         <nav className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[var(--c-text-secondary)] mb-6 sm:mb-8">
