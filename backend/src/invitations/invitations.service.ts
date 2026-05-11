@@ -21,6 +21,7 @@ const INVITATION_LIST_SELECT = {
   respondedAt: true,
   campaign: {
     select: {
+      id: true,
       title: true,
       brand: {
         select: {
