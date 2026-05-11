@@ -401,6 +401,363 @@ a {
 }
 
 /* ========================================
+   Dashboard Design Tokens (Warm Studio)
+   ======================================== */
+
+:root {
+  /* Dashboard Colors */
+  --d-sidebar-bg: #ffffff;
+  --d-sidebar-border: #f0ebe5;
+  --d-sidebar-text: #5c5c5c;
+  --d-sidebar-active: #fef6f5;
+  --d-sidebar-active-border: #E85D4C;
+  --d-sidebar-active-text: #1a1a1a;
+
+  --d-content-bg: #FAF8F5;
+  --d-content-bg-warm: #f5f0eb;
+
+  --d-accent: #E85D4C;
+  --d-accent-hover: #D44A3A;
+  --d-accent-light: #FEF0EE;
+  --d-accent-subtle: rgba(232, 93, 76, 0.08);
+
+  --d-card-bg: #ffffff;
+  --d-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+  --d-card-shadow-hover: 0 4px 12px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.04);
+  --d-card-border: #f0ebe5;
+
+  --d-text: #1a1a1a;
+  --d-text-secondary: #6b6560;
+  --d-text-muted: #a8a29e;
+
+  --d-success: #2A9D8F;
+  --d-success-light: #E8F5F3;
+  --d-warning: #E9C46A;
+  --d-warning-light: #FDF8ED;
+}
+
+/* ========================================
+   Dashboard Components
+   ======================================== */
+
+/* Dashboard Card */
+.d-card {
+  background-color: var(--d-card-bg);
+  border: 1px solid var(--d-card-border);
+  border-radius: 16px;
+  box-shadow: var(--d-card-shadow);
+  padding: 24px;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.d-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--d-card-shadow-hover);
+  border-color: #e8e0d8;
+}
+
+.d-card-filled {
+  background-color: var(--d-content-bg-warm);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* Dashboard Button Primary */
+.d-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  background-color: var(--d-accent);
+  color: white;
+}
+
+.d-btn-primary:hover {
+  background-color: var(--d-accent-hover);
+  transform: scale(1.02);
+}
+
+.d-btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Dashboard Button Secondary */
+.d-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: white;
+  color: var(--d-text);
+  border: 1px solid var(--d-card-border);
+}
+
+.d-btn-secondary:hover {
+  background-color: var(--d-content-bg);
+  border-color: #d5cdc5;
+}
+
+/* Dashboard Button Text */
+.d-btn-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  background-color: transparent;
+  color: var(--d-accent);
+}
+
+.d-btn-text:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Dashboard Input */
+.d-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid var(--d-card-border);
+  border-radius: 12px;
+  transition: all 200ms ease;
+  color: var(--d-text);
+}
+
+.d-input::placeholder {
+  color: var(--d-text-muted);
+}
+
+.d-input:focus {
+  outline: none;
+  border-color: var(--d-accent);
+  box-shadow: 0 0 0 3px var(--d-accent-subtle);
+}
+
+/* Dashboard Select */
+.d-select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid var(--d-card-border);
+  border-radius: 12px;
+  transition: all 200ms ease;
+  color: var(--d-text);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a8a29e' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+.d-select:focus {
+  outline: none;
+  border-color: var(--d-accent);
+  box-shadow: 0 0 0 3px var(--d-accent-subtle);
+}
+
+/* Dashboard Tag */
+.d-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: var(--d-accent-light);
+  color: var(--d-accent);
+}
+
+.d-tag-success {
+  background-color: var(--d-success-light);
+  color: var(--d-success);
+}
+
+.d-tag-neutral {
+  background-color: var(--d-content-bg-warm);
+  color: var(--d-text-secondary);
+}
+
+.d-tag-warning {
+  background-color: var(--d-warning-light);
+  color: #b08d3a;
+}
+
+/* Dashboard Section Title */
+.d-section-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: var(--font-heading);
+  color: var(--d-text);
+}
+
+/* Dashboard Stat */
+.d-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: var(--font-heading);
+  color: var(--d-text);
+}
+
+.d-stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--d-text-muted);
+  margin-top: 4px;
+}
+
+/* Dashboard Sidebar Nav */
+.d-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--d-sidebar-text);
+  transition: all 200ms ease;
+  position: relative;
+}
+
+.d-sidebar-link:hover {
+  background-color: var(--d-content-bg);
+  color: var(--d-text);
+}
+
+.d-sidebar-link-active {
+  background-color: var(--d-sidebar-active);
+  color: var(--d-sidebar-active-text);
+  font-weight: 600;
+}
+
+.d-sidebar-link-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background-color: var(--d-sidebar-active-border);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Dashboard Page Header */
+.d-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+/* Empty State */
+.d-empty {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.d-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background-color: var(--d-content-bg-warm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.d-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--d-text);
+  margin-bottom: 4px;
+}
+
+.d-empty-desc {
+  font-size: 14px;
+  color: var(--d-text-secondary);
+  margin-bottom: 20px;
+}
+
+/* ========================================
+   Dashboard Animations
+   ======================================== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ========================================
    Accessibility
    ======================================== */
 
