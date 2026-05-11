@@ -27,11 +27,11 @@ export default function InfluencerCampaignsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-64 relative z-10">
         <div
           className="animate-spin w-8 h-8 border-4 rounded-full"
           style={{
-            borderColor: 'var(--d-accent)',
+            borderColor: '#0c0c0c',
             borderTopColor: 'transparent',
           }}
         />
@@ -41,12 +41,7 @@ export default function InfluencerCampaignsPage() {
 
   if (isError) {
     return (
-      <div
-        className="d-card"
-        style={{
-          borderColor: 'var(--d-accent-light)',
-          backgroundColor: 'var(--d-accent-light)',
-        }}>
+      <div className="d-card animate-fade-up relative z-10">
         <div className="flex items-center gap-3">
           <svg
             className="w-5 h-5 flex-shrink-0"
@@ -54,20 +49,16 @@ export default function InfluencerCampaignsPage() {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            style={{ color: 'var(--d-accent)' }}>
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
             />
           </svg>
-          <p style={{ color: 'var(--d-accent)' }} className="font-medium">
-            Failed to load campaigns
-          </p>
+          <p className="font-medium text-ink">Failed to load campaigns</p>
         </div>
-        <p
-          className="text-sm mt-1"
-          style={{ color: 'var(--d-text-secondary)' }}>
+        <p className="text-sm mt-1 text-gray">
           {error instanceof Error ? error.message : 'Unknown error'}
         </p>
       </div>
@@ -77,28 +68,31 @@ export default function InfluencerCampaignsPage() {
   return (
     <div>
       {/* Page Header */}
-      <div className="d-page-header">
-        <div>
-          <h1 className="d-section-title">My Campaigns</h1>
-          <p style={{ color: 'var(--d-text-secondary)' }} className="mt-1">
-            View and manage your active collaborations
-          </p>
-        </div>
+      <div className="mb-10 animate-fade-up relative z-10">
+        <h1
+          className="text-3xl font-bold tracking-tight"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          My Campaigns
+        </h1>
+        <p className="text-gray mt-1 text-sm">
+          View and manage your active collaborations
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div className="d-card text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10 relative z-10">
+        <div className="d-card text-center hover-lift animate-fade-up delay-1">
           <div className="d-stat-value">{campaigns.length}</div>
           <div className="d-stat-label">Total</div>
         </div>
-        <div className="d-card text-center">
+        <div className="d-card text-center hover-lift animate-fade-up delay-2">
           <div className="d-stat-value">
             {accepted.filter((i) => i.status === 'accepted').length}
           </div>
           <div className="d-stat-label">Active</div>
         </div>
-        <div className="d-card text-center">
+        <div className="d-card text-center hover-lift animate-fade-up delay-3">
           <div className="d-stat-value">
             {accepted.filter((i) => i.status === 'completed').length}
           </div>
@@ -108,7 +102,7 @@ export default function InfluencerCampaignsPage() {
 
       {/* Campaigns List */}
       {campaigns.length === 0 ? (
-        <div className="d-card">
+        <div className="d-card animate-fade-up delay-4 relative z-10">
           <div className="d-empty py-8">
             <div className="d-empty-icon">📋</div>
             <p className="d-empty-title">No campaigns yet</p>
@@ -118,39 +112,27 @@ export default function InfluencerCampaignsPage() {
           </div>
         </div>
       ) : (
-        <div className="space-y-4">
-          {campaigns.map((c) => (
+        <div className="space-y-4 relative z-10">
+          {campaigns.map((c, index) => (
             <Link
               key={c.id}
               href={`/influencer/campaigns/${c.id}`}
-              className="d-card block group">
+              className={`d-card block group hover:shadow-soft transition-shadow hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}
+            >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <h3
-                    className="font-semibold text-lg truncate"
-                    style={{ color: 'var(--d-text)' }}>
+                    className="font-semibold text-base"
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                  >
                     {c.title}
                   </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: 'var(--d-text-secondary)' }}>
+                  <p className="text-gray text-sm mt-0.5">
                     {c.brand.brandProfile.companyName}
                   </p>
                 </div>
-                <span className="d-btn-text flex-shrink-0">
-                  View details
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                    />
-                  </svg>
+                <span className="text-ink font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0">
+                  View details <span>→</span>
                 </span>
               </div>
             </Link>

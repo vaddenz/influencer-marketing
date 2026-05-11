@@ -55,51 +55,64 @@ export default function DiscoverPage() {
     return 'Mega'
   }
 
+  const getAvatarBg = (name: string) => {
+    const colors = ['bg-orange-100', 'bg-blue-100', 'bg-pink-100', 'bg-green-100', 'bg-purple-100']
+    let hash = 0
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash)
+    }
+    return colors[Math.abs(hash) % colors.length]
+  }
+
   return (
     <div>
       {/* Page Header */}
-      <div className="d-page-header">
-        <div>
-          <h1 className="d-section-title">Discover Creators</h1>
-          <p style={{ color: 'var(--d-text-secondary)' }} className="mt-1">
-            Find the perfect influencer for your brand
-          </p>
-        </div>
+      <div className="mb-8 animate-fade-up relative z-10">
+        <h1
+          className="text-3xl font-bold tracking-tight"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          Discover Creators
+        </h1>
+        <p className="text-gray mt-1 text-sm">
+          Find the perfect influencer for your brand
+        </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Filters Sidebar */}
-        <div className="w-full lg:w-72 flex-shrink-0">
-          <div className="d-card lg:sticky lg:top-8">
+        <div className="w-full lg:w-72 flex-shrink-0 animate-fade-up delay-2 relative z-10">
+          <div className="d-card lg:sticky lg:top-8 hover-lift">
             <div className="flex items-center gap-2 mb-5">
               <svg
-                className="w-5 h-5"
+                className="w-5 h-5 text-gray"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={1.5}
-                style={{ color: 'var(--d-text-secondary)' }}>
+                strokeWidth={2}
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
                 />
               </svg>
-              <h3 className="font-semibold" style={{ color: 'var(--d-text)' }}>
+              <h3
+                className="font-semibold text-base"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
                 Filters
               </h3>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: 'var(--d-text-muted)' }}>
+                <label className="text-xs font-medium text-gray uppercase tracking-wider block mb-2">
                   Search
                 </label>
                 <input
                   placeholder="Keywords"
-                  className="d-input text-sm"
+                  className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                   value={filters.q}
                   onChange={(e) =>
                     setFilters({ ...filters, q: e.target.value })
@@ -108,56 +121,82 @@ export default function DiscoverPage() {
               </div>
 
               <div>
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: 'var(--d-text-muted)' }}>
+                <label className="text-xs font-medium text-gray uppercase tracking-wider block mb-2">
                   Niche
                 </label>
-                <select
-                  className="d-select text-sm"
-                  value={filters.niche}
-                  onChange={(e) =>
-                    setFilters({ ...filters, niche: e.target.value })
-                  }>
-                  <option value="">All Niches</option>
-                  <option value="travel">Travel</option>
-                  <option value="fashion">Fashion</option>
-                  <option value="fitness">Fitness</option>
-                  <option value="food">Food</option>
-                  <option value="tech">Tech</option>
-                  <option value="beauty">Beauty</option>
-                </select>
+                <div className="relative">
+                  <select
+                    className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm appearance-none bg-white focus:outline-none focus:border-ink transition-colors"
+                    value={filters.niche}
+                    onChange={(e) =>
+                      setFilters({ ...filters, niche: e.target.value })
+                    }
+                  >
+                    <option value="">All Niches</option>
+                    <option value="travel">Travel</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="food">Food</option>
+                    <option value="tech">Tech</option>
+                    <option value="beauty">Beauty</option>
+                  </select>
+                  <svg
+                    className="w-4 h-4 text-gray absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
               </div>
 
               <div>
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: 'var(--d-text-muted)' }}>
+                <label className="text-xs font-medium text-gray uppercase tracking-wider block mb-2">
                   Location
                 </label>
-                <select
-                  className="d-select text-sm"
-                  value={filters.location}
-                  onChange={(e) =>
-                    setFilters({ ...filters, location: e.target.value })
-                  }>
-                  <option value="">All Countries</option>
-                  <option value="US">United States</option>
-                  <option value="GB">United Kingdom</option>
-                  <option value="CN">China</option>
-                </select>
+                <div className="relative">
+                  <select
+                    className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm appearance-none bg-white focus:outline-none focus:border-ink transition-colors"
+                    value={filters.location}
+                    onChange={(e) =>
+                      setFilters({ ...filters, location: e.target.value })
+                    }
+                  >
+                    <option value="">All Countries</option>
+                    <option value="US">United States</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="CN">China</option>
+                  </select>
+                  <svg
+                    className="w-4 h-4 text-gray absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
               </div>
 
               <div>
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: 'var(--d-text-muted)' }}>
+                <label className="text-xs font-medium text-gray uppercase tracking-wider block mb-2">
                   Followers
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <input
                     placeholder="Min"
-                    className="d-input text-sm w-1/2"
+                    className="w-1/2 px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                     value={filters.followersMin}
                     onChange={(e) =>
                       setFilters({ ...filters, followersMin: e.target.value })
@@ -165,7 +204,7 @@ export default function DiscoverPage() {
                   />
                   <input
                     placeholder="Max"
-                    className="d-input text-sm w-1/2"
+                    className="w-1/2 px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                     value={filters.followersMax}
                     onChange={(e) =>
                       setFilters({ ...filters, followersMax: e.target.value })
@@ -175,36 +214,50 @@ export default function DiscoverPage() {
               </div>
 
               <div>
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: 'var(--d-text-muted)' }}>
+                <label className="text-xs font-medium text-gray uppercase tracking-wider block mb-2">
                   Scope
                 </label>
-                <select
-                  className="d-select text-sm"
-                  value={filters.scope}
-                  onChange={(e) =>
-                    setFilters({ ...filters, scope: e.target.value })
-                  }>
-                  <option value="">All Scopes</option>
-                  <option value="nano">Nano (1K-10K)</option>
-                  <option value="micro">Micro (10K-100K)</option>
-                  <option value="macro">Macro (100K-1M)</option>
-                  <option value="mega">Mega (1M+)</option>
-                </select>
+                <div className="relative">
+                  <select
+                    className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm appearance-none bg-white focus:outline-none focus:border-ink transition-colors"
+                    value={filters.scope}
+                    onChange={(e) =>
+                      setFilters({ ...filters, scope: e.target.value })
+                    }
+                  >
+                    <option value="">All Scopes</option>
+                    <option value="nano">Nano (1K-10K)</option>
+                    <option value="micro">Micro (10K-100K)</option>
+                    <option value="macro">Macro (100K-1M)</option>
+                    <option value="mega">Mega (1M+)</option>
+                  </select>
+                  <svg
+                    className="w-4 h-4 text-gray absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Results */}
-        <div className="flex-1">
+        <div className="flex-1 relative z-10">
           {isLoading && (
             <div className="flex items-center justify-center h-64">
               <div
                 className="animate-spin w-8 h-8 border-4 rounded-full"
                 style={{
-                  borderColor: 'var(--d-accent)',
+                  borderColor: '#0c0c0c',
                   borderTopColor: 'transparent',
                 }}
               />
@@ -212,12 +265,7 @@ export default function DiscoverPage() {
           )}
 
           {isError && (
-            <div
-              className="d-card"
-              style={{
-                borderColor: 'var(--d-accent-light)',
-                backgroundColor: 'var(--d-accent-light)',
-              }}>
+            <div className="d-card">
               <div className="flex items-center gap-3">
                 <svg
                   className="w-5 h-5 flex-shrink-0"
@@ -225,24 +273,20 @@ export default function DiscoverPage() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
-                  style={{ color: 'var(--d-accent)' }}>
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
                   />
                 </svg>
-                <p style={{ color: 'var(--d-accent)' }} className="font-medium">
-                  Failed to load influencers.
-                </p>
+                <p className="font-medium text-ink">Failed to load influencers.</p>
               </div>
             </div>
           )}
 
           {!isLoading && !isError && influencers && influencers.length > 0 && (
-            <p
-              className="text-sm mb-4"
-              style={{ color: 'var(--d-text-secondary)' }}>
+            <p className="text-sm text-gray mb-4">
               {t('resultCount', { count: influencers.length })}
             </p>
           )}
@@ -260,80 +304,75 @@ export default function DiscoverPage() {
           )}
 
           <div className="space-y-4">
-            {influencers?.map((influencer) => (
-              <div key={influencer.id} className="d-card group">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  {/* Avatar */}
-                  {influencer.profileImageUrl ? (
-                    <Image
-                      src={influencer.profileImageUrl}
-                      alt={influencer.displayName}
-                      width={56}
-                      height={56}
-                      unoptimized
-                      className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
-                    />
-                  ) : (
-                    <div
-                      className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0"
-                      style={{
-                        backgroundColor: 'var(--d-content-bg-warm)',
-                        color: 'var(--d-accent)',
-                      }}>
-                      {influencer.handle.charAt(0).toUpperCase()}
-                    </div>
-                  )}
-
-                  {/* Info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <h3
-                        className="font-semibold text-base"
-                        style={{ color: 'var(--d-text)' }}>
-                        {influencer.displayName}
-                      </h3>
-                      <span
-                        className="text-sm"
-                        style={{ color: 'var(--d-text-secondary)' }}>
-                        {influencer.handle}
-                      </span>
-                      <span className="d-tag text-[10px] py-1 px-2">
-                        {influencer.niche}
-                      </span>
-                      <span className="d-tag d-tag-neutral text-[10px] py-1 px-2">
-                        {getScopeLabel(influencer.followerCount)}
-                      </span>
-                    </div>
-                    <p
-                      className="text-sm"
-                      style={{ color: 'var(--d-text-secondary)' }}>
-                      {influencer.followerCount.toLocaleString()} followers ·{' '}
-                      {influencer.engagementRate}% engagement ·{' '}
-                      {influencer.locationCountry} {influencer.locationRegion}
-                    </p>
-                    {influencer.platforms &&
-                      Object.keys(influencer.platforms).length > 0 && (
-                        <div className="flex items-center gap-2 mt-1 flex-wrap">
-                          {Object.entries(influencer.platforms).map(
-                            ([platform, handle]) => (
-                              <span
-                                key={platform}
-                                className="d-tag d-tag-neutral text-[10px] py-1 px-2 capitalize">
-                                {platform}: {handle}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      )}
+            {influencers?.map((influencer, index) => (
+              <div
+                key={influencer.id}
+                className={`d-card flex items-center gap-5 hover-lift animate-fade-up delay-${Math.min(index + 3, 6)}`}
+              >
+                {/* Avatar */}
+                {influencer.profileImageUrl ? (
+                  <Image
+                    src={influencer.profileImageUrl}
+                    alt={influencer.displayName}
+                    width={56}
+                    height={56}
+                    unoptimized
+                    className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                  />
+                ) : (
+                  <div
+                    className={`w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0 ${getAvatarBg(influencer.displayName)}`}
+                  >
+                    {influencer.handle.charAt(0).toUpperCase()}
                   </div>
+                )}
 
-                  {/* CTA */}
-                  <Link
-                    href={`/brand/influencers/${influencer.userId}`}
-                    className="d-btn-primary flex-shrink-0 text-sm">
-                    View Profile
-                  </Link>
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <h3
+                      className="font-semibold text-base"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {influencer.displayName}
+                    </h3>
+                    <span className="text-gray text-sm">{influencer.handle}</span>
+                    <span className="px-2.5 py-0.5 bg-ink/10 text-ink text-xs font-medium rounded-full">
+                      {influencer.niche}
+                    </span>
+                    <span className="px-2.5 py-0.5 bg-light-gray text-gray text-xs font-medium rounded-full">
+                      {getScopeLabel(influencer.followerCount)}
+                    </span>
+                  </div>
+                  <p className="text-gray text-sm mb-2">
+                    {influencer.followerCount.toLocaleString()} followers ·{' '}
+                    {influencer.engagementRate}% engagement ·{' '}
+                    {influencer.locationCountry} {influencer.locationRegion}
+                  </p>
+                  {influencer.platforms &&
+                    Object.keys(influencer.platforms).length > 0 && (
+                      <div className="flex items-center gap-2 mt-1 flex-wrap">
+                        {Object.entries(influencer.platforms).map(
+                          ([platform, handle]) => (
+                            <span
+                              key={platform}
+                              className="px-3 py-1 bg-light-gray text-gray text-xs rounded-full capitalize"
+                            >
+                              {platform}: {handle}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    )}
                 </div>
+
+                {/* CTA */}
+                <Link
+                  href={`/brand/influencers/${influencer.userId}`}
+                  className="d-btn-primary flex-shrink-0 text-sm"
+                >
+                  View Profile
+                </Link>
               </div>
             ))}
           </div>

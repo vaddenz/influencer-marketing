@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfluencerMarketingDemo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"DM Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            ink: '#0c0c0c',
+            gray: '#888888',
+            'light-gray': '#f6f6f6',
+            'border-gray': '#eeeeee',
+            navy: '#2a2f4e',
+            coral: '#ff3636',
+            blue: '#2563eb',
+          },
+          borderRadius: {
+            '2xl': '16px',
+            '3xl': '20px',
+            '4xl': '30px',
+          },
+          boxShadow: {
+            'soft': '0 0 30px rgba(0, 0, 0, 0.06)',
+            'card': '0 4px 20px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #ffffff; }
+    .font-display { font-family: 'DM Sans', sans-serif; }
+
+    .gradient-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; pointer-events: none; z-index: 0; }
+    .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,150,100,0.4) 0%, transparent 70%); animation: float 8s ease-in-out infinite; }
+    .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,100,180,0.35) 0%, transparent 70%); animation: float 10s ease-in-out infinite reverse; }
+    .orb-3 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(150,100,255,0.3) 0%, transparent 70%); animation: float 12s ease-in-out infinite; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    .animate-fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.7s ease-out forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+
+    .section-gradient {
+      background: linear-gradient(180deg, rgba(255,240,245,0.6) 0%, rgba(255,255,255,0) 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-ink">
+
+  <!-- Header -->
+  <header class="border-b border-border-gray">
+    <div class="max-w-6xl mx-auto px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-ink flex items-center justify-center">
+          <div class="w-3 h-3 bg-white rounded-sm"></div>
+        </div>
+        <span class="font-display font-bold text-lg">InfluencerMarketingDemo</span>
+      </div>
+      <nav class="flex items-center gap-8">
+        <a href="#" class="text-blue font-medium text-sm">首页</a>
+        <a href="#" class="text-ink font-medium text-sm hover:text-gray transition-colors">发现</a>
+        <a href="#" class="text-ink font-medium text-sm hover:text-gray transition-colors">如何使用</a>
+      </nav>
+      <div class="flex items-center gap-5">
+        <button class="flex items-center gap-2 text-sm font-medium text-gray">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          简体中文
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <button class="flex items-center gap-2 text-sm font-medium">
+          <div class="w-7 h-7 bg-orange-300 rounded-full flex items-center justify-center text-white text-xs">👤</div>
+          Acme Corp
+          <svg class="w-3 h-3 text-gray" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative max-w-6xl mx-auto px-8 pt-20 pb-16 overflow-hidden">
+    <!-- Gradient orbs -->
+    <div class="gradient-orb orb-1 -top-20 -right-20"></div>
+    <div class="gradient-orb orb-2 top-40 -left-20"></div>
+    <div class="gradient-orb orb-3 bottom-0 right-1/4"></div>
+
+    <div class="flex items-center gap-16 relative z-10">
+      <div class="flex-1 max-w-xl">
+        <!-- Tag -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-light-gray text-ink rounded-full text-sm font-medium mb-8 animate-fade-in">
+          <span class="w-2 h-2 bg-ink rounded-full"></span>
+          网红营销平台
+        </div>
+
+        <!-- Heading -->
+        <h1 class="font-display font-bold text-5xl leading-tight tracking-tight mb-6 animate-fade-in delay-1">
+          连接垂直领域网红，<span class="text-ink">创作与发布内容</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-gray text-lg leading-relaxed mb-10 animate-fade-in delay-2">
+          即时连接数百万真实且相关的垂直领域网红，为您的产品创作和发布视频与图片。
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex items-center gap-4 animate-fade-in delay-3">
+          <button class="bg-ink text-white px-7 py-3.5 rounded-4xl font-body font-semibold text-base hover:opacity-90 transition-opacity flex items-center gap-2">
+            寻找网红
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+          <button class="bg-white text-ink px-7 py-3.5 rounded-4xl font-body font-semibold text-base border border-border-gray hover:bg-light-gray transition-colors">
+            成为创作者
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Illustration -->
+      <div class="flex-1 flex justify-center animate-fade-in delay-4">
+        <div class="relative w-[420px] h-[340px] rounded-3xl overflow-hidden bg-gradient-to-br from-sky-50 to-emerald-50 shadow-soft flex items-center justify-center hover-lift">
+          <!-- Abstract illustration -->
+          <div class="absolute top-8 left-8 w-16 h-16 bg-sky-200/50 rounded-xl"></div>
+          <div class="absolute top-12 right-12 w-12 h-12 bg-emerald-200/50 rounded-lg"></div>
+          <div class="absolute bottom-10 left-16 w-20 h-20 bg-orange-200/50 rounded-2xl"></div>
+          <div class="text-6xl">🤝</div>
+          <!-- People icons -->
+          <div class="absolute bottom-16 left-24 text-4xl">👩‍💻</div>
+          <div class="absolute bottom-20 right-20 text-4xl">👨‍💼</div>
+          <div class="absolute top-20 right-28 text-3xl">📱</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="mt-20 pt-10 border-t border-border-gray section-gradient rounded-3xl px-8 py-10">
+      <div class="grid grid-cols-3 gap-8 max-w-2xl">
+        <div class="animate-fade-in delay-4">
+          <p class="font-display font-bold text-4xl tracking-tight">10K+</p>
+          <p class="text-gray text-sm mt-1">创作者</p>
+        </div>
+        <div class="animate-fade-in delay-5">
+          <p class="font-display font-bold text-4xl tracking-tight">500+</p>
+          <p class="text-gray text-sm mt-1">品牌</p>
+        </div>
+        <div class="animate-fade-in delay-6">
+          <p class="font-display font-bold text-4xl tracking-tight">50K+</p>
+          <p class="text-gray text-sm mt-1">内容作品</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

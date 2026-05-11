@@ -9,38 +9,10 @@ const navItems = [
   {
     href: '/brand/dashboard',
     label: 'Dashboard',
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}>
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-        />
-      </svg>
-    ),
   },
   {
     href: '/brand/discover',
     label: 'Discover',
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}>
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-        />
-      </svg>
-    ),
   },
 ]
 
@@ -61,12 +33,12 @@ export default function BrandLayout({
   if (loading) {
     return (
       <div
-        className="flex min-h-screen items-center justify-center"
-        style={{ backgroundColor: 'var(--d-content-bg)' }}>
+        className="flex min-h-screen items-center justify-center bg-light-gray"
+      >
         <div
           className="animate-spin w-8 h-8 border-4 rounded-full"
           style={{
-            borderColor: 'var(--d-accent)',
+            borderColor: '#0c0c0c',
             borderTopColor: 'transparent',
           }}
         />
@@ -76,73 +48,55 @@ export default function BrandLayout({
   if (!user || !isBrand) return null
 
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <aside
-        className="w-64 hidden md:flex flex-col fixed inset-y-0 left-0 z-30 animate-slide-in-left"
-        style={{
-          backgroundColor: 'var(--d-sidebar-bg)',
-          borderRight: '1px solid var(--d-sidebar-border)',
-        }}>
-        <div className="p-6">
+    <div className="min-h-screen bg-light-gray text-ink">
+      {/* Top Navbar */}
+      <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-border-gray z-50">
+        <div className="h-full flex items-center justify-between px-6 lg:px-8">
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
-              style={{ backgroundColor: 'var(--d-accent)' }}>
+            <div className="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-white font-bold text-sm"
+              style={{ fontFamily: 'var(--font-heading)' }}>
               B
             </div>
             <span
-              className="text-lg font-bold"
-              style={{
-                color: 'var(--d-text)',
-                fontFamily: 'var(--font-heading)',
-              }}>
+              className="text-lg font-semibold"
+              style={{ fontFamily: 'var(--font-heading)' }}>
               Brand Studio
             </span>
           </Link>
-        </div>
 
-        <nav className="flex-1 px-4 space-y-1">
-          {navItems.map((item) => {
-            const isActive =
-              pathname === item.href || pathname.startsWith(item.href + '/')
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`d-sidebar-link ${isActive ? 'd-sidebar-link-active' : ''}`}>
-                {item.icon}
-                <span>{item.label}</span>
-              </Link>
-            )
-          })}
-        </nav>
+          {/* Nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive =
+                pathname === item.href || pathname.startsWith(item.href + '/')
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-light-gray text-ink'
+                      : 'text-gray hover:bg-light-gray'
+                  }`}>
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
 
-        <div className="p-4">
-          <div
-            className="rounded-xl p-4"
-            style={{ backgroundColor: 'var(--d-content-bg-warm)' }}>
-            <p
-              className="text-xs font-medium mb-1"
-              style={{ color: 'var(--d-text-secondary)' }}>
-              Logged in as
-            </p>
-            <p
-              className="text-sm font-semibold truncate"
-              style={{ color: 'var(--d-text)' }}>
-              {user.email}
-            </p>
+          {/* User dropdown */}
+          <div className="flex items-center gap-3 pl-4 pr-3 py-2 rounded-xl hover:bg-light-gray transition-colors">
+            <div className="w-8 h-8 bg-ink rounded-full flex items-center justify-center text-white text-xs font-semibold">
+              {user.email?.charAt(0).toUpperCase() || 'B'}
+            </div>
+            <span className="text-xs font-medium hidden sm:inline">{user.email}</span>
           </div>
         </div>
-      </aside>
+      </header>
 
       {/* Mobile bottom nav */}
-      <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-30 flex justify-around items-center h-16 border-t"
-        style={{
-          backgroundColor: 'var(--d-sidebar-bg)',
-          borderColor: 'var(--d-sidebar-border)',
-        }}>
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-30 flex justify-around items-center h-16 border-t bg-white border-border-gray">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href || pathname.startsWith(item.href + '/')
@@ -150,30 +104,23 @@ export default function BrandLayout({
             <Link
               key={item.href}
               href={item.href}
-              className="flex flex-col items-center gap-1 py-2 px-4">
-              <span
-                style={{
-                  color: isActive ? 'var(--d-accent)' : 'var(--d-sidebar-text)',
-                }}>
-                {item.icon}
-              </span>
-              <span
-                className="text-[10px] font-medium"
-                style={{
-                  color: isActive ? 'var(--d-accent)' : 'var(--d-sidebar-text)',
-                }}>
-                {item.label}
-              </span>
+              className={`flex flex-col items-center gap-1 py-2 px-4 text-xs font-medium ${
+                isActive ? 'text-ink' : 'text-gray'
+              }`}>
+              {item.label}
             </Link>
           )
         })}
       </nav>
 
       {/* Main content */}
-      <main
-        className="flex-1 md:ml-64 pb-20 md:pb-0"
-        style={{ backgroundColor: 'var(--d-content-bg)' }}>
-        <div className="max-w-6xl mx-auto p-6 lg:p-8 stagger-children">
+      <main className="pt-24 lg:px-64 sm:px-32 px-6 pb-32 relative overflow-hidden">
+        {/* Gradient orbs */}
+        <div className="gradient-orb orb-1 -top-20 -left-20" />
+        <div className="gradient-orb orb-2 top-40 -right-20" />
+        <div className="gradient-orb orb-3 bottom-40 left-1/3" />
+
+        <div className="relative z-10">
           {children}
         </div>
       </main>
