@@ -57,7 +57,7 @@ export default function AdminLayout({
     )
   }
 
-  const navItems = [
+  const navItems: { href: string; label: string }[] = [
     // { href: '/admin', label: t('dashboard') }
   ]
 
