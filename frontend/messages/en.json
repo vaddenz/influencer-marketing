@@ -267,6 +267,8 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
     "rememberMe": "Remember me",
+    "loginAsBrand": "Login as Brand",
+    "loginAsCreator": "Login as Creator",
     "signIn": "Sign In",
     "signingIn": "Signing in...",
     "forgotPassword": "Forgot password?",

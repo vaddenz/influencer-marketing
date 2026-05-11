@@ -50,13 +50,9 @@ export default function LoginPage() {
     return Object.keys(newErrors).length === 0
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setErrors({})
-
-    if (!validateForm()) return
-
+  async function performLogin(loginEmail: string, loginPassword: string) {
     setIsLoading(true)
+    setErrors({})
 
     try {
       const response = await fetch(getApiUrl('auth/login'), {
@@ -64,7 +60,7 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
       })
 
       const result: ApiResponse<LoginResponse> = await response.json()
@@ -92,6 +88,21 @@ export default function LoginPage() {
       setErrors({ form: t('error.generic') })
       setIsLoading(false)
     }
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    setErrors({})
+
+    if (!validateForm()) return
+
+    await performLogin(email, password)
+  }
+
+  function handleQuickLogin(loginEmail: string, loginPassword: string) {
+    setEmail(loginEmail)
+    setPassword(loginPassword)
+    performLogin(loginEmail, loginPassword)
   }
 
   const brandName = process.env.NEXT_PUBLIC_BRAND_NAME || 'InfluencerHub'
@@ -228,11 +239,29 @@ export default function LoginPage() {
               </p>
             )}
 
+            {/* Quick login buttons */}
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => handleQuickLogin('brand@example.com', 'password')}
+                className="btn-primary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
+                {t('loginAsBrand')}
+              </button>
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => handleQuickLogin('influencer1@example.com', 'password')}
+                className="btn-primary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
+                {t('loginAsCreator')}
+              </button>
+            </div>
+
             {/* Submit */}
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
+              className="btn-secondary w-full py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed">
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <svg

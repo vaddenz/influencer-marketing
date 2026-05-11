@@ -267,6 +267,8 @@
     "passwordLabel": "密码",
     "passwordPlaceholder": "请输入密码",
     "rememberMe": "记住我",
+    "loginAsBrand": "品牌方登录",
+    "loginAsCreator": "创作者登录",
     "signIn": "登录",
     "signingIn": "登录中...",
     "forgotPassword": "忘记密码？",

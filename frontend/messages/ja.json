@@ -267,6 +267,8 @@
     "passwordLabel": "パスワード",
     "passwordPlaceholder": "パスワードを入力",
     "rememberMe": "ログイン状態を保持",
+    "loginAsBrand": "ブランドとしてログイン",
+    "loginAsCreator": "クリエイターとしてログイン",
     "signIn": "ログイン",
     "signingIn": "ログイン中...",
     "forgotPassword": "パスワードを忘れた？",
