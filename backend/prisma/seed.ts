@@ -340,6 +340,11 @@ async function createInvitationsAndDeliverables(
 
   const campaign = brand.campaigns[0]
 
+  // Clean up existing to prevent duplicates
+  await prisma.deliverable.deleteMany({ where: { campaignId: campaign.id } })
+  await prisma.notification.deleteMany({ where: { title: { in: ['New Campaign Invitation', 'Deliverable Due Soon'] } } })
+  await prisma.invitation.deleteMany({ where: { campaignId: campaign.id } })
+
   const invitations: Invitation[] = []
   for (let i = 0; i < influencers.length; i++) {
     const status = i === 0 ? 'accepted' : i === 1 ? 'pending' : 'declined'
@@ -422,11 +427,19 @@ async function createOAuthAccounts(users: { id: string }[]) {
   console.log('\n--- Creating OAuth Accounts ---')
 
   for (const user of users.slice(0, 2)) {
-    const oauth = await prisma.userOAuthAccount.create({
-      data: {
+    const providerId = `google_${user.id.slice(-8)}`
+    const oauth = await prisma.userOAuthAccount.upsert({
+      where: {
+        provider_providerId: {
+          provider: 'google',
+          providerId,
+        },
+      },
+      update: {},
+      create: {
         userId: user.id,
         provider: 'google',
-        providerId: `google_${user.id.slice(-8)}`,
+        providerId,
         email: `oauth_${user.id.slice(-8)}@gmail.com`,
         name: 'OAuth User',
         avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=OAuth',
@@ -457,6 +470,9 @@ async function createPrompts() {
       version: 2,
     },
   ]
+
+  // Clean up existing to prevent duplicates
+  await prisma.prompt.deleteMany()
 
   for (const data of promptsData) {
     const prompt = await prisma.prompt.create({
@@ -510,6 +526,12 @@ async function createNotifications(users: { id: string }[]) {
       read: true,
     },
   ]
+
+  // Clean up static notifications to prevent duplicates
+  const titles = notificationData.map(d => d.title)
+  await prisma.notification.deleteMany({
+    where: { title: { in: titles } }
+  })
 
   for (const data of notificationData) {
     const notification = await prisma.notification.create({ data })
