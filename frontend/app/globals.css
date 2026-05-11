@@ -410,30 +410,32 @@ a {
   --d-sidebar-border: #f0ebe5;
   --d-sidebar-text: #5c5c5c;
   --d-sidebar-active: #fef6f5;
-  --d-sidebar-active-border: #E85D4C;
+  --d-sidebar-active-border: #e85d4c;
   --d-sidebar-active-text: #1a1a1a;
 
-  --d-content-bg: #FAF8F5;
+  --d-content-bg: #faf8f5;
   --d-content-bg-warm: #f5f0eb;
 
-  --d-accent: #E85D4C;
-  --d-accent-hover: #D44A3A;
-  --d-accent-light: #FEF0EE;
+  --d-accent: #e85d4c;
+  --d-accent-hover: #d44a3a;
+  --d-accent-light: #fef0ee;
   --d-accent-subtle: rgba(232, 93, 76, 0.08);
 
   --d-card-bg: #ffffff;
-  --d-card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
-  --d-card-shadow-hover: 0 4px 12px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.04);
+  --d-card-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
+  --d-card-shadow-hover:
+    0 4px 12px rgba(0, 0, 0, 0.06), 0 16px 48px rgba(0, 0, 0, 0.04);
   --d-card-border: #f0ebe5;
 
   --d-text: #1a1a1a;
   --d-text-secondary: #6b6560;
   --d-text-muted: #a8a29e;
 
-  --d-success: #2A9D8F;
-  --d-success-light: #E8F5F3;
-  --d-warning: #E9C46A;
-  --d-warning-light: #FDF8ED;
+  --d-success: #2a9d8f;
+  --d-success-light: #e8f5f3;
+  --d-warning: #e9c46a;
+  --d-warning-light: #fdf8ed;
 }
 
 /* ========================================
@@ -750,12 +752,24 @@ a {
   animation: fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
-.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
-.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: 240ms;
+}
+.stagger-children > *:nth-child(6) {
+  animation-delay: 300ms;
+}
 
 /* ========================================
    Accessibility

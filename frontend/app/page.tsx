@@ -52,7 +52,9 @@ export default async function HomePage() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-16">
-                <Link href="/brand/discover" className="btn-primary justify-center">
+                <Link
+                  href="/brand/discover"
+                  className="btn-primary justify-center">
                   {t('cta')}
                   <svg
                     className="w-4 h-4"
@@ -67,7 +69,9 @@ export default async function HomePage() {
                     />
                   </svg>
                 </Link>
-                <Link href="/influencer/profile" className="btn-secondary justify-center">
+                <Link
+                  href="/influencer/profile"
+                  className="btn-secondary justify-center">
                   {t('secondaryCta')}
                 </Link>
               </div>
@@ -143,11 +147,31 @@ export default async function HomePage() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 opacity-60">
             {/* Brand logos as text placeholders */}
-            <span className="text-xl font-bold text-[var(--c-text-secondary)]" style={{ fontFamily: 'var(--font-heading)' }}>GlowSkincare</span>
-            <span className="text-xl font-bold text-[var(--c-text-secondary)]" style={{ fontFamily: 'var(--font-heading)' }}>FitFuel</span>
-            <span className="text-xl font-bold text-[var(--c-text-secondary)]" style={{ fontFamily: 'var(--font-heading)' }}>TechWear</span>
-            <span className="text-xl font-bold text-[var(--c-text-secondary)]" style={{ fontFamily: 'var(--font-heading)' }}>HomeNest</span>
-            <span className="text-xl font-bold text-[var(--c-text-secondary)]" style={{ fontFamily: 'var(--font-heading)' }}>PurePet</span>
+            <span
+              className="text-xl font-bold text-[var(--c-text-secondary)]"
+              style={{ fontFamily: 'var(--font-heading)' }}>
+              GlowSkincare
+            </span>
+            <span
+              className="text-xl font-bold text-[var(--c-text-secondary)]"
+              style={{ fontFamily: 'var(--font-heading)' }}>
+              FitFuel
+            </span>
+            <span
+              className="text-xl font-bold text-[var(--c-text-secondary)]"
+              style={{ fontFamily: 'var(--font-heading)' }}>
+              TechWear
+            </span>
+            <span
+              className="text-xl font-bold text-[var(--c-text-secondary)]"
+              style={{ fontFamily: 'var(--font-heading)' }}>
+              HomeNest
+            </span>
+            <span
+              className="text-xl font-bold text-[var(--c-text-secondary)]"
+              style={{ fontFamily: 'var(--font-heading)' }}>
+              PurePet
+            </span>
           </div>
         </div>
       </section>
@@ -170,8 +194,17 @@ export default async function HomePage() {
             {/* For Brands */}
             <div>
               <h3 className="text-xl font-semibold text-[var(--c-accent)] mb-8 flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
                 </svg>
                 {t('howItWorks.forBrands')}
               </h3>
@@ -182,8 +215,12 @@ export default async function HomePage() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[var(--c-text)] mb-1">{t('howItWorks.brandStep1Title')}</h4>
-                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">{t('howItWorks.brandStep1Desc')}</p>
+                    <h4 className="font-semibold text-[var(--c-text)] mb-1">
+                      {t('howItWorks.brandStep1Title')}
+                    </h4>
+                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">
+                      {t('howItWorks.brandStep1Desc')}
+                    </p>
                   </div>
                 </div>
                 {/* Step 2 */}
@@ -192,8 +229,12 @@ export default async function HomePage() {
                     2
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[var(--c-text)] mb-1">{t('howItWorks.brandStep2Title')}</h4>
-                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">{t('howItWorks.brandStep2Desc')}</p>
+                    <h4 className="font-semibold text-[var(--c-text)] mb-1">
+                      {t('howItWorks.brandStep2Title')}
+                    </h4>
+                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">
+                      {t('howItWorks.brandStep2Desc')}
+                    </p>
                   </div>
                 </div>
                 {/* Step 3 */}
@@ -202,8 +243,12 @@ export default async function HomePage() {
                     3
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[var(--c-text)] mb-1">{t('howItWorks.brandStep3Title')}</h4>
-                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">{t('howItWorks.brandStep3Desc')}</p>
+                    <h4 className="font-semibold text-[var(--c-text)] mb-1">
+                      {t('howItWorks.brandStep3Title')}
+                    </h4>
+                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">
+                      {t('howItWorks.brandStep3Desc')}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -212,8 +257,17 @@ export default async function HomePage() {
             {/* For Creators */}
             <div>
               <h3 className="text-xl font-semibold text-[var(--c-accent)] mb-8 flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
                 </svg>
                 {t('howItWorks.forCreators')}
               </h3>
@@ -224,8 +278,12 @@ export default async function HomePage() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[var(--c-text)] mb-1">{t('howItWorks.creatorStep1Title')}</h4>
-                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">{t('howItWorks.creatorStep1Desc')}</p>
+                    <h4 className="font-semibold text-[var(--c-text)] mb-1">
+                      {t('howItWorks.creatorStep1Title')}
+                    </h4>
+                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">
+                      {t('howItWorks.creatorStep1Desc')}
+                    </p>
                   </div>
                 </div>
                 {/* Step 2 */}
@@ -234,8 +292,12 @@ export default async function HomePage() {
                     2
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[var(--c-text)] mb-1">{t('howItWorks.creatorStep2Title')}</h4>
-                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">{t('howItWorks.creatorStep2Desc')}</p>
+                    <h4 className="font-semibold text-[var(--c-text)] mb-1">
+                      {t('howItWorks.creatorStep2Title')}
+                    </h4>
+                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">
+                      {t('howItWorks.creatorStep2Desc')}
+                    </p>
                   </div>
                 </div>
                 {/* Step 3 */}
@@ -244,8 +306,12 @@ export default async function HomePage() {
                     3
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[var(--c-text)] mb-1">{t('howItWorks.creatorStep3Title')}</h4>
-                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">{t('howItWorks.creatorStep3Desc')}</p>
+                    <h4 className="font-semibold text-[var(--c-text)] mb-1">
+                      {t('howItWorks.creatorStep3Title')}
+                    </h4>
+                    <p className="text-sm text-[var(--c-text-secondary)] leading-relaxed">
+                      {t('howItWorks.creatorStep3Desc')}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -272,8 +338,17 @@ export default async function HomePage() {
             {/* Feature 1: Smart Matching */}
             <div className="card group bg-white">
               <div className="w-12 h-12 flex items-center justify-center text-[var(--c-accent)] mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-[var(--c-text)] mb-3">
@@ -287,8 +362,17 @@ export default async function HomePage() {
             {/* Feature 2: Campaign Management */}
             <div className="card group bg-white">
               <div className="w-12 h-12 flex items-center justify-center text-[var(--c-accent)] mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-[var(--c-text)] mb-3">
@@ -302,8 +386,17 @@ export default async function HomePage() {
             {/* Feature 3: Content Library */}
             <div className="card group bg-white">
               <div className="w-12 h-12 flex items-center justify-center text-[var(--c-accent)] mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-[var(--c-text)] mb-3">
@@ -317,8 +410,17 @@ export default async function HomePage() {
             {/* Feature 4: Performance Analytics */}
             <div className="card group bg-white">
               <div className="w-12 h-12 flex items-center justify-center text-[var(--c-accent)] mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-[var(--c-text)] mb-3">
@@ -332,8 +434,17 @@ export default async function HomePage() {
             {/* Feature 5: Secure Payments */}
             <div className="card group bg-white">
               <div className="w-12 h-12 flex items-center justify-center text-[var(--c-accent)] mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-[var(--c-text)] mb-3">
@@ -347,8 +458,17 @@ export default async function HomePage() {
             {/* Feature 6: Multi-Platform */}
             <div className="card group bg-white">
               <div className="w-12 h-12 flex items-center justify-center text-[var(--c-accent)] mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125z" />
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125z"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-[var(--c-text)] mb-3">
@@ -380,7 +500,10 @@ export default async function HomePage() {
             {/* Testimonial 1 */}
             <div className="card bg-[var(--c-bg-secondary)] border-0">
               <div className="text-[var(--c-accent)] mb-4">
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
               </div>
@@ -392,8 +515,12 @@ export default async function HomePage() {
                   SC
                 </div>
                 <div>
-                  <div className="font-semibold text-[var(--c-text)] text-sm">{t('testimonials.author1')}</div>
-                  <div className="text-xs text-[var(--c-text-muted)]">{t('testimonials.role1')}</div>
+                  <div className="font-semibold text-[var(--c-text)] text-sm">
+                    {t('testimonials.author1')}
+                  </div>
+                  <div className="text-xs text-[var(--c-text-muted)]">
+                    {t('testimonials.role1')}
+                  </div>
                 </div>
               </div>
             </div>
@@ -401,7 +528,10 @@ export default async function HomePage() {
             {/* Testimonial 2 */}
             <div className="card bg-[var(--c-bg-secondary)] border-0">
               <div className="text-[var(--c-accent)] mb-4">
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
               </div>
@@ -413,8 +543,12 @@ export default async function HomePage() {
                   MJ
                 </div>
                 <div>
-                  <div className="font-semibold text-[var(--c-text)] text-sm">{t('testimonials.author2')}</div>
-                  <div className="text-xs text-[var(--c-text-muted)]">{t('testimonials.role2')}</div>
+                  <div className="font-semibold text-[var(--c-text)] text-sm">
+                    {t('testimonials.author2')}
+                  </div>
+                  <div className="text-xs text-[var(--c-text-muted)]">
+                    {t('testimonials.role2')}
+                  </div>
                 </div>
               </div>
             </div>
@@ -422,7 +556,10 @@ export default async function HomePage() {
             {/* Testimonial 3 */}
             <div className="card bg-[var(--c-bg-secondary)] border-0">
               <div className="text-[var(--c-accent)] mb-4">
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
               </div>
@@ -434,8 +571,12 @@ export default async function HomePage() {
                   EZ
                 </div>
                 <div>
-                  <div className="font-semibold text-[var(--c-text)] text-sm">{t('testimonials.author3')}</div>
-                  <div className="text-xs text-[var(--c-text-muted)]">{t('testimonials.role3')}</div>
+                  <div className="font-semibold text-[var(--c-text)] text-sm">
+                    {t('testimonials.author3')}
+                  </div>
+                  <div className="text-xs text-[var(--c-text-muted)]">
+                    {t('testimonials.role3')}
+                  </div>
                 </div>
               </div>
             </div>

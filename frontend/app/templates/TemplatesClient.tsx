@@ -97,26 +97,23 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
     return true
   })
 
-  const updateFilters = useCallback(
-    () => {
-      const params = new URLSearchParams()
-      if (selectedCategory !== 'all') params.set('category', selectedCategory)
-      if (searchQuery) params.set('keyword', searchQuery)
+  const updateFilters = useCallback(() => {
+    const params = new URLSearchParams()
+    if (selectedCategory !== 'all') params.set('category', selectedCategory)
+    if (searchQuery) params.set('keyword', searchQuery)
 
-      const url = `/templates?${params.toString()}`
-      router.push(url)
+    const url = `/templates?${params.toString()}`
+    router.push(url)
 
-      // Track search event if there's a search query
-      if (searchQuery) {
-        trackEvent('template_search', {
-          search_query: searchQuery,
-          category_filter: selectedCategory,
-          results_count: filteredTemplates.length,
-        })
-      }
-    },
-    [selectedCategory, searchQuery, router, filteredTemplates.length]
-  )
+    // Track search event if there's a search query
+    if (searchQuery) {
+      trackEvent('template_search', {
+        search_query: searchQuery,
+        category_filter: selectedCategory,
+        results_count: filteredTemplates.length,
+      })
+    }
+  }, [selectedCategory, searchQuery, router, filteredTemplates.length])
 
   useEffect(() => {
     const timer = setTimeout(() => {

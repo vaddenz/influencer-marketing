@@ -249,6 +249,9 @@
     "contact": "9. Contact Information",
     "contactDesc": "If you have any questions about these Terms of Service, please contact us:"
   },
+  "DiscoverPage": {
+    "resultCount": "Found {count} creators"
+  },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
     "discover": "Discover",

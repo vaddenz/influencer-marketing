@@ -29,12 +29,30 @@ export default function NewCampaignPage() {
   return (
     <div className="max-w-2xl mx-auto">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 mb-6 text-sm" style={{ color: 'var(--d-text-muted)' }}>
-        <Link href="/brand/dashboard" className="hover:underline" style={{ color: 'var(--d-text-secondary)' }}>Campaigns</Link>
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      <div
+        className="flex items-center gap-2 mb-6 text-sm"
+        style={{ color: 'var(--d-text-muted)' }}>
+        <Link
+          href="/brand/dashboard"
+          className="hover:underline"
+          style={{ color: 'var(--d-text-secondary)' }}>
+          Campaigns
+        </Link>
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
         </svg>
-        <span style={{ color: 'var(--d-text)' }} className="font-medium">New Campaign</span>
+        <span style={{ color: 'var(--d-text)' }} className="font-medium">
+          New Campaign
+        </span>
       </div>
 
       <div className="d-card">
@@ -50,10 +68,11 @@ export default function NewCampaignPage() {
           onSubmit={(e) => {
             e.preventDefault()
             createMutation.mutate()
-          }}
-        >
+          }}>
           <div>
-            <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--d-text)' }}>
+            <label
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--d-text)' }}>
               Campaign Title
             </label>
             <input
@@ -66,7 +85,9 @@ export default function NewCampaignPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--d-text)' }}>
+            <label
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--d-text)' }}>
               Description
             </label>
             <textarea
@@ -82,11 +103,22 @@ export default function NewCampaignPage() {
           {createMutation.error && (
             <div
               className="p-4 rounded-xl text-sm font-medium"
-              style={{ backgroundColor: 'var(--d-accent-light)', color: 'var(--d-accent)' }}
-            >
+              style={{
+                backgroundColor: 'var(--d-accent-light)',
+                color: 'var(--d-accent)',
+              }}>
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                <svg
+                  className="w-4 h-4 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                  />
                 </svg>
                 {createMutation.error instanceof Error
                   ? createMutation.error.message
@@ -99,8 +131,7 @@ export default function NewCampaignPage() {
             <button
               type="submit"
               disabled={createMutation.isPending || !canSubmit}
-              className="d-btn-primary"
-            >
+              className="d-btn-primary">
               {createMutation.isPending ? (
                 <>
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -108,8 +139,17 @@ export default function NewCampaignPage() {
                 </>
               ) : (
                 <>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
                   </svg>
                   Create Campaign
                 </>
