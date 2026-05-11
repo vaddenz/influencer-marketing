@@ -1,22 +1,24 @@
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
+import { DM_Sans, Inter } from 'next/font/google'
 import './globals.css'
 import { PublicLayout } from '@/components/PublicLayout'
 import { AuthProvider } from '@/lib/auth'
 import { QueryProvider } from '@/lib/query-provider'
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-heading',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-body',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 })
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -72,7 +74,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${plusJakartaSans.variable} ${jetbrainsMono.variable}`}>
+      className={`${dmSans.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>

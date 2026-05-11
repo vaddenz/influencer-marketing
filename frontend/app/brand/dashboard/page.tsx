@@ -22,39 +22,43 @@ export default function BrandDashboard() {
   })
 
   const getStatusTag = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'active':
-        return <span className="d-tag d-tag-success">{status}</span>
-      case 'draft':
-        return <span className="d-tag d-tag-neutral">{status}</span>
-      case 'completed':
-        return <span className="d-tag d-tag-success">{status}</span>
-      default:
-        return <span className="d-tag d-tag-neutral">{status}</span>
-    }
+    return (
+      <span className="px-3 py-1 bg-light-gray text-gray text-xs font-medium rounded-full">
+        {status}
+      </span>
+    )
   }
 
   return (
     <div>
       {/* Page Header */}
-      <div className="d-page-header">
+      <div className="flex items-start justify-between mb-10 animate-fade-up relative z-10">
         <div>
-          <h1 className="d-section-title">Campaigns</h1>
-          <p style={{ color: 'var(--d-text-secondary)' }} className="mt-1">
+          <h1
+            className="text-3xl font-bold tracking-tight"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
+            Campaigns
+          </h1>
+          <p className="text-gray mt-1 text-sm">
             Manage your influencer marketing campaigns
           </p>
         </div>
-        <Link href="/brand/campaigns/new" className="d-btn-primary">
+        <Link
+          href="/brand/campaigns/new"
+          className="d-btn-primary"
+        >
           <svg
             className="w-4 h-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}>
+            strokeWidth={2.5}
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
+              d="M12 4v16m8-8H4"
             />
           </svg>
           New Campaign
@@ -62,19 +66,19 @@ export default function BrandDashboard() {
       </div>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div className="d-card">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 relative z-10">
+        <div className="d-card hover-lift animate-fade-up delay-1">
           <div className="d-stat-value">{campaigns?.length ?? 0}</div>
           <div className="d-stat-label">Total Campaigns</div>
         </div>
-        <div className="d-card">
+        <div className="d-card hover-lift animate-fade-up delay-2">
           <div className="d-stat-value">
             {campaigns?.filter((c) => c.status.toLowerCase() === 'active')
               .length ?? 0}
           </div>
           <div className="d-stat-label">Active</div>
         </div>
-        <div className="d-card">
+        <div className="d-card hover-lift animate-fade-up delay-3">
           <div className="d-stat-value">
             {campaigns?.filter((c) => c.status.toLowerCase() === 'completed')
               .length ?? 0}
@@ -85,11 +89,11 @@ export default function BrandDashboard() {
 
       {/* Campaigns List */}
       {isLoading && (
-        <div className="flex items-center justify-center h-64">
+        <div className="flex items-center justify-center h-64 relative z-10">
           <div
             className="animate-spin w-8 h-8 border-4 rounded-full"
             style={{
-              borderColor: 'var(--d-accent)',
+              borderColor: '#0c0c0c',
               borderTopColor: 'transparent',
             }}
           />
@@ -97,12 +101,7 @@ export default function BrandDashboard() {
       )}
 
       {error && (
-        <div
-          className="d-card"
-          style={{
-            borderColor: 'var(--d-accent-light)',
-            backgroundColor: 'var(--d-accent-light)',
-          }}>
+        <div className="d-card animate-fade-up relative z-10">
           <div className="flex items-center gap-3">
             <svg
               className="w-5 h-5 flex-shrink-0"
@@ -110,22 +109,20 @@ export default function BrandDashboard() {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
-              style={{ color: 'var(--d-accent)' }}>
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
               />
             </svg>
-            <p style={{ color: 'var(--d-accent)' }} className="font-medium">
-              Failed to load campaigns.
-            </p>
+            <p className="font-medium text-ink">Failed to load campaigns.</p>
           </div>
         </div>
       )}
 
       {!isLoading && !error && campaigns?.length === 0 && (
-        <div className="d-card">
+        <div className="d-card animate-fade-up relative z-10">
           <div className="d-empty">
             <div className="d-empty-icon">📋</div>
             <p className="d-empty-title">No campaigns yet</p>
@@ -140,43 +137,30 @@ export default function BrandDashboard() {
         </div>
       )}
 
-      <div className="space-y-4">
-        {campaigns?.map((c) => (
-          <div key={c.id} className="d-card group">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-2">
-                  <h3
-                    className="font-semibold text-lg truncate"
-                    style={{ color: 'var(--d-text)' }}>
-                    {c.title}
-                  </h3>
-                  {getStatusTag(c.status)}
-                </div>
-                <p
-                  className="text-sm line-clamp-2"
-                  style={{ color: 'var(--d-text-secondary)' }}>
-                  {c.description}
-                </p>
+      <div className="space-y-4 relative z-10">
+        {campaigns?.map((c, index) => (
+          <div
+            key={c.id}
+            className={`d-card flex items-center justify-between group hover:shadow-soft transition-shadow hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-1">
+                <h3
+                  className="font-semibold text-base"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  {c.title}
+                </h3>
+                {getStatusTag(c.status)}
               </div>
-              <Link
-                href={`/brand/campaigns/${c.id}`}
-                className="d-btn-text flex-shrink-0">
-                View details
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </Link>
+              <p className="text-gray text-sm">{c.description}</p>
             </div>
+            <Link
+              href={`/brand/campaigns/${c.id}`}
+              className="text-ink font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0"
+            >
+              View details <span>→</span>
+            </Link>
           </div>
         ))}
       </div>

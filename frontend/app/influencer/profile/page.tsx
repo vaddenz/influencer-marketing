@@ -45,11 +45,11 @@ export default function InfluencerProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-64 relative z-10">
         <div
           className="animate-spin w-8 h-8 border-4 rounded-full"
           style={{
-            borderColor: 'var(--d-accent)',
+            borderColor: '#0c0c0c',
             borderTopColor: 'transparent',
           }}
         />
@@ -59,12 +59,7 @@ export default function InfluencerProfilePage() {
 
   if (isError || !profile) {
     return (
-      <div
-        className="d-card"
-        style={{
-          borderColor: 'var(--d-accent-light)',
-          backgroundColor: 'var(--d-accent-light)',
-        }}>
+      <div className="d-card animate-fade-up relative z-10">
         <div className="flex items-center gap-3">
           <svg
             className="w-5 h-5 flex-shrink-0"
@@ -72,20 +67,16 @@ export default function InfluencerProfilePage() {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            style={{ color: 'var(--d-accent)' }}>
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
             />
           </svg>
-          <p style={{ color: 'var(--d-accent)' }} className="font-medium">
-            Failed to load profile
-          </p>
+          <p className="font-medium text-ink">Failed to load profile</p>
         </div>
-        <p
-          className="text-sm mt-1"
-          style={{ color: 'var(--d-text-secondary)' }}>
+        <p className="text-sm mt-1 text-gray">
           {error instanceof Error ? error.message : 'Unknown error'}
         </p>
       </div>
@@ -95,29 +86,28 @@ export default function InfluencerProfilePage() {
   return (
     <div>
       {/* Page Header */}
-      <div className="d-page-header">
-        <div>
-          <h1 className="d-section-title">My Profile</h1>
-          <p style={{ color: 'var(--d-text-secondary)' }} className="mt-1">
-            Manage your creator profile and public information
-          </p>
-        </div>
+      <div className="mb-10 animate-fade-up relative z-10">
+        <h1
+          className="text-3xl font-bold tracking-tight"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          My Profile
+        </h1>
+        <p className="text-gray mt-1 text-sm">
+          Manage your creator profile and public information
+        </p>
       </div>
 
       {updateMutation.isError && (
-        <div
-          className="mb-6 p-4 rounded-xl text-sm font-medium"
-          style={{
-            backgroundColor: 'var(--d-accent-light)',
-            color: 'var(--d-accent)',
-          }}>
+        <div className="mb-6 p-4 rounded-xl text-sm font-medium bg-red-50 text-red-600 animate-fade-up relative z-10">
           <div className="flex items-center gap-2">
             <svg
               className="w-4 h-4 flex-shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}>
+              strokeWidth={2}
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -131,39 +121,45 @@ export default function InfluencerProfilePage() {
         </div>
       )}
 
-      <div className="d-card">
+      <div className="d-card animate-fade-up delay-1 relative z-10">
         {/* Avatar preview */}
-        <div
-          className="flex items-center gap-4 mb-8 pb-6"
-          style={{ borderBottom: '1px solid var(--d-card-border)' }}>
-          <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold"
-            style={{
-              backgroundColor: 'var(--d-content-bg-warm)',
-              color: 'var(--d-accent)',
-            }}>
-            {profile.handle.charAt(0).toUpperCase()}
+        <div className="flex items-center gap-4 pb-6 border-b border-border-gray">
+          <div className="w-14 h-14 bg-ink/10 rounded-2xl flex items-center justify-center text-ink">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+              />
+            </svg>
           </div>
           <div>
-            <p className="font-semibold" style={{ color: 'var(--d-text)' }}>
+            <p
+              className="font-semibold text-lg"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
               {profile.displayName || profile.handle}
             </p>
-            <p className="text-sm" style={{ color: 'var(--d-text-secondary)' }}>
-              @{profile.handle}
-            </p>
+            <p className="text-gray text-sm">@{profile.handle}</p>
           </div>
         </div>
 
-        <div className="space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Form */}
+        <div className="pt-6 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--d-text)' }}>
+              <label className="block font-medium text-sm mb-2">
                 Display Name
               </label>
               <input
-                className="d-input"
+                type="text"
+                className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                 defaultValue={profile.displayName}
                 placeholder="Your public display name"
                 onChange={(e) =>
@@ -172,13 +168,10 @@ export default function InfluencerProfilePage() {
               />
             </div>
             <div>
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--d-text)' }}>
-                Handle
-              </label>
+              <label className="block font-medium text-sm mb-2">Handle</label>
               <input
-                className="d-input"
+                type="text"
+                className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                 defaultValue={profile.handle}
                 placeholder="@yourhandle"
                 onChange={(e) => setForm({ ...form, handle: e.target.value })}
@@ -187,14 +180,10 @@ export default function InfluencerProfilePage() {
           </div>
 
           <div>
-            <label
-              className="block text-sm font-semibold mb-2"
-              style={{ color: 'var(--d-text)' }}>
-              Bio
-            </label>
+            <label className="block font-medium text-sm mb-2">Bio</label>
             <textarea
-              className="d-input"
               rows={4}
+              className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors resize-none"
               defaultValue={profile.bio}
               placeholder="Tell brands about yourself and your content..."
               onChange={(e) => setForm({ ...form, bio: e.target.value })}
@@ -202,29 +191,24 @@ export default function InfluencerProfilePage() {
           </div>
 
           <div>
-            <label
-              className="block text-sm font-semibold mb-2"
-              style={{ color: 'var(--d-text)' }}>
-              Niche
-            </label>
+            <label className="block font-medium text-sm mb-2">Niche</label>
             <input
-              className="d-input"
+              type="text"
+              className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
               defaultValue={profile.niche}
               placeholder="e.g., Fashion, Travel, Fitness"
               onChange={(e) => setForm({ ...form, niche: e.target.value })}
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--d-text)' }}>
+              <label className="block font-medium text-sm mb-2">
                 Followers
               </label>
               <input
                 type="number"
-                className="d-input"
+                className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                 defaultValue={profile.followerCount}
                 placeholder="0"
                 onChange={(e) =>
@@ -236,15 +220,13 @@ export default function InfluencerProfilePage() {
               />
             </div>
             <div>
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--d-text)' }}>
+              <label className="block font-medium text-sm mb-2">
                 Engagement Rate (%)
               </label>
               <input
                 type="number"
                 step="0.1"
-                className="d-input"
+                className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                 defaultValue={profile.engagementRate}
                 placeholder="0.0"
                 onChange={(e) =>
@@ -257,15 +239,12 @@ export default function InfluencerProfilePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--d-text)' }}>
-                Country
-              </label>
+              <label className="block font-medium text-sm mb-2">Country</label>
               <input
-                className="d-input"
+                type="text"
+                className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                 defaultValue={profile.locationCountry}
                 placeholder="e.g., United States"
                 onChange={(e) =>
@@ -274,13 +253,10 @@ export default function InfluencerProfilePage() {
               />
             </div>
             <div>
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--d-text)' }}>
-                Region
-              </label>
+              <label className="block font-medium text-sm mb-2">Region</label>
               <input
-                className="d-input"
+                type="text"
+                className="w-full px-4 py-3 rounded-xl border border-border-gray text-sm focus:outline-none focus:border-ink transition-colors"
                 defaultValue={profile.locationRegion}
                 placeholder="e.g., California"
                 onChange={(e) =>
@@ -294,7 +270,8 @@ export default function InfluencerProfilePage() {
             <button
               onClick={() => updateMutation.mutate()}
               disabled={updateMutation.isPending}
-              className="d-btn-primary">
+              className="d-btn-primary"
+            >
               {updateMutation.isPending ? (
                 <>
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -307,7 +284,8 @@ export default function InfluencerProfilePage() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}>
+                    strokeWidth={2}
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

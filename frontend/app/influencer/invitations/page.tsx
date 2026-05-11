@@ -32,11 +32,11 @@ export default function InvitationsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-64 relative z-10">
         <div
           className="animate-spin w-8 h-8 border-4 rounded-full"
           style={{
-            borderColor: 'var(--d-accent)',
+            borderColor: '#0c0c0c',
             borderTopColor: 'transparent',
           }}
         />
@@ -46,12 +46,7 @@ export default function InvitationsPage() {
 
   if (isError) {
     return (
-      <div
-        className="d-card"
-        style={{
-          borderColor: 'var(--d-accent-light)',
-          backgroundColor: 'var(--d-accent-light)',
-        }}>
+      <div className="d-card animate-fade-up relative z-10">
         <div className="flex items-center gap-3">
           <svg
             className="w-5 h-5 flex-shrink-0"
@@ -59,20 +54,16 @@ export default function InvitationsPage() {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            style={{ color: 'var(--d-accent)' }}>
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
             />
           </svg>
-          <p style={{ color: 'var(--d-accent)' }} className="font-medium">
-            Failed to load invitations
-          </p>
+          <p className="font-medium text-ink">Failed to load invitations</p>
         </div>
-        <p
-          className="text-sm mt-1"
-          style={{ color: 'var(--d-text-secondary)' }}>
+        <p className="text-sm mt-1 text-gray">
           {error instanceof Error ? error.message : 'Unknown error'}
         </p>
       </div>
@@ -82,64 +73,69 @@ export default function InvitationsPage() {
   const getStatusTag = (status: string) => {
     switch (status.toLowerCase()) {
       case 'accepted':
-        return <span className="d-tag d-tag-success">{status}</span>
+        return (
+          <span className="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">
+            {status}
+          </span>
+        )
       case 'declined':
         return (
-          <span
-            className="d-tag"
-            style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}>
+          <span className="px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full">
             {status}
           </span>
         )
       default:
-        return <span className="d-tag d-tag-neutral">{status}</span>
+        return (
+          <span className="px-3 py-1 bg-light-gray text-gray text-xs font-medium rounded-full">
+            {status}
+          </span>
+        )
     }
   }
 
   return (
     <div>
       {/* Page Header */}
-      <div className="d-page-header">
-        <div>
-          <h1 className="d-section-title">Invitations</h1>
-          <p style={{ color: 'var(--d-text-secondary)' }} className="mt-1">
-            Manage collaboration requests from brands
-          </p>
-        </div>
+      <div className="mb-10 animate-fade-up relative z-10">
+        <h1
+          className="text-3xl font-bold tracking-tight"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          Invitations
+        </h1>
+        <p className="text-gray mt-1 text-sm">
+          Manage collaboration requests from brands
+        </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
-        <div className="d-card text-center">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-10 relative z-10">
+        <div className="d-card text-center hover-lift animate-fade-up delay-1">
           <div className="d-stat-value">{pending?.length ?? 0}</div>
           <div className="d-stat-label">Pending</div>
         </div>
-        <div className="d-card text-center">
+        <div className="d-card text-center hover-lift animate-fade-up delay-2">
           <div className="d-stat-value">
             {history?.filter((i) => i.status === 'accepted').length ?? 0}
           </div>
           <div className="d-stat-label">Accepted</div>
         </div>
-        <div className="d-card text-center">
+        <div className="d-card text-center hover-lift animate-fade-up delay-3">
           <div className="d-stat-value">{invitations?.length ?? 0}</div>
           <div className="d-stat-label">Total</div>
         </div>
       </div>
 
       {respondMutation.isError && (
-        <div
-          className="mb-6 p-4 rounded-xl text-sm font-medium"
-          style={{
-            backgroundColor: 'var(--d-accent-light)',
-            color: 'var(--d-accent)',
-          }}>
+        <div className="mb-6 p-4 rounded-xl text-sm font-medium bg-red-50 text-red-600 animate-fade-up relative z-10">
           <div className="flex items-center gap-2">
             <svg
               className="w-4 h-4 flex-shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}>
+              strokeWidth={2}
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -154,61 +150,59 @@ export default function InvitationsPage() {
       )}
 
       {/* Pending */}
-      <div className="mb-8">
-        <div className="flex items-center gap-2 mb-4">
+      <div className="mb-8 relative z-10">
+        <div className="flex items-center gap-3 mb-4">
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 text-gray"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={1.5}
-            style={{ color: 'var(--d-text-secondary)' }}>
+            strokeWidth={2}
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
           <h2
             className="font-semibold text-lg"
-            style={{ color: 'var(--d-text)' }}>
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
             Pending
           </h2>
-          <span className="d-tag d-tag-warning text-[10px] py-1 px-2">
+          <span className="px-2.5 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">
             {pending?.length ?? 0}
           </span>
         </div>
 
         <div className="space-y-3">
           {pending && pending.length > 0 ? (
-            pending.map((i) => {
+            pending.map((i, index) => {
               const isActing = actingId === i.id
               return (
-                <div key={i.id} className="d-card">
+                <div
+                  key={i.id}
+                  className={`d-card animate-fade-up delay-${Math.min(index + 4, 6)}`}
+                >
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h3
                           className="font-semibold"
-                          style={{ color: 'var(--d-text)' }}>
+                          style={{ fontFamily: 'var(--font-heading)' }}
+                        >
                           {i.campaign?.title}
                         </h3>
-                        <span className="d-tag d-tag-warning text-[10px] py-1 px-2">
+                        <span className="px-2.5 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">
                           pending
                         </span>
                       </div>
-                      <p
-                        className="text-sm"
-                        style={{ color: 'var(--d-text-secondary)' }}>
+                      <p className="text-gray text-sm">
                         {i.campaign?.brand?.brandProfile?.companyName}
                       </p>
                       {i.message && (
-                        <div
-                          className="mt-3 p-3 rounded-lg text-sm"
-                          style={{
-                            backgroundColor: 'var(--d-content-bg)',
-                            color: 'var(--d-text-secondary)',
-                          }}>
+                        <div className="mt-3 p-3 rounded-lg text-sm bg-light-gray text-gray">
                           &ldquo;{i.message}&rdquo;
                         </div>
                       )}
@@ -220,7 +214,8 @@ export default function InvitationsPage() {
                           respondMutation.mutate({ id: i.id, action: 'accept' })
                         }}
                         disabled={isActing}
-                        className="d-btn-primary text-sm">
+                        className="d-btn-primary text-sm"
+                      >
                         {isActing ? (
                           <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
                         ) : (
@@ -230,7 +225,8 @@ export default function InvitationsPage() {
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
-                              strokeWidth={2}>
+                              strokeWidth={2}
+                            >
                               <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -250,7 +246,8 @@ export default function InvitationsPage() {
                           })
                         }}
                         disabled={isActing}
-                        className="d-btn-secondary text-sm">
+                        className="d-btn-secondary text-sm"
+                      >
                         Decline
                       </button>
                     </div>
@@ -259,9 +256,9 @@ export default function InvitationsPage() {
               )
             })
           ) : (
-            <div className="d-card">
+            <div className="d-card animate-fade-up delay-4">
               <div className="d-empty py-8">
-                <div className="d-empty-icon">📭</div>
+                <div className="d-empty-icon">📬</div>
                 <p className="d-empty-title">No pending invitations</p>
                 <p className="d-empty-desc">
                   When brands invite you to collaborate, they&apos;ll appear
@@ -274,44 +271,45 @@ export default function InvitationsPage() {
       </div>
 
       {/* History */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-4">
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 text-gray"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={1.5}
-            style={{ color: 'var(--d-text-secondary)' }}>
+            strokeWidth={2}
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
           <h2
             className="font-semibold text-lg"
-            style={{ color: 'var(--d-text)' }}>
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
             History
           </h2>
         </div>
         <div className="space-y-3">
           {history && history.length > 0 ? (
-            history.map((i) => (
+            history.map((i, index) => (
               <Link
                 key={i.id}
                 href={`/influencer/campaigns/${i.campaign.id}`}
-                className="d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 transition-shadow hover:shadow-md"
-                style={{ opacity: 0.85 }}>
+                className={`d-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 transition-shadow hover:shadow-md hover-lift animate-fade-up delay-${Math.min(index + 4, 6)}`}
+                style={{ opacity: 0.85 }}
+              >
                 <div>
                   <h3
                     className="font-semibold"
-                    style={{ color: 'var(--d-text)' }}>
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                  >
                     {i.campaign?.title}
                   </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: 'var(--d-text-secondary)' }}>
+                  <p className="text-gray text-sm">
                     {i.campaign?.brand?.brandProfile?.companyName}
                   </p>
                 </div>

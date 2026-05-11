@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M2IE Design System — Mockups</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"DM Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            ink: '#0c0c0c',
+            gray: '#888888',
+            'light-gray': '#f6f6f6',
+            'border-gray': '#eeeeee',
+            navy: '#2a2f4e',
+            coral: '#ff3636',
+          },
+          borderRadius: {
+            '2xl': '16px',
+            '3xl': '20px',
+            '4xl': '30px',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f9f9f9 0%, #fff5f0 50%, #f5f0ff 100%); min-height: 100vh; }
+    .font-display { font-family: 'DM Sans', sans-serif; }
+
+    .gradient-orb { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.4; pointer-events: none; z-index: 0; }
+    .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,150,100,0.35) 0%, transparent 70%); animation: float 10s ease-in-out infinite; top: -10%; right: -10%; }
+    .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,100,180,0.3) 0%, transparent 70%); animation: float 12s ease-in-out infinite reverse; bottom: -10%; left: -10%; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    .animate-fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.7s ease-out forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+    .card-bg { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); }
+  </style>
+</head>
+<body class="min-h-screen text-ink p-10 relative overflow-hidden">
+  <!-- Gradient orbs -->
+  <div class="gradient-orb orb-1"></div>
+  <div class="gradient-orb orb-2"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="mb-12 animate-fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center text-white font-display font-bold">m</div>
+        <h1 class="font-display font-bold text-3xl tracking-tight">M2IE Design System</h1>
+      </div>
+      <p class="text-gray">Influencer Platform Mockups — Styled with m2ie.io design tokens</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6">
+      <a href="brand-campaigns.html" class="card-bg rounded-2xl p-6 shadow-card hover:shadow-soft transition-shadow group hover-lift animate-fade-in delay-1">
+        <span class="text-xs font-medium text-gray uppercase tracking-wider">Brand Studio</span>
+        <h2 class="font-display font-semibold text-xl mt-2 group-hover:text-coral transition-colors">Campaigns Dashboard</h2>
+        <p class="text-gray text-sm mt-1">Manage your influencer marketing campaigns</p>
+      </a>
+
+      <a href="brand-discover.html" class="card-bg rounded-2xl p-6 shadow-card hover:shadow-soft transition-shadow group hover-lift animate-fade-in delay-2">
+        <span class="text-xs font-medium text-gray uppercase tracking-wider">Brand Studio</span>
+        <h2 class="font-display font-semibold text-xl mt-2 group-hover:text-coral transition-colors">Discover Creators</h2>
+        <p class="text-gray text-sm mt-1">Find the perfect influencer for your brand</p>
+      </a>
+
+      <a href="landing-page.html" class="card-bg rounded-2xl p-6 shadow-card hover:shadow-soft transition-shadow group hover-lift animate-fade-in delay-3">
+        <span class="text-xs font-medium text-gray uppercase tracking-wider">Marketing Site</span>
+        <h2 class="font-display font-semibold text-xl mt-2 group-hover:text-coral transition-colors">Landing Page</h2>
+        <p class="text-gray text-sm mt-1">Connect with vertical influencers</p>
+      </a>
+
+      <a href="creator-invitations.html" class="card-bg rounded-2xl p-6 shadow-card hover:shadow-soft transition-shadow group hover-lift animate-fade-in delay-4">
+        <span class="text-xs font-medium text-gray uppercase tracking-wider">Creator Hub</span>
+        <h2 class="font-display font-semibold text-xl mt-2 group-hover:text-coral transition-colors">Invitations</h2>
+        <p class="text-gray text-sm mt-1">Manage collaboration requests from brands</p>
+      </a>
+
+      <a href="creator-campaigns.html" class="card-bg rounded-2xl p-6 shadow-card hover:shadow-soft transition-shadow group hover-lift animate-fade-in delay-5">
+        <span class="text-xs font-medium text-gray uppercase tracking-wider">Creator Hub</span>
+        <h2 class="font-display font-semibold text-xl mt-2 group-hover:text-coral transition-colors">My Campaigns</h2>
+        <p class="text-gray text-sm mt-1">View and manage your active collaborations</p>
+      </a>
+
+      <a href="creator-profile.html" class="card-bg rounded-2xl p-6 shadow-card hover:shadow-soft transition-shadow group hover-lift animate-fade-in delay-6">
+        <span class="text-xs font-medium text-gray uppercase tracking-wider">Creator Hub</span>
+        <h2 class="font-display font-semibold text-xl mt-2 group-hover:text-coral transition-colors">My Profile</h2>
+        <p class="text-gray text-sm mt-1">Manage your creator profile and public information</p>
+      </a>
+    </div>
+
+    <div class="mt-12 card-bg rounded-2xl p-6 shadow-card animate-fade-in delay-6">
+      <h3 class="font-display font-semibold text-lg mb-4">Design Tokens Applied</h3>
+      <div class="grid grid-cols-4 gap-4 text-sm">
+        <div>
+          <p class="text-gray text-xs uppercase tracking-wider mb-2">Colors</p>
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-[#0c0c0c]"></div><span>Ink #0c0c0c</span></div>
+            <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-[#888888]"></div><span>Gray #888888</span></div>
+            <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-[#ff3636]"></div><span>Coral #ff3636</span></div>
+            <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-[#2a2f4e]"></div><span>Navy #2a2f4e</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-gray text-xs uppercase tracking-wider mb-2">Typography</p>
+          <p class="font-display font-semibold">DM Sans</p>
+          <p class="text-gray">Display & headings</p>
+          <p class="font-body mt-2">Inter</p>
+          <p class="text-gray">Body & UI</p>
+        </div>
+        <div>
+          <p class="text-gray text-xs uppercase tracking-wider mb-2">Radius</p>
+          <p>Cards: 16px</p>
+          <p>Buttons: 30px</p>
+          <p>Inputs: 12px</p>
+        </div>
+        <div>
+          <p class="text-gray text-xs uppercase tracking-wider mb-2">Shadows</p>
+          <p>Card: 0 4px 20px rgba(0,0,0,0.04)</p>
+          <p>Soft: 0 0 30px rgba(0,0,0,0.06)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
