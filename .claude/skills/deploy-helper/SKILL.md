@@ -26,13 +26,13 @@ Use this skill when:
 
 The skill stores deployment settings in a local JSON file at:
 ```
-~/.config/agentplanet-deploy.json
+~/.config/deploy-skill/influencer-marketing-deploy.json
 ```
 
 If this file does not exist, create it with the following structure:
 ```json
 {
-  "projectName": "agentplanet",
+  "projectName": "influencer-marketing",
   "imageHub": {
     "url": "registry.example.com",
     "username": "",
@@ -46,7 +46,7 @@ If this file does not exist, create it with the following structure:
   "frontendBuildArgs": {
     "NEXT_PUBLIC_API_BASE_URL": "https://api.example.com/api/v1",
     "NEXT_PUBLIC_ADVERTISED_HOST": "https://www.example.com",
-    "NEXT_PUBLIC_BRAND_NAME": "AgentPlanet",
+    "NEXT_PUBLIC_BRAND_NAME": "Influencer Marketing Demo",
     "NEXT_PUBLIC_UMAMI_WEBSITE_ID": "",
     "NEXT_PUBLIC_CONTACT_EMAIL": ""
   }
