@@ -59,7 +59,10 @@ export const ModelName = {
   Campaign: 'Campaign',
   Invitation: 'Invitation',
   Deliverable: 'Deliverable',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  Sop: 'Sop',
+  SopBinding: 'SopBinding',
+  SopReminderLog: 'SopReminderLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -208,6 +211,49 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const SopScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  title: 'title',
+  publishDate: 'publishDate',
+  targetMarket: 'targetMarket',
+  influencerType: 'influencerType',
+  sellingPoints: 'sellingPoints',
+  steps: 'steps',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SopScalarFieldEnum = (typeof SopScalarFieldEnum)[keyof typeof SopScalarFieldEnum]
+
+
+export const SopBindingScalarFieldEnum = {
+  id: 'id',
+  sopId: 'sopId',
+  invitationId: 'invitationId',
+  chatId: 'chatId',
+  boundAt: 'boundAt',
+  sopPushedAt: 'sopPushedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SopBindingScalarFieldEnum = (typeof SopBindingScalarFieldEnum)[keyof typeof SopBindingScalarFieldEnum]
+
+
+export const SopReminderLogScalarFieldEnum = {
+  id: 'id',
+  sopBindingId: 'sopBindingId',
+  stepIndex: 'stepIndex',
+  reminderType: 'reminderType',
+  sentAt: 'sentAt'
+} as const
+
+export type SopReminderLogScalarFieldEnum = (typeof SopReminderLogScalarFieldEnum)[keyof typeof SopReminderLogScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -62,3 +62,18 @@ export type Deliverable = Prisma.DeliverableModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model Sop
+ * 
+ */
+export type Sop = Prisma.SopModel
+/**
+ * Model SopBinding
+ * 
+ */
+export type SopBinding = Prisma.SopBindingModel
+/**
+ * Model SopReminderLog
+ * 
+ */
+export type SopReminderLog = Prisma.SopReminderLogModel

@@ -53,7 +53,19 @@ export const NotificationType = {
   invitation_declined: 'invitation_declined',
   campaign_updated: 'campaign_updated',
   deliverable_due: 'deliverable_due',
-  deliverables_completed: 'deliverables_completed'
+  deliverables_completed: 'deliverables_completed',
+  sop_pushed: 'sop_pushed',
+  sop_reminder: 'sop_reminder',
+  sop_delay_requested: 'sop_delay_requested'
 } as const
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const SopStatus = {
+  generated: 'generated',
+  active: 'active',
+  completed: 'completed'
+} as const
+
+export type SopStatus = (typeof SopStatus)[keyof typeof SopStatus]

@@ -189,6 +189,7 @@ describe('CampaignsService', () => {
             },
           },
           deliverables: true,
+          sop: true,
         },
       })
     })

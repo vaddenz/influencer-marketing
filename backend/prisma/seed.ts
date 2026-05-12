@@ -469,6 +469,43 @@ async function createPrompts() {
       content: 'Welcome! Updated guidelines for 2025...',
       version: 2,
     },
+    {
+      key: 'sop-generator',
+      content: `Generate a detailed Standard Operating Procedure (SOP) for an influencer marketing campaign.
+
+Campaign: {campaignTitle}
+Description: {description}
+Target Market: {targetMarket}
+Influencer Type: {influencerType}
+Selling Points: {sellingPoints}
+Publish Date: {publishDate}
+
+Create a structured SOP with:
+1. A clear, concise title for the SOP
+2. 4-8 workflow steps that an influencer must follow
+
+For each step, provide:
+- name: Short step name (e.g., "Draft Submission", "Content Review")
+- description: Detailed explanation of what the influencer must do
+- dueDateOffset: Integer representing days relative to publish date (must be 0 or negative, where 0 = publish day, -7 = one week before)
+- requirements: Array of specific requirements/checklist items for this step
+
+All deadlines must be on or before the publish date. Steps should be ordered chronologically from earliest to latest.
+
+Return ONLY valid JSON matching this structure:
+{{
+  "title": "SOP Title",
+  "steps": [
+    {{
+      "name": "Step Name",
+      "description": "Step description",
+      "dueDateOffset": -7,
+      "requirements": ["Requirement 1", "Requirement 2"]
+    }}
+  ]
+}}`,
+      version: 1,
+    },
   ]
 
   // Clean up existing to prevent duplicates

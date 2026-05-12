@@ -392,7 +392,10 @@ export const ModelName = {
   Campaign: 'Campaign',
   Invitation: 'Invitation',
   Deliverable: 'Deliverable',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  Sop: 'Sop',
+  SopBinding: 'SopBinding',
+  SopReminderLog: 'SopReminderLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userOAuthAccount" | "prompt" | "brandProfile" | "influencerProfile" | "campaign" | "invitation" | "deliverable" | "notification"
+    modelProps: "user" | "userOAuthAccount" | "prompt" | "brandProfile" | "influencerProfile" | "campaign" | "invitation" | "deliverable" | "notification" | "sop" | "sopBinding" | "sopReminderLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1078,6 +1081,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Sop: {
+      payload: Prisma.$SopPayload<ExtArgs>
+      fields: Prisma.SopFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SopFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SopFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>
+        }
+        findFirst: {
+          args: Prisma.SopFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SopFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>
+        }
+        findMany: {
+          args: Prisma.SopFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>[]
+        }
+        create: {
+          args: Prisma.SopCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>
+        }
+        createMany: {
+          args: Prisma.SopCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SopCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>[]
+        }
+        delete: {
+          args: Prisma.SopDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>
+        }
+        update: {
+          args: Prisma.SopUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>
+        }
+        deleteMany: {
+          args: Prisma.SopDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SopUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SopUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>[]
+        }
+        upsert: {
+          args: Prisma.SopUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopPayload>
+        }
+        aggregate: {
+          args: Prisma.SopAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSop>
+        }
+        groupBy: {
+          args: Prisma.SopGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SopGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SopCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SopCountAggregateOutputType> | number
+        }
+      }
+    }
+    SopBinding: {
+      payload: Prisma.$SopBindingPayload<ExtArgs>
+      fields: Prisma.SopBindingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SopBindingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SopBindingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>
+        }
+        findFirst: {
+          args: Prisma.SopBindingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SopBindingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>
+        }
+        findMany: {
+          args: Prisma.SopBindingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>[]
+        }
+        create: {
+          args: Prisma.SopBindingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>
+        }
+        createMany: {
+          args: Prisma.SopBindingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SopBindingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>[]
+        }
+        delete: {
+          args: Prisma.SopBindingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>
+        }
+        update: {
+          args: Prisma.SopBindingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>
+        }
+        deleteMany: {
+          args: Prisma.SopBindingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SopBindingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SopBindingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>[]
+        }
+        upsert: {
+          args: Prisma.SopBindingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopBindingPayload>
+        }
+        aggregate: {
+          args: Prisma.SopBindingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSopBinding>
+        }
+        groupBy: {
+          args: Prisma.SopBindingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SopBindingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SopBindingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SopBindingCountAggregateOutputType> | number
+        }
+      }
+    }
+    SopReminderLog: {
+      payload: Prisma.$SopReminderLogPayload<ExtArgs>
+      fields: Prisma.SopReminderLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SopReminderLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SopReminderLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>
+        }
+        findFirst: {
+          args: Prisma.SopReminderLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SopReminderLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>
+        }
+        findMany: {
+          args: Prisma.SopReminderLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>[]
+        }
+        create: {
+          args: Prisma.SopReminderLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>
+        }
+        createMany: {
+          args: Prisma.SopReminderLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SopReminderLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>[]
+        }
+        delete: {
+          args: Prisma.SopReminderLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>
+        }
+        update: {
+          args: Prisma.SopReminderLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.SopReminderLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SopReminderLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SopReminderLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.SopReminderLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SopReminderLogPayload>
+        }
+        aggregate: {
+          args: Prisma.SopReminderLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSopReminderLog>
+        }
+        groupBy: {
+          args: Prisma.SopReminderLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SopReminderLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SopReminderLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SopReminderLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1247,6 +1472,49 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const SopScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  title: 'title',
+  publishDate: 'publishDate',
+  targetMarket: 'targetMarket',
+  influencerType: 'influencerType',
+  sellingPoints: 'sellingPoints',
+  steps: 'steps',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SopScalarFieldEnum = (typeof SopScalarFieldEnum)[keyof typeof SopScalarFieldEnum]
+
+
+export const SopBindingScalarFieldEnum = {
+  id: 'id',
+  sopId: 'sopId',
+  invitationId: 'invitationId',
+  chatId: 'chatId',
+  boundAt: 'boundAt',
+  sopPushedAt: 'sopPushedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SopBindingScalarFieldEnum = (typeof SopBindingScalarFieldEnum)[keyof typeof SopBindingScalarFieldEnum]
+
+
+export const SopReminderLogScalarFieldEnum = {
+  id: 'id',
+  sopBindingId: 'sopBindingId',
+  stepIndex: 'stepIndex',
+  reminderType: 'reminderType',
+  sentAt: 'sentAt'
+} as const
+
+export type SopReminderLogScalarFieldEnum = (typeof SopReminderLogScalarFieldEnum)[keyof typeof SopReminderLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1443,6 +1711,20 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'SopStatus'
+ */
+export type EnumSopStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SopStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SopStatus[]'
+ */
+export type ListEnumSopStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SopStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1574,6 +1856,9 @@ export type GlobalOmitConfig = {
   invitation?: Prisma.InvitationOmit
   deliverable?: Prisma.DeliverableOmit
   notification?: Prisma.NotificationOmit
+  sop?: Prisma.SopOmit
+  sopBinding?: Prisma.SopBindingOmit
+  sopReminderLog?: Prisma.SopReminderLogOmit
 }
 
 /* Types for Logging */
