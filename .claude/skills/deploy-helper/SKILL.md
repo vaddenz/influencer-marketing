@@ -43,6 +43,15 @@ The frontend image is based on `node:22-alpine`, which does **not** include `wge
 ### Registry namespace must exist
 Pushing to Tencent Cloud CCR (and some other registries) requires the namespace/repository to be created in the registry console first. If push fails with "no permission", the namespace likely does not exist. In that case, build images directly on the dev server and deploy using local images (skip `docker compose pull`).
 
+### NEVER overwrite the server's `.env` with a local development file
+**Critical lesson learned (2026-05-12):** During bootstrap, a local `.env` file is created for local development (pointing to `localhost` / `127.0.0.1`). This file must **never** be copied to the dev server during deployment. The dev server's `.env` contains production-specific values (DB host, Redis host, S3 endpoint, secrets) that differ from local settings. Overwriting it will break the backend's ability to connect to infrastructure and may leak local credentials.
+
+**Rule:**
+- The dev server's existing `/opt/${PROJECT_NAME}/.env` is the **source of truth** for production environment variables.
+- Do **not** copy `backend/.env`, `backend/.env.local`, or `backend/.env.example` to the server automatically.
+- Only copy an env file if the user explicitly provides a dedicated production env file (e.g., `backend/.env.server-production`) and confirms the action.
+- Always verify critical variables (`DATABASE_URL`, `REDIS_HOST`, `S3_ENDPOINT`, `JWT_SECRET`) before overwriting a server `.env`.
+
 ## Workflow
 
 ### 1. Read or create local deployment config
@@ -175,8 +184,11 @@ Export these locally before running compose commands, or write them to a `.env` 
 
 The backend service in the compose file references an `.env` file. Ensure the dev server has a valid `.env` at `/opt/${PROJECT_NAME}/.env`.
 
-- If the user has provided a production env file locally, copy it to the server.
-- If not, remind the user that the backend requires `.env` and ask whether to copy from `backend/.env.example` or use an existing one.
+- **The server's existing `.env` is the source of truth.** Before deploying, check whether the server already has one. If it does, do **not** overwrite it unless the user explicitly asks you to.
+- Do **not** copy local development `.env` files (`backend/.env`, `backend/.env.local`) to the server. These contain `localhost` references and local secrets that will break production.
+- Do **not** copy `backend/.env.example` to the server — it is a template, not a configured environment file.
+- Only copy an env file if the user explicitly provides a dedicated production env file (e.g., `backend/.env.server-production`) and confirms the action.
+- If the server does not have a `.env` yet, ask the user how to obtain or create the production `.env` before proceeding.
 - **Important**: If you need to run one-off containers (e.g., `npx prisma migrate deploy`) using `docker run --env-file`, Docker includes literal quotes from the `.env` file values. This breaks `DATABASE_URL` and other quoted values. For one-off commands, pass env vars explicitly with `-e KEY=value` instead of using `--env-file`.
 
 #### 5.3 Set up infrastructure (optional)
@@ -202,9 +214,29 @@ ssh ${SSH_OPTS} ${SSH_USER}@${SERVER_HOST} "mkdir -p ${REMOTE_DIR}"
 # Copy the project docker-compose.yml
 scp ${SSH_OPTS} docker-compose.yml "${SSH_USER}@${SERVER_HOST}:${REMOTE_DIR}/docker-compose.yml"
 
-# Copy .env if available
+# Copy .env ONLY if the user explicitly provides a dedicated production env file.
+# NEVER copy backend/.env, backend/.env.local, or backend/.env.example — these are
+# local development files and will break production if copied to the server.
+ENV_SOURCE=""
 if [[ -f "backend/.env.production" ]]; then
-  scp ${SSH_OPTS} backend/.env.production "${SSH_USER}@${SERVER_HOST}:${REMOTE_DIR}/.env"
+  # Treat this as a candidate only if the user explicitly confirmed it is the
+  # server production env file, not a local development file.
+  ENV_SOURCE="backend/.env.production"
+fi
+
+if [[ -n "${ENV_SOURCE}" ]]; then
+  # Verify that the server does not already have a valid .env before overwriting.
+  SERVER_HAS_ENV=$(ssh ${SSH_OPTS} ${SSH_USER}@${SERVER_HOST} "test -f ${REMOTE_DIR}/.env && echo yes || echo no")
+  if [[ "${SERVER_HAS_ENV}" == "yes" ]]; then
+    echo "WARNING: The server already has ${REMOTE_DIR}/.env"
+    echo "Overwriting it with ${ENV_SOURCE} may break production."
+    echo "Aborting automatic .env copy. Ask the user whether to:"
+    echo "  1. Keep the existing server .env (recommended)"
+    echo "  2. Overwrite with the provided ${ENV_SOURCE}"
+    echo "  3. Manually update specific variables"
+  else
+    scp ${SSH_OPTS} "${ENV_SOURCE}" "${SSH_USER}@${SERVER_HOST}:${REMOTE_DIR}/.env"
+  fi
 fi
 
 # Ensure acme.json exists with correct permissions
