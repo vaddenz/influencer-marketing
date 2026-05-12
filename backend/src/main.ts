@@ -14,6 +14,7 @@ async function bootstrap() {
     logger: new ConsoleLogger({
       json: process.env.NODE_ENV === 'production',
     }),
+    rawBody: true,
   })
   app.setGlobalPrefix(GLOBAL_PREFIX)
   app.enableCors({

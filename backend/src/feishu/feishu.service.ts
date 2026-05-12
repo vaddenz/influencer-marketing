@@ -17,7 +17,7 @@ export class FeishuService {
     this.verifyToken = this.configService.get('feishu.webhookVerifyToken') || ''
   }
 
-  verifySignature(body: string, signature: string, timestamp: string): boolean {
+  verifySignature(body: string | Buffer, signature: string, timestamp: string): boolean {
     if (!this.verifyToken) return true
     const sign = createHmac('sha256', this.verifyToken)
       .update(`${timestamp}\n${body}`)

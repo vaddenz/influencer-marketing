@@ -1,8 +1,13 @@
-import { Controller, Post, Body, Headers, Logger, UnauthorizedException } from '@nestjs/common'
+import { Controller, Post, Body, Headers, Logger, UnauthorizedException, Req } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
+import type { Request } from 'express'
 import { FeishuService } from './feishu.service'
 import { FeishuCommandService } from './feishu-command.service'
 import type { FeishuWebhookBody } from './dto/feishu-webhook.dto'
+
+interface RequestWithRawBody extends Request {
+  rawBody?: Buffer
+}
 
 @ApiTags('Feishu')
 @Controller('webhooks/feishu')
@@ -17,12 +22,13 @@ export class FeishuController {
   @Post()
   async handleWebhook(
     @Body() body: FeishuWebhookBody,
+    @Req() req: RequestWithRawBody,
     @Headers('x-lark-signature') signature: string,
     @Headers('x-lark-timestamp') timestamp: string,
     @Headers('x-lark-request-timeout') _timeout: string
   ) {
-    const rawBody = JSON.stringify(body)
-    if (!this.feishuService.verifySignature(rawBody, signature, timestamp)) {
+    const rawBody = req.rawBody
+    if (!rawBody || !this.feishuService.verifySignature(rawBody, signature, timestamp)) {
       this.logger.warn('Invalid Feishu webhook signature')
       throw new UnauthorizedException()
     }
