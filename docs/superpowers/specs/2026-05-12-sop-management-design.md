@@ -230,7 +230,7 @@ Add three new values:
 ### Changes to Existing Modules
 
 #### `campaigns` module
-- `CampaignsService.findOne` — include `sop: true` in Prisma query so Campaign Detail includes SOP data
+- `CampaignsService.findOne` — include `sop: true` in Prisma query so Campaign Detail includes SOP data for both brand and influencer views
 
 #### `notifications` module
 - `NotificationType` enum extended with `sop_pushed`, `sop_reminder`, `sop_delay_requested`
@@ -289,6 +289,29 @@ Inline modal for editing the AI-generated SOP:
 - "Add Step" button
 - "Remove Step" button
 - "Save Changes" / "Cancel"
+
+### Influencer Campaign View (`/influencer/campaigns/[id]`)
+
+Influencers see a **read-only SOP timeline** in their campaign detail page.
+
+- Collapsible timeline showing all steps
+- Each step: name, due date, description, requirements list
+- Highlights the **current step** (nearest upcoming deadline) with a distinct badge
+- Shows days remaining for the current step
+- No action buttons (cannot edit, regenerate, or push)
+- If SOP has not been generated yet, show placeholder: "SOP尚未生成，请联系品牌方"
+
+### Access Control Summary
+
+| Action | Brand | Influencer |
+|--------|-------|------------|
+| Generate SOP | Yes | No |
+| Edit SOP | Yes | No |
+| Activate / Push to Feishu | Yes | No |
+| View SOP timeline | Yes | Yes |
+| Receive Feishu reminders | No | Yes |
+| Query progress (`/进度`) | No | Yes |
+| Request delay (`/延期`) | No | Yes |
 
 ---
 
@@ -450,6 +473,8 @@ async generate(dto: GenerateSopDto) {
 | Full SOP lifecycle | Create campaign → generate SOP → edit → activate → push → verify Feishu API called |
 | Webhook binding flow | Simulate Feishu webhook with `/绑定` → verify `SopBinding` created → verify reply message queued |
 | Reminder cron | Seed SOP with step due in 3 days → run scheduler → verify reminder sent, log created |
+| Influencer SOP view | Log in as influencer → fetch campaign detail → verify SOP timeline is visible and read-only |
+| Access control | Influencer calls `POST /v1/sops` or `PATCH /v1/sops/:id` → verify `403` |
 | Security | Send webhook with bad signature → verify `401`, no DB changes |
 
 ### Manual Testing
