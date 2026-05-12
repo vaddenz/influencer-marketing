@@ -110,17 +110,57 @@ export class FeishuCommandService {
       return
     }
 
-    await this.prisma.sopBinding.create({
+    const binding = await this.prisma.sopBinding.create({
       data: {
         sopId: invitation.campaign.sop.id,
         invitationId: invitation.id,
         chatId,
+        sopPushedAt: new Date(),
       },
     })
 
-    this.logger.log(`handleBind: created sopBinding for influencer ${influencerId}, chat ${chatId}`)
-    await this.feishuService.sendMessage(chatId, '绑定成功，将为您推送交付流程（SOP）')
-    this.logger.log(`Influencer ${influencerId} bound to chat ${chatId}`)
+    this.logger.log(`handleBind: created sopBinding id=${binding.id} for influencer ${influencerId}, chat ${chatId}`)
+
+    // Push SOP and campaign detail
+    const campaign = invitation.campaign
+    const sop = campaign.sop!
+    const steps = sop.steps as Array<{
+      name: string
+      description: string
+      dueDateOffset: number
+      requirements: string[]
+    }>
+    const publishDate = new Date(sop.publishDate)
+    publishDate.setHours(0, 0, 0, 0)
+    const sellingPoints = (sop.sellingPoints as string[] | undefined) ?? []
+
+    let detail = `绑定成功！\n\n活动：${campaign.title}`
+    if (campaign.startDate && campaign.endDate) {
+      detail += `\n活动周期：${campaign.startDate.toISOString().split('T')[0]} 至 ${campaign.endDate.toISOString().split('T')[0]}`
+    }
+    detail += `\n发布日期：${publishDate.toISOString().split('T')[0]}`
+    detail += `\n目标市场：${sop.targetMarket}`
+    detail += `\n达人类型：${sop.influencerType}`
+    if (sellingPoints.length > 0) {
+      detail += `\n卖点：${sellingPoints.join('、')}`
+    }
+    detail += `\n\n交付流程（SOP）：`
+
+    steps.forEach((step, index) => {
+      const dueDate = new Date(publishDate)
+      dueDate.setDate(dueDate.getDate() + step.dueDateOffset)
+      const dateStr = dueDate.toISOString().split('T')[0]
+      detail += `\n${index + 1}. 【${step.name}】截止：${dateStr}`
+      if (step.description) {
+        detail += `\n   ${step.description}`
+      }
+      if (step.requirements?.length > 0) {
+        detail += `\n   要求：${step.requirements.join('、')}`
+      }
+    })
+
+    await this.feishuService.sendMessage(chatId, detail)
+    this.logger.log(`Influencer ${influencerId} bound to chat ${chatId}, SOP pushed`)
   }
 
   async handleProgress(chatId: string) {
