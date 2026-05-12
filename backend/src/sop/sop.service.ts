@@ -5,7 +5,7 @@ import type { UserPayload } from '@/common/decorators/current-user.decorator'
 import { SopGenerationService } from './sop-generation.service'
 import { GenerateSopDto } from './dto/generate-sop.dto'
 import { UpdateSopDto } from './dto/update-sop.dto'
-import { SopStatus } from '@/generated/prisma'
+import { SopStatus } from '@/generated/prisma/enums'
 
 const SOP_SELECT = {
   id: true,

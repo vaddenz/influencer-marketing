@@ -1,7 +1,7 @@
 import { IsString, IsOptional, IsDateString, IsArray, ValidateNested, IsEnum } from 'class-validator'
 import { Type } from 'class-transformer'
 import { SopStepDto } from './sop-step.dto'
-import { SopStatus } from '@/generated/prisma'
+import { SopStatus } from '@/generated/prisma/enums'
 
 export class UpdateSopDto {
   @IsOptional()

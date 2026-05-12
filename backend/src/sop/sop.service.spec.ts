@@ -5,7 +5,7 @@ import { PrismaService } from '@/common/prisma/prisma.service'
 import { SopGenerationService } from './sop-generation.service'
 import { Role } from '@/common/enums/role.enum'
 import type { UserPayload } from '@/common/decorators/current-user.decorator'
-import { SopStatus } from '@/generated/prisma'
+import { SopStatus } from '@/generated/prisma/enums'
 
 const mockPrismaService = () => ({
   campaign: {

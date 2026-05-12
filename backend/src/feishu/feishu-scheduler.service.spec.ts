@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { FeishuSchedulerService } from './feishu-scheduler.service'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { FeishuService } from './feishu.service'
-import { SopStatus, NotificationType } from '@/generated/prisma'
+import { SopStatus, NotificationType } from '@/generated/prisma/enums'
 
 const mockPrismaService = () => ({
   sop: {

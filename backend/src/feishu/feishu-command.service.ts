@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { FeishuService } from './feishu.service'
-import { NotificationType } from '@/generated/prisma'
+import { NotificationType } from '@/generated/prisma/enums'
 
 @Injectable()
 export class FeishuCommandService {

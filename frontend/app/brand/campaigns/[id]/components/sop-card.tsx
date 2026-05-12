@@ -122,11 +122,11 @@ export default function SopCard({ sop, onRefresh }: SopCardProps) {
     <>
       <div className="d-card">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-5">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 mb-2 min-w-0">
               <h3
-                className="font-semibold text-lg"
+                className="font-semibold text-lg truncate"
                 style={{ color: 'var(--d-text)' }}>
                 {sop.title}
               </h3>
@@ -175,7 +175,7 @@ export default function SopCard({ sop, onRefresh }: SopCardProps) {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 flex-shrink-0 flex-wrap">
             {sop.status === 'generated' && (
               <>
                 <button

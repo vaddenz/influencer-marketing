@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { FeishuCommandService } from './feishu-command.service'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { FeishuService } from './feishu.service'
-import { NotificationType } from '@/generated/prisma'
+import { NotificationType } from '@/generated/prisma/enums'
 
 const mockPrismaService = () => ({
   user: {

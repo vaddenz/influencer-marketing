@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import { Cron } from '@nestjs/schedule'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { FeishuService } from './feishu.service'
-import { SopStatus, NotificationType } from '@/generated/prisma'
+import { SopStatus, NotificationType } from '@/generated/prisma/enums'
 
 @Injectable()
 export class FeishuSchedulerService {
