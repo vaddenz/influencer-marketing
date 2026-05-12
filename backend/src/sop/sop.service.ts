@@ -110,7 +110,7 @@ export class SopService {
     const updated = await this.prisma.sop.update({
       where: { id: sopId },
       data: {
-        ...dto,
+        ...(dto as any),
         publishDate: dto.publishDate ? new Date(dto.publishDate) : undefined,
       },
       select: SOP_SELECT,

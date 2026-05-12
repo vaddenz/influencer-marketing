@@ -67,6 +67,6 @@ export class FeishuService {
 
     this.tenantAccessToken = data.tenant_access_token
     this.tokenExpiresAt = now + data.expire * 1000
-    return this.tenantAccessToken
+    return this.tenantAccessToken!
   }
 }

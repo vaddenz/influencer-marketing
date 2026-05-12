@@ -2,7 +2,7 @@ import { Controller, Post, Body, Headers, Logger, UnauthorizedException } from '
 import { ApiTags } from '@nestjs/swagger'
 import { FeishuService } from './feishu.service'
 import { FeishuCommandService } from './feishu-command.service'
-import { FeishuWebhookBody } from './dto/feishu-webhook.dto'
+import type { FeishuWebhookBody } from './dto/feishu-webhook.dto'
 
 @ApiTags('Feishu')
 @Controller('webhooks/feishu')

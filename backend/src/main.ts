@@ -11,9 +11,7 @@ async function bootstrap() {
       json: process.env.NODE_ENV === 'production',
     }),
   })
-  app.setGlobalPrefix(GLOBAL_PREFIX, {
-    exclude: [{ path: 'webhooks/feishu', method: RequestMethod.ALL }],
-  })
+  app.setGlobalPrefix(GLOBAL_PREFIX)
   app.enableCors({
     origin: '*',
     methods: '*',
