@@ -1,5 +1,6 @@
 import appConfig from './app.config'
 import databaseConfig from './database.config'
+import feishuConfig from './feishu.config'
 import healthCheckConfig from './health-check.config'
 import httpClientConfig from './http-client.config'
 import jwtConfig from './jwt.config'
@@ -18,6 +19,7 @@ import vectorSearchConfig from './vector-search.config'
 export const configurations = [
   appConfig,
   databaseConfig,
+  feishuConfig,
   healthCheckConfig,
   httpClientConfig,
   jwtConfig,
@@ -36,6 +38,7 @@ export const configurations = [
 export {
   appConfig,
   databaseConfig,
+  feishuConfig,
   healthCheckConfig,
   httpClientConfig,
   jwtConfig,

@@ -259,6 +259,7 @@ export type CampaignWhereInput = {
   brand?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   invitations?: Prisma.InvitationListRelationFilter
   deliverables?: Prisma.DeliverableListRelationFilter
+  sop?: Prisma.XOR<Prisma.SopNullableScalarRelationFilter, Prisma.SopWhereInput> | null
 }
 
 export type CampaignOrderByWithRelationInput = {
@@ -275,6 +276,7 @@ export type CampaignOrderByWithRelationInput = {
   brand?: Prisma.UserOrderByWithRelationInput
   invitations?: Prisma.InvitationOrderByRelationAggregateInput
   deliverables?: Prisma.DeliverableOrderByRelationAggregateInput
+  sop?: Prisma.SopOrderByWithRelationInput
 }
 
 export type CampaignWhereUniqueInput = Prisma.AtLeast<{
@@ -294,6 +296,7 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   brand?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   invitations?: Prisma.InvitationListRelationFilter
   deliverables?: Prisma.DeliverableListRelationFilter
+  sop?: Prisma.XOR<Prisma.SopNullableScalarRelationFilter, Prisma.SopWhereInput> | null
 }, "id">
 
 export type CampaignOrderByWithAggregationInput = {
@@ -343,6 +346,7 @@ export type CampaignCreateInput = {
   brand: Prisma.UserCreateNestedOneWithoutCampaignsInput
   invitations?: Prisma.InvitationCreateNestedManyWithoutCampaignInput
   deliverables?: Prisma.DeliverableCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateInput = {
@@ -358,6 +362,7 @@ export type CampaignUncheckedCreateInput = {
   updatedAt?: Date | string
   invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutCampaignInput
   deliverables?: Prisma.DeliverableUncheckedCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUpdateInput = {
@@ -373,6 +378,7 @@ export type CampaignUpdateInput = {
   brand?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   invitations?: Prisma.InvitationUpdateManyWithoutCampaignNestedInput
   deliverables?: Prisma.DeliverableUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateInput = {
@@ -388,6 +394,7 @@ export type CampaignUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invitations?: Prisma.InvitationUncheckedUpdateManyWithoutCampaignNestedInput
   deliverables?: Prisma.DeliverableUncheckedUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateManyInput = {
@@ -576,6 +583,20 @@ export type CampaignUpdateOneRequiredWithoutDeliverablesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutDeliverablesInput, Prisma.CampaignUpdateWithoutDeliverablesInput>, Prisma.CampaignUncheckedUpdateWithoutDeliverablesInput>
 }
 
+export type CampaignCreateNestedOneWithoutSopInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutSopInput, Prisma.CampaignUncheckedCreateWithoutSopInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutSopInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutSopNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutSopInput, Prisma.CampaignUncheckedCreateWithoutSopInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutSopInput
+  upsert?: Prisma.CampaignUpsertWithoutSopInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutSopInput, Prisma.CampaignUpdateWithoutSopInput>, Prisma.CampaignUncheckedUpdateWithoutSopInput>
+}
+
 export type CampaignCreateWithoutBrandInput = {
   id?: string
   title: string
@@ -588,6 +609,7 @@ export type CampaignCreateWithoutBrandInput = {
   updatedAt?: Date | string
   invitations?: Prisma.InvitationCreateNestedManyWithoutCampaignInput
   deliverables?: Prisma.DeliverableCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutBrandInput = {
@@ -602,6 +624,7 @@ export type CampaignUncheckedCreateWithoutBrandInput = {
   updatedAt?: Date | string
   invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutCampaignInput
   deliverables?: Prisma.DeliverableUncheckedCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutBrandInput = {
@@ -658,6 +681,7 @@ export type CampaignCreateWithoutInvitationsInput = {
   updatedAt?: Date | string
   brand: Prisma.UserCreateNestedOneWithoutCampaignsInput
   deliverables?: Prisma.DeliverableCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutInvitationsInput = {
@@ -672,6 +696,7 @@ export type CampaignUncheckedCreateWithoutInvitationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deliverables?: Prisma.DeliverableUncheckedCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutInvitationsInput = {
@@ -702,6 +727,7 @@ export type CampaignUpdateWithoutInvitationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   deliverables?: Prisma.DeliverableUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutInvitationsInput = {
@@ -716,6 +742,7 @@ export type CampaignUncheckedUpdateWithoutInvitationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deliverables?: Prisma.DeliverableUncheckedUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutDeliverablesInput = {
@@ -730,6 +757,7 @@ export type CampaignCreateWithoutDeliverablesInput = {
   updatedAt?: Date | string
   brand: Prisma.UserCreateNestedOneWithoutCampaignsInput
   invitations?: Prisma.InvitationCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutDeliverablesInput = {
@@ -744,6 +772,7 @@ export type CampaignUncheckedCreateWithoutDeliverablesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutCampaignInput
+  sop?: Prisma.SopUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutDeliverablesInput = {
@@ -774,6 +803,7 @@ export type CampaignUpdateWithoutDeliverablesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
   invitations?: Prisma.InvitationUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutDeliverablesInput = {
@@ -788,6 +818,83 @@ export type CampaignUncheckedUpdateWithoutDeliverablesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invitations?: Prisma.InvitationUncheckedUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutSopInput = {
+  id?: string
+  title: string
+  description: string
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  brand: Prisma.UserCreateNestedOneWithoutCampaignsInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutCampaignInput
+  deliverables?: Prisma.DeliverableCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutSopInput = {
+  id?: string
+  brandId: string
+  title: string
+  description: string
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutCampaignInput
+  deliverables?: Prisma.DeliverableUncheckedCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutSopInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutSopInput, Prisma.CampaignUncheckedCreateWithoutSopInput>
+}
+
+export type CampaignUpsertWithoutSopInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutSopInput, Prisma.CampaignUncheckedUpdateWithoutSopInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutSopInput, Prisma.CampaignUncheckedCreateWithoutSopInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutSopInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutSopInput, Prisma.CampaignUncheckedUpdateWithoutSopInput>
+}
+
+export type CampaignUpdateWithoutSopInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  brand?: Prisma.UserUpdateOneRequiredWithoutCampaignsNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutCampaignNestedInput
+  deliverables?: Prisma.DeliverableUpdateManyWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutSopInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutCampaignNestedInput
+  deliverables?: Prisma.DeliverableUncheckedUpdateManyWithoutCampaignNestedInput
 }
 
 export type CampaignCreateManyBrandInput = {
@@ -814,6 +921,7 @@ export type CampaignUpdateWithoutBrandInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invitations?: Prisma.InvitationUpdateManyWithoutCampaignNestedInput
   deliverables?: Prisma.DeliverableUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutBrandInput = {
@@ -828,6 +936,7 @@ export type CampaignUncheckedUpdateWithoutBrandInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invitations?: Prisma.InvitationUncheckedUpdateManyWithoutCampaignNestedInput
   deliverables?: Prisma.DeliverableUncheckedUpdateManyWithoutCampaignNestedInput
+  sop?: Prisma.SopUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateManyWithoutBrandInput = {
@@ -896,6 +1005,7 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   brand?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   invitations?: boolean | Prisma.Campaign$invitationsArgs<ExtArgs>
   deliverables?: boolean | Prisma.Campaign$deliverablesArgs<ExtArgs>
+  sop?: boolean | Prisma.Campaign$sopArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaign"]>
 
@@ -945,6 +1055,7 @@ export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   brand?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   invitations?: boolean | Prisma.Campaign$invitationsArgs<ExtArgs>
   deliverables?: boolean | Prisma.Campaign$deliverablesArgs<ExtArgs>
+  sop?: boolean | Prisma.Campaign$sopArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CampaignIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -960,6 +1071,7 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     brand: Prisma.$UserPayload<ExtArgs>
     invitations: Prisma.$InvitationPayload<ExtArgs>[]
     deliverables: Prisma.$DeliverablePayload<ExtArgs>[]
+    sop: Prisma.$SopPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1369,6 +1481,7 @@ export interface Prisma__CampaignClient<T, Null = never, ExtArgs extends runtime
   brand<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   invitations<T extends Prisma.Campaign$invitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deliverables<T extends Prisma.Campaign$deliverablesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$deliverablesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliverablePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sop<T extends Prisma.Campaign$sopArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$sopArgs<ExtArgs>>): Prisma.Prisma__SopClient<runtime.Types.Result.GetResult<Prisma.$SopPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1854,6 +1967,25 @@ export type Campaign$deliverablesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.DeliverableScalarFieldEnum | Prisma.DeliverableScalarFieldEnum[]
+}
+
+/**
+ * Campaign.sop
+ */
+export type Campaign$sopArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sop
+   */
+  select?: Prisma.SopSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sop
+   */
+  omit?: Prisma.SopOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SopInclude<ExtArgs> | null
+  where?: Prisma.SopWhereInput
 }
 
 /**

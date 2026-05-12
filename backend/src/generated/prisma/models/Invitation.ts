@@ -200,6 +200,7 @@ export type InvitationWhereInput = {
   respondedAt?: Prisma.DateTimeNullableFilter<"Invitation"> | Date | string | null
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
   influencer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  sopBinding?: Prisma.XOR<Prisma.SopBindingNullableScalarRelationFilter, Prisma.SopBindingWhereInput> | null
 }
 
 export type InvitationOrderByWithRelationInput = {
@@ -212,6 +213,7 @@ export type InvitationOrderByWithRelationInput = {
   respondedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   campaign?: Prisma.CampaignOrderByWithRelationInput
   influencer?: Prisma.UserOrderByWithRelationInput
+  sopBinding?: Prisma.SopBindingOrderByWithRelationInput
 }
 
 export type InvitationWhereUniqueInput = Prisma.AtLeast<{
@@ -227,6 +229,7 @@ export type InvitationWhereUniqueInput = Prisma.AtLeast<{
   respondedAt?: Prisma.DateTimeNullableFilter<"Invitation"> | Date | string | null
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
   influencer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  sopBinding?: Prisma.XOR<Prisma.SopBindingNullableScalarRelationFilter, Prisma.SopBindingWhereInput> | null
 }, "id">
 
 export type InvitationOrderByWithAggregationInput = {
@@ -263,6 +266,7 @@ export type InvitationCreateInput = {
   respondedAt?: Date | string | null
   campaign: Prisma.CampaignCreateNestedOneWithoutInvitationsInput
   influencer: Prisma.UserCreateNestedOneWithoutInvitationsInput
+  sopBinding?: Prisma.SopBindingCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationUncheckedCreateInput = {
@@ -273,6 +277,7 @@ export type InvitationUncheckedCreateInput = {
   message?: string | null
   createdAt?: Date | string
   respondedAt?: Date | string | null
+  sopBinding?: Prisma.SopBindingUncheckedCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationUpdateInput = {
@@ -283,6 +288,7 @@ export type InvitationUpdateInput = {
   respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutInvitationsNestedInput
   influencer?: Prisma.UserUpdateOneRequiredWithoutInvitationsNestedInput
+  sopBinding?: Prisma.SopBindingUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateInput = {
@@ -293,6 +299,7 @@ export type InvitationUncheckedUpdateInput = {
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sopBinding?: Prisma.SopBindingUncheckedUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationCreateManyInput = {
@@ -361,6 +368,11 @@ export type InvitationMinOrderByAggregateInput = {
   message?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   respondedAt?: Prisma.SortOrder
+}
+
+export type InvitationScalarRelationFilter = {
+  is?: Prisma.InvitationWhereInput
+  isNot?: Prisma.InvitationWhereInput
 }
 
 export type InvitationCreateNestedManyWithoutInfluencerInput = {
@@ -451,6 +463,20 @@ export type EnumInvitationStatusFieldUpdateOperationsInput = {
   set?: $Enums.InvitationStatus
 }
 
+export type InvitationCreateNestedOneWithoutSopBindingInput = {
+  create?: Prisma.XOR<Prisma.InvitationCreateWithoutSopBindingInput, Prisma.InvitationUncheckedCreateWithoutSopBindingInput>
+  connectOrCreate?: Prisma.InvitationCreateOrConnectWithoutSopBindingInput
+  connect?: Prisma.InvitationWhereUniqueInput
+}
+
+export type InvitationUpdateOneRequiredWithoutSopBindingNestedInput = {
+  create?: Prisma.XOR<Prisma.InvitationCreateWithoutSopBindingInput, Prisma.InvitationUncheckedCreateWithoutSopBindingInput>
+  connectOrCreate?: Prisma.InvitationCreateOrConnectWithoutSopBindingInput
+  upsert?: Prisma.InvitationUpsertWithoutSopBindingInput
+  connect?: Prisma.InvitationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InvitationUpdateToOneWithWhereWithoutSopBindingInput, Prisma.InvitationUpdateWithoutSopBindingInput>, Prisma.InvitationUncheckedUpdateWithoutSopBindingInput>
+}
+
 export type InvitationCreateWithoutInfluencerInput = {
   id?: string
   status?: $Enums.InvitationStatus
@@ -458,6 +484,7 @@ export type InvitationCreateWithoutInfluencerInput = {
   createdAt?: Date | string
   respondedAt?: Date | string | null
   campaign: Prisma.CampaignCreateNestedOneWithoutInvitationsInput
+  sopBinding?: Prisma.SopBindingCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationUncheckedCreateWithoutInfluencerInput = {
@@ -467,6 +494,7 @@ export type InvitationUncheckedCreateWithoutInfluencerInput = {
   message?: string | null
   createdAt?: Date | string
   respondedAt?: Date | string | null
+  sopBinding?: Prisma.SopBindingUncheckedCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationCreateOrConnectWithoutInfluencerInput = {
@@ -515,6 +543,7 @@ export type InvitationCreateWithoutCampaignInput = {
   createdAt?: Date | string
   respondedAt?: Date | string | null
   influencer: Prisma.UserCreateNestedOneWithoutInvitationsInput
+  sopBinding?: Prisma.SopBindingCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationUncheckedCreateWithoutCampaignInput = {
@@ -524,6 +553,7 @@ export type InvitationUncheckedCreateWithoutCampaignInput = {
   message?: string | null
   createdAt?: Date | string
   respondedAt?: Date | string | null
+  sopBinding?: Prisma.SopBindingUncheckedCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationCreateOrConnectWithoutCampaignInput = {
@@ -552,6 +582,62 @@ export type InvitationUpdateManyWithWhereWithoutCampaignInput = {
   data: Prisma.XOR<Prisma.InvitationUpdateManyMutationInput, Prisma.InvitationUncheckedUpdateManyWithoutCampaignInput>
 }
 
+export type InvitationCreateWithoutSopBindingInput = {
+  id?: string
+  status?: $Enums.InvitationStatus
+  message?: string | null
+  createdAt?: Date | string
+  respondedAt?: Date | string | null
+  campaign: Prisma.CampaignCreateNestedOneWithoutInvitationsInput
+  influencer: Prisma.UserCreateNestedOneWithoutInvitationsInput
+}
+
+export type InvitationUncheckedCreateWithoutSopBindingInput = {
+  id?: string
+  campaignId: string
+  influencerId: string
+  status?: $Enums.InvitationStatus
+  message?: string | null
+  createdAt?: Date | string
+  respondedAt?: Date | string | null
+}
+
+export type InvitationCreateOrConnectWithoutSopBindingInput = {
+  where: Prisma.InvitationWhereUniqueInput
+  create: Prisma.XOR<Prisma.InvitationCreateWithoutSopBindingInput, Prisma.InvitationUncheckedCreateWithoutSopBindingInput>
+}
+
+export type InvitationUpsertWithoutSopBindingInput = {
+  update: Prisma.XOR<Prisma.InvitationUpdateWithoutSopBindingInput, Prisma.InvitationUncheckedUpdateWithoutSopBindingInput>
+  create: Prisma.XOR<Prisma.InvitationCreateWithoutSopBindingInput, Prisma.InvitationUncheckedCreateWithoutSopBindingInput>
+  where?: Prisma.InvitationWhereInput
+}
+
+export type InvitationUpdateToOneWithWhereWithoutSopBindingInput = {
+  where?: Prisma.InvitationWhereInput
+  data: Prisma.XOR<Prisma.InvitationUpdateWithoutSopBindingInput, Prisma.InvitationUncheckedUpdateWithoutSopBindingInput>
+}
+
+export type InvitationUpdateWithoutSopBindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  campaign?: Prisma.CampaignUpdateOneRequiredWithoutInvitationsNestedInput
+  influencer?: Prisma.UserUpdateOneRequiredWithoutInvitationsNestedInput
+}
+
+export type InvitationUncheckedUpdateWithoutSopBindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  campaignId?: Prisma.StringFieldUpdateOperationsInput | string
+  influencerId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type InvitationCreateManyInfluencerInput = {
   id?: string
   campaignId: string
@@ -568,6 +654,7 @@ export type InvitationUpdateWithoutInfluencerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutInvitationsNestedInput
+  sopBinding?: Prisma.SopBindingUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateWithoutInfluencerInput = {
@@ -577,6 +664,7 @@ export type InvitationUncheckedUpdateWithoutInfluencerInput = {
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sopBinding?: Prisma.SopBindingUncheckedUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateManyWithoutInfluencerInput = {
@@ -604,6 +692,7 @@ export type InvitationUpdateWithoutCampaignInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   influencer?: Prisma.UserUpdateOneRequiredWithoutInvitationsNestedInput
+  sopBinding?: Prisma.SopBindingUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateWithoutCampaignInput = {
@@ -613,6 +702,7 @@ export type InvitationUncheckedUpdateWithoutCampaignInput = {
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sopBinding?: Prisma.SopBindingUncheckedUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateManyWithoutCampaignInput = {
@@ -636,6 +726,7 @@ export type InvitationSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   respondedAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
   influencer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  sopBinding?: boolean | Prisma.Invitation$sopBindingArgs<ExtArgs>
 }, ExtArgs["result"]["invitation"]>
 
 export type InvitationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -676,6 +767,7 @@ export type InvitationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type InvitationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
   influencer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  sopBinding?: boolean | Prisma.Invitation$sopBindingArgs<ExtArgs>
 }
 export type InvitationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
@@ -691,6 +783,7 @@ export type $InvitationPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     campaign: Prisma.$CampaignPayload<ExtArgs>
     influencer: Prisma.$UserPayload<ExtArgs>
+    sopBinding: Prisma.$SopBindingPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1096,6 +1189,7 @@ export interface Prisma__InvitationClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   campaign<T extends Prisma.CampaignDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CampaignDefaultArgs<ExtArgs>>): Prisma.Prisma__CampaignClient<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   influencer<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  sopBinding<T extends Prisma.Invitation$sopBindingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invitation$sopBindingArgs<ExtArgs>>): Prisma.Prisma__SopBindingClient<runtime.Types.Result.GetResult<Prisma.$SopBindingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1530,6 +1624,25 @@ export type InvitationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Invitations to delete.
    */
   limit?: number
+}
+
+/**
+ * Invitation.sopBinding
+ */
+export type Invitation$sopBindingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SopBinding
+   */
+  select?: Prisma.SopBindingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SopBinding
+   */
+  omit?: Prisma.SopBindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SopBindingInclude<ExtArgs> | null
+  where?: Prisma.SopBindingWhereInput
 }
 
 /**

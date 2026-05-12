@@ -125,6 +125,7 @@ model Campaign {
   brand        User          @relation(fields: [brandId], references: [id])
   invitations  Invitation[]
   deliverables Deliverable[]
+  sop          Sop?
 }
 
 enum InvitationStatus {
@@ -145,6 +146,7 @@ model Invitation {
 
   campaign     Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   influencer   User          @relation("InfluencerInvitations", fields: [influencerId], references: [id])
+  sopBinding   SopBinding?
 }
 
 enum DeliverableStatus {
@@ -174,6 +176,9 @@ enum NotificationType {
   campaign_updated
   deliverable_due
   deliverables_completed
+  sop_pushed
+  sop_reminder
+  sop_delay_requested
 }
 
 model Notification {
@@ -188,4 +193,59 @@ model Notification {
   createdAt         DateTime         @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum SopStatus {
+  generated
+  active
+  completed
+}
+
+model Sop {
+  id             String    @id @default(cuid(2))
+  campaignId     String    @unique
+  title          String
+  publishDate    DateTime  @db.Date
+  targetMarket   String
+  influencerType String
+  sellingPoints  Json
+  steps          Json
+  status         SopStatus @default(generated)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  campaign   Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  bindings   SopBinding[]
+}
+
+model SopBinding {
+  id           String   @id @default(cuid(2))
+  sopId        String
+  invitationId String
+  chatId       String
+  boundAt      DateTime @default(now())
+  sopPushedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sop        Sop        @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  invitation Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  reminderLogs SopReminderLog[]
+
+  @@unique([invitationId])
+  @@index([sopId])
+}
+
+model SopReminderLog {
+  id           String   @id @default(cuid(2))
+  sopBindingId String
+  stepIndex    Int
+  reminderType String
+  sentAt       DateTime @default(now())
+
+  sopBinding SopBinding @relation(fields: [sopBindingId], references: [id], onDelete: Cascade)
+
+  @@unique([sopBindingId, stepIndex, reminderType])
+  @@index([sopBindingId])
 }

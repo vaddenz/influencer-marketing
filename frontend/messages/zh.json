@@ -252,6 +252,33 @@
   "DiscoverPage": {
     "resultCount": "共找到 {count} 位创作者"
   },
+  "Sop": {
+    "title": "SOP",
+    "generate": "生成 SOP",
+    "edit": "编辑",
+    "activate": "激活",
+    "pushToFeishu": "推送到飞书",
+    "regenerate": "重新生成",
+    "noSop": "暂无 SOP",
+    "noSopDesc": "生成 AI 驱动的 SOP，指导网红完成 campaign 工作流程。",
+    "targetMarket": "目标市场",
+    "influencerType": "网红类型",
+    "sellingPoints": "卖点",
+    "sellingPointsHint": "每行一个卖点，用于指导 AI 生成。",
+    "publishDate": "发布日期",
+    "steps": "步骤",
+    "addStep": "添加步骤",
+    "stepName": "名称",
+    "stepDescription": "描述",
+    "dueDateOffset": "截止日期偏移（距离发布日期的天数）",
+    "requirements": "要求（每行一条）",
+    "sellingPointsLabel": "卖点",
+    "statusGenerated": "草稿",
+    "statusActive": "已激活",
+    "statusCompleted": "已完成",
+    "due": "截止：{date}",
+    "publish": "发布：{date}"
+  },
   "Footer": {
     "allRightsReserved": "保留所有权利。",
     "discover": "发现",

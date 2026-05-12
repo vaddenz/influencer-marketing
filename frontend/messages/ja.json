@@ -252,6 +252,33 @@
   "DiscoverPage": {
     "resultCount": "{count}件のクリエイターが見つかりました"
   },
+  "Sop": {
+    "title": "SOP",
+    "generate": "SOPを生成",
+    "edit": "編集",
+    "activate": "有効化",
+    "pushToFeishu": "Feishuに送信",
+    "regenerate": "再生成",
+    "noSop": "SOPがありません",
+    "noSopDesc": "AIを活用したSOPを生成して、インフルエンサーのキャンペーン作業をガイドします。",
+    "targetMarket": "対象市場",
+    "influencerType": "インフルエンサータイプ",
+    "sellingPoints": "セリングポイント",
+    "sellingPointsHint": "1行に1つのポイントを入力してください。AI生成のガイドとなります。",
+    "publishDate": "公開日",
+    "steps": "ステップ",
+    "addStep": "ステップを追加",
+    "stepName": "名前",
+    "stepDescription": "説明",
+    "dueDateOffset": "期限オフセット（公開日からの日数）",
+    "requirements": "要件（1行に1つ）",
+    "sellingPointsLabel": "セリングポイント",
+    "statusGenerated": "下書き",
+    "statusActive": "有効",
+    "statusCompleted": "完了",
+    "due": "期限：{date}",
+    "publish": "公開：{date}"
+  },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
     "discover": "発見",

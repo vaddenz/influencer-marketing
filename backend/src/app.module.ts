@@ -34,6 +34,9 @@ import { CampaignsModule } from '@/campaigns/campaigns.module'
 import { InvitationsModule } from '@/invitations/invitations.module'
 import { DeliverablesModule } from '@/deliverables/deliverables.module'
 import { NotificationsModule } from '@/notifications/notifications.module'
+import { ScheduleModule } from '@nestjs/schedule'
+import { SopModule } from '@/sop/sop.module'
+import { FeishuModule } from '@/feishu/feishu.module'
 
 @Module({
   imports: [
@@ -107,6 +110,9 @@ import { NotificationsModule } from '@/notifications/notifications.module'
     InvitationsModule,
     DeliverablesModule,
     NotificationsModule,
+    ScheduleModule.forRoot(),
+    SopModule,
+    FeishuModule,
   ],
   controllers: [],
   providers: [

@@ -252,6 +252,33 @@
   "DiscoverPage": {
     "resultCount": "Found {count} creators"
   },
+  "Sop": {
+    "title": "SOP",
+    "generate": "Generate SOP",
+    "edit": "Edit",
+    "activate": "Activate",
+    "pushToFeishu": "Push to Feishu",
+    "regenerate": "Regenerate",
+    "noSop": "No SOP yet",
+    "noSopDesc": "Generate an AI-powered SOP to guide your influencers through the campaign workflow.",
+    "targetMarket": "Target Market",
+    "influencerType": "Influencer Type",
+    "sellingPoints": "Selling Points",
+    "sellingPointsHint": "One point per line. These will guide the AI generation.",
+    "publishDate": "Publish Date",
+    "steps": "Steps",
+    "addStep": "Add Step",
+    "stepName": "Name",
+    "stepDescription": "Description",
+    "dueDateOffset": "Due Date Offset (days from publish date)",
+    "requirements": "Requirements (one per line)",
+    "sellingPointsLabel": "Selling Points",
+    "statusGenerated": "Draft",
+    "statusActive": "Active",
+    "statusCompleted": "Completed",
+    "due": "Due: {date}",
+    "publish": "Publish: {date}"
+  },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
     "discover": "Discover",
