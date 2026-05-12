@@ -87,6 +87,7 @@ export class CampaignsService {
           },
         },
         deliverables: true,
+        sop: true,
       },
     })
 

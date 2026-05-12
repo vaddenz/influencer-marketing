@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core'
-import { ConsoleLogger, ValidationPipe } from '@nestjs/common'
+import { ConsoleLogger, RequestMethod, ValidationPipe } from '@nestjs/common'
 import { AppModule } from '@/app.module'
 import { AllExceptionsFilter } from '@/common/filters/http-exception.filter'
 import { TransformInterceptor } from '@/common/interceptors/transform.interceptor'
@@ -11,7 +11,9 @@ async function bootstrap() {
       json: process.env.NODE_ENV === 'production',
     }),
   })
-  app.setGlobalPrefix(GLOBAL_PREFIX)
+  app.setGlobalPrefix(GLOBAL_PREFIX, {
+    exclude: [{ path: 'webhooks/feishu', method: RequestMethod.ALL }],
+  })
   app.enableCors({
     origin: '*',
     methods: '*',
