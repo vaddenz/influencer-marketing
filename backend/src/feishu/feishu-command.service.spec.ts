@@ -22,7 +22,7 @@ const mockPrismaService = () => ({
 })
 
 const mockFeishuService = () => ({
-  sendMessage: jest.fn().mockResolvedValue(undefined),
+  sendMessageAsync: jest.fn(),
 })
 
 describe('FeishuCommandService', () => {
@@ -69,7 +69,7 @@ describe('FeishuCommandService', () => {
   describe('handleCommand', () => {
     it('should send unknown command message for unsupported commands', async () => {
       await service.handleCommand('chat-1', '/foo')
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '未知命令。可用命令：/绑定, /进度, /延期'
       )
@@ -78,7 +78,7 @@ describe('FeishuCommandService', () => {
     it('should catch errors and send error message', async () => {
       jest.spyOn(service, 'handleBind').mockRejectedValue(new Error('boom'))
       await service.handleCommand('chat-1', '/绑定 KR_001')
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '处理命令时出错，请稍后重试'
       )
@@ -91,9 +91,9 @@ describe('FeishuCommandService', () => {
 
       await service.handleBind('chat-1', 'bad-id')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
-        '未找到该达人ID，请联系运营确认'
+        '未找到该达人 ID，请联系运营确认'
       )
       expect(prisma.sopBinding.create).not.toHaveBeenCalled()
     })
@@ -103,9 +103,9 @@ describe('FeishuCommandService', () => {
 
       await service.handleBind('chat-1', 'user-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
-        '未找到该达人ID，请联系运营确认'
+        '未找到该达人 ID，请联系运营确认'
       )
       expect(prisma.sopBinding.create).not.toHaveBeenCalled()
     })
@@ -119,7 +119,7 @@ describe('FeishuCommandService', () => {
 
       await service.handleBind('chat-1', 'inf-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '该达人尚未接受合作邀请，请先完成邀请流程'
       )
@@ -138,9 +138,9 @@ describe('FeishuCommandService', () => {
 
       await service.handleBind('chat-1', 'inf-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
-        '该活动暂无SOP，请联系运营'
+        '该活动暂无交付流程（SOP），请联系运营创建'
       )
       expect(prisma.sopBinding.create).not.toHaveBeenCalled()
     })
@@ -158,7 +158,7 @@ describe('FeishuCommandService', () => {
 
       await service.handleBind('chat-1', 'inf-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '您已绑定，无需重复操作'
       )
@@ -172,7 +172,21 @@ describe('FeishuCommandService', () => {
       })
       prisma.invitation.findFirst.mockResolvedValue({
         id: 'inv-1',
-        campaign: { sop: { id: 'sop-1' } },
+        campaign: {
+          id: 'campaign-1',
+          title: 'Test Campaign',
+          startDate: new Date('2026-01-01'),
+          endDate: new Date('2026-12-31'),
+          brandId: 'brand-1',
+          sop: {
+            id: 'sop-1',
+            steps: [],
+            publishDate: new Date('2026-06-01'),
+            targetMarket: 'JP',
+            influencerType: 'KOL',
+            sellingPoints: [],
+          },
+        },
       })
       prisma.sopBinding.findUnique.mockResolvedValue(null)
       prisma.sopBinding.create.mockResolvedValue({ id: 'bind-1' })
@@ -184,18 +198,19 @@ describe('FeishuCommandService', () => {
           sopId: 'sop-1',
           invitationId: 'inv-1',
           chatId: 'chat-1',
+          sopPushedAt: expect.any(Date),
         },
       })
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
-        '绑定成功，将为您推送SOP'
+        expect.stringContaining('绑定成功')
       )
     })
 
     it('should send usage message when influencer ID is empty', async () => {
       await service.handleBind('chat-1', '   ')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '用法: /绑定 <达人ID>'
       )
@@ -209,9 +224,9 @@ describe('FeishuCommandService', () => {
 
       await service.handleProgress('chat-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
-        '暂无进行中的SOP，请联系运营'
+        '暂无进行中的交付流程（SOP），请联系运营创建'
       )
     })
 
@@ -234,7 +249,7 @@ describe('FeishuCommandService', () => {
 
       await service.handleProgress('chat-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         expect.stringContaining('您当前处于【Draft】阶段')
       )
@@ -260,9 +275,9 @@ describe('FeishuCommandService', () => {
 
       await service.handleProgress('chat-1')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
-        '所有SOP步骤已结束'
+        '所有交付流程（SOP）步骤已结束'
       )
     })
   })
@@ -273,7 +288,7 @@ describe('FeishuCommandService', () => {
 
       await service.handleDelay('chat-1', '设备故障')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '绑定后才能申请延期'
       )
@@ -283,7 +298,7 @@ describe('FeishuCommandService', () => {
     it('should send usage message when reason is empty', async () => {
       await service.handleDelay('chat-1', '   ')
 
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '用法: /延期 <原因>'
       )
@@ -319,7 +334,7 @@ describe('FeishuCommandService', () => {
           relatedEntityId: 'sop-1',
         },
       })
-      expect(feishuService.sendMessage).toHaveBeenCalledWith(
+      expect(feishuService.sendMessageAsync).toHaveBeenCalledWith(
         'chat-1',
         '延期申请已提交，运营将手动处理'
       )

@@ -51,11 +51,11 @@ export class FeishuCommandService {
           break
         default:
           this.logger.log(`Unknown command received: ${command}`)
-          await this.feishuService.sendMessage(chatId, '未知命令。可用命令：/绑定, /进度, /延期')
+          this.feishuService.sendMessageAsync(chatId, '未知命令。可用命令：/绑定, /进度, /延期')
       }
     } catch (error) {
       this.logger.error(`Command error: ${command}`, error)
-      await this.feishuService.sendMessage(chatId, '处理命令时出错，请稍后重试')
+      this.feishuService.sendMessageAsync(chatId, '处理命令时出错，请稍后重试')
     }
   }
 
@@ -64,7 +64,7 @@ export class FeishuCommandService {
     const influencerId = influencerIdRaw.trim()
     if (!influencerId) {
       this.logger.log(`handleBind: empty influencerId for chatId=${chatId}`)
-      await this.feishuService.sendMessage(chatId, '用法: /绑定 <达人ID>')
+      this.feishuService.sendMessageAsync(chatId, '用法: /绑定 <达人ID>')
       return
     }
 
@@ -74,7 +74,7 @@ export class FeishuCommandService {
     })
     if (!user || !user.influencerProfile) {
       this.logger.log(`handleBind: user or influencerProfile not found for id=${influencerId}`)
-      await this.feishuService.sendMessage(chatId, '未找到该达人 ID，请联系运营确认')
+      this.feishuService.sendMessageAsync(chatId, '未找到该达人 ID，请联系运营确认')
       return
     }
     this.logger.log(`handleBind: found user id=${user.id}`)
@@ -84,20 +84,40 @@ export class FeishuCommandService {
         influencerId: user.id,
         status: 'accepted',
       },
-      include: { campaign: { include: { sop: true } } },
+      include: {
+        campaign: {
+          select: {
+            id: true,
+            title: true,
+            startDate: true,
+            endDate: true,
+            brandId: true,
+            sop: {
+              select: {
+                id: true,
+                steps: true,
+                publishDate: true,
+                targetMarket: true,
+                influencerType: true,
+                sellingPoints: true,
+              },
+            },
+          },
+        },
+      },
       orderBy: { createdAt: 'desc' },
     })
 
     if (!invitation) {
       this.logger.log(`handleBind: no accepted invitation for user id=${user.id}`)
-      await this.feishuService.sendMessage(chatId, '该达人尚未接受合作邀请，请先完成邀请流程')
+      this.feishuService.sendMessageAsync(chatId, '该达人尚未接受合作邀请，请先完成邀请流程')
       return
     }
     this.logger.log(`handleBind: found invitation id=${invitation.id}`)
 
     if (!invitation.campaign.sop) {
       this.logger.log(`handleBind: no SOP for campaign id=${invitation.campaign.id}`)
-      await this.feishuService.sendMessage(chatId, '该活动暂无交付流程（SOP），请联系运营创建')
+      this.feishuService.sendMessageAsync(chatId, '该活动暂无交付流程（SOP），请联系运营创建')
       return
     }
 
@@ -106,7 +126,7 @@ export class FeishuCommandService {
     })
     if (existing) {
       this.logger.log(`handleBind: binding already exists for invitation id=${invitation.id}`)
-      await this.feishuService.sendMessage(chatId, '您已绑定，无需重复操作')
+      this.feishuService.sendMessageAsync(chatId, '您已绑定，无需重复操作')
       return
     }
 
@@ -159,7 +179,7 @@ export class FeishuCommandService {
       }
     })
 
-    await this.feishuService.sendMessage(chatId, detail)
+    this.feishuService.sendMessageAsync(chatId, detail)
     this.logger.log(`Influencer ${influencerId} bound to chat ${chatId}, SOP pushed`)
   }
 
@@ -167,12 +187,20 @@ export class FeishuCommandService {
     this.logger.log(`handleProgress called. chatId=${chatId}`)
     const binding = await this.prisma.sopBinding.findFirst({
       where: { chatId },
-      include: { sop: true },
+      include: {
+        sop: {
+          select: {
+            id: true,
+            steps: true,
+            publishDate: true,
+          },
+        },
+      },
     })
 
     if (!binding || !binding.sop) {
       this.logger.log(`handleProgress: no binding or SOP for chatId=${chatId}`)
-      await this.feishuService.sendMessage(chatId, '暂无进行中的交付流程（SOP），请联系运营创建')
+      this.feishuService.sendMessageAsync(chatId, '暂无进行中的交付流程（SOP），请联系运营创建')
       return
     }
     this.logger.log(`handleProgress: found binding id=${binding.id}, sop id=${binding.sop.id}`)
@@ -204,7 +232,7 @@ export class FeishuCommandService {
 
     if (currentStepIndex === -1) {
       this.logger.log(`handleProgress: all SOP steps ended for binding id=${binding.id}`)
-      await this.feishuService.sendMessage(chatId, '所有交付流程（SOP）步骤已结束')
+      this.feishuService.sendMessageAsync(chatId, '所有交付流程（SOP）步骤已结束')
       return
     }
 
@@ -215,7 +243,7 @@ export class FeishuCommandService {
     const dateStr = dueDate.toISOString().split('T')[0]
 
     this.logger.log(`handleProgress: currentStep=${step.name}, dueDate=${dateStr}, daysRemaining=${daysRemaining}`)
-    await this.feishuService.sendMessage(
+    this.feishuService.sendMessageAsync(
       chatId,
       `您当前处于【${step.name}】阶段，截止日${dateStr}，剩余${daysRemaining}天`
     )
@@ -225,21 +253,43 @@ export class FeishuCommandService {
     this.logger.log(`handleDelay called. chatId=${chatId}, reason=${reason}`)
     if (!reason.trim()) {
       this.logger.log(`handleDelay: empty reason for chatId=${chatId}`)
-      await this.feishuService.sendMessage(chatId, '用法: /延期 <原因>')
+      this.feishuService.sendMessageAsync(chatId, '用法: /延期 <原因>')
       return
     }
 
     const binding = await this.prisma.sopBinding.findFirst({
       where: { chatId },
       include: {
-        sop: { include: { campaign: true } },
-        invitation: { include: { influencer: { include: { influencerProfile: true } } } },
+        sop: {
+          select: {
+            id: true,
+            campaign: {
+              select: {
+                brandId: true,
+              },
+            },
+          },
+        },
+        invitation: {
+          select: {
+            influencer: {
+              select: {
+                influencerProfile: {
+                  select: {
+                    displayName: true,
+                    handle: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     })
 
     if (!binding) {
       this.logger.log(`handleDelay: no binding for chatId=${chatId}`)
-      await this.feishuService.sendMessage(chatId, '绑定后才能申请延期')
+      this.feishuService.sendMessageAsync(chatId, '绑定后才能申请延期')
       return
     }
     this.logger.log(`handleDelay: found binding id=${binding.id}`)
@@ -261,7 +311,7 @@ export class FeishuCommandService {
     })
 
     this.logger.log(`handleDelay: notification created for userId=${binding.sop.campaign.brandId}`)
-    await this.feishuService.sendMessage(chatId, '延期申请已提交，运营将手动处理')
+    this.feishuService.sendMessageAsync(chatId, '延期申请已提交，运营将手动处理')
     this.logger.log(`Delay request from chat ${chatId}: ${reason}`)
   }
 }

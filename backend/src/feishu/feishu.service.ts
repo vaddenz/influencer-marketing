@@ -48,6 +48,27 @@ export class FeishuService {
     }
   }
 
+  sendMessageAsync(chatId: string, content: string): void {
+    this.sendMessageWithRetry(chatId, content, 3).catch((err) => {
+      this.logger.error(`Failed to send message to ${chatId} after retries`, err)
+    })
+  }
+
+  private async sendMessageWithRetry(chatId: string, content: string, maxRetries: number): Promise<void> {
+    let lastError: Error | undefined
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        await this.sendMessage(chatId, content)
+        return
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error(String(error))
+        const delay = Math.min(1000 * 2 ** attempt, 8000)
+        await new Promise((resolve) => setTimeout(resolve, delay))
+      }
+    }
+    throw lastError
+  }
+
   private async getTenantAccessToken(): Promise<string> {
     const now = Date.now()
     if (this.tenantAccessToken && this.tokenExpiresAt > now + 60000) {
