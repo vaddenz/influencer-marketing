@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger'
 import type { Request } from 'express'
 import { FeishuService } from './feishu.service'
 import { FeishuCommandService } from './feishu-command.service'
-import type { FeishuWebhookBody } from './dto/feishu-webhook.dto'
+import type { FeishuWebhookBody, FeishuSender } from './dto/feishu-webhook.dto'
 
 interface RequestWithRawBody extends Request {
   rawBody?: Buffer
@@ -49,8 +49,11 @@ export class FeishuController {
       if (message.message_type === 'text' && message.content) {
         const content = JSON.parse(message.content)
         const text = content.text?.trim() || ''
-        this.logger.log(`Parsed text command. chat_id=${message.chat_id}, text=${text}`)
-        await this.commandService.handleCommand(message.chat_id || '', text)
+        const sender: FeishuSender | undefined = message.sender
+        this.logger.log(
+          `Parsed text command. chat_id=${message.chat_id}, text=${text}, sender_type=${sender?.sender_type}, tenant_key=${sender?.tenant_key}`
+        )
+        await this.commandService.handleCommand(message.chat_id || '', text, sender)
       } else {
         this.logger.log(`Non-text message received, skipping. message_type=${message.message_type}`)
       }

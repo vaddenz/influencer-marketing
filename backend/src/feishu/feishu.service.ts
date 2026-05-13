@@ -10,6 +10,7 @@ export class FeishuService {
   private readonly verifyToken: string
   private tenantAccessToken: string | null = null
   private tokenExpiresAt = 0
+  private tenantKey: string | null = null
 
   constructor(private readonly configService: ConfigService) {
     this.appId = this.configService.get('feishu.appId') || ''
@@ -69,6 +70,10 @@ export class FeishuService {
     throw lastError
   }
 
+  getTenantKey(): string | null {
+    return this.tenantKey
+  }
+
   private async getTenantAccessToken(): Promise<string> {
     const now = Date.now()
     if (this.tenantAccessToken && this.tokenExpiresAt > now + 60000) {
@@ -88,6 +93,7 @@ export class FeishuService {
 
     this.tenantAccessToken = data.tenant_access_token
     this.tokenExpiresAt = now + data.expire * 1000
+    this.tenantKey = data.tenant_key ?? null
     return this.tenantAccessToken!
   }
 }

@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import { PrismaService } from '@/common/prisma/prisma.service'
 import { FeishuService } from './feishu.service'
 import { NotificationType } from '@/generated/prisma/enums'
+import type { FeishuSender } from './dto/feishu-webhook.dto'
 
 @Injectable()
 export class FeishuCommandService {
@@ -30,8 +31,16 @@ export class FeishuCommandService {
     }
   }
 
-  async handleCommand(chatId: string, text: string) {
-    this.logger.log(`handleCommand called. chatId=${chatId}, text=${text}`)
+  isInternalUser(sender?: FeishuSender): boolean {
+    if (!sender?.tenant_key) return false
+    return sender.tenant_key === this.feishuService.getTenantKey()
+  }
+
+  async handleCommand(chatId: string, text: string, sender?: FeishuSender) {
+    const isInternal = this.isInternalUser(sender)
+    this.logger.log(
+      `handleCommand called. chatId=${chatId}, text=${text}, sender_open_id=${sender?.sender_id?.open_id}, internal=${isInternal}`
+    )
     const { command, args } = this.parseCommand(text)
     this.logger.log(`Parsed command. command=${command}, args=${args}`)
 

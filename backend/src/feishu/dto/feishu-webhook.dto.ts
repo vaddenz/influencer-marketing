@@ -21,8 +21,19 @@ export interface FeishuEvent {
   message?: FeishuMessage
 }
 
+export interface FeishuSender {
+  sender_id?: {
+    union_id?: string
+    user_id?: string
+    open_id?: string
+  }
+  sender_type?: string
+  tenant_key?: string
+}
+
 export interface FeishuMessage {
   chat_id?: string
   message_type?: string
   content?: string
+  sender?: FeishuSender
 }
