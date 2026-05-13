@@ -28,7 +28,14 @@ export class FeishuController {
     @Headers('x-lark-request-timeout') _timeout: string
   ) {
     const eventType = body.header?.event_type || body.event?.type || body.type
-    this.logger.log(`Received Feishu webhook. eventType=${eventType}, messageType=${body.event?.message?.message_type}`)
+    const eventId = body.header?.event_id
+    const message = body.event?.message
+    const contentPreview = message?.content
+      ? JSON.parse(message.content).text?.slice(0, 80).replace(/\n/g, ' ') || ''
+      : ''
+    this.logger.log(
+      `Received Feishu webhook. event_id=${eventId}, eventType=${eventType}, messageType=${message?.message_type}, sender_open_id=${message?.sender?.sender_id?.open_id}, contentPreview="${contentPreview}"`
+    )
 
     if (body.challenge) {
       this.logger.log(`Challenge detected, returning challenge=${body.challenge}`)
@@ -43,9 +50,8 @@ export class FeishuController {
     // }
     // this.logger.log('Feishu webhook signature verified')
 
-    if (eventType === 'im.message.receive_v1' && body.event?.message) {
-      const message = body.event.message
-      this.logger.log(`Handling im.message.receive_v1 event. chat_id=${message.chat_id}, message_type=${message.message_type}`)
+    if (eventType === 'im.message.receive_v1' && message) {
+      this.logger.log(`Handling im.message.receive_v1 event. event_id=${eventId}, chat_id=${message.chat_id}, message_type=${message.message_type}`)
       if (message.message_type === 'text' && message.content) {
         const content = JSON.parse(message.content)
         const text = content.text?.trim() || ''

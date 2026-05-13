@@ -31,6 +31,10 @@ export class FeishuCommandService {
     }
   }
 
+  private sample(text: string, maxLen = 80): string {
+    return text.length > maxLen ? text.slice(0, maxLen) + '...' : text
+  }
+
   isInternalUser(sender?: FeishuSender): boolean {
     if (!sender?.tenant_key) return false
     return sender.tenant_key === this.feishuService.getTenantKey()
@@ -38,41 +42,42 @@ export class FeishuCommandService {
 
   async handleCommand(chatId: string, text: string, sender?: FeishuSender) {
     const isInternal = this.isInternalUser(sender)
+    const openId = sender?.sender_id?.open_id
     this.logger.log(
-      `handleCommand called. chatId=${chatId}, text=${text}, sender_open_id=${sender?.sender_id?.open_id}, internal=${isInternal}`
+      `handleCommand called. chatId=${chatId}, text="${this.sample(text)}", sender_open_id=${openId}, internal=${isInternal}`
     )
     const { command, args } = this.parseCommand(text)
-    this.logger.log(`Parsed command. command=${command}, args=${args}`)
+    this.logger.log(`Parsed command. command=${command}, args="${this.sample(args)}"`)
 
     try {
       switch (command) {
         case '/绑定':
-          this.logger.log(`Handling /绑定 command for chatId=${chatId}`)
-          await this.handleBind(chatId, args)
+          this.logger.log(`Handling /绑定 command for chatId=${chatId}, sender_open_id=${openId}`)
+          await this.handleBind(chatId, args, openId)
           break
         case '/进度':
-          this.logger.log(`Handling /进度 command for chatId=${chatId}`)
-          await this.handleProgress(chatId)
+          this.logger.log(`Handling /进度 command for chatId=${chatId}, sender_open_id=${openId}`)
+          await this.handleProgress(chatId, openId)
           break
         case '/延期':
-          this.logger.log(`Handling /延期 command for chatId=${chatId}`)
-          await this.handleDelay(chatId, args)
+          this.logger.log(`Handling /延期 command for chatId=${chatId}, sender_open_id=${openId}`)
+          await this.handleDelay(chatId, args, openId)
           break
         default:
-          this.logger.log(`Unknown command received: ${command}`)
+          this.logger.log(`Unknown command received: ${command}, sender_open_id=${openId}`)
           this.feishuService.sendMessageAsync(chatId, '未知命令。可用命令：/绑定, /进度, /延期')
       }
     } catch (error) {
-      this.logger.error(`Command error: ${command}`, error)
+      this.logger.error(`Command error: ${command}, sender_open_id=${openId}`, error)
       this.feishuService.sendMessageAsync(chatId, '处理命令时出错，请稍后重试')
     }
   }
 
-  async handleBind(chatId: string, influencerIdRaw: string) {
-    this.logger.log(`handleBind called. chatId=${chatId}, influencerIdRaw=${influencerIdRaw}`)
+  async handleBind(chatId: string, influencerIdRaw: string, senderOpenId?: string) {
+    this.logger.log(`handleBind called. chatId=${chatId}, influencerIdRaw=${influencerIdRaw}, sender_open_id=${senderOpenId}`)
     const influencerId = influencerIdRaw.trim()
     if (!influencerId) {
-      this.logger.log(`handleBind: empty influencerId for chatId=${chatId}`)
+      this.logger.log(`handleBind: empty influencerId for chatId=${chatId}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '用法: /绑定 <达人ID>')
       return
     }
@@ -82,11 +87,11 @@ export class FeishuCommandService {
       include: { influencerProfile: true },
     })
     if (!user || !user.influencerProfile) {
-      this.logger.log(`handleBind: user or influencerProfile not found for id=${influencerId}`)
+      this.logger.log(`handleBind: user or influencerProfile not found for id=${influencerId}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '未找到该达人 ID，请联系运营确认')
       return
     }
-    this.logger.log(`handleBind: found user id=${user.id}`)
+    this.logger.log(`handleBind: found user id=${user.id}, sender_open_id=${senderOpenId}`)
 
     const invitation = await this.prisma.invitation.findFirst({
       where: {
@@ -118,14 +123,14 @@ export class FeishuCommandService {
     })
 
     if (!invitation) {
-      this.logger.log(`handleBind: no accepted invitation for user id=${user.id}`)
+      this.logger.log(`handleBind: no accepted invitation for user id=${user.id}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '该达人尚未接受合作邀请，请先完成邀请流程')
       return
     }
-    this.logger.log(`handleBind: found invitation id=${invitation.id}`)
+    this.logger.log(`handleBind: found invitation id=${invitation.id}, sender_open_id=${senderOpenId}`)
 
     if (!invitation.campaign.sop) {
-      this.logger.log(`handleBind: no SOP for campaign id=${invitation.campaign.id}`)
+      this.logger.log(`handleBind: no SOP for campaign id=${invitation.campaign.id}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '该活动暂无交付流程（SOP），请联系运营创建')
       return
     }
@@ -134,7 +139,7 @@ export class FeishuCommandService {
       where: { invitationId: invitation.id },
     })
     if (existing) {
-      this.logger.log(`handleBind: binding already exists for invitation id=${invitation.id}`)
+      this.logger.log(`handleBind: binding already exists for invitation id=${invitation.id}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '您已绑定，无需重复操作')
       return
     }
@@ -148,7 +153,7 @@ export class FeishuCommandService {
       },
     })
 
-    this.logger.log(`handleBind: created sopBinding id=${binding.id} for influencer ${influencerId}, chat ${chatId}`)
+    this.logger.log(`handleBind: created sopBinding id=${binding.id} for influencer ${influencerId}, chat ${chatId}, sender_open_id=${senderOpenId}`)
 
     // Push SOP and campaign detail
     const campaign = invitation.campaign
@@ -189,11 +194,11 @@ export class FeishuCommandService {
     })
 
     this.feishuService.sendMessageAsync(chatId, detail)
-    this.logger.log(`Influencer ${influencerId} bound to chat ${chatId}, SOP pushed`)
+    this.logger.log(`Influencer ${influencerId} bound to chat ${chatId}, SOP pushed, sender_open_id=${senderOpenId}`)
   }
 
-  async handleProgress(chatId: string) {
-    this.logger.log(`handleProgress called. chatId=${chatId}`)
+  async handleProgress(chatId: string, senderOpenId?: string) {
+    this.logger.log(`handleProgress called. chatId=${chatId}, sender_open_id=${senderOpenId}`)
     const binding = await this.prisma.sopBinding.findFirst({
       where: { chatId },
       include: {
@@ -208,11 +213,11 @@ export class FeishuCommandService {
     })
 
     if (!binding || !binding.sop) {
-      this.logger.log(`handleProgress: no binding or SOP for chatId=${chatId}`)
+      this.logger.log(`handleProgress: no binding or SOP for chatId=${chatId}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '暂无进行中的交付流程（SOP），请联系运营创建')
       return
     }
-    this.logger.log(`handleProgress: found binding id=${binding.id}, sop id=${binding.sop.id}`)
+    this.logger.log(`handleProgress: found binding id=${binding.id}, sop id=${binding.sop.id}, sender_open_id=${senderOpenId}`)
 
     const steps = binding.sop.steps as Array<{
       name: string
@@ -240,7 +245,7 @@ export class FeishuCommandService {
     }
 
     if (currentStepIndex === -1) {
-      this.logger.log(`handleProgress: all SOP steps ended for binding id=${binding.id}`)
+      this.logger.log(`handleProgress: all SOP steps ended for binding id=${binding.id}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '所有交付流程（SOP）步骤已结束')
       return
     }
@@ -251,17 +256,17 @@ export class FeishuCommandService {
     const daysRemaining = Math.ceil((dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
     const dateStr = dueDate.toISOString().split('T')[0]
 
-    this.logger.log(`handleProgress: currentStep=${step.name}, dueDate=${dateStr}, daysRemaining=${daysRemaining}`)
+    this.logger.log(`handleProgress: currentStep=${step.name}, dueDate=${dateStr}, daysRemaining=${daysRemaining}, sender_open_id=${senderOpenId}`)
     this.feishuService.sendMessageAsync(
       chatId,
       `您当前处于【${step.name}】阶段，截止日${dateStr}，剩余${daysRemaining}天`
     )
   }
 
-  async handleDelay(chatId: string, reason: string) {
-    this.logger.log(`handleDelay called. chatId=${chatId}, reason=${reason}`)
+  async handleDelay(chatId: string, reason: string, senderOpenId?: string) {
+    this.logger.log(`handleDelay called. chatId=${chatId}, reason="${this.sample(reason)}", sender_open_id=${senderOpenId}`)
     if (!reason.trim()) {
-      this.logger.log(`handleDelay: empty reason for chatId=${chatId}`)
+      this.logger.log(`handleDelay: empty reason for chatId=${chatId}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '用法: /延期 <原因>')
       return
     }
@@ -297,11 +302,11 @@ export class FeishuCommandService {
     })
 
     if (!binding) {
-      this.logger.log(`handleDelay: no binding for chatId=${chatId}`)
+      this.logger.log(`handleDelay: no binding for chatId=${chatId}, sender_open_id=${senderOpenId}`)
       this.feishuService.sendMessageAsync(chatId, '绑定后才能申请延期')
       return
     }
-    this.logger.log(`handleDelay: found binding id=${binding.id}`)
+    this.logger.log(`handleDelay: found binding id=${binding.id}, sender_open_id=${senderOpenId}`)
 
     const influencerName =
       binding.invitation.influencer.influencerProfile?.displayName ||
@@ -319,8 +324,8 @@ export class FeishuCommandService {
       },
     })
 
-    this.logger.log(`handleDelay: notification created for userId=${binding.sop.campaign.brandId}`)
+    this.logger.log(`handleDelay: notification created for userId=${binding.sop.campaign.brandId}, sender_open_id=${senderOpenId}`)
     this.feishuService.sendMessageAsync(chatId, '延期申请已提交，运营将手动处理')
-    this.logger.log(`Delay request from chat ${chatId}: ${reason}`)
+    this.logger.log(`Delay request from chat ${chatId}: reason="${this.sample(reason)}", sender_open_id=${senderOpenId}`)
   }
 }

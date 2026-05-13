@@ -99,7 +99,7 @@ export class FeishuSchedulerService {
                 },
               })
 
-              this.logger.log(`Sent ${reminderType} reminder for binding ${binding.id}, step ${stepIndex}`)
+              this.logger.log(`Sent ${reminderType} reminder for sopId=${sop.id}, bindingId=${binding.id}, stepIndex=${stepIndex}`)
             } catch (error) {
               this.logger.error(`Failed to send reminder to binding ${binding.id}`, error)
             }
