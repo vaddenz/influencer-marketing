@@ -7,6 +7,7 @@ import jwtConfig from './jwt.config'
 import llmConfig from './llm.config'
 import mqConfig from './mq.config'
 import oauthConfig from './oauth.config'
+import scraperConfig from './scraper.config'
 import redisConfig from './redis.config'
 import storageConfig from './storage.config'
 import otelConfig from './otel.config'
@@ -27,6 +28,7 @@ export const configurations = [
   mqConfig,
   oauthConfig,
   redisConfig,
+  scraperConfig,
   storageConfig,
   otelConfig,
   vectorSearchConfig,
@@ -46,6 +48,7 @@ export {
   mqConfig,
   oauthConfig,
   redisConfig,
+  scraperConfig,
   storageConfig,
   otelConfig,
   vectorSearchConfig,
