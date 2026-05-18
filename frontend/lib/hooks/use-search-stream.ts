@@ -28,6 +28,7 @@ export interface StreamedResult {
   profileImageUrl?: string
   sourceName?: string
   sourceUrl?: string
+  homepageUrl?: string
   fans?: number
   isExternal: boolean
 }

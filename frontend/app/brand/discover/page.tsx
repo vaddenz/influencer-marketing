@@ -1,11 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { apiFetch } from '@/lib/api'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useSearchStream } from '@/lib/hooks/use-search-stream'
 
 interface InfluencerProfile {
   id: string
@@ -33,20 +32,7 @@ export default function DiscoverPage() {
     scope: '',
   })
 
-  const {
-    data: influencers,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['influencers', filters],
-    queryFn: () => {
-      const params = new URLSearchParams()
-      Object.entries(filters).forEach(([k, v]) => {
-        if (v) params.append(k, v)
-      })
-      return apiFetch<InfluencerProfile[]>(`/influencers?${params.toString()}`)
-    },
-  })
+  const { results: influencers, isLoading, isSearchingExternal, warning, error: isError } = useSearchStream(filters)
 
   const getScopeLabel = (count: number) => {
     if (count < 10000) return 'Nano'
@@ -283,6 +269,25 @@ export default function DiscoverPage() {
             </div>
           )}
 
+          {isSearchingExternal && (
+            <div className="flex items-center gap-2 mb-4 text-sm text-gray">
+              <div
+                className="animate-spin w-4 h-4 border-2 rounded-full"
+                style={{
+                  borderColor: '#0c0c0c',
+                  borderTopColor: 'transparent',
+                }}
+              />
+              Searching external sources...
+            </div>
+          )}
+
+          {warning && (
+            <div className="d-card mb-4 bg-yellow-50 border-yellow-200">
+              <p className="text-sm text-yellow-800">{warning}</p>
+            </div>
+          )}
+
           {!isLoading && !isError && influencers && influencers.length > 0 && (
             <p className="text-sm text-gray mb-4">
               {t('resultCount', { count: influencers.length })}
@@ -310,7 +315,7 @@ export default function DiscoverPage() {
                 {influencer.profileImageUrl ? (
                   <Image
                     src={influencer.profileImageUrl}
-                    alt={influencer.displayName}
+                    alt={influencer.displayName || 'Influencer'}
                     width={56}
                     height={56}
                     unoptimized
@@ -318,8 +323,8 @@ export default function DiscoverPage() {
                   />
                 ) : (
                   <div
-                    className={`w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0 ${getAvatarBg(influencer.displayName)}`}>
-                    {influencer.handle.charAt(0).toUpperCase()}
+                    className={`w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0 ${getAvatarBg(influencer.displayName || '?')}`}>
+                    {(influencer.handle || '?').charAt(0).toUpperCase()}
                   </div>
                 )}
 
@@ -329,28 +334,28 @@ export default function DiscoverPage() {
                     <h3
                       className="font-semibold text-base truncate max-w-full"
                       style={{ fontFamily: 'var(--font-heading)' }}
-                      title={influencer.displayName}>
-                      {influencer.displayName}
+                      title={influencer.displayName || ''}>
+                      {influencer.displayName || 'Unknown'}
                     </h3>
                     <span
                       className="text-gray text-sm truncate max-w-[200px]"
-                      title={influencer.handle}>
-                      {influencer.handle.length > 24
-                        ? `${influencer.handle.substring(0, 24)}...`
-                        : influencer.handle}
+                      title={influencer.handle || ''}>
+                      {(influencer.handle || '').length > 24
+                        ? `${(influencer.handle || '').substring(0, 24)}...`
+                        : (influencer.handle || '')}
                     </span>
                     <span className="px-2.5 py-0.5 bg-ink/10 text-ink text-xs font-medium rounded-full whitespace-nowrap">
-                      {influencer.niche}
+                      {influencer.niche || 'Unknown'}
                     </span>
                     <span className="px-2.5 py-0.5 bg-light-gray text-gray text-xs font-medium rounded-full whitespace-nowrap">
-                      {getScopeLabel(influencer.followerCount)}
+                      {getScopeLabel(influencer.followerCount || 0)}
                     </span>
                   </div>
                   <p
                     className="text-gray text-sm mb-2 truncate"
-                    title={`${influencer.followerCount.toLocaleString()} followers · ${influencer.engagementRate}% engagement · ${influencer.locationCountry} ${influencer.locationRegion}`}>
-                    {influencer.followerCount.toLocaleString()} followers ·{' '}
-                    {influencer.engagementRate}% engagement ·{' '}
+                    title={`${(influencer.followerCount || 0).toLocaleString()} followers · ${influencer.engagementRate || 0}% engagement · ${influencer.locationCountry || ''} ${influencer.locationRegion || ''}`}>
+                    {(influencer.followerCount || 0).toLocaleString()} followers ·{' '}
+                    {influencer.engagementRate || 0}% engagement ·{' '}
                     {influencer.locationCountry} {influencer.locationRegion}
                   </p>
                   {influencer.bio && (
@@ -381,11 +386,21 @@ export default function DiscoverPage() {
                 </div>
 
                 {/* CTA */}
-                <Link
-                  href={`/brand/influencers/${influencer.userId}`}
-                  className="d-btn-primary flex-shrink-0 text-sm">
-                  View Profile
-                </Link>
+                {influencer.userId ? (
+                  <Link
+                    href={`/brand/influencers/${influencer.userId}`}
+                    className="d-btn-primary flex-shrink-0 text-sm">
+                    View Profile
+                  </Link>
+                ) : influencer.homepageUrl ? (
+                  <a
+                    href={influencer.homepageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="d-btn-primary flex-shrink-0 text-sm">
+                    View External
+                  </a>
+                ) : null}
               </div>
             ))}
           </div>
