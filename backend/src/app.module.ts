@@ -37,6 +37,7 @@ import { NotificationsModule } from '@/notifications/notifications.module'
 import { ScheduleModule } from '@nestjs/schedule'
 import { SopModule } from '@/sop/sop.module'
 import { FeishuModule } from '@/feishu/feishu.module'
+import { ScraperModule } from '@/scraper/scraper.module'
 
 @Module({
   imports: [
@@ -113,6 +114,7 @@ import { FeishuModule } from '@/feishu/feishu.module'
     ScheduleModule.forRoot(),
     SopModule,
     FeishuModule,
+    ScraperModule,
   ],
   controllers: [],
   providers: [
