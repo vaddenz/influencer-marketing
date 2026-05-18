@@ -29,11 +29,21 @@ export type AggregateInfluencerProfile = {
 export type InfluencerProfileAvgAggregateOutputType = {
   followerCount: number | null
   engagementRate: runtime.Decimal | null
+  age: number | null
+  likes: number | null
+  postedImages: number | null
+  postedVideos: number | null
+  subscriptionFee: runtime.Decimal | null
 }
 
 export type InfluencerProfileSumAggregateOutputType = {
   followerCount: number | null
   engagementRate: runtime.Decimal | null
+  age: number | null
+  likes: number | null
+  postedImages: number | null
+  postedVideos: number | null
+  subscriptionFee: runtime.Decimal | null
 }
 
 export type InfluencerProfileMinAggregateOutputType = {
@@ -48,6 +58,20 @@ export type InfluencerProfileMinAggregateOutputType = {
   locationCountry: string | null
   locationRegion: string | null
   profileImageUrl: string | null
+  nick: string | null
+  age: number | null
+  likes: number | null
+  postedImages: number | null
+  postedVideos: number | null
+  subscriptionFee: runtime.Decimal | null
+  isFree: boolean | null
+  homepageUrl: string | null
+  sourceName: string | null
+  sourceUrl: string | null
+  lastScrapedAt: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type InfluencerProfileMaxAggregateOutputType = {
@@ -62,6 +86,20 @@ export type InfluencerProfileMaxAggregateOutputType = {
   locationCountry: string | null
   locationRegion: string | null
   profileImageUrl: string | null
+  nick: string | null
+  age: number | null
+  likes: number | null
+  postedImages: number | null
+  postedVideos: number | null
+  subscriptionFee: runtime.Decimal | null
+  isFree: boolean | null
+  homepageUrl: string | null
+  sourceName: string | null
+  sourceUrl: string | null
+  lastScrapedAt: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type InfluencerProfileCountAggregateOutputType = {
@@ -77,6 +115,23 @@ export type InfluencerProfileCountAggregateOutputType = {
   locationCountry: number
   locationRegion: number
   profileImageUrl: number
+  nick: number
+  age: number
+  likes: number
+  postedImages: number
+  postedVideos: number
+  subscriptionFee: number
+  isFree: number
+  sampleMedia: number
+  homepageUrl: number
+  socialMedia: number
+  props: number
+  sourceName: number
+  sourceUrl: number
+  lastScrapedAt: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -84,11 +139,21 @@ export type InfluencerProfileCountAggregateOutputType = {
 export type InfluencerProfileAvgAggregateInputType = {
   followerCount?: true
   engagementRate?: true
+  age?: true
+  likes?: true
+  postedImages?: true
+  postedVideos?: true
+  subscriptionFee?: true
 }
 
 export type InfluencerProfileSumAggregateInputType = {
   followerCount?: true
   engagementRate?: true
+  age?: true
+  likes?: true
+  postedImages?: true
+  postedVideos?: true
+  subscriptionFee?: true
 }
 
 export type InfluencerProfileMinAggregateInputType = {
@@ -103,6 +168,20 @@ export type InfluencerProfileMinAggregateInputType = {
   locationCountry?: true
   locationRegion?: true
   profileImageUrl?: true
+  nick?: true
+  age?: true
+  likes?: true
+  postedImages?: true
+  postedVideos?: true
+  subscriptionFee?: true
+  isFree?: true
+  homepageUrl?: true
+  sourceName?: true
+  sourceUrl?: true
+  lastScrapedAt?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type InfluencerProfileMaxAggregateInputType = {
@@ -117,6 +196,20 @@ export type InfluencerProfileMaxAggregateInputType = {
   locationCountry?: true
   locationRegion?: true
   profileImageUrl?: true
+  nick?: true
+  age?: true
+  likes?: true
+  postedImages?: true
+  postedVideos?: true
+  subscriptionFee?: true
+  isFree?: true
+  homepageUrl?: true
+  sourceName?: true
+  sourceUrl?: true
+  lastScrapedAt?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type InfluencerProfileCountAggregateInputType = {
@@ -132,6 +225,23 @@ export type InfluencerProfileCountAggregateInputType = {
   locationCountry?: true
   locationRegion?: true
   profileImageUrl?: true
+  nick?: true
+  age?: true
+  likes?: true
+  postedImages?: true
+  postedVideos?: true
+  subscriptionFee?: true
+  isFree?: true
+  sampleMedia?: true
+  homepageUrl?: true
+  socialMedia?: true
+  props?: true
+  sourceName?: true
+  sourceUrl?: true
+  lastScrapedAt?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -223,17 +333,34 @@ export type InfluencerProfileGroupByArgs<ExtArgs extends runtime.Types.Extension
 
 export type InfluencerProfileGroupByOutputType = {
   id: string
-  userId: string
+  userId: string | null
   displayName: string
   handle: string
   bio: string | null
-  niche: string
-  followerCount: number
-  engagementRate: runtime.Decimal
-  platforms: runtime.JsonValue
-  locationCountry: string
-  locationRegion: string
+  niche: string | null
+  followerCount: number | null
+  engagementRate: runtime.Decimal | null
+  platforms: runtime.JsonValue | null
+  locationCountry: string | null
+  locationRegion: string | null
   profileImageUrl: string | null
+  nick: string | null
+  age: number | null
+  likes: number | null
+  postedImages: number | null
+  postedVideos: number | null
+  subscriptionFee: runtime.Decimal | null
+  isFree: boolean | null
+  sampleMedia: runtime.JsonValue | null
+  homepageUrl: string | null
+  socialMedia: runtime.JsonValue | null
+  props: runtime.JsonValue | null
+  sourceName: string | null
+  sourceUrl: string | null
+  lastScrapedAt: Date | null
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: InfluencerProfileCountAggregateOutputType | null
   _avg: InfluencerProfileAvgAggregateOutputType | null
   _sum: InfluencerProfileSumAggregateOutputType | null
@@ -261,68 +388,136 @@ export type InfluencerProfileWhereInput = {
   OR?: Prisma.InfluencerProfileWhereInput[]
   NOT?: Prisma.InfluencerProfileWhereInput | Prisma.InfluencerProfileWhereInput[]
   id?: Prisma.StringFilter<"InfluencerProfile"> | string
-  userId?: Prisma.StringFilter<"InfluencerProfile"> | string
+  userId?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
   displayName?: Prisma.StringFilter<"InfluencerProfile"> | string
   handle?: Prisma.StringFilter<"InfluencerProfile"> | string
   bio?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
-  niche?: Prisma.StringFilter<"InfluencerProfile"> | string
-  followerCount?: Prisma.IntFilter<"InfluencerProfile"> | number
-  engagementRate?: Prisma.DecimalFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonFilter<"InfluencerProfile">
-  locationCountry?: Prisma.StringFilter<"InfluencerProfile"> | string
-  locationRegion?: Prisma.StringFilter<"InfluencerProfile"> | string
+  niche?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  followerCount?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  engagementRate?: Prisma.DecimalNullableFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  locationCountry?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  locationRegion?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
   profileImageUrl?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  nick?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  age?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  likes?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  postedImages?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  postedVideos?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  subscriptionFee?: Prisma.DecimalNullableFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.BoolNullableFilter<"InfluencerProfile"> | boolean | null
+  sampleMedia?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  homepageUrl?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  socialMedia?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  props?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  sourceName?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  sourceUrl?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  lastScrapedAt?: Prisma.DateTimeNullableFilter<"InfluencerProfile"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"InfluencerProfile"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InfluencerProfile"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"InfluencerProfile"> | Date | string | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type InfluencerProfileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   displayName?: Prisma.SortOrder
   handle?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  niche?: Prisma.SortOrder
-  followerCount?: Prisma.SortOrder
-  engagementRate?: Prisma.SortOrder
-  platforms?: Prisma.SortOrder
-  locationCountry?: Prisma.SortOrder
-  locationRegion?: Prisma.SortOrder
+  niche?: Prisma.SortOrderInput | Prisma.SortOrder
+  followerCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  engagementRate?: Prisma.SortOrderInput | Prisma.SortOrder
+  platforms?: Prisma.SortOrderInput | Prisma.SortOrder
+  locationCountry?: Prisma.SortOrderInput | Prisma.SortOrder
+  locationRegion?: Prisma.SortOrderInput | Prisma.SortOrder
   profileImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  nick?: Prisma.SortOrderInput | Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
+  likes?: Prisma.SortOrderInput | Prisma.SortOrder
+  postedImages?: Prisma.SortOrderInput | Prisma.SortOrder
+  postedVideos?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFree?: Prisma.SortOrderInput | Prisma.SortOrder
+  sampleMedia?: Prisma.SortOrderInput | Prisma.SortOrder
+  homepageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  socialMedia?: Prisma.SortOrderInput | Prisma.SortOrder
+  props?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceName?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastScrapedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type InfluencerProfileWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   userId?: string
-  handle?: string
   AND?: Prisma.InfluencerProfileWhereInput | Prisma.InfluencerProfileWhereInput[]
   OR?: Prisma.InfluencerProfileWhereInput[]
   NOT?: Prisma.InfluencerProfileWhereInput | Prisma.InfluencerProfileWhereInput[]
   displayName?: Prisma.StringFilter<"InfluencerProfile"> | string
+  handle?: Prisma.StringFilter<"InfluencerProfile"> | string
   bio?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
-  niche?: Prisma.StringFilter<"InfluencerProfile"> | string
-  followerCount?: Prisma.IntFilter<"InfluencerProfile"> | number
-  engagementRate?: Prisma.DecimalFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonFilter<"InfluencerProfile">
-  locationCountry?: Prisma.StringFilter<"InfluencerProfile"> | string
-  locationRegion?: Prisma.StringFilter<"InfluencerProfile"> | string
+  niche?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  followerCount?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  engagementRate?: Prisma.DecimalNullableFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  locationCountry?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  locationRegion?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
   profileImageUrl?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "userId" | "handle">
+  nick?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  age?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  likes?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  postedImages?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  postedVideos?: Prisma.IntNullableFilter<"InfluencerProfile"> | number | null
+  subscriptionFee?: Prisma.DecimalNullableFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.BoolNullableFilter<"InfluencerProfile"> | boolean | null
+  sampleMedia?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  homepageUrl?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  socialMedia?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  props?: Prisma.JsonNullableFilter<"InfluencerProfile">
+  sourceName?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  sourceUrl?: Prisma.StringNullableFilter<"InfluencerProfile"> | string | null
+  lastScrapedAt?: Prisma.DateTimeNullableFilter<"InfluencerProfile"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"InfluencerProfile"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InfluencerProfile"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"InfluencerProfile"> | Date | string | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id" | "userId">
 
 export type InfluencerProfileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   displayName?: Prisma.SortOrder
   handle?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  niche?: Prisma.SortOrder
-  followerCount?: Prisma.SortOrder
-  engagementRate?: Prisma.SortOrder
-  platforms?: Prisma.SortOrder
-  locationCountry?: Prisma.SortOrder
-  locationRegion?: Prisma.SortOrder
+  niche?: Prisma.SortOrderInput | Prisma.SortOrder
+  followerCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  engagementRate?: Prisma.SortOrderInput | Prisma.SortOrder
+  platforms?: Prisma.SortOrderInput | Prisma.SortOrder
+  locationCountry?: Prisma.SortOrderInput | Prisma.SortOrder
+  locationRegion?: Prisma.SortOrderInput | Prisma.SortOrder
   profileImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  nick?: Prisma.SortOrderInput | Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
+  likes?: Prisma.SortOrderInput | Prisma.SortOrder
+  postedImages?: Prisma.SortOrderInput | Prisma.SortOrder
+  postedVideos?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFree?: Prisma.SortOrderInput | Prisma.SortOrder
+  sampleMedia?: Prisma.SortOrderInput | Prisma.SortOrder
+  homepageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  socialMedia?: Prisma.SortOrderInput | Prisma.SortOrder
+  props?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceName?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastScrapedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.InfluencerProfileCountOrderByAggregateInput
   _avg?: Prisma.InfluencerProfileAvgOrderByAggregateInput
   _max?: Prisma.InfluencerProfileMaxOrderByAggregateInput
@@ -335,17 +530,34 @@ export type InfluencerProfileScalarWhereWithAggregatesInput = {
   OR?: Prisma.InfluencerProfileScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InfluencerProfileScalarWhereWithAggregatesInput | Prisma.InfluencerProfileScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
   displayName?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
   handle?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
   bio?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
-  niche?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
-  followerCount?: Prisma.IntWithAggregatesFilter<"InfluencerProfile"> | number
-  engagementRate?: Prisma.DecimalWithAggregatesFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonWithAggregatesFilter<"InfluencerProfile">
-  locationCountry?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
-  locationRegion?: Prisma.StringWithAggregatesFilter<"InfluencerProfile"> | string
+  niche?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  followerCount?: Prisma.IntNullableWithAggregatesFilter<"InfluencerProfile"> | number | null
+  engagementRate?: Prisma.DecimalNullableWithAggregatesFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.JsonNullableWithAggregatesFilter<"InfluencerProfile">
+  locationCountry?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  locationRegion?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
   profileImageUrl?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  nick?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  age?: Prisma.IntNullableWithAggregatesFilter<"InfluencerProfile"> | number | null
+  likes?: Prisma.IntNullableWithAggregatesFilter<"InfluencerProfile"> | number | null
+  postedImages?: Prisma.IntNullableWithAggregatesFilter<"InfluencerProfile"> | number | null
+  postedVideos?: Prisma.IntNullableWithAggregatesFilter<"InfluencerProfile"> | number | null
+  subscriptionFee?: Prisma.DecimalNullableWithAggregatesFilter<"InfluencerProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.BoolNullableWithAggregatesFilter<"InfluencerProfile"> | boolean | null
+  sampleMedia?: Prisma.JsonNullableWithAggregatesFilter<"InfluencerProfile">
+  homepageUrl?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  socialMedia?: Prisma.JsonNullableWithAggregatesFilter<"InfluencerProfile">
+  props?: Prisma.JsonNullableWithAggregatesFilter<"InfluencerProfile">
+  sourceName?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  sourceUrl?: Prisma.StringNullableWithAggregatesFilter<"InfluencerProfile"> | string | null
+  lastScrapedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"InfluencerProfile"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"InfluencerProfile"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"InfluencerProfile"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"InfluencerProfile"> | Date | string | null
 }
 
 export type InfluencerProfileCreateInput = {
@@ -353,29 +565,63 @@ export type InfluencerProfileCreateInput = {
   displayName: string
   handle: string
   bio?: string | null
-  niche: string
-  followerCount: number
-  engagementRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry: string
-  locationRegion: string
+  niche?: string | null
+  followerCount?: number | null
+  engagementRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: string | null
+  locationRegion?: string | null
   profileImageUrl?: string | null
-  user: Prisma.UserCreateNestedOneWithoutInfluencerProfileInput
+  nick?: string | null
+  age?: number | null
+  likes?: number | null
+  postedImages?: number | null
+  postedVideos?: number | null
+  subscriptionFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: string | null
+  sourceUrl?: string | null
+  lastScrapedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  user?: Prisma.UserCreateNestedOneWithoutInfluencerProfileInput
 }
 
 export type InfluencerProfileUncheckedCreateInput = {
   id?: string
-  userId: string
+  userId?: string | null
   displayName: string
   handle: string
   bio?: string | null
-  niche: string
-  followerCount: number
-  engagementRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry: string
-  locationRegion: string
+  niche?: string | null
+  followerCount?: number | null
+  engagementRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: string | null
+  locationRegion?: string | null
   profileImageUrl?: string | null
+  nick?: string | null
+  age?: number | null
+  likes?: number | null
+  postedImages?: number | null
+  postedVideos?: number | null
+  subscriptionFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: string | null
+  sourceUrl?: string | null
+  lastScrapedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type InfluencerProfileUpdateInput = {
@@ -383,44 +629,95 @@ export type InfluencerProfileUpdateInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   handle?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  niche?: Prisma.StringFieldUpdateOperationsInput | string
-  followerCount?: Prisma.IntFieldUpdateOperationsInput | number
-  engagementRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry?: Prisma.StringFieldUpdateOperationsInput | string
-  locationRegion?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followerCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engagementRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationRegion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutInfluencerProfileNestedInput
+  nick?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedImages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedVideos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastScrapedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneWithoutInfluencerProfileNestedInput
 }
 
 export type InfluencerProfileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   handle?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  niche?: Prisma.StringFieldUpdateOperationsInput | string
-  followerCount?: Prisma.IntFieldUpdateOperationsInput | number
-  engagementRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry?: Prisma.StringFieldUpdateOperationsInput | string
-  locationRegion?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followerCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engagementRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationRegion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nick?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedImages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedVideos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastScrapedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InfluencerProfileCreateManyInput = {
   id?: string
-  userId: string
+  userId?: string | null
   displayName: string
   handle: string
   bio?: string | null
-  niche: string
-  followerCount: number
-  engagementRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry: string
-  locationRegion: string
+  niche?: string | null
+  followerCount?: number | null
+  engagementRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: string | null
+  locationRegion?: string | null
   profileImageUrl?: string | null
+  nick?: string | null
+  age?: number | null
+  likes?: number | null
+  postedImages?: number | null
+  postedVideos?: number | null
+  subscriptionFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: string | null
+  sourceUrl?: string | null
+  lastScrapedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type InfluencerProfileUpdateManyMutationInput = {
@@ -428,28 +725,62 @@ export type InfluencerProfileUpdateManyMutationInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   handle?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  niche?: Prisma.StringFieldUpdateOperationsInput | string
-  followerCount?: Prisma.IntFieldUpdateOperationsInput | number
-  engagementRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry?: Prisma.StringFieldUpdateOperationsInput | string
-  locationRegion?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followerCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engagementRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationRegion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nick?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedImages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedVideos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastScrapedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InfluencerProfileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   handle?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  niche?: Prisma.StringFieldUpdateOperationsInput | string
-  followerCount?: Prisma.IntFieldUpdateOperationsInput | number
-  engagementRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry?: Prisma.StringFieldUpdateOperationsInput | string
-  locationRegion?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followerCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engagementRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationRegion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nick?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedImages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedVideos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastScrapedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InfluencerProfileNullableScalarRelationFilter = {
@@ -470,11 +801,33 @@ export type InfluencerProfileCountOrderByAggregateInput = {
   locationCountry?: Prisma.SortOrder
   locationRegion?: Prisma.SortOrder
   profileImageUrl?: Prisma.SortOrder
+  nick?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
+  postedImages?: Prisma.SortOrder
+  postedVideos?: Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  sampleMedia?: Prisma.SortOrder
+  homepageUrl?: Prisma.SortOrder
+  socialMedia?: Prisma.SortOrder
+  props?: Prisma.SortOrder
+  sourceName?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrder
+  lastScrapedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type InfluencerProfileAvgOrderByAggregateInput = {
   followerCount?: Prisma.SortOrder
   engagementRate?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
+  postedImages?: Prisma.SortOrder
+  postedVideos?: Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrder
 }
 
 export type InfluencerProfileMaxOrderByAggregateInput = {
@@ -489,6 +842,20 @@ export type InfluencerProfileMaxOrderByAggregateInput = {
   locationCountry?: Prisma.SortOrder
   locationRegion?: Prisma.SortOrder
   profileImageUrl?: Prisma.SortOrder
+  nick?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
+  postedImages?: Prisma.SortOrder
+  postedVideos?: Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  homepageUrl?: Prisma.SortOrder
+  sourceName?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrder
+  lastScrapedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type InfluencerProfileMinOrderByAggregateInput = {
@@ -503,11 +870,30 @@ export type InfluencerProfileMinOrderByAggregateInput = {
   locationCountry?: Prisma.SortOrder
   locationRegion?: Prisma.SortOrder
   profileImageUrl?: Prisma.SortOrder
+  nick?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
+  postedImages?: Prisma.SortOrder
+  postedVideos?: Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  homepageUrl?: Prisma.SortOrder
+  sourceName?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrder
+  lastScrapedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type InfluencerProfileSumOrderByAggregateInput = {
   followerCount?: Prisma.SortOrder
   engagementRate?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
+  postedImages?: Prisma.SortOrder
+  postedVideos?: Prisma.SortOrder
+  subscriptionFee?: Prisma.SortOrder
 }
 
 export type InfluencerProfileCreateNestedOneWithoutUserInput = {
@@ -542,12 +928,28 @@ export type InfluencerProfileUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InfluencerProfileUpdateToOneWithWhereWithoutUserInput, Prisma.InfluencerProfileUpdateWithoutUserInput>, Prisma.InfluencerProfileUncheckedUpdateWithoutUserInput>
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type InfluencerProfileCreateWithoutUserInput = {
@@ -555,13 +957,30 @@ export type InfluencerProfileCreateWithoutUserInput = {
   displayName: string
   handle: string
   bio?: string | null
-  niche: string
-  followerCount: number
-  engagementRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry: string
-  locationRegion: string
+  niche?: string | null
+  followerCount?: number | null
+  engagementRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: string | null
+  locationRegion?: string | null
   profileImageUrl?: string | null
+  nick?: string | null
+  age?: number | null
+  likes?: number | null
+  postedImages?: number | null
+  postedVideos?: number | null
+  subscriptionFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: string | null
+  sourceUrl?: string | null
+  lastScrapedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type InfluencerProfileUncheckedCreateWithoutUserInput = {
@@ -569,13 +988,30 @@ export type InfluencerProfileUncheckedCreateWithoutUserInput = {
   displayName: string
   handle: string
   bio?: string | null
-  niche: string
-  followerCount: number
-  engagementRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry: string
-  locationRegion: string
+  niche?: string | null
+  followerCount?: number | null
+  engagementRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: string | null
+  locationRegion?: string | null
   profileImageUrl?: string | null
+  nick?: string | null
+  age?: number | null
+  likes?: number | null
+  postedImages?: number | null
+  postedVideos?: number | null
+  subscriptionFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: string | null
+  sourceUrl?: string | null
+  lastScrapedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type InfluencerProfileCreateOrConnectWithoutUserInput = {
@@ -599,13 +1035,30 @@ export type InfluencerProfileUpdateWithoutUserInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   handle?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  niche?: Prisma.StringFieldUpdateOperationsInput | string
-  followerCount?: Prisma.IntFieldUpdateOperationsInput | number
-  engagementRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry?: Prisma.StringFieldUpdateOperationsInput | string
-  locationRegion?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followerCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engagementRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationRegion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nick?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedImages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedVideos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastScrapedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InfluencerProfileUncheckedUpdateWithoutUserInput = {
@@ -613,13 +1066,30 @@ export type InfluencerProfileUncheckedUpdateWithoutUserInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   handle?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  niche?: Prisma.StringFieldUpdateOperationsInput | string
-  followerCount?: Prisma.IntFieldUpdateOperationsInput | number
-  engagementRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  platforms?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  locationCountry?: Prisma.StringFieldUpdateOperationsInput | string
-  locationRegion?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followerCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  engagementRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  platforms?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  locationCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationRegion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nick?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedImages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postedVideos?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isFree?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sampleMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  homepageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialMedia?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  props?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastScrapedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -637,7 +1107,24 @@ export type InfluencerProfileSelect<ExtArgs extends runtime.Types.Extensions.Int
   locationCountry?: boolean
   locationRegion?: boolean
   profileImageUrl?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  nick?: boolean
+  age?: boolean
+  likes?: boolean
+  postedImages?: boolean
+  postedVideos?: boolean
+  subscriptionFee?: boolean
+  isFree?: boolean
+  sampleMedia?: boolean
+  homepageUrl?: boolean
+  socialMedia?: boolean
+  props?: boolean
+  sourceName?: boolean
+  sourceUrl?: boolean
+  lastScrapedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
+  user?: boolean | Prisma.InfluencerProfile$userArgs<ExtArgs>
 }, ExtArgs["result"]["influencerProfile"]>
 
 export type InfluencerProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -653,7 +1140,24 @@ export type InfluencerProfileSelectCreateManyAndReturn<ExtArgs extends runtime.T
   locationCountry?: boolean
   locationRegion?: boolean
   profileImageUrl?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  nick?: boolean
+  age?: boolean
+  likes?: boolean
+  postedImages?: boolean
+  postedVideos?: boolean
+  subscriptionFee?: boolean
+  isFree?: boolean
+  sampleMedia?: boolean
+  homepageUrl?: boolean
+  socialMedia?: boolean
+  props?: boolean
+  sourceName?: boolean
+  sourceUrl?: boolean
+  lastScrapedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
+  user?: boolean | Prisma.InfluencerProfile$userArgs<ExtArgs>
 }, ExtArgs["result"]["influencerProfile"]>
 
 export type InfluencerProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -669,7 +1173,24 @@ export type InfluencerProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   locationCountry?: boolean
   locationRegion?: boolean
   profileImageUrl?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  nick?: boolean
+  age?: boolean
+  likes?: boolean
+  postedImages?: boolean
+  postedVideos?: boolean
+  subscriptionFee?: boolean
+  isFree?: boolean
+  sampleMedia?: boolean
+  homepageUrl?: boolean
+  socialMedia?: boolean
+  props?: boolean
+  sourceName?: boolean
+  sourceUrl?: boolean
+  lastScrapedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
+  user?: boolean | Prisma.InfluencerProfile$userArgs<ExtArgs>
 }, ExtArgs["result"]["influencerProfile"]>
 
 export type InfluencerProfileSelectScalar = {
@@ -685,37 +1206,71 @@ export type InfluencerProfileSelectScalar = {
   locationCountry?: boolean
   locationRegion?: boolean
   profileImageUrl?: boolean
+  nick?: boolean
+  age?: boolean
+  likes?: boolean
+  postedImages?: boolean
+  postedVideos?: boolean
+  subscriptionFee?: boolean
+  isFree?: boolean
+  sampleMedia?: boolean
+  homepageUrl?: boolean
+  socialMedia?: boolean
+  props?: boolean
+  sourceName?: boolean
+  sourceUrl?: boolean
+  lastScrapedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type InfluencerProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "displayName" | "handle" | "bio" | "niche" | "followerCount" | "engagementRate" | "platforms" | "locationCountry" | "locationRegion" | "profileImageUrl", ExtArgs["result"]["influencerProfile"]>
+export type InfluencerProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "displayName" | "handle" | "bio" | "niche" | "followerCount" | "engagementRate" | "platforms" | "locationCountry" | "locationRegion" | "profileImageUrl" | "nick" | "age" | "likes" | "postedImages" | "postedVideos" | "subscriptionFee" | "isFree" | "sampleMedia" | "homepageUrl" | "socialMedia" | "props" | "sourceName" | "sourceUrl" | "lastScrapedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["influencerProfile"]>
 export type InfluencerProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.InfluencerProfile$userArgs<ExtArgs>
 }
 export type InfluencerProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.InfluencerProfile$userArgs<ExtArgs>
 }
 export type InfluencerProfileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.InfluencerProfile$userArgs<ExtArgs>
 }
 
 export type $InfluencerProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InfluencerProfile"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    userId: string
+    userId: string | null
     displayName: string
     handle: string
     bio: string | null
-    niche: string
-    followerCount: number
-    engagementRate: runtime.Decimal
-    platforms: runtime.JsonValue
-    locationCountry: string
-    locationRegion: string
+    niche: string | null
+    followerCount: number | null
+    engagementRate: runtime.Decimal | null
+    platforms: runtime.JsonValue | null
+    locationCountry: string | null
+    locationRegion: string | null
     profileImageUrl: string | null
+    nick: string | null
+    age: number | null
+    likes: number | null
+    postedImages: number | null
+    postedVideos: number | null
+    subscriptionFee: runtime.Decimal | null
+    isFree: boolean | null
+    sampleMedia: runtime.JsonValue | null
+    homepageUrl: string | null
+    socialMedia: runtime.JsonValue | null
+    props: runtime.JsonValue | null
+    sourceName: string | null
+    sourceUrl: string | null
+    lastScrapedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["influencerProfile"]>
   composites: {}
 }
@@ -1110,7 +1665,7 @@ readonly fields: InfluencerProfileFieldRefs;
  */
 export interface Prisma__InfluencerProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.InfluencerProfile$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InfluencerProfile$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1152,6 +1707,23 @@ export interface InfluencerProfileFieldRefs {
   readonly locationCountry: Prisma.FieldRef<"InfluencerProfile", 'String'>
   readonly locationRegion: Prisma.FieldRef<"InfluencerProfile", 'String'>
   readonly profileImageUrl: Prisma.FieldRef<"InfluencerProfile", 'String'>
+  readonly nick: Prisma.FieldRef<"InfluencerProfile", 'String'>
+  readonly age: Prisma.FieldRef<"InfluencerProfile", 'Int'>
+  readonly likes: Prisma.FieldRef<"InfluencerProfile", 'Int'>
+  readonly postedImages: Prisma.FieldRef<"InfluencerProfile", 'Int'>
+  readonly postedVideos: Prisma.FieldRef<"InfluencerProfile", 'Int'>
+  readonly subscriptionFee: Prisma.FieldRef<"InfluencerProfile", 'Decimal'>
+  readonly isFree: Prisma.FieldRef<"InfluencerProfile", 'Boolean'>
+  readonly sampleMedia: Prisma.FieldRef<"InfluencerProfile", 'Json'>
+  readonly homepageUrl: Prisma.FieldRef<"InfluencerProfile", 'String'>
+  readonly socialMedia: Prisma.FieldRef<"InfluencerProfile", 'Json'>
+  readonly props: Prisma.FieldRef<"InfluencerProfile", 'Json'>
+  readonly sourceName: Prisma.FieldRef<"InfluencerProfile", 'String'>
+  readonly sourceUrl: Prisma.FieldRef<"InfluencerProfile", 'String'>
+  readonly lastScrapedAt: Prisma.FieldRef<"InfluencerProfile", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"InfluencerProfile", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"InfluencerProfile", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"InfluencerProfile", 'DateTime'>
 }
     
 
@@ -1550,6 +2122,25 @@ export type InfluencerProfileDeleteManyArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many InfluencerProfiles to delete.
    */
   limit?: number
+}
+
+/**
+ * InfluencerProfile.user
+ */
+export type InfluencerProfile$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

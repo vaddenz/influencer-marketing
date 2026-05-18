@@ -1410,7 +1410,24 @@ export const InfluencerProfileScalarFieldEnum = {
   platforms: 'platforms',
   locationCountry: 'locationCountry',
   locationRegion: 'locationRegion',
-  profileImageUrl: 'profileImageUrl'
+  profileImageUrl: 'profileImageUrl',
+  nick: 'nick',
+  age: 'age',
+  likes: 'likes',
+  postedImages: 'postedImages',
+  postedVideos: 'postedVideos',
+  subscriptionFee: 'subscriptionFee',
+  isFree: 'isFree',
+  sampleMedia: 'sampleMedia',
+  homepageUrl: 'homepageUrl',
+  socialMedia: 'socialMedia',
+  props: 'props',
+  sourceName: 'sourceName',
+  sourceUrl: 'sourceUrl',
+  lastScrapedAt: 'lastScrapedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type InfluencerProfileScalarFieldEnum = (typeof InfluencerProfileScalarFieldEnum)[keyof typeof InfluencerProfileScalarFieldEnum]
@@ -1523,6 +1540,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const JsonNullValueInput = {
@@ -1648,6 +1673,13 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'CampaignStatus'
  */
 export type EnumCampaignStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignStatus'>
@@ -1700,13 +1732,6 @@ export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'NotificationType[]'
  */
 export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

@@ -87,20 +87,42 @@ model BrandProfile {
 }
 
 model InfluencerProfile {
-  id              String  @id @default(cuid(2))
-  userId          String  @unique
+  id              String   @id @default(cuid(2))
+  userId          String?  @unique
   displayName     String
-  handle          String  @unique
+  handle          String
   bio             String?
-  niche           String
-  followerCount   Int
-  engagementRate  Decimal @db.Decimal(5, 2)
-  platforms       Json
-  locationCountry String
-  locationRegion  String
+  niche           String?
+  followerCount   Int?
+  engagementRate  Decimal? @db.Decimal(5, 2)
+  platforms       Json?
+  locationCountry String?
+  locationRegion  String?
   profileImageUrl String?
+  nick            String?
+  age             Int?
+  likes           Int?
+  postedImages    Int?
+  postedVideos    Int?
+  subscriptionFee Decimal? @db.Decimal(10, 2)
+  isFree          Boolean?
+  sampleMedia     Json?
+  homepageUrl     String?
+  socialMedia     Json?
+  props           Json?
+  sourceName      String?
+  sourceUrl       String?
+  lastScrapedAt   DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+  deletedAt       DateTime?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([handle])
+  @@index([homepageUrl])
+  @@index([sourceName])
+  @@index([deletedAt])
 }
 
 enum CampaignStatus {
