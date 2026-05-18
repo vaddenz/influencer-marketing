@@ -8,7 +8,17 @@ import {
   Param,
   Query,
   Logger,
+  Sse,
+  MessageEvent,
 } from '@nestjs/common'
+import { Observable, concat, from, of } from 'rxjs'
+import { map, mergeMap } from 'rxjs/operators'
+import { InjectQueue } from '@nestjs/bullmq'
+import { Queue } from 'bullmq'
+import { randomUUID } from 'crypto'
+import { ScraperService } from '@/scraper/scraper.service'
+import { SseJwtAuthGuard } from '@/common/guards/sse-jwt-auth.guard'
+import { RawScrapedProfile } from '@/scraper/dto/raw-scraped-profile.dto'
 import {
   ApiBearerAuth,
   ApiTags,
@@ -32,7 +42,11 @@ import { SearchInfluencersDto } from './dto/search-influencers.dto'
 export class InfluencersController {
   private readonly logger = new Logger(InfluencersController.name)
 
-  constructor(private readonly influencersService: InfluencersService) {}
+  constructor(
+    private readonly influencersService: InfluencersService,
+    private readonly scraperService: ScraperService,
+    @InjectQueue('scraped-profiles') private readonly scrapedProfileQueue: Queue,
+  ) {}
 
   @Post('me/profile')
   @Roles(Role.Influencer)
@@ -85,5 +99,46 @@ export class InfluencersController {
   @ApiResponse({ status: 200, description: 'Search results returned' })
   async search(@Query() dto: SearchInfluencersDto) {
     return this.influencersService.search(dto)
+  }
+
+  @Sse('search-stream')
+  @UseGuards(SseJwtAuthGuard)
+  @ApiOperation({ summary: 'Discover influencers with real-time external sources (SSE)' })
+  async searchStream(@Query() dto: SearchInfluencersDto): Promise<Observable<MessageEvent>> {
+    const searchId = randomUUID()
+    const abortController = new AbortController()
+
+    const internalResults$ = from(this.influencersService.search(dto)).pipe(
+      map((profiles) => ({
+        type: 'internal',
+        data: profiles,
+      }) as MessageEvent),
+    )
+
+    const scrapeObservable = await this.scraperService.scrape(dto, abortController.signal)
+    const externalResults$ = scrapeObservable.pipe(
+      mergeMap(async (profile: RawScrapedProfile) => {
+        await this.enqueueProfile(searchId, profile)
+        return {
+          type: 'external',
+          data: profile,
+        } as MessageEvent
+      }),
+    )
+
+    const done$ = of({
+      type: 'done',
+      data: { searchId },
+    } as MessageEvent)
+
+    return concat(internalResults$, externalResults$, done$)
+  }
+
+  private async enqueueProfile(searchId: string, profile: RawScrapedProfile) {
+    await this.scrapedProfileQueue.add(
+      'process',
+      { searchId, profiles: [profile] },
+      { jobId: `${searchId}-${profile.sourceName}-${profile.sourceUrl}` },
+    )
   }
 }
